@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg">
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-icon"></span>
+    <span class="navbar-icon"></span>
+    <span class="navbar-icon"></span>
+  </button>
+
+  <table id="navbarNav">
+    <tbody>
+      <tr class="navbar-nav text-center">
+        <td class="nav-item col">
+          <%= link_to 'Home', root_path, class: 'nav_li' %>
+        </td>
+
+        <td class="nav-item col">
+          <%= link_to 'Perfil', edit_user_registration_path, class: 'nav_li' %>
+        </td>
+
+        <td class="nav-item col">
+          <%= link_to 'Clientes', patients_path, class: 'nav_li' %>
+        </td>
+
+        <% if current_user.category == 'Autônomo' %>
+          <td class="nav-item col">
+            <%= button_to 'Pagamentos', graphs_index_path, class: 'nav_li' %>
+          </td>
+        <% end %>
+
+        <td class="nav-item col">
+          <%= link_to "Sair", destroy_user_session_path, method: :delete, :class => "nav_li"  %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</nav>
