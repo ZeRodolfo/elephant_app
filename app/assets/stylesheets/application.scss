@@ -2,54 +2,61 @@
  *= require font-awesome
  *= require_tree .
  */
- @import "bootstrap";
- @import "devise/session";
- @import "devise/registration";
- @import "shared/_navbar";
- @import "shared/_footer";
- @import "home";
- @import "calendar";
- @import "patients";
+@import "bootstrap";
+@import "devise/session";
+@import "devise/registration";
+@import "shared/_navbar";
+@import "shared/_footer";
+@import "home";
+@import "calendar";
+@import "patients";
 
- @import 'morrisjs-rails';
+@import 'morrisjs-rails';
 
- .alert {
-   z-index: 9999;
-   width: 100%;
-   opacity: 0.6;
-   cursor: pointer;
- }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+}
 
- .container {
-   margin-top: 50px;
- }
+.alert {
+  z-index: 9999;
+  width: 100%;
+  opacity: 0.6;
+  cursor: pointer;
+}
 
- a {
- 	font-size: 1.2em;
-    background: none!important;
- }
+.container {
+  margin-top: 50px;
+}
 
- .btn {
- 	color: rgba(10,10,10,0.6)!important;
- 	background: none;
- }
+a {
+  font-size: 1.2em;
+  background: none !important;
+}
 
- .btn:hover {
- 	color: blue!important;
- 	background:none;
- }
+.btn {
+  color: rgba(10, 10, 10, 0.6) !important;
+  background: none;
+}
 
- p {
- 	font-size: 1em;
- }
+.btn:hover {
+  color: blue !important;
+  background: none;
+}
+
+p {
+  font-size: 1em;
+}
 
 
 .pagination {
-  a, span {
+
+  a,
+  span {
     padding: 0px 10px;
   }
 
-  span, em {
-  	padding-top: 2px;
+  span,
+  em {
+    padding-top: 2px;
   }
 }
