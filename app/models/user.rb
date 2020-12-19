@@ -8,6 +8,8 @@
 #  document_type          :string           default("cpf")
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  first_name             :string
+#  last_name              :string
 #  phone                  :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
@@ -35,6 +37,13 @@ class User < ApplicationRecord
 
   with_options presence: true do
     validates :phone
+    validates :first_name
+    validates :last_name
+    validates :document_number
+  end
+
+  def name
+    "#{first_name} #{last_name}"
   end
 
   # Whether the user is registered on mercado pago
