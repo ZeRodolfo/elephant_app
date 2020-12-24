@@ -5,7 +5,7 @@
 #  id                     :bigint           not null, primary key
 #  category               :integer
 #  document_number        :string
-#  document_type          :string           default("cpf")
+#  document_type          :string           default("CPF")
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string
@@ -31,6 +31,7 @@ class User < ApplicationRecord
 
   has_many :patients, dependent: :destroy
   has_many :addresses
+  has_one :subscription
 
   enum category: [:Empresa, :Autônomo]
   enum document_type: { CPF: 'CPF', CNPJ: 'CNPJ' }

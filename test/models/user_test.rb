@@ -5,7 +5,7 @@
 #  id                     :bigint           not null, primary key
 #  category               :integer
 #  document_number        :string
-#  document_type          :string           default("cpf")
+#  document_type          :string           default("CPF")
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string
