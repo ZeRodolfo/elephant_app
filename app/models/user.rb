@@ -33,7 +33,7 @@ class User < ApplicationRecord
   has_many :addresses
 
   enum category: [:Empresa, :Autônomo]
-  enum document_type: { cpf: 'CPF', cnpj: 'CNPJ' }
+  enum document_type: { CPF: 'CPF', CNPJ: 'CNPJ' }
 
   with_options presence: true do
     validates :phone
