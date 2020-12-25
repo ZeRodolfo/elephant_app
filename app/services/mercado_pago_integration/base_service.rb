@@ -1,5 +1,3 @@
-require 'mercadopago'
-
 module MercadoPagoIntegration
   class BaseService
     def self.call(*params, client: nil, **kwparams)
