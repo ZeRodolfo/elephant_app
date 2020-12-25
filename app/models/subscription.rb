@@ -23,6 +23,6 @@ class Subscription < ApplicationRecord
   enum status: [:active, :suspended, :canceled]
 
   with_options presence: true do
-    vaidates :mercado_pago_id
+    validates :mercado_pago_id
   end
 end
