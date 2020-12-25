@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   resources :parcels
-  
+
   resources :office_visits
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  
+
   devise_for :users, :controllers => { :registrations => 'users/registrations' }
 
   root to: 'home#index'
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   patch 'validate', to: 'patients#validate'
 
   resources :forms do
-    collection do 
+    collection do
       get 'export'
       post 'export'
     end
@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   get 'graphs/index'
   post 'graphs/index'
-  
+
   get 'pdf/generate_pdf'
+
+  resources :subscriptions, only: %i[index create]
 end
