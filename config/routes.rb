@@ -1,9 +1,12 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   resources :parcels
 
   resources :office_visits
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount Sidekiq::Web => '/sidekiq'
 
   devise_for :users, :controllers => { :registrations => 'users/registrations' }
 
@@ -31,4 +34,5 @@ Rails.application.routes.draw do
   get 'pdf/generate_pdf'
 
   resources :subscriptions, only: %i[index create]
+  resources :notifications, only: %i[create]
 end
