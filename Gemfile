@@ -100,3 +100,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'mercadopago-sdk', '~> 1.3'
 gem 'u-case', '~> 4.1.0'
+gem 'sidekiq'
