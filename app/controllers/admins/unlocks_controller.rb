@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Users::UnlocksController < Devise::UnlocksController
+class Admins::UnlocksController < Devise::UnlocksController
   include Accessible
   # GET /resource/unlock/new
   # def new
