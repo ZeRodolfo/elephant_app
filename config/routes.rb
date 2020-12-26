@@ -34,5 +34,5 @@ Rails.application.routes.draw do
   get 'pdf/generate_pdf'
 
   resources :subscriptions, only: %i[index create]
-  resources :notifications, only: %i[create]
+  resources :notifications, only: %i[index create]
 end
