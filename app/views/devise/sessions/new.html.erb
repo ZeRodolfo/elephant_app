@@ -1,50 +1,57 @@
-<section class="form_session text-center offset-md-4 col-md-4">
-  <%= image_tag 'logo.png', alt: 'Logo Elephant RH' %>
+<div class="vh100">
+  <%= render 'shared/public-navbar' %>
+  <section class="el fill">
+    <div class="row m-0 p-0 h-100">
+      <div id="left-side-login" class="left col-6 col-has-bg m-0 p-0">
 
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <section class="form-row justify-content-center">
-     <section class="form-group">
-       <section class="input-group mx-auto">
-         <section class="input-group-prepend">
-           <span class="input-group-text"><%= fa_icon "user" %></span>
-         </section>
-         <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'Email', class: 'email' %>
-       </section>
-     </section>
-   </section>
+      </div>
+      <div id="right-side-login" class="d-flex right col m-0 p-0">
+        <div class="bounding">
+          <h1 class="bold">
+            Fazer login
+          </h1>
+          <!-- <form class="pt-3"> -->
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="email">Email</label>
+                <%= f.email_field :email, id:'email', autofocus: true, placeholder: '', class: 'form-control', type: 'email', required: true%>
+              </div>
+            </div>
 
-   <section class="form-row justify-content-center">
-     <section class="form-group">
-       <section class="input-group mx-auto">
-         <section class="input-group-prepend">
-           <span class="input-group-text"><%= fa_icon "lock" %></span>
-         </section>
-         <%= f.password_field :password, autocomplete: "Senha", placeholder: 'Senha' %>
-       </section>
-     </section>
-   </section>
-
-    <% if devise_mapping.rememberable? %>
-      <section class="field">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
-      </section>
-    <% end %>
-
-    <section class="actions">
-      <%= f.submit t('.sign_in'), class: 'btn btn-primary' %>
-    </section>
-  <% end %>
-
-  <br />
-    
-  <section class="actions">
-    <%= link_to 'Registrar-se', new_user_registration_path, class: 'btn btn-success' %>
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="password">Senha</label>
+                <%= f.password_field :password, id:'password', placeholder: '', class: 'form-control', type: 'password', required: true%>
+                <div class="mt-2">
+                  <%= link_to 'Esqueceu sua senha?', new_user_password_path, class: 'el-anchor' %>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-2">
+              <% if devise_mapping.rememberable? %>
+                <div class="form-check">
+                  <%= f.check_box :remember_me, id: 'remember_me', class: 'form-check-input' %>
+                  <%= f.label :remember_me, class: 'form-check-label', for:'remember_me' %>
+                </div>
+              <% end %>
+              <%= f.submit 'Entrar', class: 'mt-2 btn btn-primary btn-block' %>
+            </div>
+            
+            <div class="pt-3">
+                <%= link_to 'Não possui uma conta? Registre-se.', new_user_registration_path, class: 'el-anchor' %>
+            </div>
+          <% end %>
+          <!-- </form> -->
+        </div>
+      </div>
+    </div>
   </section>
-
-  <br />
-
-  <section class="actions">
-    <%= link_to 'Esqueceu sua senha?', new_user_password_path, class: 'btn btn-dark' %>
-  </section>
-</section>
+  <footer class="d-flex align-items-center justify-content-center">
+    <small class="text-center">
+      ©2020 Elephant <br>
+      Todos os direitos reservados.
+    </small>
+  </footer>
+</div>
