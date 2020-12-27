@@ -1,12 +1,12 @@
+<% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Login' } %>
 <div class="vh100">
   <%= render 'shared/public-navbar' %>
   <section class="el fill">
     <div class="row m-0 p-0 h-100">
-      <div id="left-side-login" class="left col-6 col-has-bg m-0 p-0">
-
-      </div>
-      <div id="right-side-login" class="d-flex right col m-0 p-0">
+      <div id="left-side-login" class="left col-6 col-has-bg m-0 p-0"></div>
+      <div id="right-side-login" class="d-flex right col m-0 p-0 flex-column">
         <div class="bounding">
+          <%= render 'shared/alerts' %>
           <h1 class="bold">
             Fazer login
           </h1>

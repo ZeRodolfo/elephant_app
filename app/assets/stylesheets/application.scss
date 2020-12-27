@@ -41,6 +41,7 @@ body, *{
 }
 
 section.el{
+  position: relative !important;
   width: 100%;
   padding-left: var(--px);
   padding-right: var(--px);
@@ -162,4 +163,8 @@ a.el-anchor:hover{
 
 .btn-primary:focus, .btn-primary.focus {
   box-shadow: 0 0 0 0.2rem rgba(56, 200, 127, 0.5) !important;
+}
+
+.alert{
+  opacity: .75 !important;
 }
