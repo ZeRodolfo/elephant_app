@@ -1,10 +1,173 @@
-.edit_user_data {
-  .field {
-    margin-top: 30px;
+.step-content, .step-submit, .step-prev, .step-next {
+  display: none;
+}
 
-    input {
-      border:none;
-      width: 90%;
-    }
+.step-content.visible {
+  display: block;
+}
+
+.step-submit.visible, .step-prev.visible, .step-next.visible {
+  display: inline-block;
+}
+
+.form-steps {
+  margin-bottom: 3em;
+}
+
+.form-steps .item .indicator {
+  border-radius: 50%;
+  background-color: var(--dark);
+  color: var(--white);
+  height: 2.5em;
+  width: 2.5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.form-steps .item.active .indicator {
+  background-color: var(--green);
+  color: #F2F2F2;
+}
+
+.form-steps .item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.form-steps .item .description{
+  font-weight: 400;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.form-steps .divider {
+  border-top: .5px solid var(--dark);
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+#cadastro-right-side{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 992px){
+  #cadastro-left-side{
+    display: none !important;
+  }
+  #cadastro-right-side{
+    padding-left: 0 !important
+  }
+}
+
+#cabecalho{
+  color: var(--green) !important;
+  font-weight: bold !important;
+}
+
+#cabecalho h1{
+  font-size: 4rem;
+}
+
+#cabecalho h3{
+  font-size: 3rem;
+}
+
+#cadastro-features-container{
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+}
+
+#cadastro-features-container .feature-item{
+  cursor: default !important;
+}
+
+@media screen and (max-width: 1408px){
+  .feature-item i {
+      font-size: 4rem !important;
+  }
+}
+
+.feature-item{
+  width: 20%;
+}
+
+.feature-item:hover{
+  -webkit-transform: translateY(-10px);
+      -ms-transform: translateY(-10px);
+          transform: translateY(-10px);
+}
+
+.feature-item i{
+  font-size: 5rem;
+}
+
+.feature-item h6{
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.feature-item-sm i{
+  font-size: 2.25rem;
+}
+
+.feature-item-sm h6{
+  font-weight: 700;
+}
+
+.feature-item-sm .description {
+  font-weight: 300;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.feature-item-sm{
+  -webkit-transition: all linear .15s;
+  -o-transition: all linear .15s;
+  transition: all linear .15s;
+  cursor: pointer;
+}
+
+.feature-item-sm:hover {
+  -webkit-transform: translateY(-10px);
+      -ms-transform: translateY(-10px);
+          transform: translateY(-10px);
+}
+
+.flex-grow-to-remaing-size{
+  -webkit-box-flex: 1 !important;
+      -ms-flex: 1 !important;
+          flex: 1 !important;
+}
+
+@media screen and (max-width: 576px){
+  .bounding button i{
+    display: none;
   }
 }
