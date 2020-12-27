@@ -1,14 +1,20 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  devise_for :admins, path: 'admins', controllers: {
+    sessions: 'admins/sessions'
+  }
+
   resources :parcels
 
   resources :office_visits
 
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  mount Sidekiq::Web => '/sidekiq'
+  authenticate :admin do
+    mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
-  devise_for :users, :controllers => { :registrations => 'users/registrations' }
+  devise_for :users, path: 'users', :controllers => { :registrations => 'users/registrations' }
 
   root to: 'home#index'
 
@@ -34,5 +40,5 @@ Rails.application.routes.draw do
   get 'pdf/generate_pdf'
 
   resources :subscriptions, only: %i[index create]
-  resources :notifications, only: %i[create]
+  resources :notifications, only: %i[index create]
 end
