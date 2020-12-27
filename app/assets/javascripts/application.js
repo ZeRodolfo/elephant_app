@@ -19,20 +19,5 @@
 //= require jquery
 //= require raphael
 //= require morris
+//= require bootstrap
 //= require_tree .
-
-// Set time to alert disappear
-$(function() {
-  setTimeout(function(){
-    $('.alert').fadeOut(500);
-  }, 2000);
-});
-
-$( document ).on('turbolinks:load', function() {
-	if( $(window).width() <= 960){
-	  $('#navbarNav').hide();
-	  $('nav .navbar-toggler').click( function() {
-	    $('#navbarNav').toggle(500);
-	  });
-	}
-});

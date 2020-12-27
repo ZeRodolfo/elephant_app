@@ -1,15 +1,55 @@
-.form_session {
-  margin-top: 10%;
-  box-shadow: 1px -1px 15px rgba(10,10,10,0.1);
-  padding: 20px;
-  border-radius: 10px;
+#left-side-login{
+  background-image: url(green-elephant-full.png);
+}
 
-  img {
-    width: 100px;
-    padding: 10px;
-  }
+// @media screen and (max-width: 1600px){
+//   #right-side-login{
+//     justify-content: center;
+//     align-items: center !important;
+//   }
+// }
 
-  .buttons_shared {
-    margin-top:30px;
+@media screen and (max-width: 1366px){
+  .bounding{
+    width: 90% !important;
   }
 }
+
+@media screen and (max-width: 1111px){
+  .bounding{
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 992px){
+  #left-side-login{
+    display: none;
+  }
+  #right-side-login{
+    padding-left: 0 !important;
+  }
+  .bounding{
+    width: 70% !important;
+  }
+}
+
+@media screen and (max-width: 576px){
+  .bounding{
+    width: 100% !important;
+  }
+}
+
+.bounding{
+  width: 70%;
+}
+
+footer{
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+#right-side-login{
+  justify-content: center;
+  align-items: center;
+}
+

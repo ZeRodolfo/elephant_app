@@ -1,39 +1,174 @@
-<section class="form_session text-center offset-md-4 col-md-4">
-  <h2>Registrar</h2>
+<% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Registro' } %>
+<div class="vh100">
+  <%= render 'shared/public-navbar-login' %>
+  <section id="cadastro" class="el fill">
+    <div class="row m-0 p-0 h-100">
+      <div id="cadastro-left-side" class="d-flex flex-column col m-0 pl-0 left">
+        <div id="cabecalho" class="row m-0 p-0 d-flex justify-content-start flex-column">
+          <h1 class="six">O controle completo da sua clínica</h1>
+          <h3 class="six">Texto auxiliar texto auxiliar</h3>
+        </div>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+        <div id="cadastro-features-container"
+          class="flex-column align-items-center d-flex m-0 flex-grow-to-remaing-size">
+          <div class="row m-0 p-0 wd-100">
+            <div class="col feature-item d-flex flex-column align-items-center justify-content-center">
+              <i class="fas fa-hand-holding-usd"></i>
+              <h6 class="my-3 wd-100">
+                Funcionalidade 1
+              </h6>
+              <span class="description wd-100 text-center">
+                Texto descritivo
+              </span>
+            </div>
 
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'Digite seu email' %>
+            <div class="col feature-item d-flex flex-column align-items-center justify-content-center">
+              <i class="fas fa-clock"></i>
+              <h6 class="my-3  wd-100">
+                Funcionalidade 1
+              </h6>
+              <span class="description wd-100 text-center">
+                Texto descritivo
+              </span>
+            </div>
+          </div>
+
+          <div class="row mt-5 m-0 p-0 wd-100">
+            <div class="col feature-item d-flex flex-column align-items-center justify-content-center">
+              <i class="fas fa-mobile-alt"></i>
+              <h6 class="my-3  wd-100">
+                Funcionalidade 1
+              </h6>
+              <span class="description wd-100 text-center">
+                Texto descritivo
+              </span>
+            </div>
+
+            <div class="col feature-item d-flex flex-column align-items-center justify-content-center">
+              <i class="fas fa-lightbulb"></i>
+              <h6 class="my-3  wd-100">
+                Funcionalidade 1
+              </h6>
+              <span class="description wd-100 text-center">
+                Texto descritivo
+              </span>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div id="cadastro-right-side" class="col m-0 right pr-0">
+        <div id="steps" class="bounding">
+          <h1 class="bold">
+            Registrar-se
+          </h1>
+          <div id="steps-indicator" class="my-5 form-steps d-flex align-items-center justify-content-between">
+            <div data-step='1' class="item step active">
+              <div class="indicator">1</div>
+              <div class="description">
+                Informações <br> pessoais
+              </div>
+            </div>
+            <span class="divider"></span>
+            <div data-step='2' class="item step">
+              <div class="indicator">2</div>
+              <div class="description">
+                Informações <br> extra
+              </div>
+            </div>
+          </div>
+          <form id="cadastro-form" method="POST">
+            <div data-step-content='1' class="step-content visible">
+              <div class="form-row">
+                <div class="form-group col">
+                  <label for="">Label*</label>
+                  <input type="text" class="form-control" id="" name="">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col">
+                  <label for="">Label*</label>
+                  <input type="text" class="form-control" id="" name="">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col">
+                  <label for="">Label*</label>
+                  <input type="text" class="form-control" id="" name="">
+                </div>
+              </div>
+            </div>
+
+            <div data-step-content='2' class="step-content">
+              <div class="form-row">
+                <div class="form-group col">
+                  <label for="">Label*</label>
+                  <input type="text" class="form-control" id="" name="">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col">
+                  <label for="">Label*</label>
+                  <input type="text" class="form-control" id="" name="">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col">
+                  <label for="">Label*</label>
+                  <input type="text" class="form-control" id="" name="">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col">
+                  <label for="">Label*</label>
+                  <input type="text" class="form-control" id="" name="">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row mb-3 mt-0 mx-0">
+              <small class="">
+                *Obrigatórios
+              </small>
+            </div>
+
+            <div class="row m-0">
+              <div class="col-6 pl-0">
+                <button type="button" onclick="prevStep();" class="mt-0 step-prev btn btn-block btn-primary">
+                  <span class="nobreak">
+                    <i class="ml-1 fas fa-chevron-left"></i>
+                    Anterior
+                  </span>
+                </button>
+              </div>
+
+              <div class="col-6 pr-0">
+                <button type="button" onclick="nextStep();" class="mt-0 step-next visible btn btn-block btn-primary">
+                  <span class="nobreak">
+                    Próxima
+                    <i class="ml-1 fas fa-chevron-right"></i>
+                  </span>
+                </button>
+
+                <button type="submit" class="mt-0 step-submit btn btn-block btn-primary">
+                  <span class="nobreak">
+                    Enviar
+                    <i class="ml-1 fas fa-check"></i>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
     </div>
-
-    <br />
-
-    <div class="field">
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-      <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password", placeholder: 'Digite sua senha' %>
-    </div>
-
-    <br />
-
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'Digite novamente a senha' %>
-    </div>
-
-    <br />
-
-    <div class="actions">
-      <%= f.submit 'Salvar', class: 'btn btn-info' %>
-    </div>
-  <% end %>
-
-  <br />
-
-  <%= link_to 'Voltar', root_path, class: 'btn btn-warning' %>
-</section>
+  </section>
+  <script src="/assets/steps.js"></script>
+</div>
