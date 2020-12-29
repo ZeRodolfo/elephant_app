@@ -1,5 +1,5 @@
 #first-section-right-side{
-  background-image: url(green-elephant-full.png);
+  background-image: url(asset-path('green-elephant-full.png'));
 }
 
 #saiba-mais{
@@ -24,7 +24,7 @@ section#first{
 }
 
 section.has-bg::before, #funcionalidades-left-side::before{
-  background-image: url(geometric.png) !important;
+  background-image: url(asset-path('geometric.png')) !important;
 }
 
 .card-el{
@@ -113,7 +113,7 @@ section.has-bg::before, #funcionalidades-left-side::before{
 }
 
 #termos-politica:before{
-  background-image: url(green-elephant-only.png) !important;
+  background-image: url(asset-path('green-elephant-only.png')) !important;
   background-position: top right;
   background-repeat: repeat-y !important;
   background-size: contain !important;
