@@ -112,6 +112,14 @@ section.has-bg::before, #funcionalidades-left-side::before{
   margin-right: 5rem;
 }
 
+#termos-politica:before{
+  background-image: url(green-elephant-only.png) !important;
+  background-position: top right;
+  background-repeat: repeat-y !important;
+  background-size: contain !important;
+  opacity: .05 !important;
+}
+
 
 @media screen and (min-width: 1408px){
   #funcionalidades-card-deck{
