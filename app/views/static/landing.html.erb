@@ -145,9 +145,7 @@
     <div id="funcionalidades-right-side" class="bg-lite-green col-4 right pr-xx pt-xx pb-xx relative">
         <div class="my-5 follow">
             <%= image_tag 'green-elephant-full.png', alt: 'Logo Elephant - Gerenciamento para psicologia clínica', class: 'mx-auto d-block img-fluid', id: 'assine-sticky-img'%>
-            <a href="#sobre" class="btn btn-block btn-primary">
-                Assine já
-            </a>
+            <%= link_to 'Assine já', new_user_registration_path, class: 'btn btn-primary btn-block' %>
         </div>
     </div>
 </section>
