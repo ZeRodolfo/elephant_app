@@ -41,4 +41,6 @@ Rails.application.routes.draw do
 
   resources :subscriptions, only: %i[index create]
   resources :notifications, only: %i[index create]
+  
+  get "/:page" => "static#show"
 end
