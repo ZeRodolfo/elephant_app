@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   devise_for :users, path: 'users', :controllers => { :registrations => 'users/registrations' }
 
-  root to: 'home#index'
+  root to: 'static#show', page: 'landing'
 
   resources :patients do
     collection do
