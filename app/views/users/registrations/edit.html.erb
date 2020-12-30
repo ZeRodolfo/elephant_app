@@ -9,11 +9,19 @@
       <div class="form-row">
         <div class="form-group col">
           <%= f.label :email, for: 'email' %>
-          <%= f.email_field :email, id:'email', autofocus: true, placeholder: '', class: 'form-control', type: 'email', required: true%>
+          <%= f.email_field :email, id:'email', autofocus: true, placeholder: '', class: "form-control #{ 'is-invalid' if resource.errors[:email].any? }", type: 'email', required: true%>
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <div>
-            <%= t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email) %>
-          </div>
+            <div>
+              <%= t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email) %>
+            </div>
+          <% end %>
+          <% if resource.errors[:email].any? %>
+            <div class="invalid-feedback">
+              <% resource.errors[:email].each do |m| %>
+                <%= m %>
+                <br>
+              <% end %>
+            </div>
           <% end %>
         </div>
       </div>
@@ -21,10 +29,18 @@
       <div class="form-row">
         <div class="form-group col">
           <%= f.label :password, for: 'password' %>
-          <%= f.password_field :password, class: 'form-control', id: 'password' %>
+          <%= f.password_field :password, class: "form-control #{ 'is-invalid' if resource.errors[:email].any? }", id: 'password' %>
           <% if @minimum_password_length %>
-          <small>(<%= t('.leave_blank_if_you_don_t_want_to_change_it') %>)</small>
-          <small><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></small>
+            <small>(<%= t('.leave_blank_if_you_don_t_want_to_change_it') %>)</small>
+            <small><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></small>
+          <% end %>
+          <% if resource.errors[:password].any? %>
+            <div class="invalid-feedback">
+              <% resource.errors[:password].each do |m| %>
+                <%= m %>
+                <br>
+              <% end %>
+            </div>
           <% end %>
         </div>
       </div>
@@ -32,15 +48,31 @@
       <div class="form-row">
         <div class="form-group col">
           <%= f.label :password_confirmation, for: 'password_confirmation' %><br />
-          <%= f.password_field :password_confirmation, id: 'password_confirmation', class: 'form-control' %>
+          <%= f.password_field :password_confirmation, id: 'password_confirmation', class: "form-control #{ 'is-invalid' if resource.errors[:password_confirmation].any? }" %>
+          <% if resource.errors[:password_confirmation].any? %>
+            <div class="invalid-feedback">
+              <% resource.errors[:password_confirmation].each do |m| %>
+                <%= m %>
+                <br>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group col">
           <%= f.label :current_password, for: 'current_password' %><br />
-          <%= f.password_field :current_password, id: 'current_password', class: 'form-control' %>
+          <%= f.password_field :current_password, id: 'current_password', class: "form-control #{ 'is-invalid' if resource.errors[:current_password].any? }" %>
           <small>(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)</small>
+          <% if resource.errors[:current_password].any? %>
+            <div class="invalid-feedback">
+              <% resource.errors[:current_password].each do |m| %>
+                <%= m %>
+                <br>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       </div>
 

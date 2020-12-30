@@ -1,24 +1,26 @@
-<section class="form_session text-center offset-md-4 col-md-4">
-  <h2><%= t('.forgot_your_password') %></h2>
+<% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Esqueceu sua senha?' } %>
 
-  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+<%= render 'shared/public-navbar-full' %>
 
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
-
-    <br />
-
-    <div class="actions">
-      <%= f.submit t('.send_me_reset_password_instructions'), class: 'btn btn-dark' %>
-    </div>
-  <% end %>
-
-  <br />
-
-  <section class="row">
-    <%= render "devise/shared/links" %>
-  </section>
+<section class="d-flex m-0 align-items-start justify-content-center el min100">
+  <div class="bounding generic-form">
+    <h1 class="bold"><%= t('.forgot_your_password') %></h1>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <div class="form-row">
+        <div class="form-group col">
+          <%= f.label :email, for: 'email' %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control #{ 'is-invalid' if resource.errors[:email].any? }" %>
+          <% if resource.errors[:email].any? %>
+            <div class="invalid-feedback">
+              <% resource.errors[:email].each do |m| %>
+                <%= m %>
+                <br>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <%= f.submit t('.send_me_reset_password_instructions'), class: 'mt-2 btn btn-primary btn-block' %>
+    <% end %>
+  </div>
 </section>
