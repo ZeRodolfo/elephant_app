@@ -14,7 +14,7 @@ function currentStepNumber() {
     return parseInt(currentStep().dataset.step)
 }
 
-function showStep(number) {
+function showStep(number, callback = function(){}) {
     let step = document.querySelector(`[data-step='${number}']`)
     let stepContent = document.querySelector(`[data-step-content='${number}']`)
 
@@ -24,6 +24,7 @@ function showStep(number) {
 
         $(stepContent).fadeIn('fast', () => {
             stepContent.classList.add('visible')
+            callback()
         })
     })
 
@@ -84,3 +85,27 @@ function prevStep() {
 
     update()
 }
+
+$(() => {
+    const form = document.getElementsByTagName('form')[0]
+
+    const fieldsWithError = Array.from(form.elements).filter(el => el.classList.contains('is-invalid'))
+
+    for (const field of fieldsWithError){
+        const stepIndex = $(field).closest('div[data-step-content]').data('step-content')
+
+        if (!stepIndex){ return }
+
+        if (currentStepNumber() != stepIndex){
+            showStep(stepIndex, () => {
+                field.focus()
+            })
+            update()
+        }
+        else {
+            field.focus()
+        }
+
+        break
+    }
+})

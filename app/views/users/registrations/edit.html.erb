@@ -1,51 +1,87 @@
-<section class="edit_user_data">
-  <h2>Editar Perfil</h2>
+<% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Editar Perfil' } %>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+<%= render 'shared/navbar' %>
 
-    <section class="row">
-      <div class="field col-6">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'border-bottom' %>
+<section class="d-flex m-0 align-items-start justify-content-center el min100">
+  <div class="bounding generic-form">
+    <h1 class="bold">Editar Perfil</h1>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <div class="form-row">
+        <div class="form-group col">
+          <%= f.label :email, for: 'email' %>
+          <%= f.email_field :email, id:'email', autofocus: true, placeholder: '', class: "form-control #{ 'is-invalid' if resource.errors[:email].any? }", type: 'email', required: true%>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>
+              <%= t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email) %>
+            </div>
+          <% end %>
+          <% if resource.errors[:email].any? %>
+            <div class="invalid-feedback">
+              <% resource.errors[:email].each do |m| %>
+                <%= m %>
+                <br>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
       </div>
 
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div><%= t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email) %></div>
-      <% end %>
-
-      <div class="field col-6">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "new-password", class: 'border-bottom' %>
-        <% if @minimum_password_length %>
-          <br />
-          <small>(<%= t('.leave_blank_if_you_don_t_want_to_change_it') %>)</small>
-
-          <br />
-          <small><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></small>
-        <% end %>
+      <div class="form-row">
+        <div class="form-group col">
+          <%= f.label :password, for: 'password' %>
+          <%= f.password_field :password, class: "form-control #{ 'is-invalid' if resource.errors[:email].any? }", id: 'password' %>
+          <% if @minimum_password_length %>
+            <small>(<%= t('.leave_blank_if_you_don_t_want_to_change_it') %>)</small>
+            <small><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></small>
+          <% end %>
+          <% if resource.errors[:password].any? %>
+            <div class="invalid-feedback">
+              <% resource.errors[:password].each do |m| %>
+                <%= m %>
+                <br>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
       </div>
 
-      <div class="field col-6">
-        <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'border-bottom' %>
+      <div class="form-row">
+        <div class="form-group col">
+          <%= f.label :password_confirmation, for: 'password_confirmation' %><br />
+          <%= f.password_field :password_confirmation, id: 'password_confirmation', class: "form-control #{ 'is-invalid' if resource.errors[:password_confirmation].any? }" %>
+          <% if resource.errors[:password_confirmation].any? %>
+            <div class="invalid-feedback">
+              <% resource.errors[:password_confirmation].each do |m| %>
+                <%= m %>
+                <br>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
       </div>
 
-      <div class="field col-6">
-        <%= f.label :current_password %><br />
-        <%= f.password_field :current_password, autocomplete: "current-password", class: 'border-bottom' %>
-        <br />
-        <small>(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)</small>
+      <div class="form-row">
+        <div class="form-group col">
+          <%= f.label :current_password, for: 'current_password' %><br />
+          <%= f.password_field :current_password, id: 'current_password', class: "form-control #{ 'is-invalid' if resource.errors[:current_password].any? }" %>
+          <small>(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)</small>
+          <% if resource.errors[:current_password].any? %>
+            <div class="invalid-feedback">
+              <% resource.errors[:current_password].each do |m| %>
+                <%= m %>
+                <br>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
       </div>
-    </section>
 
-    <div class="field text-center col-md-4 offset-md-4">
-      <%= f.label :categoria %><br />
-      <%= f.select :category, [:Empresa, :Autônomo], {include_blank: 'Selecione'}, class: 'form-control', required: true %>
-    </div>
+      <!-- <div class="field text-center col-md-4 offset-md-4">
+    <%= f.label :categoria %><br />
+    <%= f.select :category, [:Empresa, :Autônomo], {include_blank: 'Selecione'}, class: 'form-control', required: true %>
+  </div> -->
 
-    <div class="actions text-center mt-4">
-      <%= f.submit t('.update'), class: 'btn btn-info' %>
-    </div>
+    <%= f.submit 'Atualizar', class: 'mt-2 btn btn-primary btn-block' %>
   <% end %>
+  </div>
 </section>

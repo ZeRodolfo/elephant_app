@@ -18,18 +18,36 @@ li.nav-item{
   margin-right: 2rem;
 }
 
-@media screen and (max-width: 992px){
+#collapsed-navbar-content .nav-btn:not(:last-of-type){
+  margin-right: 3rem;
+}
+
+@media screen and (max-width: 991px){
   li.nav-item{
     margin-left: 0 !important;
     margin-right: 0 !important;
     margin-top: .5rem !important;
     margin-bottom: .5rem !important;
   }
-  .nav-register-btn{
+  .nav-btn{
     width: 100% !important;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
   }
   #navbar{
     padding-top: 1rem !important;
     padding-bottom: 1rem !important;
   }
+}
+
+@media screen and (max-width: 1113px){
+  li.nav-item{
+    margin-left: .5rem;
+    margin-right: .5rem;
+  }
+
+  #collapsed-navbar-content .nav-btn:not(:last-of-type){
+    margin-right: 1.5rem !important;
+  }
+  
 }

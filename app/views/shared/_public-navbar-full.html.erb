@@ -10,7 +10,7 @@
   <div class="collapse navbar-collapse" id="collapsed-navbar-content">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="nav-link" href="#">Fale Conosco</a>
+          <a class="nav-link" href="#">Fale Conosco</a>
         </li>
         <li class="nav-item">
           <%= link_to 'Termos de Uso', '/termos-politica', class: 'nav-link' %>
@@ -18,16 +18,11 @@
         <li class="nav-item">
           <%= link_to 'Política de Privacidade', '/termos-politica' + '#politica-de-privacidade', class: 'nav-link' %>
         </li>
+        
     </ul>
-    <%= link_to 'Fazer login', new_user_registration_path, class: 'btn btn-light nav-btn' %>
+
+    <%= link_to 'Fazer Login', new_user_session_path, class: 'btn btn-outline-light nav-btn' %>
+    <%= link_to 'Registrar-se', new_user_registration_path, class: 'btn btn-light nav-btn' %>
     
   </div>
-
-  
-
-
-  
-
-  
-  
 </nav>

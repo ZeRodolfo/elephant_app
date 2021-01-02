@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   devise_for :users, path: 'users', :controllers => { :registrations => 'users/registrations' }
 
-  root to: 'home#index'
+  root to: 'static#show', page: 'landing'
 
   resources :patients do
     collection do
@@ -41,4 +41,6 @@ Rails.application.routes.draw do
 
   resources :subscriptions, only: %i[index create]
   resources :notifications, only: %i[index create]
+  
+  get "/:page" => "static#show"
 end

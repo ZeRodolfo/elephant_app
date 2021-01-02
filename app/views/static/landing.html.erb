@@ -1,0 +1,217 @@
+<div class="vh100">
+    <%= render 'shared/public-navbar-full' %>
+    <section id="first" class="el fill has-bg">
+        <div class="m-0 p-0 row h-100">
+            <div id="first-section-left-side" class="d-flex left col m-0 px-0 pb-0 flex-column">
+                <h1 class="lg-title">
+                    <span class="light text-dark">
+                        A gerência
+                    </span>
+                    <span class="bold text-green">
+                        completa
+                    </span>
+                    <br>
+                    <span class="light text-dark">
+                        da sua clínica.
+                    </span>
+                    <br>
+                    <span class="light text-dark">
+                        100% 
+                    </span>
+                    <span class="bold text-green">digital<span class="light text-dark">.</span></span>
+                </h1>
+                <div class="my-5 row mx-0 p-0 d-none d-lg-block ">
+                    <div class="col-4 m-0 p-0">
+                        <a href="#sobre" class="btn btn-block btn-primary">
+                            Saiba mais
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div id="first-section-right-side" class="col-6 col-has-bg right m-0 p-0">
+
+            </div>
+        </div>
+        <div id="saiba-mais" class="bounce">
+            <p class="text-center subtitle m-0 p-0 bold">Saiba Mais</p>
+            <p class="text-center m-0 p-0"><i class="bold subtitle fas fa-chevron-down"></i></p>
+        </div>
+    </section>
+</div>
+
+<section id="second" class="el min100 has-bg">
+    <div id="sobre" class="col h-100 m-0 p-0">
+      <div class="row m-0 px-0 py-0 d-flex align-items-center justify-content-center">
+        <h1 class="title text-green six section-title">
+          Sobre nós
+        </h1>
+      </div>
+
+      <div class="row m-0 p-0">
+        <div id="funcionalidades-card-deck" class="card-deck p-0 py-5 mx-0 justify-content-between">
+          <div class="card card-el">
+            <div class="card-body">
+                <div class="card-head">
+                    <i class="fas fa-question text-green text-center"></i>
+                    <h1 class="text-center card-title six text-green">
+                        Quem somos
+                    </h1>
+                </div>
+              <p class="card-text phrase light text-dark">
+                A ELEPHANT é uma startup de gerenciamento de dados online por assinatura, exclusivamente para 
+                os profissionais da psicologia clínica. Criada em 2020, na cidade de Campos dos Goytacazes, RJ.
+              </p>
+            </div>
+          </div>
+
+          <div class="card card-el">
+            <div class="card-body">
+                <div class="card-head">
+                    <i class="fas fa-bullseye text-green text-center"></i>
+                    <h1 class="text-center card-title six text-green">
+                        Objetivos
+                    </h1>
+                </div>
+              <p class="card-text phrase light text-dark">
+                Auxiliar os profissionais psicólogos na criação de documentos
+                clínicos, respeitando a resolução vigente do Conselho Federal de Psicologia sobre a elaboração de
+                documentos e seu devido armazenamento, além do cadastro de clientes, agendamento de consultas, preenchimento de
+                consultas e registro de pagamentos.
+              </p>
+            </div>
+          </div>
+
+          <div class="card card-el">
+            <div class="card-body">
+                <div class="card-head">
+                    <i class="fas fa-arrow-circle-right text-green text-center"></i>
+                    <h1 class="text-center card-title six text-green">
+                        Missão
+                    </h1>
+                </div>
+              <p class="card-text phrase light text-dark">
+                Proporcionar não apenas um sistema gerenciamento, mas um novo conceito de
+                organização e criação de documentos na área da Psicologia, seguindo uma uniformização dos
+                dados como é exigido pelo Conselho de Federal de Psicologia.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<section id="third" class="row m-0 p-0 el min100">
+    <div id="funcionalidades-left-side" class="col has-bg left pl-xx pt-xx pb-xx">
+        <div class="row m-0 px-0 py-0 d-flex align-items-center justify-content-center">
+            <h1 class="title text-green six section-title text-center">
+                Funcionalidades
+            </h1>
+        </div>
+        <div class="col flex-column mx-0 my-5 px-0 py-0 d-flex align-items-center justify-content-center">
+            <% for i in 1..6 do %>
+                <% if i.odd? %>
+                    <div class="row fill flex-row mb-lg-5 mb-3 mx-0 funcionalidade odd d-flex align-items-center">
+                        <div class="icon-col d-flex align-items-center justify-content-start col-1 ml-0 mr-4 my-0 p-0">
+                            <i class="text-dark fas fa-clock">
+                            </i>
+                        </div>
+                        <div class="text-col col m-0 p-0">
+                            <span class="bold text-dark text-left phrase">
+                                <%= ('Funcionalidade' + ' ' + i.to_s + ' ' ) * 3 %>
+                            </span>
+                        </div>
+                    </div>
+                <% else %>
+                    <div class="row fill flex-row mb-lg-5 mb-3 mx-0 funcionalidade even d-flex align-items-center">
+                    
+                        <div class="text-col col m-0 p-0">
+                            <span class="bold text-dark text-left phrase">
+                                <%= ('Funcionalidade' + ' ' + i.to_s + ' ' ) * 3 %>
+                            </span>
+                        </div>
+        
+                        <div class="icon-col d-flex align-items-center justify-content-end col-1 ml-4 mr-0 my-0 p-0">
+                            <i class="text-dark fas fa-clock">
+                            </i>
+                        </div>
+                    </div>
+                <% end %>
+            <% end %>            
+        </div>
+    </div>
+    <div id="funcionalidades-right-side" class="bg-lite-green col-4 right pr-xx pt-xx pb-xx relative">
+        <div class="my-5 follow">
+            <%= image_tag 'green-elephant-full.png', alt: 'Logo Elephant - Gerenciamento para psicologia clínica', class: 'mx-auto d-block img-fluid', id: 'assine-sticky-img'%>
+            <%= link_to 'Assine já', new_user_registration_path, class: 'btn btn-primary btn-block' %>
+        </div>
+    </div>
+</section>
+
+<section id="fourth" class="row m-0 el vh100 has-bg">
+    <div class="col h-100 m-0 p-0 d-flex flex-column">
+        <div class="row m-0 px-0 py-0 d-flex align-items-center justify-content-center">
+          <h1 class="title text-green six section-title">
+            Assinatura
+          </h1>
+        </div>
+        <div class="d-flex row fill m-0 py-5 px-0 align-items-center justify-content-start">
+            <div class="bounding w-auto">
+                <p class="text-center title text-dark m-0">R$ XX,00</p>
+                <p class="phrase light text-dark text-center">mensais</p>
+                <%= link_to 'Assine já', new_user_registration_path, class: 'btn btn-primary btn-block' %>
+                <div class="mt-3">
+                    <span class="d-block text-center phrase light">Possui dúvidas? <a class="el-anchor-green bold" href="#">Fale conosco</a>.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="text-white wd-100 bg-dark">
+    <div class="row m-0 p-0">
+      <div class="col m-0 p-0 d-flex align-items-start justify-content-start">
+        <%= image_tag 'white-elephant-full.png', alt: 'Logo Elephant - Gerenciamento para psicologia clínica', id: 'footer-logo'%>
+      </div>
+    </div>
+    <hr class="bg-white">
+
+    <div id="footer-links" class="d-flex align-items-start justify-content-start flex-row row m-0 py-5">
+      <div class="footer-links-col">
+        <p><a class="el-anchor-white" href="/">Início</a></p>
+        <p><a class="el-anchor-white" href="/">Fale conosco</a></p>
+      </div>
+
+      <div class="footer-links-col">
+        <p><a class="el-anchor-white" href="/">Política de privacidade</a></p>
+        <p><a class="el-anchor-white" href="/">Termos de uso</a></p>
+      </div>
+        
+
+      <div class="footer-links-col">
+        <p class="text-white light">Siga-nos</p>
+        <p>
+            <a class="phrase el-anchor-white mr-3" href="/">
+                <i class="text-white fab fa-facebook-f"></i>
+            </a>
+
+            <a class="phrase el-anchor-white" href="/">
+                <i class="text-white fab fa-instagram"></i>
+            </a>
+        </p>
+      </div>
+        
+        
+    </div>
+
+    <div class="row m-0 px-0 pt-5 pb-0">
+      <div class="col p-0 m-0 d-flex align-items-end justify-content-start">
+        <small class="text-white">
+            © 2020 Elephant - Todos os direitos reservados. <br>
+            CNPJ nº 40081479000152 <br>
+            Campos dos Goytacazes, RJ.
+        </small>
+      </div>
+</footer>

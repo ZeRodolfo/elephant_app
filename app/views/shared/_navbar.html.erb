@@ -1,37 +1,42 @@
-<nav class="navbar navbar-expand-lg">
+<nav id="navbar" class="navbar navbar-expand-lg navbar-dark">
+  <a class="navbar-brand" href="/">
+    <%= image_tag 'white-elephant-full.png', alt: 'Logo Elephant - Gerenciamento para psicologia clínica', class: 'navbar-brand-img'%>
+  </a>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-icon"></span>
-    <span class="navbar-icon"></span>
-    <span class="navbar-icon"></span>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsed-navbar-content" aria-controls="collapsed-navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
   </button>
 
-  <table id="navbarNav">
-    <tbody>
-      <tr class="navbar-nav text-center">
-        <td class="nav-item col">
-          <%= link_to 'Home', root_path, class: 'nav_li' %>
-        </td>
+  <div class="collapse navbar-collapse" id="collapsed-navbar-content">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <%= link_to 'Pacientes', patients_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Documentos', '#', class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Finanças', graphs_index_path, class: 'nav-link' %>
+        </li>
 
-        <td class="nav-item col">
-          <%= link_to 'Perfil', edit_user_registration_path, class: 'nav_li' %>
-        </td>
+        <li class="nav-item">
+          <%= link_to 'Consultas', office_visits_path, class: 'nav-link' %>
+        </li>
+    </ul>
 
-        <td class="nav-item col">
-          <%= link_to 'Clientes', patients_path, class: 'nav_li' %>
-        </td>
-
-        <% if current_user.category == 'Autônomo' %>
-          <td class="nav-item col">
-            <%= button_to 'Pagamentos', graphs_index_path, class: 'nav_li' %>
-          </td>
-        <% end %>
-
-        <td class="nav-item col">
-          <%= link_to "Sair", destroy_user_session_path, method: :delete, :class => "nav_li"  %>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <% if user_signed_in? %>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="profile-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= current_user.email %>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="profile-dropdown">
+            <%= link_to 'Editar Perfil', edit_user_registration_path, class: 'dropdown-item' %>
+            <%= link_to 'Ajustes', '#', class: 'dropdown-item' %>
+            <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+          </div>
+        </li>
+      </ul>
+    <% end %>
+  </div>
 </nav>
