@@ -1,5 +1,70 @@
 window.Mercadopago.setPublishableKey("APP_USR-94728077-2644-4d83-b383-5a10ae527dbb");
 
+const responses = {
+  '205': {
+    field: '#card_number',
+    message: 'Digite o número do seu cartão.',
+  },
+  '208': {
+    field: '#card_expiration_month',
+    message: 'Escolha um mês.',
+  },
+  '209': {
+    field: '#card_expiration_year',
+    message: 'Escolha um ano.',
+  },
+  '212': {
+    message: 'Seu CPF está em branco.<br>Acesse seu <a href="/users/edit">perfil</a> e corrija.',
+  },
+  '213': {
+    message: 'Seu CPF está em branco.<br>Acesse seu <a href="/users/edit">perfil</a> e corrija.',
+  },
+  '214': {
+    message: 'Seu CPF está em branco.<br>Acesse seu <a href="/users/edit">perfil</a> e corrija.',
+  },
+  '220': {
+    message: 'O Emissor do cartão não pôde ser definido.\nConfira os dados.',
+  },
+  '221': {
+    field: '#cardholder_name',
+    message: 'Digite o nome e sobrenome.',
+  },
+  '224': {
+    field: '#security_code',
+    message: 'Digite o código de segurança.',
+  },
+  'E301': {
+    field: '#card_number',
+    message: 'Há algo de errado com esse número. Digite novamente.',
+  },
+  'E302': {
+    field: '#security_code',
+    message: 'Confira o código de segurança.',
+  },
+  '316': {
+    field: '#cardholder_name',
+    message: 'Por favor, digite um nome válido.',
+  },
+  '322': {
+    message: 'Seu CPF é inválido.<br>Acesse seu <a href="/users/edit">perfil</a> e corrija.',
+  },
+  '323': {
+    message: 'Seu CPF é inválido.<br>Acesse seu <a href="/users/edit">perfil</a> e corrija.',
+  },
+  '324': {
+    message: 'Seu CPF é inválido.<br>Acesse seu <a href="/users/edit">perfil</a> e corrija.',
+  },
+  '325': {
+    field: '#card_expiration_month',
+    message: 'Confira a data.',
+  },
+  '326': {
+    field: '#card_expiration_year',
+    message: 'Confira a data.',
+  },
+}
+
+
 function sliceToMaxLength() {
   if (this.value.length > this.maxLength) {
     this.value = this.value.slice(0, this.maxLength)
@@ -86,107 +151,21 @@ $(document).on('turbolinks:load', function () {
         form.submit()
       }
       else {
-        /*
-          Código	Descrição	Mensagem sugerida
-          205	parameter cardNumber can not be null/empty	Digite o número do seu cartão.
-          208	parameter cardExpirationMonth can not be null/empty	Escolha um mês.
-          209	parameter cardExpirationYear can not be null/empty	Escolha um ano.
-          212	parameter docType can not be null/empty	Informe seu documento.
-          213	The parameter cardholder.document.subtype can not be null or empty	Informe seu documento.
-          214	parameter docNumber can not be null/empty	Informe seu documento.
-          220	parameter cardIssuerId can not be null/empty	Informe seu banco emissor.
-          221	parameter cardholderName can not be null/empty	Digite o nome e sobrenome.
-          224	parameter securityCode can not be null/empty	Digite o código de segurança.
-          E301	invalid parameter cardNumber	Há algo de errado com esse número. Digite novamente.
-          E302	invalid parameter securityCode	Confira o código de segurança.
-          316	invalid parameter cardholderName	Por favor, digite um nome válido.
-          322	invalid parameter docType	Confira seu documento.
-          323	invalid parameter cardholder.document.subtype	Confira seu documento.
-          324	invalid parameter docNumber	Confira seu documento.
-          325	invalid parameter cardExpirationMonth	Confira a data.
-          326	invalid parameter cardExpirationYear	Confira a data.
-          default	Outro código de erro	Confira os dados.
-        */
         for (const error of response.cause) {
-          console.log(error)
-          if (error.code == 205) {
-            setError('#card_number', 'Digite o número do seu cartão.')
-          }
+          const code = error.code.toString()
 
-          else if (error.code == 208) {
-            setError('#card_expiration_month', 'Escolha um mês.')
-          }
+          const responseData = responses[code]
 
-
-          else if (error.code == 209) {
-            setError('#card_expiration_year', 'Escolha um ano.')
-          }
-
-          else if (error.code == 212) {
-            showAlert('Seu CPF está em branco.<br>Acesse seu <a href="/users/edit">perfil</a> e corrija.')
-            // parameter docType can not be null/empty	Informe seu documento.
-          }
-
-          else if (error.code == 213) {
-            showAlert('Seu CPF está em branco.<br>Acesse seu <a href="/users/edit">perfil</a> e corrija.')
-            // The parameter cardholder.document.subtype can not be null or empty	Informe seu documento.
-          }
-
-          else if (error.code == 214) {
-            showAlert('Seu CPF está em branco.<br>Acesse seu <a href="/users/edit">perfil</a> e corrija.')
-            //  docNumber can not be null/empty	Informe seu documento.
-          }
-
-          else if (error.code == 220) {
-            showAlert('O Emissor do cartão não pôde ser definido.\nConfira os dados.')
-            // cardIssuerId can not be null/empty	Informe seu banco emissor.
-          }
-
-          else if (error.code == 221) {
-            setError('#cardholder_name', 'Digite o nome e sobrenome.')
-          }
-
-          else if (error.code == 224) {
-            setError('#security_code', 'Digite o código de segurança.')
-          }
-
-          else if (error.code == 'E301') {
-            setError('#card_number', 'Há algo de errado com esse número. Digite novamente.')
-          }
-
-          else if (error.code == 'E302') {
-            setError('#security_code', 'Confira o código de segurança.')
-          }
-
-          else if (error.code == 316) {
-            setError('#cardholder_name', 'Por favor, digite um nome válido.')
-          }
-
-          else if (error.code == 322) {
-            showAlert('Seu CPF é inválido.<br>Acesse seu <a href="/users/edit">perfil</a> e corrija.')
-            // invalid parameter docType	Confira seu documento.
-          }
-
-          else if (error.code == 323) {
-            showAlert('Seu CPF é inválido.<br>Acesse seu <a href="/users/edit">perfil</a> e corrija.')
-            // invalid parameter cardholder.document.subtype	Confira seu documento.
-          }
-
-          else if (error.code == 324) {
-            showAlert('Seu CPF é inválido.<br>Acesse seu <a href="/users/edit">perfil</a> e corrija.')
-            // invalid parameter docNumber	Confira seu documento.
-          }
-
-          else if (error.code == 325) {
-            setError('#card_expiration_month', 'Confira a data.')
-          }
-
-          else if (error.code == 326) {
-            setError('#card_expiration_year', 'Confira a data.')
-          }
-
-          else {
+          if (!responseData) {
             showAlert('Ocorreu um erro inesperado.<br>Tente novamente.')
+            return
+          }
+
+          if (responseData.field) {
+            setError(responseData.field, responseData.message)
+          }
+          else {
+            showAlert(responseData.message)
           }
         }
       }
