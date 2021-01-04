@@ -87,7 +87,9 @@ function prevStep() {
 }
 
 $(() => {
-    const form = document.getElementsByTagName('form')[0]
+    const form = $('form[data-step]')[0]
+
+    if (!form){ return }
 
     const fieldsWithError = Array.from(form.elements).filter(el => el.classList.contains('is-invalid'))
 

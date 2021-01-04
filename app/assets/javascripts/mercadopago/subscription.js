@@ -103,27 +103,29 @@ $(document).on('turbolinks:load', function () {
 
   const sendTokenButton = document.getElementById('send_token')
 
-  const card = new Card({
-    form: '#card-data-form',
-    container: '.card-wrapper',
-
-    placeholders: {
-      number: '**** **** **** ****',
-      name: 'Nome Sobrenome',
-      expiry: '**/****',
-      cvc: '***'
-    },
-
-    formSelectors: {
-      numberInput: '#card_number',
-      expiryInput: '#card_expiration_month, #card_expiration_year',
-      cvcInput: '#security_code',
-      nameInput: '#cardholder_name'
-    },
-
-    debug: false
-  })
-
+  if (document.querySelector('.card-wrapper')){
+    const card = new Card({
+      form: '#card-data-form',
+      container: '.card-wrapper',
+  
+      placeholders: {
+        number: '**** **** **** ****',
+        name: 'Nome Sobrenome',
+        expiry: '**/****',
+        cvc: '***'
+      },
+  
+      formSelectors: {
+        numberInput: '#card_number',
+        expiryInput: '#card_expiration_month, #card_expiration_year',
+        cvcInput: '#security_code',
+        nameInput: '#cardholder_name'
+      },
+  
+      debug: false
+    })
+  }
+  
   if (sendTokenButton) {
     sendTokenButton.addEventListener('click', createTokenAndSubmit)
   }
