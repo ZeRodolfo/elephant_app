@@ -1,0 +1,26 @@
+@media (max-width: 480px){
+    .card-wrapper>.jp-card-container {
+      transform: none !important;
+      max-width: 100%;
+    }
+    .jp-card{
+      min-width: 100% !important;
+    }
+
+    .jp-card .jp-card-front .jp-card-lower .jp-card-name {
+      position: relative !important;
+    }
+
+    .jp-card .jp-card-front .jp-card-lower .jp-card-expiry {
+      letter-spacing: 0;
+      position: relative;
+      float: right;
+      margin-top: 1rem;
+      width: auto !important;
+    }
+
+    .jp-card .jp-card-front .jp-card-lower {
+      bottom: 50% !important;
+      transform: translateY(50%) !important;
+    }
+}

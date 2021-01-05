@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   devise_for :users, path: 'users', :controllers => { :registrations => 'users/registrations' }
 
-  root to: 'static#show', page: 'landing'
+  root to: "static#landing"
 
   resources :patients do
     collection do
@@ -39,8 +39,14 @@ Rails.application.routes.draw do
 
   get 'pdf/generate_pdf'
 
-  resources :subscriptions, only: %i[index create]
+  resources :subscriptions, only: %i[index create] do 
+    get :gate, on: :collection
+  end
+
   resources :notifications, only: %i[index create]
+
+  get :home, to: 'home#index'
   
-  get "/:page" => "static#show"
+  get '/landing' => "static#landing"
+  get '/termos-politica' => "static#termos"
 end

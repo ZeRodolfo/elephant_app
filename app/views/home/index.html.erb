@@ -1,26 +1,57 @@
-<section class="row text-center home">
-  <section class="col-md-6">
-    <%= image_tag 'logo.png', alt: 'Logo Elephant RH' %>
-  </section>
+<% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Home' } %>
 
-  <section class="col-md-6 mt-4">
-    <p class="title">
-      Seja bem vindo(a) ao sistema <b>Elephant RH</b>!
-    </p>
+<div class="min100 d-flex flex-column">
+  <%= render 'shared/navbar' %>
+  <section class="el fill d-flex flex-column align-items-center justify-content-between">
+    <div class="card-deck card-deck-home">
+      <div class="card card-home" data-link="<%= patients_path %>">
+        <div class="card-body">
+          <i class="fas fa-users"></i>
+          <h4 class="d-block text-center light text-dark m-0 card-title">Pacientes</h4>
+        </div>
+      </div>
 
-    <br />
+      <div class="card card-home" data-link="#">
+        <div class="card-body">
+          <i class="fas fa-file-alt"></i>
+          <h4 class="d-block text-center light text-dark m-0 card-title">Documentos</h4>
+        </div>
+      </div>
 
-    <p>
-      Aqui você vai conseguir realizar o monitoramento de clientes e/ou candidatos,
-      o controle dos mesmos, adicionar formulários e imprimir em PDF, entre outras funcionalidades...
-    </p>
+      <div class="card card-home" data-link="<%= graphs_index_path %>">
+        <div class="card-body">
+          <i class="fas fa-money-bill-wave"></i>
+          <h4 class="d-block text-center light text-dark m-0 card-title">Finanças</h4>
+        </div>
+      </div>
 
-    <br />
+      <div class="card card-home" data-link="#">
+        <div class="card-body">
+          <i class="far fa-calendar-alt"></i>
+          <h4 class="d-block text-center light text-dark m-0 card-title">Consultas</h4>
+        </div>
+      </div>
 
-    <p>
-      Para realizar o cadastro de um candidato
-    </p>
+      <div class="card card-home" data-link="<%= edit_user_registration_path %>">
+        <div class="card-body">
+          <i class="fas fa-user-tie"></i>
+          <h4 class="d-block text-center light text-dark m-0 card-title">Meu Perfil</h4>
+        </div>
+      </div>
 
-    <%= link_to 'Clique Aqui', new_patient_path, class: 'btn btn-info' %>
-  </section>
+      <div class="card card-home" data-link="#">
+        <div class="card-body">
+          <i class="fas fa-cogs"></i>
+          <h4 class="d-block text-center light text-dark m-0 card-title">Ajustes</h4>
+        </div>
+      </div>
+  </div>
+  <div class="row mt-5 mx-0">
+    <small class="text-center d-block">
+      ©2020 Elephant <br>
+      Todos os direitos reservados.
+    </small>
+  </div>
 </section>
+</div>
+

@@ -9,4 +9,8 @@ class SubscriptionsController < ApplicationController
         render json: { message: result.data }, status: :unprocessable_entity
       end
   end
+
+  def gate
+    @active = current_user.subscription.present? ? current_user.subscription.active? : false
+  end
 end

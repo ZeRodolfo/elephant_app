@@ -1,23 +1,76 @@
-<label for="cardholder_name">Nome do titular</label>
-<input type="text" id="cardholder_name" value="Test Test" /><br />
+<% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Nova assinatura' } %>
 
-<label for="card_number">Número</label>
-<input type="text" id="card_number" value="5031433215406351" /><br />
+<%= render 'shared/navbar' %>
 
-<label for="card_expiration_month">Mês</label>
-<input type="text" id="card_expiration_month" value="11" /><br />
+<style>
+  
+</style>
 
-<label for="card_expiration_year">Ano</label>
-<input type="text" id="card_expiration_year" value="25" /><br />
+<section class="d-flex m-0 align-items-start justify-content-center el min100">
+  <div class="bounding generic-form">
+    <h1 class="bold">Nova Assinatura</h1>
 
-<label for="security_code">Código de segurança</label>
-<input type="text" id="security_code" value="123" /><br />
+    <div class='card-wrapper my-3 my-lg-5 d-flex align-items-center justify-content-center'></div>
 
-<input type="hidden" id="doc_type" value="<%= current_user.document_type %>" />
-<input type="hidden" id="doc_number" value="<%= current_user.document_number %>" />
+    <form id="card-data-form">
+      <div class="form-row">
+        <div class="form-group col">
+          <label for="cardholder_name">Nome do titular</label>
+          <input type="text" id="cardholder_name" class="form-control" placeholder="Nome conforme escrito no cartão">
+          <div class="invalid-feedback"></div>
+        </div>
+      </div>
 
-<%= form_with url: subscriptions_path, html: { id: :subscription_form } do |form| %>
-  <%= hidden_field_tag :token, '' %>
-<% end %>
+      <div class="form-row">
+        <div class="form-group col">
+          <label for="card_number">Número</label>
+          <input type="text" id="card_number" value="" class="form-control">
+          <div class="invalid-feedback"></div>
+        </div>
+      </div>
 
-<button type="button" id="send_token">Assinar</button>
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label for="card_expiration_month">Mês</label>
+          <input type="number" min="0" max="12" id="card_expiration_month" value="" class="form-control" maxlength="2">
+          <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="form-group col-6">
+          <label for="card_expiration_year">Ano</label>
+          <input type="number" min="0" id="card_expiration_year" value="" class="form-control hidden-arrows" maxlength="4">
+          <div class="invalid-feedback"></div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-12 col-lg-6">
+          <label for="security_code">Cód. de segurança</label>
+          <input type="number" min="0" id="security_code" value="" class="form-control hidden-arrows" maxlength="4"> 
+          <div class="invalid-feedback"></div>
+        </div>
+      </div>
+
+      <div class="alert alert-danger alert-dismissible fade hidden" role="alert">
+        <div class="alert-content"></div>
+        <button type="button" onclick="closeAlert()" class="close" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </form>
+
+      <input type="hidden" id="doc_type" value="<%= current_user.document_type %>" />
+      <input type="hidden" id="doc_number" value="<%= current_user.document_number %>" />
+    
+
+      <%= form_with url: subscriptions_path, html: { id: :subscription_form } do |form| %>
+        <%= hidden_field_tag :token, '' %>
+      <% end %>
+      
+      <button type="button" id="send_token" class="btn btn-primary btn-block my-2">Assinar</button>
+  </div>
+</section>
+
+<script src="/assets/card.js"></script>
+
+
