@@ -20,4 +20,7 @@
 //= require raphael
 //= require morris
 //= require bootstrap
-//= require_tree .
+//= require dom
+//= require jquery.mask.min
+//= require masks
+// require_tree .
