@@ -1,21 +1,131 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.card-home {
+  border: none !important;
+  border-radius: .5rem !important;
+  background-color: var(--lite-green) !important;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
 
-.home {
-  padding-top: 50px;
+.card-home .card-body > i{
+  display: block !important;
+  font-size: 3rem;
+  color: var(--dark);
+  margin-bottom: 1rem;
+  text-align: center !important;
+}
 
-  img {
+.card-home{
+  cursor: pointer;
+}
+
+.card-home:hover{
+  transform: translateY(-10px);
+}
+
+@media screen and (min-width: 1569px){
+  .card-deck-home {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 1568px){
+  .card-deck-home {
     width: 60%;
-    box-shadow: 2px 2px 15px rgba(10,10,10,0.2);
   }
+}
 
-  .title {
-    font-size: 1.5em;
+@media screen and (max-width: 1408px){
+  .card-deck-home {
+    width: 65%;
   }
+}
 
-  p {
-    font-size: 1.2em;
-    line-height: 30px;
+@media screen and (max-width: 1261px){
+  .card-deck-home {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 1200px){
+  .card-deck-home {
+    width: 75%;
+  }
+}
+
+@media screen and (max-width: 1116px){
+  .card-deck-home {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 1056px){
+  .card-deck-home {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 850px){
+  .card-deck-home {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 767px){
+  .card-deck-home {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 666px){
+  .card-deck-home {
+    width: 55%;
+  }
+}
+
+@media screen and (max-width: 576px){
+  .card-deck-home {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 360px){
+  .card-deck-home {
+    width: 70%;
+  }
+}
+
+@media (min-width: 0) {
+  .card-deck.card-deck-home .card {
+    flex: 0 0 calc(100% - 60px);
+  }
+}
+@media (min-width: 576px) {
+  .card-deck.card-deck-home .card {
+    flex: 0 0 calc(100% - 60px);
+  }
+}
+@media (min-width: 768px) {
+  .card-deck.card-deck-home .card {
+    flex: 0 0 calc(50% - 60px);
+  }
+}
+@media (min-width: 992px) {
+  .card-deck.card-deck-home .card {
+    flex: 0 0 calc(50% - 60px);
+  }
+}
+@media (min-width: 1024px) {
+  .card-deck.card-deck-home .card {
+    flex: 0 0 calc(33.3333333333% - 60px);
+  }
+}
+@media (min-width: 1200px) {
+  .card-deck.card-deck-home .card {
+    flex: 0 0 calc(33.3333333333% - 60px);
+  }
+}
+@media (min-width: 1679px) {
+  .card-deck.card-deck-home .card {
+    flex: 0 0 calc(33.3333333333% - 60px);
   }
 }
