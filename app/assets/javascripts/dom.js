@@ -17,6 +17,10 @@
     throttle("resize", "optimizedResize")
 })()
 
+$(() => {
+    bsCustomFileInput.init()
+})
+
 /*
 $(() => {
     function calcRemaining(){

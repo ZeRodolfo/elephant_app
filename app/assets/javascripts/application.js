@@ -20,6 +20,7 @@
 //= require raphael
 //= require morris
 //= require bootstrap
+//= require bs-custom-file-input.min
 //= require dom
 //= require jquery.mask.min
 //= require masks
