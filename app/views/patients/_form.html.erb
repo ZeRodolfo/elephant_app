@@ -1,4 +1,13 @@
 <%= form_for(patient) do |f| %>
+
+<% if patient.avatar.present? %>
+  <div class="form-row">
+    <div class="form-group col d-flex align-items-center justify-content-center">
+      <%= image_tag(patient.avatar.medium.url, class: 'img-fluid') %>
+    </div>
+  </div>
+<% end %>
+
 <div class="form-row">
   <div class="form-group col">
     <label for="name">Nome</label>
@@ -7,7 +16,7 @@
 </div>
 
 <div class="form-row">
-  <div class="form-group col-6">
+  <div class="form-group col-12 col-lg-6">
     <label for="exampleFormControlSelect1">Gênero</label>
     <select class="form-control" id="exampleFormControlSelect1">
       <option selected value="0">Selecione uma opção</option>
@@ -17,14 +26,14 @@
     </select>
   </div>
 
-  <div class="form-group col-6">
+  <div class="form-group col-12 col-lg-6">
     <label for="age">Idade</label>
     <%= f.number_field :age, min: 0, class: 'form-control', id: 'age', required: true %>
   </div>
 </div>
 
 <div class="form-row">
-  <div class="form-group col-6">
+  <div class="form-group col-12 col-lg-6">
     <label for="birth-date">Data de nascimento</label>
     <div class="input-group">
       <div class="input-group-prepend">
@@ -34,25 +43,25 @@
     </div>
   </div>
 
-  <div class="form-group col-6">
+  <div class="form-group col-12 col-lg-6">
     <label for="contato">Contato</label>
     <input type="text" class="form-control telefone" id="contato">
   </div>
 </div>
 
 <div class="form-row">
-  <div class="form-group col-6">
+  <div class="form-group col-12 col-lg-6">
     <label for="profissao">Profissão</label>
     <input type="text" class="form-control" id="profissao">
   </div>
 
-  <div class="form-group col-6">
+  <div class="form-group col-12 col-lg-6">
     <label for="contato-parente">Contato de parente</label>
     <input type="text" class="form-control telefone" id="contato-parente">
   </div>
 </div>
 
-<div class="form-row">
+<div class="form-row my-2">
   <div class="form-group col">
     <div class="input-group">
       <div class="custom-file">
@@ -85,5 +94,15 @@
     </div>
   </div> -->
 
-<%= f.submit 'Salvar', class: 'btn btn-primary btn-block my-2' %>
+<div class="form-row">
+  <% if patient.id.present? %>
+    <div class="form-group col-12 col-lg-6">
+        <%= link_to 'Excluir', patient, method: :delete, class: 'btn btn-outline-danger btn-block my-0 my-lg-2', data: { confirm: 'Tem certeza que deseja excluir este paciente?' } %>
+    </div>
+  <% end %>
+  <div class="form-group col">
+    <%= f.submit 'Salvar', class: 'btn btn-primary btn-block my-0 my-lg-2' %>
+  </div>
+</div>
+
 <% end %>

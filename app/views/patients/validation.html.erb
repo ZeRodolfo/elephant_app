@@ -1,15 +1,29 @@
-<section class="text-center col-md-4 offset-md-4">
+<% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Validação do paciente' } %>
+
+<%= render 'shared/navbar' %>
+
+<section class="d-flex m-0 align-items-start justify-content-center el min100">
+	<div class="bounding generic-form">
+	<!-- <h1 class="bold">Senha do paciente</h1> -->
+
 	<%= form_for @patient, url: {action: :validate} do |f| %>
 
 		<%= hidden_field_tag :id_patient, @patient.id %>
 
-		<section class="field">
-          Senha <br />
-          <%= f.password_field :code %>
-        </section>
+		<div class="form-row">
+			<div class="form-group col">
+				<label for="code">Código de segurança </label>
+				<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="code-prepend"><i class="fas fa-lock"></i></span>
+				</div>
+			
+				<%= f.password_field :code, class: 'form-control', id:'code', 'aria-describedby': 'code-prepend' %>
+				</div>
+			</div>
+		</div>
 
-        <%= f.submit 'Enviar', class: 'btn btn-primary mt-4' %>
+		<%= f.submit 'Acessar', class: 'btn btn-primary btn-block my-2' %>
 	<% end %>
-
-	<%= link_to 'Voltar', patients_path, class: 'btn btn-warning mt-3' %>
+	</div>
 </section>
