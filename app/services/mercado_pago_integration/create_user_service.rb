@@ -1,6 +1,8 @@
 module MercadoPagoIntegration
   class CreateUserService < BaseService
     def call(user)
+      return user if user.integrated?
+
       @user = user
 
       validate_params
