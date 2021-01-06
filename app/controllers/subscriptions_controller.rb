@@ -11,6 +11,6 @@ class SubscriptionsController < ApplicationController
   end
 
   def gate
-    @active = current_user.subscription.present? ? current_user.subscription.active? : false
+    @active = current_user.subscription&.active?
   end
 end
