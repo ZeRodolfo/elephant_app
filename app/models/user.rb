@@ -51,4 +51,8 @@ class User < ApplicationRecord
   def integrated?
     mercado_pago_id.present?
   end
+
+  def has_active_subscription?
+    subscription.present? && subscription.active?
+  end
 end
