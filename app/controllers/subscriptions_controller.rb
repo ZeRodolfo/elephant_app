@@ -1,5 +1,9 @@
 class SubscriptionsController < ApplicationController
-  def index; end
+  def index
+    @active = current_user.subscription&.active?
+  end
+
+  def new; end
 
   def create
     Subscription::Create
@@ -8,9 +12,5 @@ class SubscriptionsController < ApplicationController
       .on_failure do |result|
         render json: { message: result.data }, status: :unprocessable_entity
       end
-  end
-
-  def gate
-    @active = current_user.subscription&.active?
   end
 end
