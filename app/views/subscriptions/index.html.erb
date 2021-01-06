@@ -2,10 +2,6 @@
 
 <%= render 'shared/navbar' %>
 
-<style>
-  
-</style>
-
 <section class="d-flex m-0 align-items-start justify-content-center el min100">
   <div class="bounding generic-form">
     <h1 class="bold">Nova Assinatura</h1>
@@ -38,7 +34,7 @@
 
         <div class="form-group col-6">
           <label for="card_expiration_year">Ano</label>
-          <input type="number" min="0" id="card_expiration_year" value="" class="form-control hidden-arrows" maxlength="4">
+          <input type="number" min="0" id="card_expiration_year" value="" class="form-control hidden-arrows" maxlength="2">
           <div class="invalid-feedback"></div>
         </div>
       </div>
@@ -46,7 +42,7 @@
       <div class="form-row">
         <div class="form-group col-12 col-lg-6">
           <label for="security_code">Cód. de segurança</label>
-          <input type="number" min="0" id="security_code" value="" class="form-control hidden-arrows" maxlength="4"> 
+          <input type="number" min="0" id="security_code" value="" class="form-control hidden-arrows" maxlength="4">
           <div class="invalid-feedback"></div>
         </div>
       </div>
@@ -59,19 +55,16 @@
       </div>
     </form>
 
-      <input type="hidden" id="doc_type" value="<%= current_user.document_type %>" />
-      <input type="hidden" id="doc_number" value="<%= current_user.document_number %>" />
-    
+    <input type="hidden" id="doc_type" value="<%= current_user.document_type %>" />
+    <input type="hidden" id="doc_number" value="<%= current_user.document_number %>" />
 
-      <%= form_with url: subscriptions_path, html: { id: :subscription_form } do |form| %>
-        <%= hidden_field_tag :token, '' %>
-      <% end %>
-      
-      <button type="button" id="send_token" class="btn btn-primary btn-block my-2">Assinar</button>
+    <%= form_with url: subscriptions_path, html: { id: :subscription_form } do |form| %>
+      <%= hidden_field_tag :token, '' %>
+    <% end %>
+
+    <button type="button" id="send_token" class="btn btn-primary btn-block my-2">Assinar</button>
   </div>
 </section>
 
-<script src="/assets/card.js"></script>
-<script src="/assets/mercadopago/subscription.js"></script>
-
-
+<%= javascript_include_tag 'mercadopago/subscription', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'card', 'data-turbolinks-track': 'reload' %>
