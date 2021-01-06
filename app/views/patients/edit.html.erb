@@ -1,5 +1,13 @@
-<section class="new_patient text-center">
-    <h4>Edição de um Cliente</h4>
+<% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Detalhes do paciente ' + @patient.name } %>
 
+<%= render 'shared/navbar' %>
+
+<section class="d-flex m-0 align-items-start justify-content-center el min100">
+  <div class="bounding generic-form">
+    <h1 class="bold m-0">Detalhes do paciente</h1>
+    <div class="mb-3">
+        <a class="text-dark" href="#docs">Ver documentos</a> / <a class="text-dark" href="#consultas">Ver consultas</a>
+    </div>
     <%= render 'form', patient: @patient %>
+  </div>
 </section>

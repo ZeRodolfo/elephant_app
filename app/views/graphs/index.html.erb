@@ -1,64 +1,34 @@
-<section class="page-header border-bottom pb-2">
-  <h3>Gráfico dos valores semanais</h3>
-</section>
+<% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Gráfico de finanças' } %>
 
-<section class="graph">
-  <%= content_tag :div, "", id: "line_graph", data: {graph: week_data} %>
-</section>
+<div class="vh100">
+  <%= render 'shared/navbar' %>
+  <section class="el fill">
+    <h6 class="subtitle light my-3">Gráfico de finanças</h6>
+    
+    <div class="form-row">
+      <div class="form-group col-12 col-sm-8 col-lg-3">
+        <label for="graph-interval-select">Selecione o intervalo</label>
+        <select class="form-control" id="graph-interval-select">
+          <option selected value="0">Semanal</option>
+          <option value="1">Mensal</option>
+          <option value="2">Anual</option>
+        </select>
+      </div>
+    </div>
 
-<hr />
+    <div class="graph" data-select="0" style="display: none;">
+      <%= content_tag :div, "", id: "week-graph", data: {graph: week_data} %>
+    </div>
 
-<section class="page-header border-bottom pb-2">
-  <h3>Gráfico dos valores mensais</h3>
-</section>
+    <div class="graph" data-select="1" style="display: none;">
+      <%= content_tag :div, "", id: "month-graph", data: {graph: month_data} %>
+    </div>
+    
+    <div class="graph" data-select="2" style="display: none;">
+      <%= content_tag :div, "", id: "annual-graph", data: {graph: annual_data} %>
+    </div>
 
-<section class="graph">
-  <%= content_tag :div, "", id: "line_graph2", data: {graph: month_data} %>
-</section>
+  </section>
+</div>
 
-<hr />
-
-<section class="page-header border-bottom pb-2">
-  <h3>Gráfico dos valores anuais</h3>
-</section>
-
-<section class="graph">
-  <%= content_tag :div, "", id: "line_graph3", data: {graph: annual_data} %>
-</section>
-
-<%= javascript_tag do -%>
-  $( document ).on('turbolinks:load', function() {
-    Morris.Line({
-      element: 'line_graph',
-      data: $('#line_graph').data('graph'),
-      xkey: 'created_at',
-      ykeys: ['collected'],
-      labels: ['Quantia Recebida (R$)'],
-      lineColors: ['#007bff']
-    }).on('click', function(i, row){
-      console.log(i, row);
-    });
-
-    Morris.Line({
-      element: 'line_graph2',
-      data: $('#line_graph2').data('graph'),
-      xkey: 'created_at',
-      ykeys: ['collected'],
-      labels: ['Quantia Recebida (R$)'],
-      lineColors: ['#007bff']
-    }).on('click', function(i, row){
-      console.log(i, row);
-    });
-
-    Morris.Line({
-      element: 'line_graph3',
-      data: $('#line_graph3').data('graph'),
-      xkey: 'created_at',
-      ykeys: ['collected'],
-      labels: ['Quantia Recebida (R$)'],
-      lineColors: ['#007bff']
-    }).on('click', function(i, row){
-      console.log(i, row);
-    });
-  });
-<% end -%>
+<script src="/assets/graphs.js"></script>

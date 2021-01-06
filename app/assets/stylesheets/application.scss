@@ -216,12 +216,19 @@ small{
   border-radius: 0.5rem;
 }
 
+.custom-file-label::after { content: "Navegar";}
+
 .form-control:focus {
   color: #495057;
   background-color: #fff;
   border-color: var(--green);
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(69, 170, 119, .25);
+}
+
+.custom-file-input:focus ~ .custom-file-label {
+  border-color: var(--green) !important;
+  box-shadow: 0 0 0 0.2rem rgba(69, 170, 119, .25) !important;
 }
 
 .input-group-text {
@@ -288,6 +295,10 @@ a.el-anchor-green:hover{
 .btn-outline-primary:hover {
   color: var(--white) !important;
   background-color: var(--green) !important;
+}
+
+.custom-file-label::after {
+  border-radius: 0 0.5rem 0.5rem 0 !important;
 }
 
 .alert{

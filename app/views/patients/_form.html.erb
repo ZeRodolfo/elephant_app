@@ -1,62 +1,108 @@
 <%= form_for(patient) do |f| %>
-  <section class="card">
-        <section class="card-header">
-          Identificação do Candidato
-        </section>
 
-        <section class="card-body">
-          <section class="row">
-            <section class="col-6">
-              Empresa <br />
-              <%= f.text_field :company %>
-            </section>
+<% if patient.avatar.present? %>
+  <div class="form-row">
+    <div class="form-group col d-flex align-items-center justify-content-center">
+      <%= image_tag(patient.avatar.medium.url, class: 'img-fluid') %>
+    </div>
+  </div>
+<% end %>
 
-            <section class="col-6">
-              Estado Civil* <br />
-              <%= f.text_field :marital_status, required: true %>
-            </section>
+<div class="form-row">
+  <div class="form-group col">
+    <label for="name">Nome</label>
+    <%= f.text_field :name, id: 'name', class: 'form-control', required: true %>
+  </div>
+</div>
 
-            <section class="col-6">
-              Nome do Candidato* <br />
-              <%= f.text_field :name, required: true %>
-            </section>
+<div class="form-row">
+  <div class="form-group col-12 col-lg-6">
+    <label for="exampleFormControlSelect1">Gênero</label>
+    <select class="form-control" id="exampleFormControlSelect1">
+      <option selected value="0">Selecione uma opção</option>
+      <option value="m">Masculino</option>
+      <option value="f">Feminino</option>
+      <option value="o">Outro</option>
+    </select>
+  </div>
 
-            <section class="col-6">
-              Escolaridade* <br />
-              <%= f.text_field :schooling, required: true %>
-            </section>
+  <div class="form-group col-12 col-lg-6">
+    <label for="age">Idade</label>
+    <%= f.number_field :age, min: 0, class: 'form-control', id: 'age', required: true %>
+  </div>
+</div>
 
-            <section class="col-6">
-              Idade* <br />
-              <%= f.number_field :age, min: 0, required: true %>
-            </section>
+<div class="form-row">
+  <div class="form-group col-12 col-lg-6">
+    <label for="birth-date">Data de nascimento</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="birth-date-prepend"><i class="far fa-calendar-alt"></i></span>
+      </div>
+      <input type="text" class="form-control nascimento" id="birth-date" aria-describedby="birth-date-prepend" required>
+    </div>
+  </div>
 
-            <section class="col-6">
-              Cargo <br />
-              <%= f.text_field :office %>
-            </section>
-          </section>
+  <div class="form-group col-12 col-lg-6">
+    <label for="contato">Contato</label>
+    <input type="text" class="form-control telefone" id="contato">
+  </div>
+</div>
 
-          <% if current_user.category == 'Autônomo' %>
-            <section class="text-center mt-4">
-                Código de segurança <br />
-                <small>Código para acessar as consultas do paciente</small>
-                <%= f.password_field :code, class: 'text-center' %>
-            </section>
-          <% end %>
+<div class="form-row">
+  <div class="form-group col-12 col-lg-6">
+    <label for="profissao">Profissão</label>
+    <input type="text" class="form-control" id="profissao">
+  </div>
 
+  <div class="form-group col-12 col-lg-6">
+    <label for="contato-parente">Contato de parente</label>
+    <input type="text" class="form-control telefone" id="contato-parente">
+  </div>
+</div>
 
-          <section class="inferior-buttons">
-            <%= f.file_field :avatar, class: 'photo' %>
+<div class="form-row my-2">
+  <div class="form-group col">
+    <div class="input-group">
+      <div class="custom-file">
+        <%= f.file_field :avatar, class: 'custom-file-input', id: 'avatar' %>
+        <label class="custom-file-label form-control" for="avatar">Selecione uma foto</label>
+      </div>
+    </div>
 
-            <br />
+  </div>
+</div>
 
-            <%= f.submit 'Salvar', class: 'btn btn-primary save' %>
+<div class="form-row">
+  <div class="form-group col">
 
-            <br />
+    <label for="code">Código de segurança </label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="code-prepend"><i class="fas fa-lock"></i></span>
+      </div>
 
-            <%= link_to 'Voltar', :back, class: 'btn btn-warning m-4' %>
-          </section>
-        </section>
-      </section>
+      <%= f.password_field :code, class: 'form-control', id:'code', 'aria-describedby': 'code-prepend' %>
+    </div>
+    <small>Código para acessar as consultas do paciente</small>
+  </div>
+</div>
+
+<!-- <div class="form-row">
+    <div class="form-group col-6">
+    
+    </div>
+  </div> -->
+
+<div class="form-row">
+  <% if patient.id.present? %>
+    <div class="form-group col-12 col-lg-6">
+        <%= link_to 'Excluir', patient, method: :delete, class: 'btn btn-outline-danger btn-block my-0 my-lg-2', data: { confirm: 'Tem certeza que deseja excluir este paciente?' } %>
+    </div>
+  <% end %>
+  <div class="form-group col">
+    <%= f.submit 'Salvar', class: 'btn btn-primary btn-block my-0 my-lg-2' %>
+  </div>
+</div>
+
 <% end %>
