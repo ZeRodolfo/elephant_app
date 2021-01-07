@@ -5,7 +5,7 @@
 #  id             :bigint           not null, primary key
 #  age            :integer
 #  avatar         :json
-#  code           :integer
+#  code           :string
 #  company        :string
 #  marital_status :string
 #  name           :string
@@ -27,9 +27,9 @@ class Patient < ApplicationRecord
   
   has_many :office_visits
 
-  validates_presence_of :company, :marital_status, :name, :schooling, :age, :office
+  validates_presence_of :company, :code, :marital_status, :name, :schooling, :age, :office
   
-  validates :code, :avatar, presence: false
+  validates :avatar, presence: false
 
   mount_uploader :avatar, AvatarUploader
 
