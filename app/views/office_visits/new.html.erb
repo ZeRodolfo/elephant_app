@@ -1,6 +1,14 @@
-<section class="text-center">
-	<h1>Nova Consulta</h1>
+<% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Nova Consulta' } %>
 
+<%= render 'shared/navbar' %>
+
+<style>
+  main {
+    height: 100%;
+  }
+</style>
+
+<section class="el min-100 d-flex flex-column">
 	<% if params[:register].present? %>
 		<%= render 'register', office_visit: @office_visit %>
 	<% else %>

@@ -15,8 +15,8 @@
 //= require highcharts
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
-//= require jquery
+//= require jquery3
+//= require jquery_ujs
 //= require raphael
 //= require morris
 //= require bootstrap
