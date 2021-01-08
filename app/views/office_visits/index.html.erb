@@ -1,46 +1,88 @@
-<p id="notice"><%= notice %></p>
+<% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Home' } %>
 
-<h1>Listagem de Consultas</h1>
+<%= render 'shared/navbar' %>
 
-<p>
-  Paciente: <b><%= @patient.name %></b>
-</p>
+<style>
+  main {
+    height: 100%;
+  }
+</style>
 
-<table class="table table-hover text-center">
-  <thead>
-    <tr>
-      <th>Data da consulta</th>
-      <th>Descrição</th>
-      <th>Anexos</th>
-      <th colspan="4"></th>
-    </tr>
-  </thead>
+<link rel="stylesheet" href="/assets/dataTables.bootstrap4.min.css">
 
-  <tbody>
-    <% @office_visits.each do |office_visit| %>
-      <tr>
-        <td><%= (office_visit.date.present?) ? office_visit.date : '-' %> <%= (office_visit.hour.present?) ? office_visit.hour : '-' %></td>
-        <td><p><%= (office_visit.description.present?) ? truncate(office_visit.description, :length => 20, separator: ' ') : '-' %></p></td>
-        <td>
-          <% office_visit.documents.each_with_index do |document, index| %>
-            <%= link_to("Anexo #{index + 1} ", document.url, target: '_blank') %>
-            <br />
-          <% end %>
-        </td>
-        <td><%= link_to 'Remarcar Paciente', edit_office_visit_path(office_visit, id_patient: @patient, remark: true), class: 'btn btn-primary' %></td>
-        <td><%= link_to 'Preencher Atendimento', edit_office_visit_path(office_visit, id_patient: @patient), class: 'btn btn-success' %></td>
-        <td><%= link_to 'Pagamento', parcels_path(office: office_visit, id_patient: params[:id_patient]), class: 'btn btn-warning' %></td>
-        <td><%= link_to 'Exibir', office_visit, class: 'btn btn-info' %></td>
-        <td><%= link_to 'Cancelar', office_visit, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<section class="el min-100 d-flex flex-column">
+  <div class="my-3">
+    <h6 class="subtitle light m-0">Listagem de consultas</h6>
+    <p class="phrase light m-0">Paciente: <span class="phrase bold"><%= @patient.name %></span></p>
+  </div>
+  <div class="row m-0 p-0">
+    <div class="col-8 col-lg-6 d-flex align-items-center justify-content-center m-0 pl-0">
+      <label class="sr-only" for="office-visits-search">Pesquisa</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fas fa-search"></i></div>
+        </div>
+        <input type="text" class="form-control" id="office-visits-search"
+          placeholder="busque uma data ou descrição">
+      </div>
+    </div>
 
-<br>
+    <div class="col-4 col-lg-6 d-flex align-items-end justify-content-end m-0 pr-0">
+      <%= link_to new_office_visit_path(id_patient: @patient, register: true), class: 'btn btn-outline-primary' do %>
+        <i class="d-none d-lg-inline fas fa-plus mr-2"></i>Adicionar
+      <% end %>
+    </div>
+  </div>
 
-<%= will_paginate @office_visits %>
+  <div class="h-100 py-3">
+    <table id="office-visits-table" class="table table-striped table-bordered" style="width:100%">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Descrição</th>
+          <th>Atalhos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @office_visits.each do |office_visit| %>
+        <tr>
+          <td><%= (office_visit.date.present?) ? office_visit.date : '-' %> <%= (office_visit.hour.present?) ? office_visit.hour : '-' %></td>
+          <td><%= (office_visit.description.present?) ? truncate(office_visit.description, :length => 75, separator: ' ') : '-' %></td>
+          <td>
+            <div class="row m-0">
+              <div class="col-3 m-0 d-flex align-items-center justify-content-center">
+                <a href="<%= edit_office_visit_path(office_visit, id_patient: @patient) %>" class="el-anchor"><i class="fas fa-check text-green"></i></a>
+              </div>
 
-<br>
+              <div class="col-3 m-0 p-0 d-flex align-items-center justify-content-center">
+                <%= link_to edit_office_visit_path(office_visit, id_patient: @patient, remark: true), class: 'el-anchor' do %>
+                  <i class="fas fa-pencil-alt"></i>
+                <% end %>
+              </div>
 
-<%= link_to 'Voltar', patients_path, class: 'btn btn-warning mt-4' %>
+              <div class="col-3 m-0 d-flex align-items-center justify-content-center">
+                <a href="<%= parcels_path(office: office_visit, id_patient: params[:id_patient]) %>" class="el-anchor"><i class="fas fa-money-bill-wave"></i></a>
+              </div>
+
+              <div class="col-3 m-0 p-0 d-flex align-items-center justify-content-center">
+                <%= link_to office_visit, method: :delete, class: 'text-danger', data: { confirm: 'Tem certeza que deseja excluir esta consulta?' } do %>
+                  <i class="fas fa-trash"></i>
+                <% end %>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <script>
+
+    </script>
+
+    <script src="/assets/dataTables.min.js"></script>
+    <script src="/assets/dataTables.bootstrap4.min.js"></script>
+    <script src="/assets/dataTables.responsive.min.js"></script>
+    <script src="/assets/office_visits.js"></script>
+  </div>
+</section
