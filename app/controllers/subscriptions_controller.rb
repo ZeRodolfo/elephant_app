@@ -6,7 +6,9 @@ class SubscriptionsController < ApplicationController
     @active = current_user.subscription&.active?
   end
 
-  def new; end
+  def new
+    gon.session = PagSeguro::Session.create
+  end
 
   def create
     Subscription::Create
