@@ -2,12 +2,13 @@
 <html>
   <head>
     <title><%= content_for?(:html_title) ? yield(:html_title) : "Elephant - Gerenciamento Para Psicologia Clínica" %></title>
+    <%= Gon::Base.render_data %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= favicon_link_tag asset_path('favicon.png') %>
