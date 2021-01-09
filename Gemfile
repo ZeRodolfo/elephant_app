@@ -102,4 +102,5 @@ gem 'mercadopago-sdk', '~> 1.3'
 gem 'u-case', '~> 4.1.0'
 gem 'sidekiq'
 gem 'whenever', require: false
-gem 'pagseguro-oficial', '~> 2.1'
+gem 'pagseguro-oficial', '~> 2.6.0'
+gem 'gon', '~> 6.0', '>= 6.0.1'
