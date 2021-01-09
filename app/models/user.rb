@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  birth_date             :date
 #  category               :integer
 #  document_number        :string
 #  document_type          :string           default("CPF")
@@ -43,6 +44,8 @@ class User < ApplicationRecord
     validates :document_number
   end
 
+  before_validation :clean_masked_fields
+
   def name
     "#{first_name} #{last_name}"
   end
@@ -55,4 +58,10 @@ class User < ApplicationRecord
   def has_active_subscription?
     subscription.present? && subscription.active?
   end
+
+  private
+    def clean_masked_fields
+      self.document_number = self.document_number.to_s.gsub /[^\d]/, ''
+      self.phone = self.phone.to_s.gsub /[^\d]/, ''
+    end
 end
