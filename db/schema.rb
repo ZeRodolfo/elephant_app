@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_26_144016) do
+ActiveRecord::Schema.define(version: 2021_01_07_163917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 2020_12_26_144016) do
     t.string "schooling"
     t.integer "age"
     t.string "office"
-    t.integer "code"
+    t.string "code"
     t.index ["form_id"], name: "index_patients_on_form_id"
     t.index ["user_id"], name: "index_patients_on_user_id"
   end

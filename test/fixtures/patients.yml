@@ -5,7 +5,7 @@
 #  id             :bigint           not null, primary key
 #  age            :integer
 #  avatar         :json
-#  code           :integer
+#  code           :string
 #  company        :string
 #  marital_status :string
 #  name           :string
