@@ -1,5 +1,3 @@
-window.Mercadopago.setPublishableKey("APP_USR-94728077-2644-4d83-b383-5a10ae527dbb");
-
 const responses = {
   '205': {
     field: '#card_number',
@@ -107,71 +105,115 @@ $(document).on('turbolinks:load', function () {
     const card = new Card({
       form: '#card-data-form',
       container: '.card-wrapper',
-  
+
       placeholders: {
         number: '**** **** **** ****',
         name: 'Nome Sobrenome',
         expiry: '**/****',
         cvc: '***'
       },
-  
+
       formSelectors: {
         numberInput: '#card_number',
         expiryInput: '#card_expiration_month, #card_expiration_year',
         cvcInput: '#security_code',
         nameInput: '#cardholder_name'
       },
-  
+
       debug: false
     })
   }
-  
+
   if (sendTokenButton) {
     sendTokenButton.addEventListener('click', createTokenAndSubmit)
   }
+
+  const setValue = (id, value) => document.querySelector(id).value = value
+  const setAttr = (id, attr, value) => document.querySelector(id)[attr] = value
+
+  PagSeguroDirectPayment.setSessionId(gon.session.id);
+
+  PagSeguroDirectPayment.onSenderHashReady(function(response) { window.senderHash = response.senderHash; })
+
+  PagSeguroDirectPayment.onSenderHashReady(function(response) {
+    if (response.status == 'error') {
+      console.log(response.message);
+      return false;
+    }
+
+    setValue('#sender_hash', response.senderHash)
+  });
+
+  $("#card_number").on('keyup', function() {
+    if ($("#card_number").val().length >= 7) {
+      PagSeguroDirectPayment.getBrand({
+        cardBin: $("#card_number").val().replace(/\s/g, '').substring(0, 6),
+        success: function(response) {
+          $("#card_brand").val(response['brand']['name']);
+          $("#security_code").attr('size', response['brand']['cvvSize']);
+        },
+        error: function(response) {
+          console.log(response);
+        }
+      })
+    };
+  })
 
   function createTokenAndSubmit(event) {
     const form = document.getElementById('subscription_form')
     const value = (id) => document.getElementById(id).value
 
-    const payload = {
-      'cardholderName': value('cardholder_name'),
-      'cardNumber': value('card_number'),
-      'cardExpirationMonth': value('card_expiration_month'),
-      'cardExpirationYear': value('card_expiration_year'),
-      'securityCode': value('security_code'),
-      'docType': value('doc_type'),
-      'docNumber': value('doc_number'),
+    var payload = {
+      cardNumber: value('card_number'),
+      expirationMonth: value('card_expiration_month'),
+      expirationYear: value('card_expiration_year'),
+      cvv: value('security_code'),
+      success: function(response) {
+        console.log(response);
+        const token = document.getElementById('token')
+        token.setAttribute('value', response['card']['token'])
+        // form.submit()
+      },
+      error: function(response) {
+        console.log(response);
+        printError(response);
+      }
     }
 
-    window.Mercadopago.createToken(payload, (status, response) => {
-      clearErrors()
+    if ($("#card_brand").val() != '') {
+      payload.brand = $("#card_brand").val()
+    }
 
-      if (status == 200 || status == 201) {
-        const token = document.getElementById('token')
-        token.setAttribute('value', response.id)
-        form.submit()
-      }
-      else {
-        for (const error of response.cause) {
-          const code = error.code.toString()
+    PagSeguroDirectPayment.createCardToken(payload)
 
-          const responseData = responses[code]
+    // window.Mercadopago.createToken(payload, (status, response) => {
+    //   clearErrors()
 
-          if (!responseData) {
-            showAlert('Ocorreu um erro inesperado.<br>Tente novamente.')
-            return
-          }
+    //   if (status == 200 || status == 201) {
+    //     const token = document.getElementById('token')
+    //     token.setAttribute('value', response.id)
+    //     form.submit()
+    //   }
+    //   else {
+    //     for (const error of response.cause) {
+    //       const code = error.code.toString()
 
-          if (responseData.field) {
-            setError(responseData.field, responseData.message)
-          }
-          else {
-            showAlert(responseData.message)
-          }
-        }
-      }
-    })
+    //       const responseData = responses[code]
+
+    //       if (!responseData) {
+    //         showAlert('Ocorreu um erro inesperado.<br>Tente novamente.')
+    //         return
+    //       }
+
+    //       if (responseData.field) {
+    //         setError(responseData.field, responseData.message)
+    //       }
+    //       else {
+    //         showAlert(responseData.message)
+    //       }
+    //     }
+    //   }
+    // })
 
     return false
   }
