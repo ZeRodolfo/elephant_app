@@ -42,12 +42,21 @@ class User < ApplicationRecord
     validates :first_name
     validates :last_name
     validates :document_number
+    validates :birth_date
   end
 
   before_validation :clean_masked_fields
 
   def name
     "#{first_name} #{last_name}"
+  end
+
+  def phone_ddd
+    self.phone[0..1]
+  end
+
+  def phone_number
+    self.phone[2..-1]
   end
 
   # Whether the user is registered on mercado pago

@@ -2,15 +2,17 @@
 #
 # Table name: addresses
 #
-#  id         :bigint           not null, primary key
-#  cep        :string
-#  city       :string
-#  number     :integer
-#  street     :string
-#  uf         :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint
+#  id           :bigint           not null, primary key
+#  cep          :string
+#  city         :string
+#  complement   :string
+#  neighborhood :string
+#  number       :integer
+#  street       :string
+#  uf           :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  user_id      :bigint
 #
 # Indexes
 #

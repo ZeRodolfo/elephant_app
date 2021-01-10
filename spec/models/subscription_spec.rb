@@ -7,6 +7,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  mercado_pago_id :string
+#  pag_seguro_id   :string
 #  user_id         :bigint
 #
 # Indexes
