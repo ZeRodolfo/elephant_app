@@ -169,10 +169,9 @@ $(document).on('turbolinks:load', function () {
       expirationYear: value('card_expiration_year'),
       cvv: value('security_code'),
       success: function(response) {
-        console.log(response);
         const token = document.getElementById('token')
         token.setAttribute('value', response['card']['token'])
-        // form.submit()
+        form.submit()
       },
       error: function(response) {
         console.log(response);
