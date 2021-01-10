@@ -12,10 +12,10 @@ class SubscriptionsController < ApplicationController
 
   def create
     Subscription::Create
-      .call(card_token: params[:token], user: current_user)
+      .call(card_token: params[:token], user: current_user, remote_ip: request.remote_ip)
       .on_success { |result| redirect_to home_path }
       .on_failure do |result|
-        render json: { message: result.data }, status: :unprocessable_entity
+        render :new, alert: result.data
       end
   end
 
