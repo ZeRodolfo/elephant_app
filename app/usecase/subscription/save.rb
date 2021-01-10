@@ -1,11 +1,11 @@
 class Subscription::Save < Micro::Case
-  attribute :subscription_data
   attribute :user
+  attribute :pagseguro_subscription
 
   def call!
     subscription = user.create_subscription(
       status: :active,
-      mercado_pago_id: subscription_data['id']
+      pag_seguro_id: pagseguro_subscription.code,
     )
 
     Success result: { subscription: subscription }
