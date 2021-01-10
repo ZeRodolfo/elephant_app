@@ -28,3 +28,6 @@
 /public/uploads
 
 *.env
+
+tasks.md
+pagseguro.md
