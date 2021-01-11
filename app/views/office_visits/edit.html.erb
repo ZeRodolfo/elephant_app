@@ -1,8 +1,16 @@
-<section class="text-center">
-	<h1>Editar Atendimento</h1>
+<% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Editar Consulta' } %>
 
+<%= render 'shared/navbar' %>
+
+<style>
+  main {
+    height: 100%;
+  }
+</style>
+
+<section class="el min-100 d-flex flex-column">
 	<% if params[:remark].present? %>
-		<%= render 'register', office_visit: @office_visit %>
+		<%= render 'register', multiple: false, office_visit: @office_visit, title: 'Editar Consulta' %>
 	<% else %>
 		<%= render 'form', office_visit: @office_visit %>
 	<% end %>

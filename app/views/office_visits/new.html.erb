@@ -10,7 +10,7 @@
 
 <section class="el min-100 d-flex flex-column">
 	<% if params[:register].present? %>
-		<%= render 'register', office_visit: @office_visit %>
+		<%= render 'register', multiple: true, office_visit: @office_visit, title: 'Nova Consulta' %>
 	<% else %>
 		<%= render 'form', office_visit: @office_visit %>
 	<% end %>
