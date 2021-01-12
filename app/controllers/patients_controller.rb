@@ -51,7 +51,7 @@ class PatientsController < ApplicationController
     @patient = Patient.find(params[:id_patient])
 
     if @patient.validate_code(params[:patient][:code].to_s)
-      redirect_to office_visits_path(id_patient: @patient), notice: 'Autenticação realizada!'
+      redirect_to office_visits_path(id_patient: @patient)
     else
       redirect_to request.referrer, alert: 'Senha Inválida!'
     end

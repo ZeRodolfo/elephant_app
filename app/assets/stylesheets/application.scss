@@ -1,5 +1,6 @@
 /*
  *= require font-awesome
+ *= require jquery-ui
  *= require_tree .
  */
 @import "bootstrap";
@@ -61,7 +62,7 @@ html, body{
   font-family: 'Ubuntu', sans-serif !important;
 }
 
-body, *{
+body, *:not(.alert){
   transition: all linear .2s;
 }
 
@@ -297,9 +298,9 @@ a.el-anchor-green:hover{
   border-radius: 0 0.5rem 0.5rem 0 !important;
 }
 
-.alert{
-  opacity: .75 !important;
-}
+// .alert{
+//   opacity: .75 !important;
+// }
 
 .h-auto{
   height: auto !important;

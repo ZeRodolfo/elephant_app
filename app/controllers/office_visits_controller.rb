@@ -96,7 +96,7 @@ class OfficeVisitsController < ApplicationController
     if @office_visit.update(office_visit_params)
       redirect_to office_visits_path(id_patient: params[:id_patient]), notice: 'Consulta atualizada com sucesso.'
     else
-      redirect_to office_visits_path(id_patient: params[:id_patient]), notice: 'Erro na atualização da consulta.'
+      redirect_to office_visits_path(id_patient: params[:id_patient]), alert: 'Erro na atualização da consulta.'
     end
   end
 

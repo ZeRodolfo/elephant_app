@@ -18,6 +18,11 @@
   cursor: pointer;
 }
 
+.card-deck-home {
+  align-items: center;
+  justify-content: center;
+}
+
 .card-home:hover{
   transform: translateY(-10px);
 }
@@ -85,6 +90,11 @@
 @media screen and (max-width: 576px){
   .card-deck-home {
     width: 50%;
+  }
+
+  .card-deck-home {
+    align-items: unset !important;
+    justify-content: unset !important;
   }
 }
 
