@@ -302,6 +302,20 @@ a.el-anchor-green:hover{
 //   opacity: .75 !important;
 // }
 
+.page-link {
+  color: var(--green) !important
+}
+
+.page-item.active .page-link {
+  background-color: var(--green) !important;
+  border-color: var(--green) !important;
+  color: #fff !important;
+}
+
+.page-link:focus {
+  box-shadow: 0 0 0 0.2rem rgba(56, 200, 127, 0.5) !important;
+}
+
 .h-auto{
   height: auto !important;
 }
