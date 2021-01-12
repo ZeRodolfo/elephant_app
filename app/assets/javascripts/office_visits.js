@@ -35,7 +35,7 @@ $(document).on('turbolinks:load', () => {
                     searchable: false,
                     title: 'Atalhos',
                     orderable: false,
-                    width: '10%',
+                    width: '20%',
                     responsivePriority: 1
                 }
             ],
