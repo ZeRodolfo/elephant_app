@@ -1,5 +1,9 @@
 <% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Gráfico de finanças' } %>
 
+<% content_for(:head) do %>
+  <meta name="turbolinks-visit-control" content="reload">
+<% end %>
+
 <div class="vh100">
   <%= render 'shared/navbar' %>
   <section class="el fill">

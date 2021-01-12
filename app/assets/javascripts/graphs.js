@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function () {
+$(function () {
     const graphs = [
         Morris.Line({
             element: 'week-graph',
