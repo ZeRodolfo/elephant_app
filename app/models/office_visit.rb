@@ -21,10 +21,17 @@
 #  fk_rails_...  (patient_id => patients.id)
 #
 class OfficeVisit < ApplicationRecord
+  include DateHelper
   belongs_to :patient
   has_many :parcels
 
-  validates :value, :hour, :date, presence: false
+  validates :hour, :date, presence: true
 
   mount_uploaders :documents, DocumentUploader
+
+  validate :validity_of_date
+
+  def validity_of_date
+    errors.add(:date, "A data é inválida.") if DateHelper.parse(start_date).nil? 
+  end
 end

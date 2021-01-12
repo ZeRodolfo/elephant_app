@@ -119,46 +119,52 @@ $(document).on('turbolinks:load', function () {
         selectionInfo.currentColor = color
     }
 
-    $('#submit-multiple').on('click', (event) => {
-        clearErrors()
-        $('#visits').val('')
+    $('#submit').on('click', (event) => {
+        // clearErrors()
+        // $('#visits').val('')
 
-        const startDate = new Date(toYyyyMmDd($start.val()) + 'T00:00:00')
-        const endDate = $end.val() ? new Date(toYyyyMmDd($end.val()) + 'T00:00:00') : null
-        const hour = $hour.val()
+        // const startDate = new Date(toYyyyMmDd($start.val()) + 'T00:00:00')
+        // const endDate = $end.val() ? new Date(toYyyyMmDd($end.val()) + 'T00:00:00') : null
+        // const hour = $hour.val()
 
-        if (endDate && isInvalid(startDate, endDate)){ 
-            const errorMsg = "A data inicial precisa ser menor que a final."
+        // if (endDate && isInvalid(startDate, endDate)){ 
+        //     const errorMsg = "A data inicial precisa ser menor que a final."
 
-            $start.addClass('is-invalid')
-            $end.addClass('is-invalid')
+        //     $start.addClass('is-invalid')
+        //     $end.addClass('is-invalid')
 
-            $start.parent().closest('div.invalid-feedback').html(errorMsg)
-            $end.parent().closest('div.invalid-feedback').html(errorMsg)
-            event.preventDefault() 
-            return
-        }
+        //     $start.parent().closest('div.invalid-feedback').html(errorMsg)
+        //     $end.parent().closest('div.invalid-feedback').html(errorMsg)
+        //     event.preventDefault() 
+        //     return
+        // }
 
-        const repeat = parseInt($('#repetition-select :selected').val())
-        let visits = []
-        switch (repeat) {
-            default: case 0:
-                visits = [ buildVisit(startDate, hour) ]
-                break;
-            case SEMANAL:
-                visits = repeatWeekly(startDate, endDate, hour)
-            break;
-            case QUINZ:
-                visits = repeatQuinzenally(startDate, endDate, hour)
-            break;
-            case MENSAL:
-                visits = repeatMonthly(startDate, endDate, hour)
-            break;
-        }
+        // const repeat = parseInt($('#repetition-select :selected').val())
+        // let visits = []
+        // switch (repeat) {
+        //     default: case 0:
+        //         visits = [ buildVisit(startDate, hour) ]
+        //         break;
+        //     case SEMANAL:
+        //         visits = repeatWeekly(startDate, endDate, hour)
+        //     break;
+        //     case QUINZ:
+        //         visits = repeatQuinzenally(startDate, endDate, hour)
+        //     break;
+        //     case MENSAL:
+        //         visits = repeatMonthly(startDate, endDate, hour)
+        //     break;
+        // }
 
-        console.log(visits)
+        // console.log(visits)
 
-        $('#visits').val(JSON.stringify(visits))
+        // $('#visits').val(JSON.stringify(visits))
+
+        // const startDate = $start.val() ? new Date(toYyyyMmDd($start.val()) + 'T00:00:00').toISO() : ""
+        // const endDate = $end.val() ? new Date(toYyyyMmDd($end.val()) + 'T00:00:00').toISO()  : ""
+
+        // $start.val(startDate)
+        // $end.val(endDate)
     })
 
     function clearErrors() {

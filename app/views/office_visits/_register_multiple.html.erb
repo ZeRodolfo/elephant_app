@@ -1,0 +1,90 @@
+<div class="row m-0">
+  <div class="col m-0">
+    <div class="row mx-0 mt-0 mb-3">
+      <div class="">
+        <h6 class="subtitle light m-0"><%= title %></h6>
+        <p class="phrase light m-0">Paciente: <span class="phrase bold"><%= @patient.name %></span></p>
+      </div>
+    </div>
+
+    <div class="row m-0">
+      <div class="col-8 m-0 py-0 pr-3 pl-0 d-none d-lg-block">
+        <%= render 'calendar/show' %>
+      </div>
+
+      <div class="col m-0 p-0 d-flex justify-content-center align-items-start">
+        <div class="bounding">
+          <%= form_for @form, url: create_multiple_office_visits_path(id_patient: params[:id_patient]) do |form| %>
+          <%= hidden_field_tag :id_patient, params[:id_patient] %>
+
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="start-date">Data</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="start-date-prepend"><i class="far fa-calendar-alt"></i></span>
+                </div>
+                <%= form.text_field :start_date, type: 'text', required: true, class: "form-control nascimento #{ 'is-invalid' if @form.errors[:start_date].any? }", id: 'start-date', 'aria-describedby': 'start-date-prepend', placeholder: 'dd/mm/aaaa' %>
+              </div>
+              <% if @form.errors[:start_date].any? %>
+                <div class="invalid-feedback">
+                  <% @form.errors[:start_date].each do |m| %>
+                    <%= m %>
+                    <br>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="hour">Horário</label>
+              <%= form.text_field :hour, type: 'time', required: true, class: "form-control #{ 'is-invalid' if @form.errors[:hour].any? }", id: 'hour' %>
+              <% if @form.errors[:hour].any? %>
+                <div class="invalid-feedback">
+                  <% @form.errors[:hour].each do |m| %>
+                    <%= m %>
+                    <br>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="repetition-select">Repetir</label>
+              <%= form.select :repetition, [['Não', 0], ['Semanalmente', 1], ['Quinzenalmente', 2], ['Mensalmente', 3]], { include_blank: false }, { id: 'repetition-select', class: 'form-control' } %>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="end-date">Até</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="end-date-prepend"><i class="far fa-calendar-alt"></i></span>
+                </div>
+                <%= form.text_field :end_date, type: 'text', class: "form-control nascimento #{ 'is-invalid' if @form.errors[:end_date].any? }", id: 'end-date', 'aria-describedby': 'end-date-prepend', placeholder: 'dd/mm/aaaa' %>
+              </div>
+              <% if @form.errors[:password].any? %>
+                <div class="invalid-feedback">
+                  <% @form.errors[:end_date].each do |m| %>
+                    <%= m %>
+                    <br>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <%= form.submit 'Adicionar', class: 'btn btn-primary btn-block my-2', id: 'submit' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

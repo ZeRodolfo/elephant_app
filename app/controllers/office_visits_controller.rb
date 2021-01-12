@@ -1,6 +1,10 @@
+require 'activeform-rails'
+require 'mutiple_office_visits_form'
+
 class OfficeVisitsController < ApplicationController
+  include DateHelper
   before_action :set_office_visit, only: [:show, :edit, :update, :destroy]
-  before_action :set_patient, only: [:index, :edit, :new, :create]
+  before_action :set_patient, only: [:index, :edit, :new, :create, :create_multiple]
 
 
   def index
@@ -15,6 +19,7 @@ class OfficeVisitsController < ApplicationController
 
   def new
     @office_visit = OfficeVisit.new
+    @form = MultipleOfficeVisitsForm.new(id_patient: @patient.id)
     show_calendar
   end
 
@@ -23,18 +28,66 @@ class OfficeVisitsController < ApplicationController
   end
 
   def create
-    params[:visits] = JSON.parse params[:visits]
-    
-    OfficeVisit.transaction do
-      post_multiple_params[:visits].each do |visit_params|
-        OfficeVisit.create!(visit_params.merge(patient_id: @patient.id))
+    @office_visit = OfficeVisit.new(office_visit_params)
+    @office_visit.patient = @patient
+
+    if @office_visit.save
+      redirect_to request.referrer, notice: 'Consulta criada com sucesso!'
+    else
+      render :new
+    end
+  end
+
+  def create_multiple
+    @form = MultipleOfficeVisitsForm.new(id_patient: @patient.id)
+    @form.fill_attributes(create_multiple_params)
+    # byebug
+
+    unless @form.valid? then
+      render :new
+      return
+    end
+
+    dates_to_repeat = Array.new
+    repetition = @form.repetition.to_i
+
+    if repetition == 0 then
+      office_visit = OfficeVisit.new(date: @form.start_date, hour: @form.hour, patient_id: @form.id_patient)  
+      if office_visit.save
+        redirect_to office_visits_path(id_patient: params[:id_patient]), notice: 'Consulta(s) criada(s) com sucesso.'
+      else
+        render :new
+        return
+      end
+    else
+      start_date = DateHelper.parse(@form.start_date)
+      end_date = DateHelper.parse(@form.end_date)
+
+      if repetition == 1 then
+        dates_to_repeat = DateHelper.repeat_weekly(start_date, end_date)
+      elsif repetition == 2 then
+        dates_to_repeat = DateHelper.repeat_quinzenally(start_date, end_date)
+      elsif repetition == 3 then
+        dates_to_repeat = DateHelper.repeat_monthly(start_date, end_date)
       end
     end
 
-    redirect_to office_visits_path(id_patient: params[:id_patient]), notice: 'Consulta(s) criada(s) com sucesso.'
+    dates_to_repeat.map { |visit|
+      {
+        date: visit.to_s,
+        hour: @form.hour,
+        patient_id: @patient.id
+      }
+    }.each do |visit_param|
+      OfficeVisit.transaction do
+        OfficeVisit.create!(visit_param)
+      end
+    end
+
+  redirect_to office_visits_path(id_patient: params[:id_patient]), notice: 'Consulta(s) criada(s) com sucesso.'
+
   rescue
-    
-    redirect_to new_office_visit_path(id_patient: @patient, register: true), params: params, notice: 'Erro na criação da(s) consulta(s).'
+    render :new
   end
 
   def update
@@ -65,8 +118,8 @@ class OfficeVisitsController < ApplicationController
       @office_visit = OfficeVisit.find(params[:id])
     end
 
-    def post_multiple_params
-      params.permit!
+    def create_multiple_params
+      params.require(:multiple_office_visits_form).permit(:repetition, :start_date, :end_date, :hour)
     end
 
     def office_visit_params

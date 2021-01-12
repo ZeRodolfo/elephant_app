@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   resources :office_visits
 
+  post 'create_multiple_office_visits', to: 'office_visits#create_multiple'
+
   authenticate :admin do
     mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
     mount Sidekiq::Web => '/sidekiq'
