@@ -1,6 +1,11 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   include Accessible
   skip_before_action :check_user, except: [:new, :create]
+
+  def new
+    @user = User.new
+    @user.addresses.build
+  end
   protected
 
   def update_resource(resource, params)
