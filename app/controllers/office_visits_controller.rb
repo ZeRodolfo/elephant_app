@@ -72,14 +72,16 @@ class OfficeVisitsController < ApplicationController
       end
     end
 
-    dates_to_repeat.map { |visit|
+    visits_to_create = dates_to_repeat.map { |visit|
       {
         date: visit.to_s,
         hour: @form.hour,
         patient_id: @patient.id
       }
-    }.each do |visit_param|
-      OfficeVisit.transaction do
+    }
+
+    OfficeVisit.transaction do
+      visits_to_create.each do |visit_param|
         OfficeVisit.create!(visit_param)
       end
     end
