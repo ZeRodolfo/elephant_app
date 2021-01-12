@@ -32,6 +32,6 @@ class OfficeVisit < ApplicationRecord
   validate :validity_of_date
 
   def validity_of_date
-    errors.add(:date, "A data é inválida.") if DateHelper.parse(start_date).nil? 
+    errors.add(:date, "A data é inválida.") if DateHelper.parse(date).nil? 
   end
 end
