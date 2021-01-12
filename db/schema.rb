@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_07_163917) do
+ActiveRecord::Schema.define(version: 2021_01_12_014817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,7 +125,6 @@ ActiveRecord::Schema.define(version: 2021_01_07_163917) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "category"
     t.string "mercado_pago_id"
     t.string "document_number"
     t.string "document_type", default: "CPF"

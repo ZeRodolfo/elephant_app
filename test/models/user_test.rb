@@ -3,7 +3,6 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
-#  category               :integer
 #  document_number        :string
 #  document_type          :string           default("CPF")
 #  email                  :string           default(""), not null
