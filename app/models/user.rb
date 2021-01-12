@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  birth_date             :date
 #  document_number        :string
 #  document_type          :string           default("CPF")
 #  email                  :string           default(""), not null
@@ -32,7 +33,6 @@ class User < ApplicationRecord
   has_many :addresses
   has_one :subscription
 
-  enum category: [:Empresa, :Autônomo]
   enum document_type: { CPF: 'CPF', CNPJ: 'CNPJ' }
 
   with_options presence: true do
