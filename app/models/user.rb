@@ -31,6 +31,7 @@ class User < ApplicationRecord
 
   has_many :patients, dependent: :destroy
   has_many :addresses
+  accepts_nested_attributes_for :addresses, allow_destroy: false
   has_one :subscription
 
   enum document_type: { CPF: 'CPF', CNPJ: 'CNPJ' }
@@ -43,6 +44,7 @@ class User < ApplicationRecord
   end
 
   before_validation :clean_masked_fields
+  validates_associated :addresses
 
   def name
     "#{first_name} #{last_name}"

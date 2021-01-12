@@ -72,14 +72,16 @@ class OfficeVisitsController < ApplicationController
       end
     end
 
-    dates_to_repeat.map { |visit|
+    visits_to_create = dates_to_repeat.map { |visit|
       {
         date: visit.to_s,
         hour: @form.hour,
         patient_id: @patient.id
       }
-    }.each do |visit_param|
-      OfficeVisit.transaction do
+    }
+
+    OfficeVisit.transaction do
+      visits_to_create.each do |visit_param|
         OfficeVisit.create!(visit_param)
       end
     end
@@ -94,7 +96,7 @@ class OfficeVisitsController < ApplicationController
     if @office_visit.update(office_visit_params)
       redirect_to office_visits_path(id_patient: params[:id_patient]), notice: 'Consulta atualizada com sucesso.'
     else
-      redirect_to office_visits_path(id_patient: params[:id_patient]), notice: 'Erro na atualização da consulta.'
+      redirect_to office_visits_path(id_patient: params[:id_patient]), alert: 'Erro na atualização da consulta.'
     end
   end
 
