@@ -67,7 +67,8 @@
             <div data-step='1' class="item step active">
               <div class="indicator">1</div>
               <div class="description">
-                Info<span class="d-lg-none d-inline">. </span><span class="d-lg-inline d-none">rmações</span><br> pessoais
+                Info<span class="d-lg-none d-inline">. </span><span class="d-lg-inline d-none">rmações</span><br>
+                pessoais
               </div>
             </div>
             <span class="divider"></span>
@@ -75,200 +76,242 @@
               <div class="indicator">2</div>
               <div class="description">
                 <span>
-                  Info<span class="d-lg-none d-inline">. </span><span class="d-lg-inline d-none">rmações</span> de<br> autent<span class="d-lg-none d-inline">. </span><span class="d-lg-inline d-none">icação</span>
+                  Info<span class="d-lg-none d-inline">. </span><span class="d-lg-inline d-none">rmações</span> de<br>
+                  autent<span class="d-lg-none d-inline">. </span><span class="d-lg-inline d-none">icação</span>
                 </span>
-                
+
               </div>
             </div>
             <span class="divider"></span>
             <div data-step='3' class="item step">
               <div class="indicator">3</div>
               <div class="description">
-                Info<span class="d-lg-none d-inline">. </span><span class="d-lg-inline d-none">rmações</span> de<br>logradouro
+                Info<span class="d-lg-none d-inline">. </span><span class="d-lg-inline d-none">rmações</span>
+                de<br>logradouro
               </div>
             </div>
           </div>
           <%= form_with(model: @user, html: { 'data-step': 'true' }, url: user_registration_path) do |f| %>
-            <div data-step-content='1' class="step-content visible">
-              <div class="form-row">
-                <div class="form-group col">
-                  <%= f.label :first_name, for: 'first_name' %>
-                  <%= f.text_field :first_name, class: "form-control #{ 'is-invalid' if @user.errors[:first_name].any? }", id: 'first_name'%>
-                  <% if @user.errors[:first_name].any? %>
-                  <div class="invalid-feedback">
-                    <% @user.errors[:first_name].each do |m| %>
-                      <%= m %>
-                      <br>
-                    <% end %>
-                  </div>
+          <div data-step-content="1" class="step-content visible">
+            <div class="form-row">
+              <div class="form-group col">
+                <%= f.label :first_name, for: 'first_name' %>
+                <%= f.text_field :first_name, class: "form-control #{ 'is-invalid' if @user.errors[:first_name].any? }", id: 'first_name'%>
+                <% if @user.errors[:first_name].any? %>
+                <div class="invalid-feedback">
+                  <% @user.errors[:first_name].each do |m| %>
+                  <%= m %>
+                  <br>
                   <% end %>
                 </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group col">
-                  <%= f.label :last_name, for: 'last_name' %>
-                  <%= f.text_field :last_name, class: "form-control #{ 'is-invalid' if @user.errors[:last_name].any? }", id: 'last_name'%>
-                  <% if @user.errors[:last_name].any? %>
-                  <div class="invalid-feedback">
-                    <% @user.errors[:last_name].each do |m| %>
-                      <%= m %>
-                      <br>
-                    <% end %>
-                  </div>
-                  <% end %>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group col">
-                  <%= f.label :phone, for: 'phone' %>
-                  <%= f.text_field :phone, class: "form-control telefone #{ 'is-invalid' if @user.errors[:phone].any? }", id: 'phone'%>
-                  <% if @user.errors[:phone].any? %>
-                  <div class="invalid-feedback">
-                    <% @user.errors[:phone].each do |m| %>
-                      <%= m %>
-                      <br>
-                    <% end %>
-                  </div>
-                  <% end %>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group col">
-                  <%= f.label :document_number, for: 'document_number' %>
-                  <%= f.text_field :document_number, class: "form-control cpf #{ 'is-invalid' if @user.errors[:document_number].any? }", id: 'document_number'%>
-                  <% if @user.errors[:document_number].any? %>
-                  <div class="invalid-feedback">
-                    <% @user.errors[:document_number].each do |m| %>
-                      <%= m %>
-                      <br>
-                    <% end %>
-                  </div>
-                  <% end %>
-                </div>
+                <% end %>
               </div>
             </div>
 
-            <div data-step-content='2' class="step-content">
-              <div class="form-row">
-                <div class="form-group col">
-                  <%= f.label :email, for: 'email' %>
-                  <%= f.email_field :email, class: "form-control #{ 'is-invalid' if @user.errors[:email].any? }", id: 'email', autocomplete: "email"%>
-                  <% if @user.errors[:email].any? %>
-                  <div class="invalid-feedback">
-                    <% @user.errors[:email].each do |m| %>
-                      <%= m %>
-                      <br>
-                    <% end %>
-                  </div>
+            <div class="form-row">
+              <div class="form-group col">
+                <%= f.label :last_name, for: 'last_name' %>
+                <%= f.text_field :last_name, class: "form-control #{ 'is-invalid' if @user.errors[:last_name].any? }", id: 'last_name'%>
+                <% if @user.errors[:last_name].any? %>
+                <div class="invalid-feedback">
+                  <% @user.errors[:last_name].each do |m| %>
+                  <%= m %>
+                  <br>
                   <% end %>
                 </div>
+                <% end %>
               </div>
+            </div>
 
-              <div class="form-row">
-                <div class="form-group col">
-                  <%= f.label :password, for: 'password'%>
-                  <% if @minimum_password_length %>
-                    <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
-                  <% end %><br />
-                  <%= f.password_field :password, class: "form-control #{ 'is-invalid' if @user.errors[:password].any? }", id: 'password' %>
-                  <% if @user.errors[:password].any? %>
-                  <div class="invalid-feedback">
-                    <% @user.errors[:password].each do |m| %>
-                      <%= m %>
-                      <br>
-                    <% end %>
-                  </div>
+            <div class="form-row">
+              <div class="form-group col">
+                <%= f.label :phone, for: 'phone' %>
+                <%= f.text_field :phone, class: "form-control telefone #{ 'is-invalid' if @user.errors[:phone].any? }", id: 'phone'%>
+                <% if @user.errors[:phone].any? %>
+                <div class="invalid-feedback">
+                  <% @user.errors[:phone].each do |m| %>
+                  <%= m %>
+                  <br>
                   <% end %>
                 </div>
+                <% end %>
               </div>
+            </div>
 
-              <div class="form-row">
-                <div class="form-group col">
-                  <%= f.label :password_confirmation, for: 'password_confirmation'%>
-                  <%= f.password_field :password_confirmation, class: "form-control #{ 'is-invalid' if @user.errors[:password_confirmation].any? }", id: 'password_confirmation' %>
-                  <% if @user.errors[:password_confirmation].any? %>
-                  <div class="invalid-feedback">
-                    <% @user.errors[:password_confirmation].each do |m| %>
-                      <%= m %>
-                      <br>
-                    <% end %>
-                  </div>
+            <div class="form-row">
+              <div class="form-group col">
+                <%= f.label :document_number, for: 'document_number' %>
+                <%= f.text_field :document_number, class: "form-control cpf #{ 'is-invalid' if @user.errors[:document_number].any? }", id: 'document_number'%>
+                <% if @user.errors[:document_number].any? %>
+                <div class="invalid-feedback">
+                  <% @user.errors[:document_number].each do |m| %>
+                  <%= m %>
+                  <br>
                   <% end %>
                 </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div data-step-content="2" class="step-content">
+            <div class="form-row">
+              <div class="form-group col">
+                <%= f.label :email, for: 'email' %>
+                <%= f.email_field :email, class: "form-control #{ 'is-invalid' if @user.errors[:email].any? }", id: 'email', autocomplete: "email"%>
+                <% if @user.errors[:email].any? %>
+                <div class="invalid-feedback">
+                  <% @user.errors[:email].each do |m| %>
+                  <%= m %>
+                  <br>
+                  <% end %>
+                </div>
+                <% end %>
               </div>
             </div>
 
-            <div data-step-content='3' class="step-content">
-              <%= f.fields_for :addresses do |addr_form| %>
-                <div class="form-row">
-                  <div class="form-group col">
-                    <label for="uf">UF</label>
-                    <%= addr_form.select :uf, [], { include_blank: false }, { id: 'uf', class: 'form-control' } %>
-                  </div>
+            <div class="form-row">
+              <div class="form-group col">
+                <%= f.label :password, for: 'password'%>
+                <% if @minimum_password_length %>
+                <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
+                <% end %><br />
+                <%= f.password_field :password, class: "form-control #{ 'is-invalid' if @user.errors[:password].any? }", id: 'password' %>
+                <% if @user.errors[:password].any? %>
+                <div class="invalid-feedback">
+                  <% @user.errors[:password].each do |m| %>
+                  <%= m %>
+                  <br>
+                  <% end %>
                 </div>
-
-                <div class="form-row">
-                  <div class="form-group col">
-                    <label for="city">Cidade</label>
-                    <%= addr_form.select :city, [], { include_blank: false }, { id: 'city', class: 'form-control' } %>
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="form-group col">
-                    <label for="number">Rua</label>
-                    <%= addr_form.text_field :street, class: 'form-control', id: 'street', required: 'true' %>
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="form-group col-lg-8 col-12">
-                    <label for="cep">Cep</label>
-                    <%= addr_form.text_field :cep, class: 'form-control cep', id: 'cep', required: 'true' %>
-                  </div>
-                  <div class="form-group col-12 col-lg-4">
-                    <label for="number">Número</label>
-                    <%= addr_form.number_field :number, min: 0, class: 'form-control', id: 'number' %>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-
-            <div class="form-row mb-3 mt-0 mx-0">
-              <small class="">
-                *Obrigatórios
-              </small>
-            </div>
-
-            <div class="row m-0">
-              <div class="col-6 pl-0">
-                <button type="button" onclick="prevStep();" class="mt-0 step-prev btn btn-block btn-primary">
-                  <span class="nobreak">
-                    <i class="ml-1 fas fa-chevron-left"></i>
-                    Anterior
-                  </span>
-                </button>
-              </div>
-
-              <div class="col-6 pr-0">
-                <button type="button" onclick="nextStep();" class="mt-0 step-next visible btn btn-block btn-primary">
-                  <span class="nobreak">
-                    Próxima
-                    <i class="ml-1 fas fa-chevron-right"></i>
-                  </span>
-                </button>
-
-                <button type="submit" class="mt-0 step-submit btn btn-block btn-primary">
-                  <span class="nobreak">
-                    Enviar
-                    <i class="ml-1 fas fa-check"></i>
-                  </span>
-                </button>
+                <% end %>
               </div>
             </div>
+
+            <div class="form-row">
+              <div class="form-group col">
+                <%= f.label :password_confirmation, for: 'password_confirmation'%>
+                <%= f.password_field :password_confirmation, class: "form-control #{ 'is-invalid' if @user.errors[:password_confirmation].any? }", id: 'password_confirmation' %>
+                <% if @user.errors[:password_confirmation].any? %>
+                <div class="invalid-feedback">
+                  <% @user.errors[:password_confirmation].each do |m| %>
+                  <%= m %>
+                  <br>
+                  <% end %>
+                </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div data-step-content="3" class="step-content">
+            <%= f.fields_for :addresses do |addr_form| %>
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="uf">UF</label>
+                <%= addr_form.select :uf, [], { include_blank: false }, { id: 'uf', class: "form-control #{ 'is-invalid' if @user.errors['addresses.uf'].any? }" } %>
+                <% if @user.errors["addresses.uf"].any? %>
+                <div class="invalid-feedback">
+                  <% @user.errors["addresses.uf"].each do |m| %>
+                  <%= m %>
+                  <br>
+                  <% end %>
+                </div>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="city">Cidade</label>
+                <%= addr_form.select :city, [], { include_blank: false }, { id: 'city', class: "form-control #{ 'is-invalid' if @user.errors['addresses.city'].any? }" } %>
+                <% if @user.errors["addresses.city"].any? %>
+                <div class="invalid-feedback">
+                  <% @user.errors["addresses.city"].each do |m| %>
+                  <%= m %>
+                  <br>
+                  <% end %>
+                </div>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="number">Rua</label>
+                <%= addr_form.text_field :street, class: "form-control #{ 'is-invalid' if @user.errors['addresses.street'].any? }", id: 'street', required: 'true' %>
+                <% if @user.errors["addresses.street"].any? %>
+                <div class="invalid-feedback">
+                  <% @user.errors["addresses.street"].each do |m| %>
+                  <%= m %>
+                  <br>
+                  <% end %>
+                </div>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-lg-8 col-12">
+                <label for="cep">Cep</label>
+                <%= addr_form.text_field :cep, class: "form-control cep #{ 'is-invalid' if @user.errors['addresses.cep'].any? }", id: 'cep', required: 'true' %>
+                <% if @user.errors["addresses.cep"].any? %>
+                <div class="invalid-feedback">
+                  <% @user.errors["addresses.cep"].each do |m| %>
+                  <%= m %>
+                  <br>
+                  <% end %>
+                </div>
+                <% end %>
+              </div>
+              <div class="form-group col-12 col-lg-4">
+                <label for="number">Número</label>
+                <%= addr_form.number_field :number, min: 0, class: "form-control #{ 'is-invalid' if @user.errors['addresses.number'].any? }", id: 'number' %>
+                <% if @user.errors["addresses.number"].any? %>
+                <div class="invalid-feedback">
+                  <% @user.errors["addresses.number"].each do |m| %>
+                  <%= m %>
+                  <br>
+                  <% end %>
+                </div>
+                <% end %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+
+          <div class="form-row mb-3 mt-0 mx-0">
+            <small class="">
+              *Obrigatórios
+            </small>
+          </div>
+
+          <div class="row m-0">
+            <div class="col-6 pl-0">
+              <button type="button" onclick="prevStep();" class="mt-0 step-prev btn btn-block btn-primary">
+                <span class="nobreak">
+                  <i class="ml-1 fas fa-chevron-left"></i>
+                  Anterior
+                </span>
+              </button>
+            </div>
+
+            <div class="col-6 pr-0">
+              <button type="button" onclick="nextStep();" class="mt-0 step-next visible btn btn-block btn-primary">
+                <span class="nobreak">
+                  Próxima
+                  <i class="ml-1 fas fa-chevron-right"></i>
+                </span>
+              </button>
+
+              <button type="submit" class="mt-0 step-submit btn btn-block btn-primary">
+                <span class="nobreak">
+                  Enviar
+                  <i class="ml-1 fas fa-check"></i>
+                </span>
+              </button>
+            </div>
+          </div>
           <% end %>
         </div>
 

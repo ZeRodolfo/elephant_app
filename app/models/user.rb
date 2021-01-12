@@ -30,6 +30,7 @@ class User < ApplicationRecord
 
   has_many :patients, dependent: :destroy
   has_many :addresses
+  accepts_nested_attributes_for :addresses, allow_destroy: false
   has_one :subscription
 
   enum category: [:Empresa, :Autônomo]
@@ -41,6 +42,8 @@ class User < ApplicationRecord
     validates :last_name
     validates :document_number
   end
+
+  validates_associated :addresses
 
   def name
     "#{first_name} #{last_name}"
