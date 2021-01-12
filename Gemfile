@@ -103,3 +103,4 @@ gem 'u-case', '~> 4.1.0'
 gem 'sidekiq'
 gem 'whenever', require: false
 gem 'activeform-rails'
+gem 'pagseguro-oficial', '~> 2.1'

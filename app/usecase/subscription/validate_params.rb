@@ -6,7 +6,6 @@ class Subscription::ValidateParams < Micro::Case
     plan_id = ENV['MERCADO_PAGO_PLAN_ID']
 
     return Failure :missing_plan_id unless plan_id
-    return Failure :user_not_integrated unless user.integrated?
     return Failure :invalid_card_token if card_token.blank?
     return Failure :user_subscribed if user.subscription.present?
 

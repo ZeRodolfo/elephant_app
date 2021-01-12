@@ -1,16 +1,25 @@
 class SubscriptionsController < ApplicationController
-  def index; end
+  skip_before_action :verify_subscription
+  before_action :redirect_to_home, except: [:index]
+
+  def index
+    @active = current_user.subscription&.active?
+  end
+
+  def new; end
 
   def create
     Subscription::Create
       .call(card_token: params[:token], user: current_user)
-      .on_success { |result| render json: result.data }
+      .on_success { |result| redirect_to home_path }
       .on_failure do |result|
         render json: { message: result.data }, status: :unprocessable_entity
       end
   end
 
-  def gate
-    @active = current_user.subscription.present? ? current_user.subscription.active? : false
+  private
+
+  def redirect_to_home
+    redirect_to home_path if current_user&.has_active_subscription?
   end
 end

@@ -41,14 +41,12 @@ Rails.application.routes.draw do
 
   get 'pdf/generate_pdf'
 
-  resources :subscriptions, only: %i[index create] do 
-    get :gate, on: :collection
-  end
+  resources :subscriptions, only: %i[index new create]
 
   resources :notifications, only: %i[index create]
 
   get :home, to: 'home#index'
-  
+
   get '/landing' => "static#landing"
   get '/termos-politica' => "static#termos"
 end
