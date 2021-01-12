@@ -24,18 +24,31 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="start-date-prepend"><i class="far fa-calendar-alt"></i></span>
                 </div>
-                <%= form.text_field :date, type: 'text', required: true, class: 'form-control nascimento', id: 'start-date', 'aria-describedby': 'start-date-prepend', placeholder: 'dd/mm/aaaa', value: '12/12/1222' %>
+                <%= form.text_field :date, type: 'text', required: true, class: "form-control nascimento #{ 'is-invalid' if @office_visit.errors[:date].any? }", id: 'start-date', 'aria-describedby': 'start-date-prepend', placeholder: 'dd/mm/aaaa' %>
               </div>
-              <div class="invalid-feedback">
-
-              </div>
+              <% if @office_visit.errors[:date].any? %>
+                <div class="invalid-feedback">
+                  <% @office_visit.errors[:date].each do |m| %>
+                    <%= m %>
+                    <br>
+                  <% end %>
+                </div>
+              <% end %>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group col">
               <label for="hour">Horário</label>
-              <%= form.text_field :hour, type: 'time', required: true, class: 'form-control', id: 'hour', value: '12:12' %>
+              <%= form.text_field :hour, type: 'time', required: true, class: "form-control #{ 'is-invalid' if @office_visit.errors[:hour].any? }", id: 'hour' %>
+              <% if @office_visit.errors[:hour].any? %>
+                <div class="invalid-feedback">
+                  <% @office_visit.errors[:hour].each do |m| %>
+                    <%= m %>
+                    <br>
+                  <% end %>
+                </div>
+              <% end %>
             </div>
           </div>
 
