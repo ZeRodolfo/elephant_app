@@ -7,9 +7,9 @@ Rails.application.routes.draw do
 
   resources :parcels
 
-  resources :office_visits
-
-  post 'create_multiple_office_visits', to: 'office_visits#create_multiple'
+  resources :office_visits do
+    post :create_multiple, on: :collection
+  end
 
   authenticate :admin do
     mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
