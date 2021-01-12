@@ -1,9 +1,7 @@
 module DateHelper
     extend self
     def parse(date)
-        nil if !date.instance_of? String || date.empty? || date.nil?
         Date.strptime(date, '%d/%m/%Y')
-
     rescue
         nil
     end
