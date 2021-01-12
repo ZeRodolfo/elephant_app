@@ -34,7 +34,7 @@ class OfficeVisitsController < ApplicationController
     if @office_visit.save
       redirect_to request.referrer, notice: 'Consulta criada com sucesso!'
     else
-      render :new
+      render :new # Todo: Fix me!
     end
   end
 
@@ -44,7 +44,7 @@ class OfficeVisitsController < ApplicationController
     # byebug
 
     unless @form.valid? then
-      render :new
+      render :new # Todo: Fix me!
       return
     end
 
@@ -87,7 +87,7 @@ class OfficeVisitsController < ApplicationController
   redirect_to office_visits_path(id_patient: params[:id_patient]), notice: 'Consulta(s) criada(s) com sucesso.'
 
   rescue
-    render :new
+    render :new # Todo: Fix me! notice: 'Erro ao criar consulta(s). Por favor, confira os campos.'
   end
 
   def update
