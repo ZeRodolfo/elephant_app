@@ -24,11 +24,11 @@
 class Patient < ApplicationRecord
   belongs_to :user
   has_one :form, dependent: :destroy
-  
+
   has_many :office_visits
 
   validates_presence_of :company, :code, :marital_status, :name, :schooling, :age, :office
-  
+
   validates :avatar, presence: false
 
   mount_uploader :avatar, AvatarUploader
@@ -39,5 +39,5 @@ class Patient < ApplicationRecord
   		return true
   	end
   end
-  
+
 end

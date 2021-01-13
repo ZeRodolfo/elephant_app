@@ -86,7 +86,7 @@ function prevStep() {
     update()
 }
 
-$(() => {
+$(document).on('turbolinks:load', () => {
     const form = $('form[data-step]')[0]
 
     if (!form){ return }

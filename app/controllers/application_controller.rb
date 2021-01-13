@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
     home_path
   end
 
+  def after_sign_out_path_for(resource_or_scope)
+    new_user_session_path
+  end
+
   protected
     def verify_subscription
       if current_user && !current_user.has_active_subscription?

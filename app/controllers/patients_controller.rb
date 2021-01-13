@@ -23,7 +23,7 @@ class PatientsController < ApplicationController
     if @patient.save
       redirect_to patients_path, notice: 'Candidato Salvo com sucesso!'
     else
-      redirect_to patients_path, alert: 'Erro ao cadastrar Candidato'
+      render :new, alert: 'Erro ao cadastrar Candidato'
     end
   end
 
@@ -47,11 +47,11 @@ class PatientsController < ApplicationController
   def validation
   end
 
-  def validate 
+  def validate
     @patient = Patient.find(params[:id_patient])
 
     if @patient.validate_code(params[:patient][:code].to_s)
-      redirect_to office_visits_path(id_patient: @patient), notice: 'Autenticação realizada!'
+      redirect_to patient_office_visits_path(@patient), notice: 'Autenticação realizada!'
     else
       redirect_to request.referrer, alert: 'Senha Inválida!'
     end

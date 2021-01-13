@@ -104,3 +104,4 @@ gem 'sidekiq'
 gem 'whenever', require: false
 gem 'pagseguro-oficial', '~> 2.6.0'
 gem 'gon', '~> 6.0', '>= 6.0.1'
+gem 'activeform-rails'

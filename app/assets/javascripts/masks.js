@@ -6,7 +6,7 @@ const masks = {
     'nascimento': '00/00/0000'
 }
 
-$(() => {
+$(document).on('turbolinks:load', () => {
     const identifiers = Object.keys(masks)
 
     for (const clazz of identifiers){

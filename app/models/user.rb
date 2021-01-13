@@ -4,7 +4,6 @@
 #
 #  id                     :bigint           not null, primary key
 #  birth_date             :date
-#  category               :integer
 #  document_number        :string
 #  document_type          :string           default("CPF")
 #  email                  :string           default(""), not null
@@ -32,9 +31,9 @@ class User < ApplicationRecord
 
   has_many :patients, dependent: :destroy
   has_many :addresses
+  accepts_nested_attributes_for :addresses, allow_destroy: false
   has_one :subscription
 
-  enum category: [:Empresa, :Autônomo]
   enum document_type: { CPF: 'CPF', CNPJ: 'CNPJ' }
 
   with_options presence: true do
@@ -46,6 +45,7 @@ class User < ApplicationRecord
   end
 
   before_validation :clean_masked_fields
+  validates_associated :addresses
 
   def name
     "#{first_name} #{last_name}"

@@ -1,0 +1,61 @@
+<div class="row m-0">
+  <div class="col m-0">
+    <div class="row mx-0 mt-0 mb-3">
+      <div class="">
+        <h6 class="subtitle light m-0"><%= title %></h6>
+        <p class="phrase light m-0">Paciente: <span class="phrase bold"><%= @patient.name %></span></p>
+      </div>
+    </div>
+
+    <div class="row m-0">
+      <div class="col-8 m-0 py-0 pr-3 pl-0 d-none d-lg-block">
+        <%= render 'calendar/show' %>
+      </div>
+
+      <div class="col m-0 p-0 d-flex justify-content-center align-items-start">
+        <div class="bounding">
+          <%= form_with(model: [@patient, office_visit], local: true, method: :patch) do |form| %>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="start-date">Data</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="start-date-prepend"><i class="far fa-calendar-alt"></i></span>
+                </div>
+                <%= form.text_field :date, type: 'text', required: true, class: "form-control nascimento #{ 'is-invalid' if @office_visit.errors[:date].any? }", id: 'start-date', 'aria-describedby': 'start-date-prepend', placeholder: 'dd/mm/aaaa' %>
+              </div>
+              <% if @office_visit.errors[:date].any? %>
+                <div class="invalid-feedback">
+                  <% @office_visit.errors[:date].each do |m| %>
+                    <%= m %>
+                    <br>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="hour">Horário</label>
+              <%= form.text_field :hour, type: 'time', required: true, class: "form-control #{ 'is-invalid' if @office_visit.errors[:hour].any? }", id: 'hour' %>
+              <% if @office_visit.errors[:hour].any? %>
+                <div class="invalid-feedback">
+                  <% @office_visit.errors[:hour].each do |m| %>
+                    <%= m %>
+                    <br>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <%= form.submit 'Adicionar', class: 'btn btn-primary btn-block my-2' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

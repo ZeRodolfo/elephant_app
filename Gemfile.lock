@@ -26,6 +26,11 @@ GEM
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
     activejob (5.2.4.4)
       activesupport (= 5.2.4.4)
+    activeform-rails (0.0.5)
+      activemodel (>= 3)
+      activesupport (>= 3)
+    activejob (5.2.4.1)
+      activesupport (= 5.2.4.1)
       globalid (>= 0.3.6)
     activemodel (5.2.4.4)
       activesupport (= 5.2.4.4)
@@ -370,6 +375,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activeform-rails
   annotate
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.3.1)

@@ -15,11 +15,13 @@
 //= require highcharts
 //= require rails-ujs
 //= require activestorage
-//= require jquery3
+//= require jquery
 //= require jquery_ujs
+//= require jquery-ui
+//= require popper
+//= require bootstrap
 //= require raphael
 //= require morris
-//= require bootstrap
 //= require bs-custom-file-input.min
 //= require dom
 //= require jquery.mask.min

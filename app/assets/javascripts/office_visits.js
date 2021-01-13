@@ -10,11 +10,11 @@ $(document).on('turbolinks:load', () => {
     else {
         table = $(tableId).DataTable({
             autoWidth: false,
-            dom: 't',
+            dom: 'tp',
             language: {
                 url: "//cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
             },
-            paging: false,
+            paging: true,
             fixedColumns: false,
             columns: [
                 {
@@ -35,7 +35,7 @@ $(document).on('turbolinks:load', () => {
                     searchable: false,
                     title: 'Atalhos',
                     orderable: false,
-                    width: '10%',
+                    width: '20%',
                     responsivePriority: 1
                 }
             ],
