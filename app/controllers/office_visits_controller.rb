@@ -11,7 +11,7 @@ class OfficeVisitsController < ApplicationController
       set_patient
       @office_visits = @patient.office_visits
     else
-      @office_visits = OfficeVisit.where(id: current_user.patient_ids)
+      @office_visits = OfficeVisit.where(patient_id: current_user.patient_ids)
       render :all
     end
 
@@ -96,7 +96,8 @@ class OfficeVisitsController < ApplicationController
     if @office_visit.update(office_visit_params)
       redirect_to patient_office_visits_path(@patient), notice: 'Consulta atualizada com sucesso.'
     else
-      render :edit, alert: 'Erro na atualização da consulta.'
+      params[:remark] = 'true'
+      render :edit
     end
   end
 
