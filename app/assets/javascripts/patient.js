@@ -1,68 +1,61 @@
 
-$(document).on('turbolinks:load', () => {
+$(() => {
   const tableId = '#patients-table'
-  let table = null
-
-  // turbolinks workaround
-  if ($.fn.dataTable.isDataTable(tableId)) {
-    table = $(tableId).DataTable()
-  }
-  else {
-    table = $(tableId).DataTable({
-      autoWidth: false,
-      dom: 'tp',
-      language: {
-        url: "//cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
+  const table = $(tableId).DataTable({
+    autoWidth: false,
+    dom: 'tp',
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
+    },
+    paging: true,
+    fixedColumns: false,
+    columns: [
+      {
+        searchable: true,
+        title: 'Nome',
+        orderable: true,
+        width: null,
+        responsivePriority: 1
       },
-      paging: true,
-      fixedColumns: false,
-      columns: [
-        {
-          searchable: true,
-          title: 'Nome',
-          orderable: true,
-          width: null,
-          responsivePriority: 1
-        },
-        {
-          searchable: true,
-          title: 'Contato',
-          orderable: true,
-          width: null,
-          responsivePriority: 2
-        },
-        {
-          searchable: true,
-          title: 'Profissão',
-          orderable: true,
-          width: null,
-          responsivePriority: 3
-        },
-        {
-          searchable: true,
-          title: 'Idade',
-          orderable: true,
-          width: null,
-          responsivePriority: 4
-        },
-        {
-          searchable: true,
-          title: 'Gen.',
-          orderable: true,
-          width: null,
-          responsivePriority: 5
-        },
-        {
-          searchable: false,
-          title: 'Atalhos',
-          orderable: false,
-          width: '10%',
-          responsivePriority: 1
-        }
-      ],
-      responsive: true
-    })
-  }
+      {
+        searchable: true,
+        title: 'Contato',
+        orderable: true,
+        width: null,
+        responsivePriority: 2
+      },
+      {
+        searchable: true,
+        title: 'Profissão',
+        orderable: true,
+        width: null,
+        responsivePriority: 3
+      },
+      {
+        searchable: true,
+        title: 'Idade',
+        orderable: true,
+        width: null,
+        responsivePriority: 4
+      },
+      {
+        searchable: true,
+        title: 'Gen.',
+        orderable: true,
+        width: null,
+        responsivePriority: 5
+      },
+      {
+        searchable: false,
+        title: 'Atalhos',
+        orderable: false,
+        width: '10%',
+        responsivePriority: 1
+      }
+    ],
+    responsive: true
+  })
+
 
   window.addEventListener('optimizedResize', function (e) {
     // const atalhos = $(tableId + ' thead th:eq(5)')
