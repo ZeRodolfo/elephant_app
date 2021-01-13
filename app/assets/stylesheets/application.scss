@@ -332,6 +332,11 @@ a.el-anchor-green:hover{
   max-width: 40%;
 }
 
+.input-group > .form-control.is-invalid:not(:last-child) {
+  border-top-right-radius: 0.5rem !important; 
+  border-bottom-right-radius: 0.5rem !important;
+}
+
 .has-bg::before{
   content: "";
   position: absolute;
