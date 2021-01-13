@@ -34,4 +34,10 @@ class OfficeVisit < ApplicationRecord
   def validity_of_date
     errors.add(:date, "A data é inválida.") if DateHelper.parse(date).nil? 
   end
+
+  def as_json(options = {})
+    super(options).merge({
+      'patient_name' => patient.name
+    })
+  end
 end

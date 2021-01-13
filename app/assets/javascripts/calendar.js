@@ -20,6 +20,8 @@ $(function () {
     const $end = $('#end-date')
     const $hour = $('#hour')
 
+    const hasInputs = $start[0] != undefined
+
     // Todo: Better way?
     $start.on('focus', function (endDate) {
         focused = 'startDate'
@@ -35,6 +37,8 @@ $(function () {
         themeSystem: 'bootstrap',
         locale: 'pt-br',
         dateClick: function (info) {
+            if (!hasInputs){ return }
+
             if (focused == 'startDate') {
                 $start.val(toLocale(info.dateStr))
             }
@@ -45,33 +49,54 @@ $(function () {
             selectDate(info.dayEl)
         },
         datesSet: function (info) {
+            if (!hasInputs){ return }
             repaint()
-        }
+        },
+        eventDidMount: function(info) {
+            console.log(info.event.title)
+            console.log(info)
+            const el = info.el
+            $(el).tooltip({
+                title: `<span class="text-nowrap">${info.event.title.split('-')[0].trim()} <br> ${info.event.title.split('-')[1].trim()} </span>`,
+                container: el,
+                html: true,
+            })
+            // var tooltip = new Tooltip(info.el, {
+            //   title: info.event.extendedProps.description,
+            //   placement: 'top',
+            //   trigger: 'hover',
+            //   container: 'body'
+            // });
+        },
     })
 
     calendar.render()
 
-    $(calendarDiv).append(
-        `
-        <div class="my-2">
-            <!-- <p class="subtitle m-0">Legenda</p> -->
-            <p class="m-0">
-                <svg class="bi bi-circle-fill" style="color: ${startColor}" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="10" cy="10" r="8"></circle>
-                </svg>
-                <span class="phrase">Início</span>
-            </p>
-            
+    window.calendar = calendar
 
-            <p class="m-0">
-                <svg class="bi bi-circle-fill" style="color: ${endColor}" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="10" cy="10" r="8"></circle>
-                </svg>
-                <span class="phrase">Fim</span>
-            </p>
-        </div>
-        `
-    )
+    if (hasInputs){
+        $(calendarDiv).append(
+            `
+            <div class="my-2">
+                <!-- <p class="subtitle m-0">Legenda</p> -->
+                <p class="m-0">
+                    <svg class="bi bi-circle-fill" style="color: ${startColor}" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="10" r="8"></circle>
+                    </svg>
+                    <span class="phrase">Início</span>
+                </p>
+                
+
+                <p class="m-0">
+                    <svg class="bi bi-circle-fill" style="color: ${endColor}" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="10" r="8"></circle>
+                    </svg>
+                    <span class="phrase">Fim</span>
+                </p>
+            </div>
+            `
+        )
+    }
 
     function repaint() {
         clearPaint()
