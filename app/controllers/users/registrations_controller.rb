@@ -2,10 +2,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   include Accessible
   skip_before_action :check_user, except: [:new, :create]
 
-  def new
-    @user = User.new
-    @user.addresses.build
-  end
   protected
 
   def update_resource(resource, params)
@@ -15,10 +11,27 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def sign_up_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :phone, :document_number, addresses_attributes: [:cep, :city, :number, :street, :uf])
+    params
+      .require(:user)
+      .permit(
+        :email,
+        :password,
+        :password_confirmation,
+        :first_name,
+        :last_name,
+        :phone,
+        :document_number,
+        addresses_attributes: [:cep, :city, :number, :street, :uf]
+      )
   end
 
   def account_update_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params
+      .require(:user)
+      .permit(
+        :email,
+        :password,
+        :password_confirmation
+      )
   end
 end
