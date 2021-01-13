@@ -23,15 +23,15 @@
                   <span class="input-group-text" id="start-date-prepend"><i class="far fa-calendar-alt"></i></span>
                 </div>
                 <%= form.text_field :date, type: 'text', required: true, class: "form-control nascimento #{ 'is-invalid' if @office_visit.errors[:date].any? }", id: 'start-date', 'aria-describedby': 'start-date-prepend', placeholder: 'dd/mm/aaaa' %>
+                <% if @office_visit.errors[:date].any? %>
+                  <div class="invalid-feedback">
+                    <% @office_visit.errors[:date].each do |m| %>
+                      <%= m %>
+                      <br>
+                    <% end %>
+                  </div>
+                <% end %>
               </div>
-              <% if @office_visit.errors[:date].any? %>
-                <div class="invalid-feedback">
-                  <% @office_visit.errors[:date].each do |m| %>
-                    <%= m %>
-                    <br>
-                  <% end %>
-                </div>
-              <% end %>
             </div>
           </div>
 
@@ -50,7 +50,7 @@
             </div>
           </div>
 
-          <%= form.submit 'Adicionar', class: 'btn btn-primary btn-block my-2' %>
+          <%= form.submit 'Atualizar', class: 'btn btn-primary btn-block my-2' %>
           <% end %>
         </div>
       </div>

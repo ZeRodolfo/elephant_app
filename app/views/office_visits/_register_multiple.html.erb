@@ -68,15 +68,15 @@
                   <span class="input-group-text" id="end-date-prepend"><i class="far fa-calendar-alt"></i></span>
                 </div>
                 <%= form.text_field :end_date, type: 'text', class: "form-control nascimento #{ 'is-invalid' if @form.errors[:end_date].any? }", id: 'end-date', 'aria-describedby': 'end-date-prepend', placeholder: 'dd/mm/aaaa' %>
+                <% if @form.errors[:end_date].any? %>
+                  <div class="invalid-feedback">
+                    <% @form.errors[:end_date].each do |m| %>
+                      <%= m %>
+                      <br>
+                    <% end %>
+                  </div>
+                <% end %>
               </div>
-              <% if @form.errors[:password].any? %>
-                <div class="invalid-feedback">
-                  <% @form.errors[:end_date].each do |m| %>
-                    <%= m %>
-                    <br>
-                  <% end %>
-                </div>
-              <% end %>
             </div>
           </div>
 
