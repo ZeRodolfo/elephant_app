@@ -14,9 +14,7 @@
 
       <div class="col m-0 p-0 d-flex justify-content-center align-items-start">
         <div class="bounding">
-          <%= form_with(model: office_visit, local: true) do |form| %>
-          <%= hidden_field_tag :id_patient, params[:id_patient] %>
-
+          <%= form_with(model: [@patient, office_visit], local: true, method: :patch) do |form| %>
           <div class="form-row">
             <div class="form-group col">
               <label for="start-date">Data</label>

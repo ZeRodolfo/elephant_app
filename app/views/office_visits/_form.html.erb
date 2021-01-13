@@ -7,9 +7,7 @@
 
 <div class="col fill m-0 p-0 align-items-center">
   <div class="bounding generic-form">
-    <%= form_with(model: office_visit, local: true) do |form| %>
-
-    <%= hidden_field_tag :id_patient, params[:id_patient] %>
+    <%= form_with(model: [@patient, office_visit], local: true) do |form| %>
 
     <div class="form-row">
       <div class="form-group col">

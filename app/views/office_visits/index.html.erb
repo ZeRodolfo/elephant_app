@@ -28,7 +28,7 @@
     </div>
 
     <div class="col-4 col-lg-6 d-flex align-items-end justify-content-end m-0 pr-0">
-      <%= link_to new_office_visit_path(id_patient: @patient, register: true), class: 'btn btn-outline-primary' do %>
+      <%= link_to new_patient_office_visit_path(@patient), class: 'btn btn-outline-primary' do %>
         <i class="d-none d-lg-inline fas fa-plus mr-2"></i>Adicionar
       <% end %>
     </div>
@@ -51,11 +51,11 @@
           <td>
             <div class="row m-0">
               <div class="col-3 m-0 d-flex align-items-center justify-content-center">
-                <a href="<%= edit_office_visit_path(office_visit, id_patient: @patient) %>" class="el-anchor"><i class="fas fa-check text-green"></i></a>
+                <a href="<%= edit_patient_office_visit_path(@patient, office_visit) %>" class="el-anchor"><i class="fas fa-check text-green"></i></a>
               </div>
 
               <div class="col-3 m-0 p-0 d-flex align-items-center justify-content-center">
-                <%= link_to edit_office_visit_path(office_visit, id_patient: @patient, remark: true), class: 'el-anchor' do %>
+                <%= link_to edit_patient_office_visit_path(@patient, office_visit, remark: true), class: 'el-anchor' do %>
                   <i class="fas fa-pencil-alt"></i>
                 <% end %>
               </div>
@@ -65,7 +65,7 @@
               </div>
 
               <div class="col-3 m-0 p-0 d-flex align-items-center justify-content-center">
-                <%= link_to office_visit, method: :delete, class: 'text-danger', data: { confirm: 'Tem certeza que deseja excluir esta consulta?' } do %>
+                <%= link_to [@patient, office_visit], method: :delete, class: 'text-danger', data: { confirm: 'Tem certeza que deseja excluir esta consulta?' } do %>
                   <i class="fas fa-trash"></i>
                 <% end %>
               </div>

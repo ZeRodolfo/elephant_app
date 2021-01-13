@@ -9,9 +9,5 @@
 </style>
 
 <section class="el min-100 d-flex flex-column">
-	<% if params[:register].present? %>
-		<%= render 'register_multiple', office_visit: @office_visit, title: 'Nova Consulta' %>
-	<% else %>
-		<%= render 'form', office_visit: @office_visit %>
-	<% end %>
+	<%= render 'register_multiple', patient: @patient, title: 'Nova Consulta' %>
 </section>

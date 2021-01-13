@@ -14,7 +14,8 @@
 
       <div class="col m-0 p-0 d-flex justify-content-center align-items-start">
         <div class="bounding">
-          <%= form_for @form, url: create_multiple_office_visits_path(id_patient: params[:id_patient]) do |form| %>
+          <%= render 'shared/alerts' %>
+          <%= form_for @form, url: create_multiple_patient_office_visits_path(patient) do |form| %>
           <%= hidden_field_tag :id_patient, params[:id_patient] %>
 
           <div class="form-row">
@@ -25,15 +26,15 @@
                   <span class="input-group-text" id="start-date-prepend"><i class="far fa-calendar-alt"></i></span>
                 </div>
                 <%= form.text_field :start_date, type: 'text', required: true, class: "form-control nascimento #{ 'is-invalid' if @form.errors[:start_date].any? }", id: 'start-date', 'aria-describedby': 'start-date-prepend', placeholder: 'dd/mm/aaaa' %>
+                <% if @form.errors[:start_date].any? %>
+                  <div class="invalid-feedback">
+                    <% @form.errors[:start_date].each do |m| %>
+                      <%= m %>
+                      <br>
+                    <% end %>
+                  </div>
+                <% end %>
               </div>
-              <% if @form.errors[:start_date].any? %>
-                <div class="invalid-feedback">
-                  <% @form.errors[:start_date].each do |m| %>
-                    <%= m %>
-                    <br>
-                  <% end %>
-                </div>
-              <% end %>
             </div>
           </div>
 

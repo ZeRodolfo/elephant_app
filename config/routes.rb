@@ -7,10 +7,6 @@ Rails.application.routes.draw do
 
   resources :parcels
 
-  resources :office_visits do
-    post :create_multiple, on: :collection
-  end
-
   authenticate :admin do
     mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
     mount Sidekiq::Web => '/sidekiq'
@@ -20,7 +16,13 @@ Rails.application.routes.draw do
 
   root to: "static#landing"
 
+  resources :office_visits, only: [:index]
+
   resources :patients do
+    resources :office_visits do
+      post :create_multiple, on: :collection
+    end
+
     collection do
       get 'graph'
       get 'validation'
