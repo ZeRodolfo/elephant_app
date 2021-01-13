@@ -53,22 +53,29 @@
           <td><%= (office_visit.description.present?) ? truncate(office_visit.description, :length => 75, separator: ' ') : '-' %></td>
           <td>
             <div class="row m-0">
-              <div class="col-3 m-0 d-flex align-items-center justify-content-center">
-                <a href="<%= edit_patient_office_visit_path(@patient, office_visit) %>" class="el-anchor"><i class="fas fa-check text-green"></i></a>
-              </div>
-
-              <div class="col-3 m-0 p-0 d-flex align-items-center justify-content-center">
-                <%= link_to edit_patient_office_visit_path(@patient, office_visit, remark: true), class: 'el-anchor' do %>
-                  <i class="fas fa-pencil-alt"></i>
+            
+              <div class="col-2 m-0 d-flex align-items-center justify-content-center">
+                <%= link_to office_visit, class: 'el-anchor', title: 'Ver Consulta' do %>
+                  <i class="fas fa-search"></i>
                 <% end %>
               </div>
 
-              <div class="col-3 m-0 d-flex align-items-center justify-content-center">
-                <a href="<%= parcels_path(office: office_visit, id_patient: params[:id_patient]) %>" class="el-anchor"><i class="fas fa-money-bill-wave"></i></a>
+              <div class="col-2 m-0 d-flex align-items-center justify-content-center">
+                <a title="Editar Consulta" href="<%= edit_patient_office_visit_path(@patient, office_visit) %>" class="el-anchor"><i class="fas fa-pencil-alt"></i></a>
               </div>
 
-              <div class="col-3 m-0 p-0 d-flex align-items-center justify-content-center">
-                <%= link_to [@patient, office_visit], method: :delete, class: 'text-danger', data: { confirm: 'Tem certeza que deseja excluir esta consulta?' } do %>
+              <div class="col-2 m-0 p-0 d-flex align-items-center justify-content-center">
+                <%= link_to edit_patient_office_visit_path(@patient, office_visit, remark: true), class: 'el-anchor', title: 'Remarcar Consulta' do %>
+                  <i class="far fa-calendar-alt"></i>
+                <% end %>
+              </div>
+
+              <div class="col-2 m-0 d-flex align-items-center justify-content-center">
+                <a title="Adicionar Parcela" href="<%= parcels_path(office: office_visit, id_patient: params[:id_patient]) %>" class="el-anchor"><i class="fas fa-money-bill-wave"></i></a>
+              </div>
+
+              <div class="col-4 m-0 p-0 d-flex align-items-center justify-content-center">
+                <%= link_to [@patient, office_visit], method: :delete, class: 'text-danger', data: { confirm: 'Tem certeza que deseja excluir esta consulta?' }, title: 'Apagar Consulta' do %>
                   <i class="fas fa-trash"></i>
                 <% end %>
               </div>

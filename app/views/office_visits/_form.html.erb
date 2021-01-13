@@ -32,7 +32,7 @@
     <div class="form-row">
       <div class="form-group col">
         <%= form.label :descrição %>
-        <%= form.text_area :description, class: "form-control  #{ 'is-invalid' if @office_visit.errors[:description].any? }" %>
+        <%= form.text_area :description, class: "form-control  #{ 'is-invalid' if @office_visit.errors[:description].any? }", rows: 8 %>
         <% if @office_visit.errors[:description].any? %>
           <div class="invalid-feedback">
             <% @office_visit.errors[:description].each do |m| %>
@@ -49,11 +49,43 @@
         <div class="input-group">
           <div class="custom-file">
             <%= form.file_field :documents, multiple: true, class: 'custom-file-input', id: 'documents' %>
-            <%= form.label :anexos, class: 'custom-file-label form-control', for: 'documents' %>
+            <%= form.label 'Adicionar anexos', class: 'custom-file-label form-control', for: 'documents' %>
           </div>
         </div>
       </div>
     </div>
+
+    <%
+=begin%>
+ <% if @office_visit.documents.any? %>
+      <p class="m-0"> Anexos da consulta </p>
+      <table class="table table-image table-stripped table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Anexo</th>
+            <th scope="col">Imagem</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @office_visit.documents.each_with_index do |document, index| %>
+            <tr>
+              <th style="vertical-align: middle" scope="row">1</th>
+              <td class="w-25">
+                <%= link_to document.url, target: '_blank' do %>
+                  <img alt='<%= "Anexo #{index + 1}" %>' src="<%= document.url %>" class="img-fluid img-thumbnail">
+                <% end %>
+              </td>
+              <td style="vertical-align: middle" class="w-10">
+                <i class="text-danger fas fa-trash"></i>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %> 
+<%
+=end%>
 
     <%= form.submit 'Atualizar', class: 'btn btn-primary btn-block my-2' %>
 

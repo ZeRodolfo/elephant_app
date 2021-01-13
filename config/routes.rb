@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   root to: "static#landing"
 
-  resources :office_visits, only: [:index]
+  resources :office_visits, only: [:index, :show]
 
   resources :patients do
     resources :office_visits do

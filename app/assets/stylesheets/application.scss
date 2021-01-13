@@ -328,8 +328,17 @@ a.el-anchor-green:hover{
   width: auto !important;
 }
 
+.w-10 {
+  width: 10% !important;
+}
+
 .generic-form{
   max-width: 40%;
+}
+
+.custom-file-label {
+  white-space: nowrap !important;
+  overflow-x: hidden !important;
 }
 
 .input-group > .form-control.is-invalid:not(:last-child) {

@@ -1,26 +1,75 @@
-<p id="notice"><%= notice %></p>
+<% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Detalhes da consulta' } %>
 
-<p>
-	<% @office_visit.documents.each_with_index do |document, index| %>
-	  <%= link_to("Anexo #{index + 1} ", document.url, target: '_blank', class: 'btn btn-info m-2') %>
-	<% end %>
-</p>	
+<%= render 'shared/navbar' %>
+<%= render 'shared/alerts' %>
 
-<section class="text-center show_div">
-	<p>
-	  <strong>Paciente:</strong>
-	  <%= @office_visit.patient.name %>
-	</p>
+<style>
+    main {
+        height: 100%;
+    }
 
-	<p>
-	  <strong>Data da Consulta:</strong>
-	  <%= @office_visit.date %> <%= @office_visit.hour %>
-	</p>
+    .table-image td,
+    .table-image th {
+        vertical-align: middle;
+    }
+</style>
 
-	<p>
-	  <strong>Descrição:</strong>
-	  <%= @office_visit.description %>
-	</p>
+<section class="el min-100 d-flex flex-column">
+    <div class="row mx-0 mt-0 mb-3">
+        <div class="">
+            <h6 class="subtitle light m-0">Detalhes da consulta</h6>
+            <p class="phrase light m-0">Paciente: <span class="phrase bold"><%= @office_visit.patient.name %></span></p>
+        </div>
+    </div>
 
-	<%= link_to 'Voltar', :back, class: 'btn btn-warning' %>
+    <div class="row m-0 p-0 d-flex justify-content-center">
+        <div id="office-visit-detail" class="bounding">
+            <p>
+                <strong>Data:</strong>
+                <br>
+                <%= @office_visit.date %>
+            </p>
+
+            <p>
+                <strong>Horário:</strong>
+                <br>
+                <%= @office_visit.hour %>
+            </p>
+
+            <p>
+                <strong>Descrição:</strong>
+                <br>
+                <% if @office_visit.description.present? %>
+                <%= @office_visit.description %>
+                <% else %>
+                Sem Descrição.
+                <% end %>
+            </p>
+
+			<% if @office_visit.documents.any? %>
+				<table class="table table-image table-stripped table-bordered">
+					<thead>
+						<tr>
+							<th scope="col">Anexo</th>
+							<th scope="col">Imagem</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @office_visit.documents.each_with_index do |document, index| %>
+							<tr>
+								<th scope="row"><%= index + 1 %></th>
+								<td class="w-25">
+									<%= link_to document.url, target: '_blank' do %>
+										<img alt='<%= "Anexo #{index + 1}" %>' src="<%= document.url %>" class="img-fluid img-thumbnail">
+									<% end %>
+								</td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+			<% end %>
+        </div>
+    </div>
+
+
 </section>
