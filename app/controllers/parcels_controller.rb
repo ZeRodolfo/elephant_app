@@ -5,16 +5,9 @@ class ParcelsController < ApplicationController
 
 
   def index
-    @parcels = @office_visit.parcels.paginate(page: params[:page], per_page: 5)
+    @parcels = @office_visit.parcels
 
     @parcel = Parcel.new
-
-
-    if params[:page].present? && params[:page] > "1"
-      @count = (params[:page].to_i - 1) * 5
-    else
-      @count = 0
-    end
   end
 
   def create
@@ -24,7 +17,7 @@ class ParcelsController < ApplicationController
     if @parcel.save
       redirect_to request.referrer, notice: 'Parcela criada com sucesso!'
     else
-      redirect_to request.referrer, notice: 'Erro ao salvar parcela.'
+      redirect_to request.referrer, alert: 'Erro ao salvar parcela.'
     end
   end
 
