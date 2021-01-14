@@ -1,82 +1,209 @@
 <% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Editar Perfil' } %>
 
 <%= render 'shared/navbar' %>
+<% content_for(:head) do %>
+<meta name="turbolinks-visit-control" content="reload">
+<% end %>
 
 <section class="d-flex m-0 align-items-start justify-content-center el min100">
-  <div class="bounding generic-form">
-    <h1 class="bold">Editar Perfil</h1>
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <div class="form-row">
-        <div class="form-group col">
-          <%= f.label :email, for: 'email' %>
-          <%= f.email_field :email, id:'email', autofocus: true, placeholder: '', class: "form-control #{ 'is-invalid' if resource.errors[:email].any? }", type: 'email', required: true%>
-          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-            <div>
-              <%= t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email) %>
+    <div class="bounding generic-form">
+        <h1 class="bold">Editar Perfil</h1>
+        <% unless resource.addresses.present? %>
+          <% resource.addresses.build %>
+        <% end %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <div class="form-row">
+            <div class="form-group col">
+                <%= f.label :email, for: 'email' %>
+                <%= f.email_field :email, id:'email', autofocus: true, placeholder: '', class: "form-control #{ 'is-invalid' if resource.errors[:email].any? }", type: 'email', required: true%>
+                <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <div>
+                    <%= t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email) %>
+                </div>
+                <% end %>
+                <% if resource.errors[:email].any? %>
+                <div class="invalid-feedback">
+                    <% resource.errors[:email].each do |m| %>
+                    <%= m %>
+                    <br>
+                    <% end %>
+                </div>
+                <% end %>
             </div>
-          <% end %>
-          <% if resource.errors[:email].any? %>
-            <div class="invalid-feedback">
-              <% resource.errors[:email].each do |m| %>
-                <%= m %>
-                <br>
-              <% end %>
-            </div>
-          <% end %>
         </div>
-      </div>
 
-      <div class="form-row">
-        <div class="form-group col">
-          <%= f.label :password, for: 'password' %>
-          <%= f.password_field :password, class: "form-control #{ 'is-invalid' if resource.errors[:email].any? }", id: 'password' %>
-          <% if @minimum_password_length %>
-            <small>(<%= t('.leave_blank_if_you_don_t_want_to_change_it') %>)</small>
-            <small><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></small>
-          <% end %>
-          <% if resource.errors[:password].any? %>
-            <div class="invalid-feedback">
-              <% resource.errors[:password].each do |m| %>
-                <%= m %>
-                <br>
-              <% end %>
+        <div class="form-row">
+            <div class="form-group col">
+                <%= f.label :phone, for: 'phone' %>
+                <%= f.text_field :phone, class: "form-control telefone #{ 'is-invalid' if resource.errors[:phone].any? }", id: 'phone'%>
+                <% if resource.errors[:phone].any? %>
+                <div class="invalid-feedback">
+                    <% resource.errors[:phone].each do |m| %>
+                    <%= m %>
+                    <br>
+                    <% end %>
+                </div>
+                <% end %>
             </div>
-          <% end %>
         </div>
-      </div>
 
-      <div class="form-row">
-        <div class="form-group col">
-          <%= f.label :password_confirmation, for: 'password_confirmation' %><br />
-          <%= f.password_field :password_confirmation, id: 'password_confirmation', class: "form-control #{ 'is-invalid' if resource.errors[:password_confirmation].any? }" %>
-          <% if resource.errors[:password_confirmation].any? %>
-            <div class="invalid-feedback">
-              <% resource.errors[:password_confirmation].each do |m| %>
-                <%= m %>
-                <br>
-              <% end %>
+        <%= f.fields_for :addresses do |addr_form| %>
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="uf">UF</label>
+                <%= addr_form.hidden_field :uf, {name: 'uf_value', id: 'uf_value'} %>
+                <%= addr_form.select :uf, [], { include_blank: false }, { id: 'uf', class: "form-control #{ 'is-invalid' if resource.errors['addresses.uf'].any? }" } %>
+                <% if resource.errors["addresses.uf"].any? %>
+                <div class="invalid-feedback">
+                    <% resource.errors["addresses.uf"].each do |m| %>
+                    <%= m %>
+                    <br>
+                    <% end %>
+                </div>
+                <% end %>
             </div>
-          <% end %>
         </div>
-      </div>
 
-      <div class="form-row">
-        <div class="form-group col">
-          <%= f.label :current_password, for: 'current_password' %><br />
-          <%= f.password_field :current_password, id: 'current_password', class: "form-control #{ 'is-invalid' if resource.errors[:current_password].any? }" %>
-          <small>(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)</small>
-          <% if resource.errors[:current_password].any? %>
-            <div class="invalid-feedback">
-              <% resource.errors[:current_password].each do |m| %>
-                <%= m %>
-                <br>
-              <% end %>
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="city">Cidade</label>
+                <%= addr_form.hidden_field :city, {name: 'city_value', id: 'city_value'} %>
+                <%= addr_form.select :city, [], { include_blank: false }, { id: 'city', class: "form-control #{ 'is-invalid' if resource.errors['addresses.city'].any? }" } %>
+                <% if resource.errors["addresses.city"].any? %>
+                <div class="invalid-feedback">
+                    <% resource.errors["addresses.city"].each do |m| %>
+                    <%= m %>
+                    <br>
+                    <% end %>
+                </div>
+                <% end %>
             </div>
-          <% end %>
         </div>
-      </div>
 
-      <%= f.submit 'Atualizar', class: 'mt-2 btn btn-primary btn-block' %>
-    <% end %>
-  </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="number">Rua</label>
+                <%= addr_form.text_field :street, class: "form-control #{ 'is-invalid' if resource.errors['addresses.street'].any? }", id: 'street', required: 'true' %>
+                <% if resource.errors["addresses.street"].any? %>
+                <div class="invalid-feedback">
+                    <% resource.errors["addresses.street"].each do |m| %>
+                    <%= m %>
+                    <br>
+                    <% end %>
+                </div>
+                <% end %>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-lg-6 col-12">
+                <label for="neighborhood">Bairro</label>
+                <%= addr_form.text_field :neighborhood, class: "form-control #{ 'is-invalid' if resource.errors['addresses.neighborhood'].any? }", id: 'neighborhood', required: 'true' %>
+                <% if resource.errors["addresses.neighborhood"].any? %>
+                <div class="invalid-feedback">
+                    <% resource.errors["addresses.neighborhood"].each do |m| %>
+                    <%= m %>
+                    <br>
+                    <% end %>
+                </div>
+                <% end %>
+            </div>
+            <div class="form-group col-12 col-lg-6">
+                <label for="complement">Complemento</label>
+                <%= addr_form.text_field :complement, class: "form-control #{ 'is-invalid' if resource.errors['addresses.complement'].any? }", id: 'complement' %>
+                <% if resource.errors["addresses.complement"].any? %>
+                <div class="invalid-feedback">
+                    <% resource.errors["addresses.complement"].each do |m| %>
+                    <%= m %>
+                    <br>
+                    <% end %>
+                </div>
+                <% end %>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-lg-8 col-12">
+                <label for="cep">Cep</label>
+                <%= addr_form.text_field :cep, class: "form-control cep #{ 'is-invalid' if resource.errors['addresses.cep'].any? }", id: 'cep', required: 'true' %>
+                <% if resource.errors["addresses.cep"].any? %>
+                <div class="invalid-feedback">
+                    <% resource.errors["addresses.cep"].each do |m| %>
+                    <%= m %>
+                    <br>
+                    <% end %>
+                </div>
+                <% end %>
+            </div>
+            <div class="form-group col-12 col-lg-4">
+                <label for="number">Número</label>
+                <%= addr_form.number_field :number, min: 0, class: "form-control #{ 'is-invalid' if resource.errors['addresses.number'].any? }", id: 'number' %>
+                <% if resource.errors["addresses.number"].any? %>
+                <div class="invalid-feedback">
+                    <% resource.errors["addresses.number"].each do |m| %>
+                    <%= m %>
+                    <br>
+                    <% end %>
+                </div>
+                <% end %>
+            </div>
+        </div>
+
+        <% end %>
+
+        <div class="form-row">
+            <div class="form-group col">
+                <%= f.label :password, for: 'password' %>
+                <%= f.password_field :password, class: "form-control #{ 'is-invalid' if resource.errors[:email].any? }", id: 'password' %>
+                <% if @minimum_password_length %>
+                <small>(<%= t('.leave_blank_if_you_don_t_want_to_change_it') %>)</small>
+                <small><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></small>
+                <% end %>
+                <% if resource.errors[:password].any? %>
+                <div class="invalid-feedback">
+                    <% resource.errors[:password].each do |m| %>
+                    <%= m %>
+                    <br>
+                    <% end %>
+                </div>
+                <% end %>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col">
+                <%= f.label :password_confirmation, for: 'password_confirmation' %><br />
+                <%= f.password_field :password_confirmation, id: 'password_confirmation', class: "form-control #{ 'is-invalid' if resource.errors[:password_confirmation].any? }" %>
+                <% if resource.errors[:password_confirmation].any? %>
+                <div class="invalid-feedback">
+                    <% resource.errors[:password_confirmation].each do |m| %>
+                    <%= m %>
+                    <br>
+                    <% end %>
+                </div>
+                <% end %>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col">
+                <%= f.label :current_password, for: 'current_password' %><br />
+                <%= f.password_field :current_password, id: 'current_password', class: "form-control #{ 'is-invalid' if resource.errors[:current_password].any? }" %>
+                <small>(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)</small>
+                <% if resource.errors[:current_password].any? %>
+                <div class="invalid-feedback">
+                    <% resource.errors[:current_password].each do |m| %>
+                    <%= m %>
+                    <br>
+                    <% end %>
+                </div>
+                <% end %>
+            </div>
+        </div>
+
+        <%= f.submit 'Atualizar', class: 'mt-2 btn btn-primary btn-block' %>
+        <% end %>
+
+        <script src="/assets/ibge.js"></script>
+    </div>
 </section>

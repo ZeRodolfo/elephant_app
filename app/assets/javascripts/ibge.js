@@ -10,7 +10,7 @@ $(() => {
         fetchCities(option.data('id'))
     })
 
-    function fetchCities(stateId) {
+    function fetchCities(stateId, callback = function(){}) {
         $city.html('')
         disable($city)
         fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${stateId}/municipios?orderBy=nome`).then(
@@ -24,6 +24,7 @@ $(() => {
                 }
 
                 enable($city)
+                callback()
             })
         ).catch(e => {
             transformSelectIntoInput($city)
@@ -65,11 +66,36 @@ $(() => {
 
                 enable($uf)
                 $uf.trigger('change')
+                changeSelection()
             })
         ).catch(e => {
             $uf.off('change')
             transformSelectIntoInput($uf)
             transformSelectIntoInput($city)
         })
+    }
+
+    function changeSelection(){
+        const city = $('#city_value').val()
+        const uf = $('#uf_value').val()
+
+        if (city && uf){
+            selectUfByName(uf)
+            const option = $("option:selected", $uf)
+    
+            fetchCities(option.data('id'), function(){
+                selectCityByName(city)
+            })
+        }
+    }
+
+    function selectCityByName(city){
+        $city.val(city)
+        $city.trigger('change')
+    }
+
+    function selectUfByName(uf){
+        $uf.val(uf)
+        $uf.trigger('change')
     }
 })

@@ -22,7 +22,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         :phone,
         :document_number,
         :birth_date,
-        addresses_attributes: [:cep, :city, :number, :street, :uf, :complement, :neighborhood]
+        addresses_attributes: [:id, :cep, :city, :number, :street, :uf, :complement, :neighborhood]
       )
   end
 
@@ -32,7 +32,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
       .permit(
         :email,
         :password,
-        :password_confirmation
+        :password_confirmation,
+        :phone,
+        addresses_attributes: [:id, :cep, :city, :number, :street, :uf, :complement, :neighborhood]
       )
   end
 end
