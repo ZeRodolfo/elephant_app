@@ -21,7 +21,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
         :last_name,
         :phone,
         :document_number,
-        addresses_attributes: [:cep, :city, :number, :street, :uf]
+        :birth_date,
+        addresses_attributes: [:cep, :city, :number, :street, :uf, :complement, :neighborhood]
       )
   end
 

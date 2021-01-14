@@ -91,6 +91,9 @@
               </div>
             </div>
           </div>
+          <% unless resource.addresses.present? %>
+            <% resource.addresses.build %>
+          <% end %>
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { 'data-step': 'true' }) do |f| %>
           <div data-step-content="1" class="step-content visible">
             <div class="form-row">
@@ -150,6 +153,26 @@
                   <% end %>
                 </div>
                 <% end %>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="birth_date">Data de Nascimento</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="birth_date-prepend"><i class="far fa-calendar-alt"></i></span>
+                  </div>
+                  <%= f.text_field :birth_date, type: 'text', class: "form-control nascimento #{ 'is-invalid' if resource.errors[:birth_date].any? }", id: 'birth_date', 'aria-describedby': 'birth_date-prepend', placeholder: 'dd/mm/aaaa' %>
+                  <% if resource.errors[:birth_date].any? %>
+                    <div class="invalid-feedback">
+                      <% resource.errors[:birth_date].each do |m| %>
+                        <%= m %>
+                        <br>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>
@@ -252,6 +275,33 @@
             </div>
 
             <div class="form-row">
+              <div class="form-group col-lg-6 col-12">
+                <label for="neighborhood">Bairro</label>
+                <%= addr_form.text_field :neighborhood, class: "form-control #{ 'is-invalid' if resource.errors['addresses.neighborhood'].any? }", id: 'neighborhood', required: 'true' %>
+                <% if resource.errors["addresses.neighborhood"].any? %>
+                <div class="invalid-feedback">
+                  <% resource.errors["addresses.neighborhood"].each do |m| %>
+                  <%= m %>
+                  <br>
+                  <% end %>
+                </div>
+                <% end %>
+              </div>
+              <div class="form-group col-12 col-lg-6">
+                <label for="complement">Complemento</label>
+                <%= addr_form.text_field :complement, class: "form-control #{ 'is-invalid' if resource.errors['addresses.complement'].any? }", id: 'complement' %>
+                <% if resource.errors["addresses.complement"].any? %>
+                <div class="invalid-feedback">
+                  <% resource.errors["addresses.complement"].each do |m| %>
+                  <%= m %>
+                  <br>
+                  <% end %>
+                </div>
+                <% end %>
+              </div>
+            </div>
+            
+            <div class="form-row">
               <div class="form-group col-lg-8 col-12">
                 <label for="cep">Cep</label>
                 <%= addr_form.text_field :cep, class: "form-control cep #{ 'is-invalid' if resource.errors['addresses.cep'].any? }", id: 'cep', required: 'true' %>
@@ -277,6 +327,7 @@
                 <% end %>
               </div>
             </div>
+
             <% end %>
           </div>
 

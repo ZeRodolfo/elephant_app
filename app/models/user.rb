@@ -47,6 +47,13 @@ class User < ApplicationRecord
   before_validation :clean_masked_fields
   validates_associated :addresses
 
+  validate :validity_of_date
+
+  def validity_of_date
+    errors.delete(:birth_date)
+    errors.add(:birth_date, "A data é inválida.") if DateHelper.parse(birth_date).nil? 
+  end
+
   def name
     "#{first_name} #{last_name}"
   end
