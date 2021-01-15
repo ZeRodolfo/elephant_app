@@ -1,6 +1,7 @@
 $(document).on('turbolinks:load', () => {
   const tableId = '#patients-table'
   const table = $(tableId).DataTable({
+    retrieve: true,
     autoWidth: false,
     dom: 'tp',
     language: {

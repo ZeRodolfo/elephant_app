@@ -3,6 +3,7 @@ $(document).on('turbolinks:load', () => {
   const tableId = '#office-visits-table'
 
   const table = $(tableId).DataTable({
+    retrieve: true,
     autoWidth: false,
     dom: 'tp',
     language: {

@@ -4,6 +4,7 @@ $(document).on('turbolinks:load', () => {
   const tableId = '#parcels-table'
 
   const table = $(tableId).DataTable({
+    retrieve: true,
     autoWidth: false,
     dom: 'tp',
     language: {
