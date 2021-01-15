@@ -15,4 +15,6 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 Rails.application.config.assets.precompile += %w(
   mercadopago/subscription.js
   card.js
+  steps.js
+  ibge.js
 )
