@@ -17,4 +17,11 @@ Rails.application.config.assets.precompile += %w(
   card.js
   steps.js
   ibge.js
+  home.js
+  calendar.js
+  graphs.js
+  dataTables.min.js
+  dataTables.bootstrap4.min.js
+  dataTables.responsive.min.js
+  office_visits_all.js
 )

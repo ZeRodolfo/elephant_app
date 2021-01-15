@@ -53,7 +53,7 @@
           <td><%= (office_visit.description.present?) ? truncate(office_visit.description, :length => 75, separator: ' ') : '-' %></td>
           <td>
             <div class="row m-0">
-            
+
               <div class="col-2 m-0 d-flex align-items-center justify-content-center">
                 <%= link_to office_visit, class: 'el-anchor', title: 'Ver Consulta' do %>
                   <i class="fas fa-search"></i>
@@ -90,9 +90,9 @@
 
     </script>
 
-    <script src="/assets/dataTables.min.js"></script>
-    <script src="/assets/dataTables.bootstrap4.min.js"></script>
-    <script src="/assets/dataTables.responsive.min.js"></script>
-    <script src="/assets/office_visits.js"></script>
+    <%= javascript_include_tag 'dataTables.min', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'dataTables.bootstrap4.min', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'dataTables.responsive.min', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'office_visits_all', 'data-turbolinks-track': 'reload' %>
   </div>
 </section

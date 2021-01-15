@@ -8,7 +8,7 @@
   <%= render 'shared/navbar' %>
   <section class="el fill">
     <h6 class="subtitle light my-3">Gráfico de finanças</h6>
-    
+
     <div class="form-row">
       <div class="form-group col-12 col-sm-8 col-lg-3">
         <label for="graph-interval-select">Selecione o intervalo</label>
@@ -27,7 +27,7 @@
     <div class="graph" data-select="1" style="display: none;">
       <%= content_tag :div, "", id: "month-graph", data: {graph: month_data} %>
     </div>
-    
+
     <div class="graph" data-select="2" style="display: none;">
       <%= content_tag :div, "", id: "annual-graph", data: {graph: annual_data} %>
     </div>
@@ -35,4 +35,4 @@
   </section>
 </div>
 
-<script src="/assets/graphs.js"></script>
+<%= javascript_include_tag 'graphs', 'data-turbolinks-track': 'reload' %>

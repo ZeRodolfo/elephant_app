@@ -201,6 +201,6 @@
         <%= f.submit 'Atualizar', class: 'mt-2 btn btn-primary btn-block' %>
         <% end %>
 
-        <script src="/assets/ibge.js"></script>
+        <%= javascript_include_tag 'ibge', 'data-turbolinks-track': 'reload' %>
     </div>
 </section>
