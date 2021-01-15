@@ -24,4 +24,5 @@ Rails.application.config.assets.precompile += %w(
   dataTables.bootstrap4.min.js
   dataTables.responsive.min.js
   office_visits_all.js
+  dataTables.bootstrap4.min.css
 )
