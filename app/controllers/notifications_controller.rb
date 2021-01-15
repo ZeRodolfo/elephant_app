@@ -7,7 +7,8 @@ class NotificationsController < ApplicationController
   end
 
   def create
-    notification = Notification.create(data: params.to_s)
+    params.permit!
+    notification = Notification.create(data: JSON.dump(params.to_h))
     ProcessNotificationJob.perform_later notification
     head :ok
   end
