@@ -1,5 +1,10 @@
 <% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Nova assinatura' } %>
 
+<% content_for(:head) do %>
+  <%= javascript_include_tag 'card', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'mercadopago/subscription', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
 <%= render 'shared/navbar' %>
 
 <section class="d-flex m-0 align-items-start justify-content-center el min100">
@@ -69,6 +74,3 @@
     <button type="button" id="send_token" class="btn btn-primary btn-block my-2">Assinar</button>
   </div>
 </section>
-
-<%= javascript_include_tag 'mercadopago/subscription', 'data-turbolinks-track': 'reload' %>
-<%= javascript_include_tag 'card', 'data-turbolinks-track': 'reload' %>

@@ -96,7 +96,7 @@ function clearErrors() {
   }
 }
 
-$(document).on('turbolinks:load', function () {
+$(() => {
   $('input[type="number"][maxlength]').on('input', sliceToMaxLength)
 
   const sendTokenButton = document.getElementById('send_token')
