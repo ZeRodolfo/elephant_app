@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', () => {
+$(() => {
   $uf = $('#uf')
   $city = $('#city')
 
