@@ -3,22 +3,20 @@
 # Table name: patients
 #
 #  id             :bigint           not null, primary key
-#  age            :integer
 #  avatar         :json
+#  birth_date     :date
 #  code           :string
-#  company        :string
-#  marital_status :string
+#  gender         :integer
 #  name           :string
-#  office         :string
-#  schooling      :string
+#  phone          :string
+#  profession     :string
+#  relative_phone :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  form_id        :bigint
 #  user_id        :bigint
 #
 # Indexes
 #
-#  index_patients_on_form_id  (form_id)
 #  index_patients_on_user_id  (user_id)
 #
 require 'test_helper'
