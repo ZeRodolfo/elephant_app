@@ -22,7 +22,7 @@
 class Patient < ApplicationRecord
   belongs_to :user
 
-  enum gender: [:outro, :masculino, :feminino]
+  enum genders: { outro: 0, masculino: 1, feminino: 2 }
 
   has_many :office_visits
 
@@ -42,6 +42,15 @@ class Patient < ApplicationRecord
   def age
     return 0 if birth_date.nil?
     return ((Time.zone.now - birth_date.to_time) / 1.year.seconds).floor
+  end
+
+  def self.gender_for_select
+    self.genders.to_a.map{ |x| [x[0].humanize, x[1]] }
+  end
+
+  def readable_gender
+    g = self.class.genders.key(self.gender)
+    g.nil? ? 'Indefinido' : g.humanize
   end
 
   def validate_code(code)

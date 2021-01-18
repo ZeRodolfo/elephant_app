@@ -2,14 +2,7 @@ class PatientsController < ApplicationController
   before_action :set_patient, only: [:edit, :update, :destroy, :graph, :validation]
 
   def index
-    if params[:search].present?
-      @patients = current_user.patients.order(name: :ASC).
-        where("lower(name) LIKE :search OR lower(company) LIKE :search
-        OR lower(marital_status) LIKE :search OR lower(schooling) LIKE :search
-        OR lower(office) LIKE :search", search: "%#{params[:search].downcase}%").paginate(page: params[:page], per_page: 10)
-    else
-      @patients = current_user.patients.order(name: :ASC).paginate(page: params[:page], per_page: 10)
-    end
+    @patients = current_user.patients.order(name: :ASC)
   end
 
   def new
@@ -23,7 +16,7 @@ class PatientsController < ApplicationController
     if @patient.save
       redirect_to patients_path, notice: 'Candidato Salvo com sucesso!'
     else
-      render :new, alert: 'Erro ao cadastrar Candidato'
+      render :new
     end
   end
 
@@ -37,10 +30,11 @@ class PatientsController < ApplicationController
   end
 
   def update
-    if @patient.update(patient_params)
+    code = patient_params[:code].present? ? patient_params[:code] : @patient.code
+    if @patient.update(patient_params.merge({ code: code }))
       redirect_to patients_path, notice: 'Candidato Atualizado com sucesso!'
     else
-      redirect_to patients_path, alert: 'Erro na atualização do Candidato!'
+      render :edit
     end
   end
 
@@ -74,6 +68,6 @@ class PatientsController < ApplicationController
   end
 
   def patient_params
-    params.require(:patient).permit(:company, :marital_status, :name, :schooling, :age, :office, :code, :avatar)
+    params.require(:patient).permit(:avatar, :birth_date, :code, :gender, :name, :phone, :profession, :relative_phone)
   end
 end
