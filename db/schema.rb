@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_19_034836) do
+ActiveRecord::Schema.define(version: 2021_01_19_041222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,16 @@ ActiveRecord::Schema.define(version: 2021_01_19_034836) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "declaracaos", force: :cascade do |t|
+    t.string "crp"
+    t.string "text"
+    t.string "city"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "patient_id"
+    t.index ["patient_id"], name: "index_declaracaos_on_patient_id"
+  end
+
   create_table "forms", force: :cascade do |t|
     t.bigint "patient_id"
     t.string "personal_moment"
@@ -63,6 +73,21 @@ ActiveRecord::Schema.define(version: 2021_01_19_034836) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["patient_id"], name: "index_forms_on_patient_id"
+  end
+
+  create_table "laudos", force: :cascade do |t|
+    t.string "crp"
+    t.string "solicitante"
+    t.string "description"
+    t.string "procedure"
+    t.string "analysis"
+    t.string "conclusion"
+    t.string "references"
+    t.integer "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "patient_id"
+    t.index ["patient_id"], name: "index_laudos_on_patient_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -150,6 +175,8 @@ ActiveRecord::Schema.define(version: 2021_01_19_034836) do
   end
 
   add_foreign_key "addresses", "users"
+  add_foreign_key "declaracaos", "patients"
+  add_foreign_key "laudos", "patients"
   add_foreign_key "office_visits", "patients"
   add_foreign_key "parecers", "patients"
   add_foreign_key "subscriptions", "users"

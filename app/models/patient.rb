@@ -27,6 +27,8 @@ class Patient < ApplicationRecord
   has_many :office_visits
   
   has_many :parecers
+  has_many :declaracaos
+  has_many :laudos
 
   validates_presence_of :birth_date, :code, :gender, :name, :phone, :profession
 
