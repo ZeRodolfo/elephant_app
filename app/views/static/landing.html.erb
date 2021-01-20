@@ -110,36 +110,50 @@
                 Funcionalidades
             </h1>
         </div>
-        <div class="col flex-column mx-0 my-5 px-0 py-0 d-flex align-items-center justify-content-center">
-            <% for i in 1..6 do %>
-                <% if i.odd? %>
-                    <div class="row fill flex-row mb-lg-5 mb-3 mx-0 funcionalidade odd d-flex align-items-center">
-                        <div class="icon-col d-flex align-items-center justify-content-start col-1 ml-0 mr-4 my-0 p-0">
-                            <i class="text-dark fas fa-clock">
-                            </i>
-                        </div>
-                        <div class="text-col col m-0 p-0">
-                            <span class="bold text-dark text-left phrase">
-                                <%= ('Funcionalidade' + ' ' + i.to_s + ' ' ) * 3 %>
-                            </span>
-                        </div>
-                    </div>
-                <% else %>
-                    <div class="row fill flex-row mb-lg-5 mb-3 mx-0 funcionalidade even d-flex align-items-center">
-                    
-                        <div class="text-col col m-0 p-0">
-                            <span class="bold text-dark text-left phrase">
-                                <%= ('Funcionalidade' + ' ' + i.to_s + ' ' ) * 3 %>
-                            </span>
-                        </div>
-        
-                        <div class="icon-col d-flex align-items-center justify-content-end col-1 ml-4 mr-0 my-0 p-0">
-                            <i class="text-dark fas fa-clock">
-                            </i>
-                        </div>
-                    </div>
-                <% end %>
-            <% end %>            
+        <div class="col flex-column mx-0 my-5 px-0 py-0 d-flex align-items-start justify-content-center">
+            <div class="row mb-lg-5 mb-3 mx-0 funcionalidade odd align-items-center w-100">
+                <div class="icon-col d-flex align-items-center justify-content-center col-1 ml-0 mr-4 my-0 p-0">
+                    <i class="text-dark fas fa-file-alt"></i>
+                </div>
+                <div class="text-col col m-0 p-0">
+                    <span class="bold text-dark text-left phrase-lg">
+                        Criação e armazenamento seguro de documentos clínicos;
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-lg-5 mb-3 mx-0 funcionalidade odd align-items-center w-100">
+                <div class="icon-col d-flex align-items-center justify-content-center col-1 ml-0 mr-4 my-0 p-0">
+                    <i class="text-dark fas fa-user-friends"></i>
+                </div>
+                <div class="text-col col m-0 p-0">
+                    <span class="bold text-dark text-left phrase-lg">
+                        Gerenciamento de pacientes;
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-lg-5 mb-3 mx-0 funcionalidade odd align-items-center w-100">
+                <div class="icon-col d-flex align-items-center justify-content-center col-1 ml-0 mr-4 my-0 p-0">
+                    <i class="text-dark fas fa-user-clock"></i>
+                </div>
+                <div class="text-col col m-0 p-0">
+                    <span class="bold text-dark text-left phrase-lg">
+                        Registro de consultas;
+                    </span>
+                </div>
+            </div> 
+
+            <div class="row mb-lg-5 mb-3 mx-0 funcionalidade odd align-items-center w-100">
+                <div class="icon-col d-flex align-items-center justify-content-center col-1 ml-0 mr-4 my-0 p-0">
+                    <i class="text-dark fas fa-dollar-sign"></i>
+                </div>
+                <div class="text-col col m-0 p-0">
+                    <span class="bold text-dark text-left phrase-lg">
+                        Controle de pagamentos.
+                    </span>
+                </div>
+            </div> 
         </div>
     </div>
     <div id="funcionalidades-right-side" class="bg-lite-green col-4 right pr-xx pt-xx pb-xx relative">
