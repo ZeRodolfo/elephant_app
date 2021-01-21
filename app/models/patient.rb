@@ -27,7 +27,7 @@ class Patient < ApplicationRecord
   has_many :office_visits
   
   has_many :parecers
-  has_many :declaracaos
+  has_many :declaracoes, class_name: 'Declaracao'
   has_many :laudos
   has_many :relatorios
   has_many :formularios

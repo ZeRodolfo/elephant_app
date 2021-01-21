@@ -96,7 +96,7 @@ class FormulariosController < ApplicationController
         @adultos = current_user.patients.find(@patient.id).formularios.where(identifier: Formulario::ADULTO).order('id ASC')
         @relatorios = current_user.patients.find(@patient.id).relatorios.where(patient_id: @patient.id).order('id ASC')
         @laudos = current_user.patients.find(@patient.id).laudos.where(patient_id: @patient.id).order('id ASC')
-        @declaracoes = current_user.patients.find(@patient.id).declaracaos.where(patient_id: @patient.id).order('id ASC')
+        @declaracoes = current_user.patients.find(@patient.id).declaracoes.where(patient_id: @patient.id).order('id ASC')
         @pareceres = current_user.patients.find(@patient.id).parecers.where(patient_id: @patient.id).order('id ASC')
         @atestados = current_user.patients.find(@patient.id).atestados.where(patient_id: @patient.id).order('id ASC')
     end
