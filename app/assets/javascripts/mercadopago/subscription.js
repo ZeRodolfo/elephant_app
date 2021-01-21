@@ -133,8 +133,6 @@ $(() => {
 
   PagSeguroDirectPayment.setSessionId(gon.session.id);
 
-  PagSeguroDirectPayment.onSenderHashReady(function(response) { window.senderHash = response.senderHash; })
-
   PagSeguroDirectPayment.onSenderHashReady(function(response) {
     if (response.status == 'error') {
       console.log(response.message);
