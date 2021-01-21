@@ -6,6 +6,7 @@
 #  avatar         :json
 #  birth_date     :date
 #  code           :string
+#  cpf            :string
 #  gender         :integer
 #  name           :string
 #  phone          :string
@@ -25,7 +26,7 @@ class Patient < ApplicationRecord
   enum genders: { outro: 0, masculino: 1, feminino: 2 }
 
   has_many :office_visits
-  
+
   has_many :parecers
   has_many :declaracaos
   has_many :laudos
@@ -43,7 +44,7 @@ class Patient < ApplicationRecord
 
   def validity_of_date
     # errors.delete(:birth_date)
-    errors.add(:birth_date, "A data é inválida.") if DateHelper.parse(birth_date).nil? 
+    errors.add(:birth_date, "A data é inválida.") if DateHelper.parse(birth_date).nil?
   end
 
   def age

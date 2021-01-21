@@ -30,6 +30,21 @@
 </div>
 
 <div class="form-row">
+  <div class="form-group col">
+    <%= f.label :cpf, for: 'cpf' %>
+    <%= f.text_field :cpf, class: "form-control cpf #{ 'is-invalid' if patient.errors[:cpf].any? }", id: 'cpf'%>
+    <% if patient.errors[:cpf].any? %>
+    <div class="invalid-feedback">
+      <% patient.errors[:cpf].each do |m| %>
+      <%= m %>
+      <br>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="form-row">
   <div class="form-group col-12 col-lg-6">
     <label for="birth-date">Data de nascimento</label>
     <div class="input-group">
@@ -123,7 +138,7 @@
 
 <!-- <div class="form-row">
     <div class="form-group col-6">
-    
+
     </div>
   </div> -->
 

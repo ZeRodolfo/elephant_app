@@ -6,6 +6,7 @@
 #  avatar         :json
 #  birth_date     :date
 #  code           :string
+#  cpf            :string
 #  gender         :integer
 #  name           :string
 #  phone          :string
