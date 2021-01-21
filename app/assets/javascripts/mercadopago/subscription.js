@@ -164,7 +164,7 @@ $(() => {
     const value = (id) => document.getElementById(id).value
 
     var payload = {
-      cardNumber: value('card_number'),
+      cardNumber: value('card_number').replace(/\s/g, ''),
       expirationMonth: value('card_expiration_month'),
       expirationYear: value('card_expiration_year'),
       cvv: value('security_code'),
