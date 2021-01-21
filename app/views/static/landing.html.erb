@@ -110,36 +110,50 @@
                 Funcionalidades
             </h1>
         </div>
-        <div class="col flex-column mx-0 my-5 px-0 py-0 d-flex align-items-center justify-content-center">
-            <% for i in 1..6 do %>
-                <% if i.odd? %>
-                    <div class="row fill flex-row mb-lg-5 mb-3 mx-0 funcionalidade odd d-flex align-items-center">
-                        <div class="icon-col d-flex align-items-center justify-content-start col-1 ml-0 mr-4 my-0 p-0">
-                            <i class="text-dark fas fa-clock">
-                            </i>
-                        </div>
-                        <div class="text-col col m-0 p-0">
-                            <span class="bold text-dark text-left phrase">
-                                <%= ('Funcionalidade' + ' ' + i.to_s + ' ' ) * 3 %>
-                            </span>
-                        </div>
-                    </div>
-                <% else %>
-                    <div class="row fill flex-row mb-lg-5 mb-3 mx-0 funcionalidade even d-flex align-items-center">
-                    
-                        <div class="text-col col m-0 p-0">
-                            <span class="bold text-dark text-left phrase">
-                                <%= ('Funcionalidade' + ' ' + i.to_s + ' ' ) * 3 %>
-                            </span>
-                        </div>
-        
-                        <div class="icon-col d-flex align-items-center justify-content-end col-1 ml-4 mr-0 my-0 p-0">
-                            <i class="text-dark fas fa-clock">
-                            </i>
-                        </div>
-                    </div>
-                <% end %>
-            <% end %>            
+        <div class="col flex-column mx-0 my-5 px-0 py-0 d-flex align-items-start justify-content-center">
+            <div class="row mb-lg-5 mb-3 mx-0 funcionalidade odd align-items-center w-100">
+                <div class="icon-col d-flex align-items-center justify-content-center col-1 ml-0 mr-4 my-0 p-0">
+                    <i class="text-dark fas fa-file-alt"></i>
+                </div>
+                <div class="text-col col m-0 p-0">
+                    <span class="bold text-dark text-left phrase-lg">
+                        Criação e armazenamento seguro de documentos clínicos;
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-lg-5 mb-3 mx-0 funcionalidade odd align-items-center w-100">
+                <div class="icon-col d-flex align-items-center justify-content-center col-1 ml-0 mr-4 my-0 p-0">
+                    <i class="text-dark fas fa-user-friends"></i>
+                </div>
+                <div class="text-col col m-0 p-0">
+                    <span class="bold text-dark text-left phrase-lg">
+                        Gerenciamento de pacientes;
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-lg-5 mb-3 mx-0 funcionalidade odd align-items-center w-100">
+                <div class="icon-col d-flex align-items-center justify-content-center col-1 ml-0 mr-4 my-0 p-0">
+                    <i class="text-dark fas fa-user-clock"></i>
+                </div>
+                <div class="text-col col m-0 p-0">
+                    <span class="bold text-dark text-left phrase-lg">
+                        Registro de consultas;
+                    </span>
+                </div>
+            </div> 
+
+            <div class="row mb-lg-5 mb-3 mx-0 funcionalidade odd align-items-center w-100">
+                <div class="icon-col d-flex align-items-center justify-content-center col-1 ml-0 mr-4 my-0 p-0">
+                    <i class="text-dark fas fa-dollar-sign"></i>
+                </div>
+                <div class="text-col col m-0 p-0">
+                    <span class="bold text-dark text-left phrase-lg">
+                        Controle de pagamentos.
+                    </span>
+                </div>
+            </div> 
         </div>
     </div>
     <div id="funcionalidades-right-side" class="bg-lite-green col-4 right pr-xx pt-xx pb-xx relative">
@@ -159,11 +173,11 @@
         </div>
         <div class="d-flex row fill m-0 py-5 px-0 align-items-center justify-content-start">
             <div class="bounding generic-form">
-                <p class="text-center title text-dark m-0">R$ XX,00</p>
+                <p class="text-center title text-dark m-0">R$ 29,90</p>
                 <p class="phrase light text-dark text-center">mensais</p>
                 <%= link_to 'Assine já', new_user_registration_path, class: 'btn btn-primary btn-block' %>
                 <div class="mt-3">
-                    <span class="d-block text-center phrase light">Possui dúvidas? <a class="el-anchor-green bold" href="#">Fale conosco</a>.</span>
+                    <span class="d-block text-center phrase light">Possui dúvidas? <a class="el-anchor-green bold" href="mailto:aplicativoelephant@gmail.com?subject=Contato%20sobre%20o%20app%20Elephant">Fale conosco</a>.</span>
                 </div>
             </div>
         </div>
@@ -181,23 +195,23 @@
     <div id="footer-links" class="d-flex align-items-start justify-content-start flex-row row m-0 py-5">
       <div class="footer-links-col">
         <p><a class="el-anchor-white" href="/">Início</a></p>
-        <p><a class="el-anchor-white" href="/">Fale conosco</a></p>
+        <p><a class="el-anchor-white" href="mailto:aplicativoelephant@gmail.com?subject=Contato%20sobre%20o%20app%20Elephant">Fale conosco</a></p>
       </div>
 
       <div class="footer-links-col">
-        <p><a class="el-anchor-white" href="/">Política de privacidade</a></p>
-        <p><a class="el-anchor-white" href="/">Termos de uso</a></p>
+        <p><a class="el-anchor-white" href="/termos-politica#politica-de-privacidade">Política de privacidade</a></p>
+        <p><a class="el-anchor-white" href="/termos-politica">Termos de uso</a></p>
       </div>
         
 
       <div class="footer-links-col">
         <p class="text-white light">Siga-nos</p>
         <p>
-            <a class="phrase el-anchor-white mr-3" href="/">
+            <a class="phrase el-anchor-white mr-3" target="_blank" href="https://www.facebook.com/AppElephant">
                 <i class="text-white fab fa-facebook-f"></i>
             </a>
 
-            <a class="phrase el-anchor-white" href="/">
+            <a class="phrase el-anchor-white" target="_blank" href="https://www.instagram.com/appelephant">
                 <i class="text-white fab fa-instagram"></i>
             </a>
         </p>

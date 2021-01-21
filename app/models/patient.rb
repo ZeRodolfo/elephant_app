@@ -25,6 +25,13 @@ class Patient < ApplicationRecord
   enum genders: { outro: 0, masculino: 1, feminino: 2 }
 
   has_many :office_visits
+  
+  has_many :parecers
+  has_many :declaracaos
+  has_many :laudos
+  has_many :relatorios
+  has_many :formularios
+  has_many :atestados
 
   validates_presence_of :birth_date, :code, :gender, :name, :phone, :profession
 

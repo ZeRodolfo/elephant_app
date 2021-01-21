@@ -47,6 +47,9 @@ body {
 .phrase{
   font-size: 1.15rem;
 }
+.phrase-lg{
+  font-size: 1.5rem;
+}
 
 html, body{
   height: 100%;
@@ -425,6 +428,9 @@ input[type=number].hidden-arrows {
   .phrase{
     font-size: 1.1rem !important;
   }
+  .phrase-lg{
+    font-size: 1.25rem !important;
+  }
   .has-bg::before {
     background-size: cover !important;
   }
@@ -461,5 +467,8 @@ input[type=number].hidden-arrows {
   }
   .phrase{
     font-size: 1rem !important;
+  }
+  .phrase-lg{
+    font-size: 1.15rem !important;
   }
 }

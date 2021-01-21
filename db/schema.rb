@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_18_153605) do
+ActiveRecord::Schema.define(version: 2021_01_21_144222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,11 +41,31 @@ ActiveRecord::Schema.define(version: 2021_01_18_153605) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "atestados", force: :cascade do |t|
+    t.string "text"
+    t.string "cidade"
+    t.string "crp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "patient_id"
+    t.index ["patient_id"], name: "index_atestados_on_patient_id"
+  end
+
   create_table "configs", force: :cascade do |t|
     t.string "name"
     t.string "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "declaracaos", force: :cascade do |t|
+    t.string "crp"
+    t.string "text"
+    t.string "city"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "patient_id"
+    t.index ["patient_id"], name: "index_declaracaos_on_patient_id"
   end
 
   create_table "forms", force: :cascade do |t|
@@ -63,6 +83,31 @@ ActiveRecord::Schema.define(version: 2021_01_18_153605) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["patient_id"], name: "index_forms_on_patient_id"
+  end
+
+  create_table "formularios", force: :cascade do |t|
+    t.json "content"
+    t.string "kind"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "patient_id"
+    t.integer "identifier"
+    t.index ["patient_id"], name: "index_formularios_on_patient_id"
+  end
+
+  create_table "laudos", force: :cascade do |t|
+    t.string "crp"
+    t.string "solicitante"
+    t.string "description"
+    t.string "procedure"
+    t.string "analysis"
+    t.string "conclusion"
+    t.string "references"
+    t.integer "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "patient_id"
+    t.index ["patient_id"], name: "index_laudos_on_patient_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -93,6 +138,18 @@ ActiveRecord::Schema.define(version: 2021_01_18_153605) do
     t.index ["office_visit_id"], name: "index_parcels_on_office_visit_id"
   end
 
+  create_table "parecers", force: :cascade do |t|
+    t.string "crp"
+    t.datetime "created_at", null: false
+    t.string "description"
+    t.string "analysis"
+    t.string "conclusion"
+    t.string "references"
+    t.datetime "updated_at", null: false
+    t.bigint "patient_id"
+    t.index ["patient_id"], name: "index_parecers_on_patient_id"
+  end
+
   create_table "patients", force: :cascade do |t|
     t.bigint "user_id"
     t.json "avatar"
@@ -106,6 +163,22 @@ ActiveRecord::Schema.define(version: 2021_01_18_153605) do
     t.string "relative_phone"
     t.string "profession"
     t.index ["user_id"], name: "index_patients_on_user_id"
+  end
+
+  create_table "relatorios", force: :cascade do |t|
+    t.string "crp"
+    t.string "atendido"
+    t.string "solicitante"
+    t.string "description"
+    t.string "procedure"
+    t.string "analysis"
+    t.string "conclusion"
+    t.string "goal"
+    t.integer "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "patient_id"
+    t.index ["patient_id"], name: "index_relatorios_on_patient_id"
   end
 
   create_table "subscriptions", force: :cascade do |t|
@@ -138,6 +211,12 @@ ActiveRecord::Schema.define(version: 2021_01_18_153605) do
   end
 
   add_foreign_key "addresses", "users"
+  add_foreign_key "atestados", "patients"
+  add_foreign_key "declaracaos", "patients"
+  add_foreign_key "formularios", "patients"
+  add_foreign_key "laudos", "patients"
   add_foreign_key "office_visits", "patients"
+  add_foreign_key "parecers", "patients"
+  add_foreign_key "relatorios", "patients"
   add_foreign_key "subscriptions", "users"
 end

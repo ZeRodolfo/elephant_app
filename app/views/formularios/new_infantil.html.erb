@@ -1,0 +1,17 @@
+<% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Nova Anamnese Infantil' } %>
+
+<%= render 'shared/navbar' %>
+
+<section class="d-flex m-0 align-items-start justify-content-center el min100">
+    <div class="bounding generic-form">
+        <%= form_with url: anamnese_infantil_patient_formularios_path, method: :post do |form| %>
+            <%= render 'form', formulario: @form, patient: @patient, title: 'Anamnese Infantil', text_area_rows: 3 %>
+            
+            <div class="form-row">
+                <div class="form-group col">
+                    <%= form.submit 'Salvar', class: 'btn btn-primary btn-block my-0 my-lg-2' %>
+                </div>
+             </div>
+        <% end %>
+    </div>
+</section>
