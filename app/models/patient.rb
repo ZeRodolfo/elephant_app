@@ -23,7 +23,7 @@
 class Patient < ApplicationRecord
   belongs_to :user
 
-  enum genders: { outro: 0, masculino: 1, feminino: 2 }
+  enum gender: { outro: 0, masculino: 1, feminino: 2 }
 
   has_many :office_visits
 
