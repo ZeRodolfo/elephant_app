@@ -1,0 +1,36 @@
+<h1 class="bold"><%= title %></h1>
+<% formulario.fields.each do |f| %>
+<div class="form-row">
+    <div class="form-group col">
+        <% if f[:type] == 'header' %>
+        <h3 class="bold my-2"><%= f[:label] %></h3>
+
+        <% elsif f[:type] == 'select' %>
+        <label for="<%= f[:name] %>"><%= f[:label] %></label>
+        <select name="<%= f[:name] %>" class="form-control <%= f[:classes] %>" id="<%= f[:name] %>">
+            <% f[:options].each do |option| %>
+            <option value="<%= option[1] %>" <% if f[:value].to_s == option[1].to_s %> selected <% end %>>
+                <%= option[0] %>
+            </option>
+            <% end %>
+        </select>
+
+        <% elsif f[:type] == 'checkbox' %>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="<%= true %>" name="<%= f[:name] %>" id="<%= f[:name] %>" <% if f[:value] == 'true' %> checked <% end %>>
+            <label class="form-check-label" for="<%= f[:name] %>">
+                <%= f[:label] %>
+            </label>
+        </div>
+
+        <% elsif f[:type] == 'textarea' %>
+        <label for="<%= f[:name] %>"><%= f[:label] %></label>
+        <textarea name="<%= f[:name] %>" class="form-control <%= f[:classes] %>" id="<%= f[:name] %>" rows="<%= text_area_rows %>"><%= f[:value] %></textarea>
+
+        <% else %>
+        <label for="<%= f[:name] %>"><%= f[:label] %></label>
+        <input type="<%= f[:type] %>" name="<%= f[:name] %>" class="form-control <%= f[:classes] %>" id="<%= f[:name] %>" value="<%= f[:value] %>" <% if f[:type] == 'number' %> min="<%= f[:min] %>" <% end %>>
+        <% end %>
+    </div>
+</div>
+<% end %>

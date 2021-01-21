@@ -1,0 +1,22 @@
+<% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Editar Anamnese Infantil' } %>
+
+<%= render 'shared/navbar' %>
+
+<section class="d-flex m-0 align-items-start justify-content-center el min100">
+    <div class="bounding generic-form">
+        <%= form_with method: :post do |form| %>
+            <%= render 'form', formulario: @form, patient: @patient, title: @model.kind, text_area_rows: 3 %>
+
+            <div class="form-row">
+                <% if @model.present? %>
+                    <div class="form-group col-12 col-lg-6">
+                        <%= link_to 'Excluir', [@patient, @model], method: :delete, class: 'btn btn-outline-danger btn-block my-0 my-lg-2', data: { confirm: 'Tem certeza que deseja excluir este formulário?' } %>
+                    </div>
+                <% end %>
+                <div class="form-group col">
+                    <%= form.submit 'Atualizar', class: 'btn btn-primary btn-block my-0 my-lg-2' %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</section>
