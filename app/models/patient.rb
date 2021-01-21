@@ -31,6 +31,7 @@ class Patient < ApplicationRecord
   has_many :laudos
   has_many :relatorios
   has_many :formularios
+  has_many :atestados
 
   validates_presence_of :birth_date, :code, :gender, :name, :phone, :profession
 
