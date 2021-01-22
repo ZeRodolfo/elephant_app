@@ -39,12 +39,17 @@ class PdfDocument
     def add_document_header(header)
       # pdf.fill_color "666666"
       pdf.text header, :size => 16, :style => :bold, :align => :center
-      pdf.text "DATA: #{(Time.now).strftime("%d/%m/%y")}", :align => :right
+      # pdf.text "DATA: #{(Time.now).strftime("%d/%m/%y")}", :align => :right
       pdf.move_down 40
     end
 
     def add_section(label)
       pdf.text label, size: 12, style: :bold, indent_paragraphs: 20
+    end
+
+    def add_paragraph(paragraph)
+      pdf.text paragraph, size: 10, indent_paragraphs: 20
+      move_down 10
     end
 
     def add_table(rows, width: max_width)

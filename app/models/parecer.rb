@@ -21,7 +21,11 @@
 #  fk_rails_...  (patient_id => patients.id)
 #
 class Parecer < ApplicationRecord
-    belongs_to :patient
+  belongs_to :patient
 
-    validates :analysis, :conclusion, :crp, :description, :references, presence: true
+  validates :analysis, :conclusion, :crp, :description, :references, presence: true
+
+  def pdf
+    ParecerPdf.new(self, patient).pdf
+  end
 end
