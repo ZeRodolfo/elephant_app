@@ -9,9 +9,9 @@
 #  crp         :string
 #  description :string
 #  goal        :string
+#  kind        :string           default("psicologico")
 #  procedure   :string
 #  solicitante :string
-#  type        :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  patient_id  :bigint

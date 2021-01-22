@@ -7,10 +7,10 @@
 #  conclusion  :string
 #  crp         :string
 #  description :string
+#  kind        :string           default("psicologico")
 #  procedure   :string
 #  references  :string
 #  solicitante :string
-#  type        :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  patient_id  :bigint
@@ -24,9 +24,17 @@
 #  fk_rails_...  (patient_id => patients.id)
 #
 class Laudo < ApplicationRecord
-  belongs_to :patient
-  enum types: { psicologico: 0, neuropsicologico: 1 }
-  validates :analysis, :conclusion, :crp, :description, :procedure, :references, :solicitante, :type, presence: true
+	belongs_to :patient
+	enum kind: { psicologico: 'Psicológico', neuropsicologico: 'Neuropsicológico' }
+	validates :analysis, :conclusion, :crp, :description, :procedure, :references, :solicitante, :kind, presence: true
+
+	def self.kind_for_select
+    self.kinds.to_a.map{ |x| [x[1], x[0]] }
+	end
+
+	def readable_kind
+    self.class.kinds[self.kind]
+  end
 
   def pdf
     LaudoPdf.new(self, patient).pdf

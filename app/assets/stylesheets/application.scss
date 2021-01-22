@@ -339,6 +339,10 @@ a.el-anchor-green:hover{
   max-width: 40%;
 }
 
+.ojiasasdop{
+  width: 40% !important;
+}
+
 .custom-file-label {
   white-space: nowrap !important;
   overflow-x: hidden !important;
@@ -412,6 +416,9 @@ input[type=number].hidden-arrows {
   .generic-form{
     max-width: 30%
   }
+  .ojiasasdop{
+    width: 30% !important;
+  }
 }
 
 @media screen and (max-width: 1408px){
@@ -437,11 +444,17 @@ input[type=number].hidden-arrows {
   .generic-form{
     max-width: 50%
   }
+  .ojiasasdop{
+    width: 50% !important;
+  }
 }
 
 @media screen and (max-width: 1200px){
   .generic-form{
     max-width: 60%
+  }
+  .ojiasasdop{
+    width: 60% !important;
   }
 }
 
@@ -451,6 +464,9 @@ input[type=number].hidden-arrows {
   }
   .generic-form{
     max-width: 100%;
+  }
+  .ojiasasdop{
+    width: 100% !important;
   }
 }
 

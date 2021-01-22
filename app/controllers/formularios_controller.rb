@@ -1,7 +1,7 @@
 class FormulariosController < ApplicationController
     before_action :set_patient
-    before_action :set_formulario_infantil, only: [:edit_infantil, :update_infantil]
-    before_action :set_formulario_adulto, only: [:edit_adulto, :update_adulto]
+    before_action :set_formulario_infantil, only: [:edit_infantil, :update_infantil, :show_infantil]
+    before_action :set_formulario_adulto, only: [:edit_adulto, :update_adulto, :show_adulto]
     before_action :set_formulario, only: [:destroy]
     
     def new_infantil
@@ -78,18 +78,27 @@ class FormulariosController < ApplicationController
         @form.deserialize(@model.content)
     end
 
+    def index_adulto
+        redirect_to anamnese_adulto_new_patient_formularios_path
+    end
+
+    def index_infantil
+        redirect_to anamnese_infantil_new_patient_formularios_path
+    end
+
     def destroy
         @model.destroy
         redirect_to patient_formularios_path(@patient), notice: 'Formulário excluido com sucesso!'
     end
 
     def index
-        @infantis = current_user.patients.find(@patient.id).formularios.where(identifier: Formulario::INFANTIL).order('id ASC')
-        @adultos = current_user.patients.find(@patient.id).formularios.where(identifier: Formulario::ADULTO).order('id ASC')
-        @relatorios = current_user.patients.find(@patient.id).relatorios.where(patient_id: @patient.id).order('id ASC')
-        @laudos = current_user.patients.find(@patient.id).laudos.where(patient_id: @patient.id).order('id ASC')
-        @declaracoes = current_user.patients.find(@patient.id).declaracaos.where(patient_id: @patient.id).order('id ASC')
-        @pareceres = current_user.patients.find(@patient.id).parecers.where(patient_id: @patient.id).order('id ASC')
+        @infantis = @patient.formularios.where(identifier: Formulario::INFANTIL).order('id ASC')
+        @adultos = @patient.formularios.where(identifier: Formulario::ADULTO).order('id ASC')
+        @relatorios = @patient.relatorios.where(patient_id: @patient.id).order('id ASC')
+        @laudos = @patient.laudos.where(patient_id: @patient.id).order('id ASC')
+        @declaracoes = @patient.declaracoes.where(patient_id: @patient.id).order('id ASC')
+        @pareceres = @patient.pareceres.where(patient_id: @patient.id).order('id ASC')
+        @atestados = @patient.atestados.where(patient_id: @patient.id).order('id ASC')
     end
 
     private

@@ -1,0 +1,66 @@
+<%= form_with model: atestado, url: path, local: true, method: method do |f| %>
+  <% if atestado.id.present? %>
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="created_at">Data de criação</label>
+        <input type="text" id="created_at" disabled value="<%= atestado.created_at.to_date %>" class="form-control">
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="cidade">CRP</label>
+      <%= f.text_field :crp, id: 'crp', class: "form-control #{ 'is-invalid' if atestado.errors[:crp].any? }", required: true %>
+      <% if atestado.errors[:crp].any? %>
+        <div class="invalid-feedback">
+          <% atestado.errors[:crp].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="cidade">Cidade</label>
+      <%= f.text_field :cidade, id: 'cidade', class: "form-control #{ 'is-invalid' if atestado.errors[:cidade].any? }", required: true %>
+      <% if atestado.errors[:cidade].any? %>
+        <div class="invalid-feedback">
+          <% atestado.errors[:cidade].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="text">Texto</label>
+      <%= f.text_area :text, id: 'text', class: "form-control #{ 'is-invalid' if atestado.errors[:text].any? }", required: true, rows: '5' %>
+      <% if atestado.errors[:text].any? %>
+        <div class="invalid-feedback">
+          <% atestado.errors[:text].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <% if atestado.id.present? %>
+      <div class="form-group col-12 col-lg-6">
+          <%= link_to 'Excluir', patient_atestado_path, method: :delete, class: 'btn btn-outline-danger btn-block my-0 my-lg-2', data: { confirm: 'Tem certeza que deseja excluir este atestado?' } %>
+      </div>
+    <% end %>
+    <div class="form-group col">
+      <%= f.submit (atestado.id.present?) ? 'Atualizar' : 'Salvar', class: 'btn btn-primary btn-block my-0 my-lg-2' %>
+    </div>
+</div>
+<% end %>

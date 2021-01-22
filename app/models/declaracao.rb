@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: declaracaos
+# Table name: declaracoes
 #
 #  id         :bigint           not null, primary key
 #  city       :string
@@ -12,7 +12,7 @@
 #
 # Indexes
 #
-#  index_declaracaos_on_patient_id  (patient_id)
+#  index_declaracoes_on_patient_id  (patient_id)
 #
 # Foreign Keys
 #

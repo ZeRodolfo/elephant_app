@@ -10,13 +10,13 @@
 // }
 
 @media screen and (max-width: 1366px){
-  .bounding:not(.generic-form){
+  .bounding:not(.generic-form):not(.ojiasasdop){
     width: 90% !important;
   }
 }
 
 @media screen and (max-width: 1111px){
-  .bounding:not(.generic-form){
+  .bounding:not(.generic-form):not(.ojiasasdop){
     width: 100% !important;
   }
 }
@@ -28,18 +28,18 @@
   #right-side-login{
     padding-left: 0 !important;
   }
-  .bounding:not(.generic-form){
+  .bounding:not(.generic-form):not(.ojiasasdop){
     width: 70% !important;
   }
 }
 
 @media screen and (max-width: 576px){
-  .bounding:not(.generic-form){
+  .bounding:not(.generic-form):not(.ojiasasdop){
     width: 100% !important;
   }
 }
 
-.bounding:not(.generic-form){
+.bounding:not(.generic-form):not(.ojiasasdop){
   width: 70%;
 }
 

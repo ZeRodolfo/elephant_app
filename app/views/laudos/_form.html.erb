@@ -1,0 +1,133 @@
+<%= form_with model: laudo, url: path, local: true, method: method do |f| %>
+  <% if laudo.id.present? %>
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="created_at">Data de criação</label>
+        <input type="text" id="created_at" disabled value="<%= laudo.created_at.to_date %>" class="form-control">
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="kind">Tipo</label>
+      <%= f.select :kind, options_for_select(Laudo.kind_for_select, laudo.kind), {}, { class: "form-control", id: "kind" } %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="text">Solicitante</label>
+      <%= f.text_field :solicitante, id: 'solicitante', class: "form-control #{ 'is-invalid' if laudo.errors[:solicitante].any? }", required: true %>
+      <% if laudo.errors[:solicitante].any? %>
+        <div class="invalid-feedback">
+          <% laudo.errors[:solicitante].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="cidade">CRP</label>
+      <%= f.text_field :crp, id: 'crp', class: "form-control #{ 'is-invalid' if laudo.errors[:crp].any? }", required: true %>
+      <% if laudo.errors[:crp].any? %>
+        <div class="invalid-feedback">
+          <% laudo.errors[:crp].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="description">Descrição da demanda</label>
+      <%= f.text_area :description, id: 'description', class: "form-control #{ 'is-invalid' if laudo.errors[:description].any? }", required: true, rows: '5' %>
+      <% if laudo.errors[:description].any? %>
+        <div class="invalid-feedback">
+          <% laudo.errors[:description].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="procedure">Procedimento</label>
+      <%= f.text_area :procedure, id: 'procedure', class: "form-control #{ 'is-invalid' if laudo.errors[:procedure].any? }", required: true, rows: '5' %>
+      <% if laudo.errors[:procedure].any? %>
+        <div class="invalid-feedback">
+          <% laudo.errors[:procedure].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="analysis">Análise</label>
+      <%= f.text_area :analysis, id: 'analysis', class: "form-control #{ 'is-invalid' if laudo.errors[:analysis].any? }", required: true, rows: '5' %>
+      <% if laudo.errors[:analysis].any? %>
+        <div class="invalid-feedback">
+          <% laudo.errors[:analysis].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="conclusion">Conclusão</label>
+      <%= f.text_area :conclusion, id: 'conclusion', class: "form-control #{ 'is-invalid' if laudo.errors[:conclusion].any? }", required: true, rows: '5' %>
+      <% if laudo.errors[:conclusion].any? %>
+        <div class="invalid-feedback">
+          <% laudo.errors[:conclusion].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="references">Referências</label>
+      <%= f.text_area :references, id: 'references', class: "form-control #{ 'is-invalid' if laudo.errors[:references].any? }", required: true, rows: '5' %>
+      <% if laudo.errors[:references].any? %>
+        <div class="invalid-feedback">
+          <% laudo.errors[:references].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <% if laudo.id.present? %>
+      <div class="form-group col-12 col-lg-6">
+          <%= link_to 'Excluir', patient_laudo_path, method: :delete, class: 'btn btn-outline-danger btn-block my-0 my-lg-2', data: { confirm: 'Tem certeza que deseja excluir este laudo?' } %>
+      </div>
+    <% end %>
+    <div class="form-group col">
+      <%= f.submit (laudo.id.present?) ? 'Atualizar' : 'Salvar', class: 'btn btn-primary btn-block my-0 my-lg-2' %>
+    </div>
+</div>
+<% end %>

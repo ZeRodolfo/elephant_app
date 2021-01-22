@@ -9,9 +9,9 @@
 #  crp         :string
 #  description :string
 #  goal        :string
+#  kind        :string           default("psicologico")
 #  procedure   :string
 #  solicitante :string
-#  type        :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  patient_id  :bigint
@@ -26,8 +26,16 @@
 #
 class Relatorio < ApplicationRecord
   belongs_to :patient
-  enum types: { psicologico: 0, multidisciplinar: 1 }
-  validates :analysis, :atendido, :conclusion, :crp, :description, :goal, :procedure, :solicitante, :type, presence: true
+  enum kind: { psicologico: 'Psicológico', multidisciplinar: 'Multidisciplinar' }
+  validates :analysis, :atendido, :conclusion, :crp, :description, :goal, :procedure, :solicitante, :kind, presence: true
+
+  def self.kind_for_select
+    self.kinds.to_a.map{ |x| [x[1], x[0]] }
+  end
+
+  def readable_kind
+    self.class.kinds[self.kind]
+  end
 
   def pdf
     RelatorioPdf.new(self, patient).pdf

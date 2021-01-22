@@ -23,16 +23,26 @@ Rails.application.routes.draw do
       post :create_multiple, on: :collection
     end
 
+    resources :atestados
+    resources :declaracoes
+    resources :laudos
+    resources :pareceres
+    resources :relatorios
+
     resources :formularios do
       get 'anamnese-infantil/new', to: 'formularios#new_infantil', on: :collection
+      get 'anamnese-infantil/', to: 'formularios#index_infantil', on: :collection
       get 'anamnese-infantil/:formulario_id/edit', to: 'formularios#edit_infantil', on: :collection
       post 'anamnese-infantil', to: 'formularios#create_infantil', on: :collection
       post 'anamnese-infantil/:formulario_id/edit', to: 'formularios#update_infantil', on: :collection
+      get 'anamnese-infantil/:formulario_id', to: 'formularios#edit_infantil', on: :collection
 
+      get 'anamnese-adulto/', to: 'formularios#new_adulto', on: :collection
       get 'anamnese-adulto/new', to: 'formularios#new_adulto', on: :collection
       get 'anamnese-adulto/:formulario_id/edit', to: 'formularios#edit_adulto', on: :collection
       post 'anamnese-adulto', to: 'formularios#create_adulto', on: :collection
       post 'anamnese-adulto/:formulario_id/edit', to: 'formularios#update_adulto', on: :collection
+      get 'anamnese-adulto/:formulario_id', to: 'formularios#edit_adulto', on: :collection
     end
 
     collection do

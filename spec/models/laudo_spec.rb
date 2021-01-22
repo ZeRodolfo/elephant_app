@@ -7,10 +7,10 @@
 #  conclusion  :string
 #  crp         :string
 #  description :string
+#  kind        :string           default("psicologico")
 #  procedure   :string
 #  references  :string
 #  solicitante :string
-#  type        :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  patient_id  :bigint

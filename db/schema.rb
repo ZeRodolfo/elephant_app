@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_22_000655) do
+ActiveRecord::Schema.define(version: 2021_01_22_003830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,14 +58,14 @@ ActiveRecord::Schema.define(version: 2021_01_22_000655) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "declaracaos", force: :cascade do |t|
+  create_table "declaracoes", force: :cascade do |t|
     t.string "crp"
     t.string "text"
     t.string "city"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "patient_id"
-    t.index ["patient_id"], name: "index_declaracaos_on_patient_id"
+    t.index ["patient_id"], name: "index_declaracoes_on_patient_id"
   end
 
   create_table "forms", force: :cascade do |t|
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 2021_01_22_000655) do
     t.string "analysis"
     t.string "conclusion"
     t.string "references"
-    t.integer "type"
+    t.string "kind", default: "psicologico"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "patient_id"
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 2021_01_22_000655) do
     t.index ["office_visit_id"], name: "index_parcels_on_office_visit_id"
   end
 
-  create_table "parecers", force: :cascade do |t|
+  create_table "pareceres", force: :cascade do |t|
     t.string "crp"
     t.datetime "created_at", null: false
     t.string "description"
@@ -147,7 +147,7 @@ ActiveRecord::Schema.define(version: 2021_01_22_000655) do
     t.string "references"
     t.datetime "updated_at", null: false
     t.bigint "patient_id"
-    t.index ["patient_id"], name: "index_parecers_on_patient_id"
+    t.index ["patient_id"], name: "index_pareceres_on_patient_id"
   end
 
   create_table "patients", force: :cascade do |t|
@@ -176,7 +176,7 @@ ActiveRecord::Schema.define(version: 2021_01_22_000655) do
     t.string "analysis"
     t.string "conclusion"
     t.string "goal"
-    t.integer "type"
+    t.string "kind", default: "psicologico"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "patient_id"
@@ -214,11 +214,11 @@ ActiveRecord::Schema.define(version: 2021_01_22_000655) do
 
   add_foreign_key "addresses", "users"
   add_foreign_key "atestados", "patients"
-  add_foreign_key "declaracaos", "patients"
+  add_foreign_key "declaracoes", "patients"
   add_foreign_key "formularios", "patients"
   add_foreign_key "laudos", "patients"
   add_foreign_key "office_visits", "patients"
-  add_foreign_key "parecers", "patients"
+  add_foreign_key "pareceres", "patients"
   add_foreign_key "relatorios", "patients"
   add_foreign_key "subscriptions", "users"
 end
