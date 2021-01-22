@@ -19,7 +19,11 @@
 #  fk_rails_...  (patient_id => patients.id)
 #
 class Declaracao < ApplicationRecord
-    belongs_to :patient
+  belongs_to :patient
 
-    validates :city, :crp, :text, presence:true
+  validates :city, :crp, :text, presence:true
+
+  def pdf
+    DeclaracaoPdf.new(self, patient).pdf
+  end
 end

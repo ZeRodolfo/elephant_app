@@ -19,7 +19,11 @@
 #  fk_rails_...  (patient_id => patients.id)
 #
 class Atestado < ApplicationRecord
-    belongs_to :patient
+  belongs_to :patient
 
-    validates :cidade, :crp, :text, :patient_id, presence: true
+  validates :cidade, :crp, :text, presence: true
+
+  def pdf
+    AtestadoPdf.new(self, patient).pdf
+  end
 end

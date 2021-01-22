@@ -7,7 +7,7 @@
 #  conclusion  :string
 #  crp         :string
 #  description :string
-#  kind        :string           default("psicologico")
+#  kind        :string           default(NULL)
 #  procedure   :string
 #  references  :string
 #  solicitante :string
@@ -29,10 +29,14 @@ class Laudo < ApplicationRecord
 	validates :analysis, :conclusion, :crp, :description, :procedure, :references, :solicitante, :kind, presence: true
 
 	def self.kind_for_select
-			self.kinds.to_a.map{ |x| [x[1], x[0]] }
+    self.kinds.to_a.map{ |x| [x[1], x[0]] }
 	end
 
 	def readable_kind
-			self.class.kinds[self.kind]
-	end
+    self.class.kinds[self.kind]
+  end
+
+  def pdf
+    LaudoPdf.new(self, patient).pdf
+  end
 end

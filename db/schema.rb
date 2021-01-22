@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_22_003830) do
+ActiveRecord::Schema.define(version: 2021_01_22_013252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,10 @@ ActiveRecord::Schema.define(version: 2021_01_22_003830) do
     t.string "phone"
     t.string "relative_phone"
     t.string "profession"
+    t.string "cpf"
+    t.string "naturalidade"
+    t.bigint "address_id"
+    t.index ["address_id"], name: "index_patients_on_address_id"
     t.index ["user_id"], name: "index_patients_on_user_id"
   end
 
@@ -217,6 +221,7 @@ ActiveRecord::Schema.define(version: 2021_01_22_003830) do
   add_foreign_key "laudos", "patients"
   add_foreign_key "office_visits", "patients"
   add_foreign_key "pareceres", "patients"
+  add_foreign_key "patients", "addresses"
   add_foreign_key "relatorios", "patients"
   add_foreign_key "subscriptions", "users"
 end

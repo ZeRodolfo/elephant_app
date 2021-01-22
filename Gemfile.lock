@@ -400,6 +400,7 @@ DEPENDENCIES
   pagseguro-oficial (~> 2.6.0)
   pg (>= 0.18, < 2.0)
   prawn-rails
+  prawn-table
   puma (~> 3.11)
   rack-test
   rails (~> 5.2.4, >= 5.2.4.1)
