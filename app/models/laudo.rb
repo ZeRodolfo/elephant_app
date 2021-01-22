@@ -7,7 +7,7 @@
 #  conclusion  :string
 #  crp         :string
 #  description :string
-#  kind        :string           default("psicologico")
+#  kind        :string           default(NULL)
 #  procedure   :string
 #  references  :string
 #  solicitante :string

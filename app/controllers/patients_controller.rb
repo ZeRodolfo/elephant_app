@@ -1,12 +1,17 @@
 class PatientsController < ApplicationController
-  before_action :set_patient, only: [:edit, :update, :destroy, :graph, :validation]
+  before_action :set_patient, only: [:edit, :show, :update, :destroy, :graph, :validation]
 
   def index
     @patients = current_user.patients.order(name: :ASC)
   end
 
+  def show
+    render :edit
+  end
+
   def new
     @patient = Patient.new
+    @patient.address = Address.new
   end
 
   def create
@@ -16,6 +21,7 @@ class PatientsController < ApplicationController
     if @patient.save
       redirect_to patients_path, notice: 'Candidato Salvo com sucesso!'
     else
+      @patient.address = Address.new
       render :new
     end
   end
@@ -68,6 +74,20 @@ class PatientsController < ApplicationController
   end
 
   def patient_params
-    params.require(:patient).permit(:avatar, :birth_date, :code, :gender, :name, :phone, :profession, :relative_phone, :cpf, :naturalidade)
+    params
+      .require(:patient)
+      .permit(
+        :avatar,
+        :birth_date,
+        :code,
+        :gender,
+        :name,
+        :phone,
+        :profession,
+        :relative_phone,
+        :cpf,
+        :naturalidade,
+        address_attributes: [:id, :cep, :city, :number, :street, :uf, :complement, :neighborhood]
+      )
   end
 end

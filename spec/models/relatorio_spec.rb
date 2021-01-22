@@ -9,7 +9,7 @@
 #  crp         :string
 #  description :string
 #  goal        :string
-#  kind        :string           default("psicologico")
+#  kind        :string           default(NULL)
 #  procedure   :string
 #  solicitante :string
 #  created_at  :datetime         not null

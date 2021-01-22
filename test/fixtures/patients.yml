@@ -15,11 +15,17 @@
 #  relative_phone :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  address_id     :bigint
 #  user_id        :bigint
 #
 # Indexes
 #
-#  index_patients_on_user_id  (user_id)
+#  index_patients_on_address_id  (address_id)
+#  index_patients_on_user_id     (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (address_id => addresses.id)
 #
 
 # This model initially had no columns defined. If you add columns to the

@@ -23,7 +23,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Address < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
 
   with_options presence: true do
     validates :cep
@@ -33,5 +33,9 @@ class Address < ApplicationRecord
     validates :uf
     validates :complement
     validates :neighborhood
+  end
+
+  def resume
+    "#{street}, #{number}, #{neighborhood}, #{city} - #{uf}"
   end
 end

@@ -15,14 +15,23 @@
 #  relative_phone :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  address_id     :bigint
 #  user_id        :bigint
 #
 # Indexes
 #
-#  index_patients_on_user_id  (user_id)
+#  index_patients_on_address_id  (address_id)
+#  index_patients_on_user_id     (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (address_id => addresses.id)
 #
 class Patient < ApplicationRecord
   belongs_to :user
+  belongs_to :address
+
+  accepts_nested_attributes_for :address
 
   enum gender: { outro: 0, masculino: 1, feminino: 2 }
 
@@ -58,8 +67,7 @@ class Patient < ApplicationRecord
   end
 
   def readable_gender
-    g = self.class.genders.key(self.gender)
-    g.nil? ? 'Indefinido' : g.humanize
+    (self.gender || 'Indefinido').humanize
   end
 
   def validate_code(code)
