@@ -25,7 +25,11 @@
 #  fk_rails_...  (patient_id => patients.id)
 #
 class Relatorio < ApplicationRecord
-    belongs_to :patient
-    enum types: { psicologico: 0, multidisciplinar: 1 }
-    validates :analysis, :atendido, :conclusion, :crp, :description, :goal, :procedure, :solicitante, :type, presence: true
+  belongs_to :patient
+  enum types: { psicologico: 0, multidisciplinar: 1 }
+  validates :analysis, :atendido, :conclusion, :crp, :description, :goal, :procedure, :solicitante, :type, presence: true
+
+  def pdf
+    RelatorioPdf.new(self, patient).pdf
+  end
 end
