@@ -5,13 +5,13 @@ class AnamneseInfantilPdf < PdfDocument
     add_document_header('ANAMNÉSE INFANTIL')
     add_section('1 - Identificação')
     add_table([
-      ['Data Inicial', form.data_inicial.value.to_s],
-      ['Data Término', form.data_termino.value.to_s],
-      ['Data de Nascimento', patient.birth_date.to_s],
+      ['Data Inicial', form.data_inicial&.value&.to_date&.to_s],
+      ['Data Término', form.data_termino&.value&.to_date&.to_s],
+      ['Data de Nascimento', patient.birth_date&.to_s],
       ['Idade', patient.age.to_s],
       ['Sexo', patient.gender.to_s],
       ['CPF', patient.cpf.to_s],
-      ['Endereço', ''],
+      ['Endereço', patient.address.resume],
       ['Telefone', patient.phone.to_s],
     ])
 
