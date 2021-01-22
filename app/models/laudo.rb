@@ -35,5 +35,4 @@ class Laudo < ApplicationRecord
     def readable_kind
         self.class.kinds[self.kind]
     end
-
 end

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resources :declaracoes
     resources :laudos
     resources :pareceres
+    resources :relatorios
 
     resources :formularios do
       get 'anamnese-infantil/new', to: 'formularios#new_infantil', on: :collection
