@@ -7,7 +7,7 @@
   <div class="bounding generic-form">
     <h1 class="bold m-0">Detalhes do paciente</h1>
     <div class="mb-3">
-        <a class="text-dark" href="#docs">Ver documentos</a> / <a class="text-dark" href="#consultas">Ver consultas</a>
+        <a class="text-dark" href="<%= patient_formularios_path(@patient) %>">Ver documentos</a> / <a class="text-dark" href="<%= validation_patients_path(id: @patient.id) %>">Ver consultas</a>
     </div>
     <%= render 'form', patient: @patient %>
   </div>
