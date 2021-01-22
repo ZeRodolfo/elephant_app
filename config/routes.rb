@@ -69,6 +69,10 @@ Rails.application.routes.draw do
 
   resources :notifications, only: %i[index create]
 
+  resources :preferences, only: %i[index] do
+    patch :update, on: :collection
+  end
+
   get :home, to: 'home#index'
 
   get '/landing' => "static#landing"

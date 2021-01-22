@@ -17,11 +17,17 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  mercado_pago_id        :string
+#  user_preference_id     :bigint
 #
 # Indexes
 #
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_user_preference_id    (user_preference_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_preference_id => user_preferences.id)
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -33,6 +39,7 @@ class User < ApplicationRecord
   has_many :addresses
   accepts_nested_attributes_for :addresses, allow_destroy: false
   has_one :subscription
+  belongs_to :preferences, optional: true, class_name: 'UserPreference', foreign_key: :user_preference_id
 
   enum document_type: { CPF: 'CPF', CNPJ: 'CNPJ' }
 
@@ -51,7 +58,7 @@ class User < ApplicationRecord
 
   def validity_of_date
     errors.delete(:birth_date)
-    errors.add(:birth_date, "A data é inválida.") if DateHelper.parse(birth_date).nil? 
+    errors.add(:birth_date, "A data é inválida.") if DateHelper.parse(birth_date).nil?
   end
 
   def name

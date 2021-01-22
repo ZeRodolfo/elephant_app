@@ -32,7 +32,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="profile-dropdown">
             <%= link_to 'Editar Perfil', edit_user_registration_path, class: 'dropdown-item' %>
-            <%= link_to 'Ajustes', '#', class: 'dropdown-item' %>
+            <%= link_to 'Ajustes', preferences_path, class: 'dropdown-item' %>
             <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
           </div>
         </li>
