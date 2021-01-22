@@ -65,7 +65,9 @@ Rails.application.routes.draw do
 
   get 'pdf/generate_pdf'
 
-  resources :subscriptions, only: %i[index new create]
+  resources :subscriptions, only: %i[index new create] do
+    delete :cancel, on: :collection
+  end
 
   resources :notifications, only: %i[index create]
 
