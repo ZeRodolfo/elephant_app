@@ -37,6 +37,8 @@ class Laudo < ApplicationRecord
   end
 
   def pdf
-    LaudoPdf.new(self, patient).pdf
+    document = LaudoPdf.new(self, patient)
+    document.build
+    document.pdf
   end
 end
