@@ -7,14 +7,14 @@ class PdfDocument
     @form = form
     @patient = patient
 
-    default_background = "#{Rails.root.to_s}/app/assets/images/timbrado.png"
+    default_background = user_background || "#{Rails.root.to_s}/app/assets/images/timbrado.jpg"
 
     @background_image = background_image || default_background
     @options = {
       page_size: 'A4',
       page_layout: :portrait,
       margin: [120, 75],
-      background: background_image,
+      background: @background_image,
     }.merge!(pdf_options)
     @pdf = Prawn::Document.new(@options)
 
@@ -25,6 +25,13 @@ class PdfDocument
       bold_italic: Rails.root.join("app/assets/fonts/RobotoMono-BoldItalic.ttf")
     })
     @pdf.font "RobotoMono"
+  end
+
+  def user_background
+    image = patient.user&.preferences&.papel_timbrado
+    return unless image.present?
+
+    StringIO.open image.download
   end
 
   def render(*args, **kwargs)
