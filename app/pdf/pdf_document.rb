@@ -7,9 +7,9 @@ class PdfDocument
     @form = form
     @patient = patient
 
-    default_background = user_background || "#{Rails.root.to_s}/app/assets/images/timbrado.jpg"
+    # default_background = user_background || "#{Rails.root.to_s}/app/assets/images/timbrado.jpg"
 
-    @background_image = background_image || default_background
+    @background_image = user_background|| background_image
     @options = {
       page_size: 'A4',
       page_layout: :portrait,
@@ -28,7 +28,7 @@ class PdfDocument
   end
 
   def user_background
-    image = patient.user&.preferences&.papel_timbrado
+    image = patient&.user&.preferences&.papel_timbrado
     return unless image.present?
 
     StringIO.open image.download
