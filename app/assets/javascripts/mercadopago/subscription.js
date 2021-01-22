@@ -1,67 +1,11 @@
-const responses = {
-  '205': {
-    field: '#card_number',
-    message: 'Digite o número do seu cartão.',
-  },
-  '208': {
-    field: '#card_expiration_month',
-    message: 'Escolha um mês.',
-  },
-  '209': {
-    field: '#card_expiration_year',
-    message: 'Escolha um ano.',
-  },
-  '212': {
-    message: 'Seu CPF está em branco.<br>Acesse seu <a href="/users/edit">perfil</a> e corrija.',
-  },
-  '213': {
-    message: 'Seu CPF está em branco.<br>Acesse seu <a href="/users/edit">perfil</a> e corrija.',
-  },
-  '214': {
-    message: 'Seu CPF está em branco.<br>Acesse seu <a href="/users/edit">perfil</a> e corrija.',
-  },
-  '220': {
-    message: 'O Emissor do cartão não pôde ser definido.\nConfira os dados.',
-  },
-  '221': {
-    field: '#cardholder_name',
-    message: 'Digite o nome e sobrenome.',
-  },
-  '224': {
-    field: '#security_code',
-    message: 'Digite o código de segurança.',
-  },
-  'E301': {
-    field: '#card_number',
-    message: 'Há algo de errado com esse número. Digite novamente.',
-  },
-  'E302': {
-    field: '#security_code',
-    message: 'Confira o código de segurança.',
-  },
-  '316': {
-    field: '#cardholder_name',
-    message: 'Por favor, digite um nome válido.',
-  },
-  '322': {
-    message: 'Seu CPF é inválido.<br>Acesse seu <a href="/users/edit">perfil</a> e corrija.',
-  },
-  '323': {
-    message: 'Seu CPF é inválido.<br>Acesse seu <a href="/users/edit">perfil</a> e corrija.',
-  },
-  '324': {
-    message: 'Seu CPF é inválido.<br>Acesse seu <a href="/users/edit">perfil</a> e corrija.',
-  },
-  '325': {
-    field: '#card_expiration_month',
-    message: 'Confira a data.',
-  },
-  '326': {
-    field: '#card_expiration_year',
-    message: 'Confira a data.',
-  },
+const known_errors = {
+  '10000': 'Bandeira de cartão de crédito inválida',
+  '10001': 'Número do cartão de crédito com comprimento inválido',
+  '10002': 'Formato de data inválido',
+  '10003': 'Campo de segurança inválido',
+  '10004': 'cvv é obrigatório',
+  '10006': 'campo de segurança com comprimento inválido',
 }
-
 
 function sliceToMaxLength() {
   if (this.value.length > this.maxLength) {
@@ -74,9 +18,18 @@ function closeAlert() {
 }
 
 function showAlert(message) {
-  const _alert = $('.alert')
-  _alert.find('.alert-content')[0].innerHTML = message
-  _alert.show()
+  const container = $('#alert-container')
+  container.html('')
+
+  container.append(`
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      ${message}
+    </div>
+  `)
+
+  setTimeout(() => {
+    $('.alert').alert('close')
+  }, 3000)
 }
 
 function setError(fieldQuery, errorMessage) {
@@ -174,8 +127,10 @@ $(() => {
         form.submit()
       },
       error: function(response) {
-        console.log(response);
-        printError(response);
+        error_keys = Object.keys(response.errors)
+        errors = error_keys.map((key) => known_errors[key] !== undefined ? known_errors[key] : '')
+        message = errors.join(', ')
+        showAlert(message);
       }
     }
 
@@ -184,35 +139,6 @@ $(() => {
     }
 
     PagSeguroDirectPayment.createCardToken(payload)
-
-    // window.Mercadopago.createToken(payload, (status, response) => {
-    //   clearErrors()
-
-    //   if (status == 200 || status == 201) {
-    //     const token = document.getElementById('token')
-    //     token.setAttribute('value', response.id)
-    //     form.submit()
-    //   }
-    //   else {
-    //     for (const error of response.cause) {
-    //       const code = error.code.toString()
-
-    //       const responseData = responses[code]
-
-    //       if (!responseData) {
-    //         showAlert('Ocorreu um erro inesperado.<br>Tente novamente.')
-    //         return
-    //       }
-
-    //       if (responseData.field) {
-    //         setError(responseData.field, responseData.message)
-    //       }
-    //       else {
-    //         showAlert(responseData.message)
-    //       }
-    //     }
-    //   }
-    // })
 
     return false
   }
