@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_21_181738) do
+ActiveRecord::Schema.define(version: 2021_01_22_000655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,7 @@ ActiveRecord::Schema.define(version: 2021_01_21_181738) do
     t.string "relative_phone"
     t.string "profession"
     t.string "cpf"
+    t.string "naturalidade"
     t.index ["user_id"], name: "index_patients_on_user_id"
   end
 

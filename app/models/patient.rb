@@ -9,6 +9,7 @@
 #  cpf            :string
 #  gender         :integer
 #  name           :string
+#  naturalidade   :string
 #  phone          :string
 #  profession     :string
 #  relative_phone :string
@@ -53,7 +54,7 @@ class Patient < ApplicationRecord
   end
 
   def self.gender_for_select
-    self.genders.to_a.map{ |x| [x[0].humanize, x[1]] }
+    self.genders.to_a.map{ |x| [x[0].humanize, x[0]] }
   end
 
   def readable_gender

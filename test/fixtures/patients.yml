@@ -9,6 +9,7 @@
 #  cpf            :string
 #  gender         :integer
 #  name           :string
+#  naturalidade   :string
 #  phone          :string
 #  profession     :string
 #  relative_phone :string

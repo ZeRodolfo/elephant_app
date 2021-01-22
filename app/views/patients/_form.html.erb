@@ -45,6 +45,21 @@
 </div>
 
 <div class="form-row">
+  <div class="form-group col">
+    <label for="naturalidade">Naturalidade</label>
+    <%= f.text_field :naturalidade, id: 'naturalidade', class: "form-control #{ 'is-invalid' if patient.errors[:naturalidade].any? }", required: true %>
+    <% if patient.errors[:naturalidade].any? %>
+      <div class="invalid-feedback">
+        <% patient.errors[:naturalidade].each do |m| %>
+          <%= m %>
+          <br>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="form-row">
   <div class="form-group col-12 col-lg-6">
     <label for="birth-date">Data de nascimento</label>
     <div class="input-group">
