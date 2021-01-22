@@ -42,7 +42,7 @@ class PagSeguro::Subscription::Create < Micro::Case
     if subscription.errors.empty?
       Success result: { pagseguro_subscription: subscription }
     else
-      Failure result: { pagseguro_subscription: subscription }
+      Failure result: { message: subscription.errors.join(', ') }
     end
   end
 end

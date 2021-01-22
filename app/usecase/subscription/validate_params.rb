@@ -7,10 +7,17 @@ class Subscription::ValidateParams < Micro::Case
     plan_code = ENV['PAGSEGURO_PLAN_CODE']
     plan_reference = ENV['PAGSEGURO_PLAN_REFERENCE']
 
-    return Failure :missing_plan_code unless plan_code
-    return Failure :missing_plan_reference unless plan_reference
-    return Failure :invalid_card_token if card_token.blank?
-    return Failure :user_subscribed if user.subscription.present?
+    return fail_with('Sistema configura incorretamente, contate o administrador') unless plan_code
+    return fail_with('Sistema configura incorretamente, contate o administrador') unless plan_reference
+    return fail_with('Dados inválido, tente novamente') if card_token.blank?
+
+    if user.subscription.present?
+      if user.subscription.active?
+        return fail_with('Usuário já possui assinatura ativa')
+      else
+        user.subscription.destroy!
+      end
+    end
 
     Success result: {
       plan_code: plan_code,
@@ -19,4 +26,9 @@ class Subscription::ValidateParams < Micro::Case
       email: user.email
     }
   end
+
+  private
+    def fail_with(message)
+      Failure result: { message: message }
+    end
 end

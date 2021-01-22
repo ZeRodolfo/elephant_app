@@ -4,7 +4,7 @@ class PagSeguro::CreateAddress < Micro::Case
   def call!
     address = user.addresses.first
 
-    return Failure :address_not_found unless address
+    return Failure result: { message: 'Usuário não possui endereço' } unless address
 
     Success result: {
       pagseguro_address: {
