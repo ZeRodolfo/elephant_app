@@ -12,7 +12,7 @@
   }
 </style>
 
-<link rel="stylesheet" href="/assets/dataTables.bootstrap4.min.css">
+<%= stylesheet_link_tag 'dataTables.bootstrap4.min', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <section class="el min-100 d-flex flex-column">
   <h6 class="subtitle light my-3">Escolha um paciente para editar.</h6>
@@ -88,7 +88,7 @@
                 <% end %>
               </div>
             </div>
-            
+
           </td>
         </tr>
         <% end %>
@@ -99,9 +99,9 @@
 
     </script>
 
-    <script src="/assets/dataTables.min.js"></script>
-    <script src="/assets/dataTables.bootstrap4.min.js"></script>
-    <script src="/assets/dataTables.responsive.min.js"></script>
-    <script src="/assets/patient.js"></script>
+    <%= javascript_include_tag 'dataTables.min', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'dataTables.bootstrap4.min', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'dataTables.responsive.min', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'patient', 'data-turbolinks-track': 'reload' %>
   </div>
 </section

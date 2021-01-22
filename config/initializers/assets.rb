@@ -15,4 +15,17 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 Rails.application.config.assets.precompile += %w(
   mercadopago/subscription.js
   card.js
+  steps.js
+  ibge.js
+  home.js
+  calendar.js
+  graphs.js
+  dataTables.min.js
+  dataTables.bootstrap4.min.js
+  dataTables.responsive.min.js
+  office_visits_all.js
+  office_visits.js
+  parcels.js
+  patient.js
+  dataTables.bootstrap4.min.css
 )

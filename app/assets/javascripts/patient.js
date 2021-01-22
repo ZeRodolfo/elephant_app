@@ -1,7 +1,7 @@
-
-$(() => {
+$(document).on('turbolinks:load', () => {
   const tableId = '#patients-table'
   const table = $(tableId).DataTable({
+    retrieve: true,
     autoWidth: false,
     dom: 'tp',
     language: {
@@ -65,20 +65,20 @@ $(() => {
     // const w = window.innerWidth
     // console.log(window.innerWidth)
     // if (w <= 608){
-    //   atalhos.width('65%'); 
+    //   atalhos.width('65%');
     // }
     // else if (w <= 686){
-    //   atalhos.width('300px'); 
+    //   atalhos.width('300px');
     // }
     // else if (w <= 785){
-    //   atalhos.width('200px'); 
+    //   atalhos.width('200px');
     // }
     // else if (w <= 950){
-    //   atalhos.width('20%'); 
+    //   atalhos.width('20%');
     // }
     // else if (w <= 1366){
     //   atalhos.width('15%');
-    // } 
+    // }
     // else {
     //   atalhos.width('10%')
     // }

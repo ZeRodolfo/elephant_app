@@ -15,7 +15,8 @@ class SubscriptionsController < ApplicationController
       .call(card_token: params[:token], user: current_user, remote_ip: request.remote_ip)
       .on_success { |result| redirect_to home_path }
       .on_failure do |result|
-        render :new, alert: result.data
+        flash.now[:alert] = result.data
+        render :new
       end
   end
 

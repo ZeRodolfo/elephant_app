@@ -296,7 +296,7 @@
                 <% end %>
               </div>
             </div>
-            
+
             <div class="form-row">
               <div class="form-group col-lg-8 col-12">
                 <label for="cep">Cep</label>
@@ -365,6 +365,6 @@
       </div>
     </div>
   </section>
-  <script src="/assets/steps.js"></script>
-  <script src="/assets/ibge.js"></script>
+  <%= javascript_include_tag 'steps', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'ibge', 'data-turbolinks-track': 'reload' %>
 </div>

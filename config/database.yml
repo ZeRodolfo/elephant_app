@@ -13,6 +13,6 @@ test:
 
 production:
   <<: *default
-  database: ElephantRH_production
-  username: ElephantRH
+  database: elephant_prod
+  username: elephant
   password: <%= ENV['ELEPHANTRH_DATABASE_PASSWORD'] %>

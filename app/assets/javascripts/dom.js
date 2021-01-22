@@ -17,7 +17,7 @@
     throttle("resize", "optimizedResize")
 })()
 
-$(() => {
+$(document).on('turbolinks:load', () => {
     bsCustomFileInput.init()
     setTimeout(() => {
         $('.alert').alert('close')
@@ -30,7 +30,7 @@ $(() => {
         if ($('section.remaining-height').length == 0 || false){ return }
 
         const vh = innerHeight * 0.01 // workaround to compensate for softkeys on android
-        $('section.remaining-height').css('height', `calc((${vh}px * 100) - ${$('#navbar').css('height')})`) 
+        $('section.remaining-height').css('height', `calc((${vh}px * 100) - ${$('#navbar').css('height')})`)
     }
 
     function resizeElements(){
