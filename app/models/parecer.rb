@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: parecers
+# Table name: pareceres
 #
 #  id          :bigint           not null, primary key
 #  analysis    :string
@@ -14,7 +14,7 @@
 #
 # Indexes
 #
-#  index_parecers_on_patient_id  (patient_id)
+#  index_pareceres_on_patient_id  (patient_id)
 #
 # Foreign Keys
 #

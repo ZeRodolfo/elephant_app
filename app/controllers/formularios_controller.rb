@@ -92,13 +92,13 @@ class FormulariosController < ApplicationController
     end
 
     def index
-        @infantis = current_user.patients.find(@patient.id).formularios.where(identifier: Formulario::INFANTIL).order('id ASC')
-        @adultos = current_user.patients.find(@patient.id).formularios.where(identifier: Formulario::ADULTO).order('id ASC')
-        @relatorios = current_user.patients.find(@patient.id).relatorios.where(patient_id: @patient.id).order('id ASC')
-        @laudos = current_user.patients.find(@patient.id).laudos.where(patient_id: @patient.id).order('id ASC')
-        @declaracoes = current_user.patients.find(@patient.id).declaracoes.where(patient_id: @patient.id).order('id ASC')
-        @pareceres = current_user.patients.find(@patient.id).parecers.where(patient_id: @patient.id).order('id ASC')
-        @atestados = current_user.patients.find(@patient.id).atestados.where(patient_id: @patient.id).order('id ASC')
+        @infantis = @patient.formularios.where(identifier: Formulario::INFANTIL).order('id ASC')
+        @adultos = @patient.formularios.where(identifier: Formulario::ADULTO).order('id ASC')
+        @relatorios = @patient.relatorios.where(patient_id: @patient.id).order('id ASC')
+        @laudos = @patient.laudos.where(patient_id: @patient.id).order('id ASC')
+        @declaracoes = @patient.declaracoes.where(patient_id: @patient.id).order('id ASC')
+        @pareceres = @patient.pareceres.where(patient_id: @patient.id).order('id ASC')
+        @atestados = @patient.atestados.where(patient_id: @patient.id).order('id ASC')
     end
 
     private
