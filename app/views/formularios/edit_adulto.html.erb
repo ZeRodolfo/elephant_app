@@ -5,7 +5,7 @@
 <section class="d-flex m-0 align-items-start justify-content-center el min100">
     <div class="bounding generic-form">
         <%= form_with method: :post do |form| %>
-            <%= render 'form', formulario: @form, patient: @patient, title: @model.kind, text_area_rows: 3 %>
+            <%= render 'form', formulario: @form, patient: @patient, local: true, title: @model.kind, text_area_rows: 3 %>
 
             <div class="form-row">
                 <% if @model.present? %>

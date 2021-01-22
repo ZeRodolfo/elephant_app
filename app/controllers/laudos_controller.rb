@@ -30,6 +30,7 @@ class LaudosController < ApplicationController
 
 
   def update
+    byebug
     if @laudo.update(laudo_params)
       redirect_to patient_formularios_path, notice: 'Laudo atualizado com sucesso.'
     else

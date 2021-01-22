@@ -24,15 +24,15 @@
 #  fk_rails_...  (patient_id => patients.id)
 #
 class Laudo < ApplicationRecord
-    belongs_to :patient
-    enum kinds: { psicologico: 'Psicológico', neuropsicologico: 'Neuropsicológico' }
-    validates :analysis, :conclusion, :crp, :description, :procedure, :references, :solicitante, :kind, presence: true
+	belongs_to :patient
+	enum kind: { psicologico: 'Psicológico', neuropsicologico: 'Neuropsicológico' }
+	validates :analysis, :conclusion, :crp, :description, :procedure, :references, :solicitante, :kind, presence: true
 
-    def self.kind_for_select
-        self.kinds.to_a.map{ |x| [x[1], x[0]] }
-    end
+	def self.kind_for_select
+			self.kinds.to_a.map{ |x| [x[1], x[0]] }
+	end
 
-    def readable_kind
-        self.class.kinds[self.kind]
-    end
+	def readable_kind
+			self.class.kinds[self.kind]
+	end
 end

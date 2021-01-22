@@ -26,7 +26,7 @@
 #
 class Relatorio < ApplicationRecord
     belongs_to :patient
-    enum kinds: { psicologico: 'Psicológico', multidisciplinar: 'Multidisciplinar' }
+    enum kind: { psicologico: 'Psicológico', multidisciplinar: 'Multidisciplinar' }
     validates :analysis, :atendido, :conclusion, :crp, :description, :goal, :procedure, :solicitante, :kind, presence: true
 
     def self.kind_for_select
