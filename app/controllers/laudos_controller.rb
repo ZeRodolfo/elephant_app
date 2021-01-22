@@ -3,7 +3,7 @@ class LaudosController < ApplicationController
   before_action :set_laudo, only: [:show, :edit, :update, :destroy]
 
   def show
-    render :edit
+    send_data @laudo.pdf.render, filename: 'laudo.pdf', type: 'application/pdf', disposition: 'inline'
   end
 
   def new

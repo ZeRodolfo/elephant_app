@@ -3,7 +3,7 @@ class DeclaracoesController < ApplicationController
   before_action :set_declaracao, only: [:show, :edit, :update, :destroy]
 
   def show
-    render :edit
+    send_data @declaracao.pdf.render, filename: 'declaracao.pdf', type: 'application/pdf', disposition: 'inline'
   end
 
   def new

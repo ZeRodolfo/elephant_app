@@ -5,7 +5,7 @@ class FormulariosController < ApplicationController
   before_action :set_formulario, only: [:destroy, :show]
 
   def show
-    send_data @model.pdf.render, filename: 'relatorio.pdf', type: 'application/pdf', disposition: 'inline'
+    send_data @model.pdf.render, filename: 'formulario.pdf', type: 'application/pdf', disposition: 'inline'
   end
 
   def new_infantil
