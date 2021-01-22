@@ -24,7 +24,11 @@
 #  fk_rails_...  (patient_id => patients.id)
 #
 class Laudo < ApplicationRecord
-    belongs_to :patient
-    enum types: { psicologico: 0, neuropsicologico: 1 }
-    validates :analysis, :conclusion, :crp, :description, :procedure, :references, :solicitante, :type, presence: true
+  belongs_to :patient
+  enum types: { psicologico: 0, neuropsicologico: 1 }
+  validates :analysis, :conclusion, :crp, :description, :procedure, :references, :solicitante, :type, presence: true
+
+  def pdf
+    LaudoPdf.new(self, patient).pdf
+  end
 end
