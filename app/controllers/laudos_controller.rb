@@ -8,6 +8,7 @@ class LaudosController < ApplicationController
 
   def new
     @laudo = Laudo.new
+    @laudo.grafico = Grafico.new
   end
 
   def edit
@@ -18,6 +19,7 @@ class LaudosController < ApplicationController
   end
 
   def create
+    byebug
     @laudo = Laudo.new(laudo_params)
     @laudo.patient_id = @patient.id
 
@@ -53,6 +55,18 @@ class LaudosController < ApplicationController
     end
 
     def laudo_params
-      params.require(:laudo).permit(:analysis, :conclusion, :crp, :description, :procedure, :references, :solicitante, :kind)
+      params
+        .require(:laudo)
+        .permit(
+          :analysis,
+          :conclusion,
+          :crp,
+          :description,
+          :procedure,
+          :references,
+          :solicitante,
+          :kind,
+          grafico_attributes: [:id, :data, :title, :kind]
+        )
     end
 end
