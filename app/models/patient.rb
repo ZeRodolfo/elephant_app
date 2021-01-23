@@ -35,14 +35,14 @@ class Patient < ApplicationRecord
 
   enum gender: { outro: 0, masculino: 1, feminino: 2 }
 
-  has_many :office_visits
+  has_many :office_visits, dependent: :delete_all
 
-  has_many :pareceres, class_name: 'Parecer'
-  has_many :declaracoes, class_name: 'Declaracao'
-  has_many :laudos
-  has_many :relatorios
-  has_many :formularios
-  has_many :atestados
+  has_many :pareceres, class_name: 'Parecer', dependent: :delete_all
+  has_many :declaracoes, class_name: 'Declaracao', dependent: :delete_all
+  has_many :laudos, dependent: :delete_all
+  has_many :relatorios, dependent: :delete_all
+  has_many :formularios, dependent: :delete_all
+  has_many :atestados, dependent: :delete_all
 
   validates_presence_of :birth_date, :code, :gender, :name, :phone, :profession
 
