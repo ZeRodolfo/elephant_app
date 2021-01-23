@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 #first-section-right-side{
   background-image: url(asset-path('green-elephant-full.png'));
 }
@@ -10,8 +17,13 @@
   width: 100%;
 }
 
+@media screen and (max-width: 768px) and (orientation: landscape){
+  #saiba-mais{
+    display: none !important
+  }
+}
+
 #first-section-left-side{
-  // justify-content: center;
   padding-top: 6rem;
 }
 
@@ -71,12 +83,16 @@ section.has-bg::before, #funcionalidades-left-side::before{
 
 .section-title::before{
   left: 0;
-  transform: translateY(50%) translateX(calc(-100% - 10px));
+  -webkit-transform: translateY(50%) translateX(calc(-100% - 10px));
+      -ms-transform: translateY(50%) translateX(calc(-100% - 10px));
+          transform: translateY(50%) translateX(calc(-100% - 10px));
 }
 
 .section-title::after{
   right: 0;
-  transform: translateY(-50%) translateX(calc(100% + 10px));
+  -webkit-transform: translateY(-50%) translateX(calc(100% + 10px));
+      -ms-transform: translateY(-50%) translateX(calc(100% + 10px));
+          transform: translateY(-50%) translateX(calc(100% + 10px));
 }
 
 .follow{
@@ -157,9 +173,6 @@ section.has-bg::before, #funcionalidades-left-side::before{
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
-  // .funcionalidade .icon-col{
-  //   display: none !important;
-  // }
   .funcionalidade i{
     font-size: 2.5rem;
   }  
@@ -241,5 +254,11 @@ section.has-bg::before, #funcionalidades-left-side::before{
       -webkit-box-flex: 0;
           -ms-flex: 0 0 calc(25% - 30px);
               flex: 0 0 calc(25% - 30px);
+  }
+}
+
+@media screen and (min-width: 992px){
+  #first > .row{
+     height: 80vh !important;
   }
 }

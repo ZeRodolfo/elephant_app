@@ -81,6 +81,7 @@ footer{
 }
 
 section.el{
+  z-index: 1;
   position: relative !important;
   width: 100%;
   padding-left: var(--px);
@@ -409,7 +410,6 @@ input[type=number].hidden-arrows {
 
 .min100{
   min-height: 100vh;
-  height: auto;
 }
 
 @media screen and (min-width: 1600px){
