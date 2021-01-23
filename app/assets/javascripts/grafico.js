@@ -7,7 +7,7 @@ $(() => {
     const randomColor = () => Math.floor(Math.random()*16777215).toString(16)
     const title = get('laudo_grafico_attributes_title')
     const ctx = get('grafico').getContext('2d')
-    const kinds = ['bar', 'pizza']
+    const kinds = ['bar', 'pizza', 'radar']
 
     let grafico = null
     buildGraficoFor(kindSelect.value)
@@ -73,11 +73,27 @@ $(() => {
                 }
             })
         }
-        // else if (kind == 'radar'){
-        //     grafico = null
-        // }
-        else {
-            throw ('Erro no tipo do gráfico.')
+        else if (kind == 'radar'){
+            grafico = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    datasets:
+                    [
+                        {
+                            label: 'Radar',
+                            backgroundColor: 'black',
+                            data: []
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        text: title.value,
+                        display: true
+                    },
+                }
+            })
         }
 
         grafico.update()
@@ -92,6 +108,11 @@ $(() => {
     }
 
     function cclean(kind){
+        $('#radar-vertices').html('')
+        $('#radar-fields').html('')
+        hideRadarValues()
+        showVerticesInputs()
+
         title.value = ''
         buildGraficoFor(kind)
         show(kind)
@@ -238,6 +259,96 @@ $(() => {
         $('#bar-fields').append(buildBarFieldset())
         grafico.update()
     })
+
+    // --------------------------
+
+    get('add-radar').addEventListener('click', function(event){
+    
+        $('#radar-vertices').append(buildRadarVerticeInput())
+        grafico.update()
+    })
+
+    function radarVerticeCount(){
+        if (!$('#radar-vertices .radar-vertice-formset').length){ return 0 }
+
+        let max = parseInt($('#radar-vertices .radar-vertice-formset').first().data('index'))
+        $('#radar-vertices .radar-vertice-formset').each(function(i, e){
+            const v = parseInt(this.dataset['index'])
+            if (v > max){
+                max = v
+            }
+        })
+       return max + 1
+    }
+
+    function buildRadarVerticeInput(){
+        const $el = $('#radar-vertices-formset').html().replaceAll('RADAR-VERTICE-INDEX', radarVerticeCount()).replace('RADAR-VERTICE-VALUE', 'Vertice ' + (radarVerticeCount() + 1))
+        return $el
+    }
+
+    function getVertices(){
+        const a = []
+        $('#radar-vertices .radar-vertice-label').each(function(i, e){
+            a.push(e.value)
+        })
+        console.log(a)
+        return a
+    }
+
+    $('#ok-vertices').on('click', function(){
+        const vertices = getVertices()
+        grafico.data.labels = vertices
+        grafico.update()
+        hideVerticesInputs()
+        showRadarValuesForVertices(vertices)
+    })
+
+    function hideVerticesInputs(){
+        $('#vvvvv').hide()
+    }
+
+    function showVerticesInputs(){
+        $('#vvvvv').show()
+    }
+
+    function hideRadarValues(){
+        $('#radar-fields').hide()
+    }
+
+    function showRadarValuesForVertices(vertices){
+        // for (const vertice of vertices){
+        vertices.forEach((v, i) => {
+            buildRadarValueInput(v, i)
+        })
+        $('#radar-fields').show()
+    }
+
+    function buildRadarValueInput(vertice, index){
+        const $el = $($('#radar-formset .radar-formset').html().replaceAll('INDEX', index).replace('RADAR-VALUE-LABEL', vertice))
+        $('#radar-fields').append($el)
+    }
+
+    $('body').on('change keyup', '.radar-value', function(e){
+        const index = parseInt(this.dataset['index'])
+        grafico.data.datasets[0].data[index] = parseFloat(this.value)
+        grafico.update()
+    })
+
+    $('body').on('click', '.radar-vertice-remove', function(e){
+        const index = this.dataset['index']
+        $(`.radar-vertice-formset[data-index="${index}"]`).remove()
+        reIndexVertices()
+    })
+
+    function reIndexVertices(){
+        $('#radar-vertices .radar-vertice-formset').each(function(i, e){
+            console.log(`i ${i} - dataindex ${e.dataset['index']}`)
+            const $e = $(e)
+            $e.attr('data-index', i)
+            $e.find('input.radar-vertice-label').attr('data-index', i)
+            $e.find('button.radar-vertice-remove').attr('data-index', i)
+        })
+    }
 
     // ---------------------
 
