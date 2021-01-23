@@ -31,7 +31,10 @@ class PdfDocument
     image = patient&.user&.preferences&.papel_timbrado
     return unless image.present?
 
-    StringIO.open image.download
+    resized_image = MiniMagick::Image.read(image.download)
+    suppress(MiniMagick::Error) { resized_image.resample(72, 72) }
+
+    resized_image.resize('595x842').path
   end
 
   def render(*args, **kwargs)
@@ -55,7 +58,7 @@ class PdfDocument
     end
 
     def add_paragraph(paragraph)
-      pdf.text paragraph, size: 10, indent_paragraphs: 20
+      pdf.text paragraph, size: 10
       move_down 10
     end
 

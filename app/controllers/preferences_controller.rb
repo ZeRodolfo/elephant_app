@@ -19,6 +19,18 @@ class PreferencesController < ApplicationController
     end
   end
 
+  def download_psd
+    send_file "#{Rails.root}/public/samples/timbrado.psd",
+      filename: 'timbrado.psd',
+      type: 'image/vnd.adobe.photoshop'
+  end
+
+  def download_png
+    send_file "#{Rails.root}/public/samples/timbrado.png",
+      filename: 'timbrado.png',
+      type: 'image/png'
+  end
+
   private
     def preferences_params
       params
