@@ -1,0 +1,10 @@
+<% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Editar declaração' } %>
+
+<%= render 'shared/navbar' %>
+
+<section class="d-flex m-0 align-items-start justify-content-center el min100">
+  <div class="bounding generic-form">
+    <h1 class="bold">Editar Declaração</h1>
+    <%= render 'form', declaracao: @declaracao, path: patient_declaracao_path, method: :patch  %>
+  </div>
+</section>

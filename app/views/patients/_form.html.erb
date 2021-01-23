@@ -1,4 +1,4 @@
-<%= form_for(patient) do |f| %>
+<%= form_for(patient, local: true) do |f| %>
 <% if patient.avatar.present? %>
   <div class="form-row">
     <div class="form-group col d-flex align-items-center justify-content-center">
@@ -28,6 +28,140 @@
     <%= f.select :gender, options_for_select(Patient.gender_for_select, patient.gender || 0), {}, { class: "form-control", id: "gender" } %>
   </div>
 </div>
+
+<div class="form-row">
+  <div class="form-group col">
+    <%= f.label :cpf, for: 'cpf' %>
+    <%= f.text_field :cpf, class: "form-control cpf #{ 'is-invalid' if patient.errors[:cpf].any? }", id: 'cpf'%>
+    <% if patient.errors[:cpf].any? %>
+    <div class="invalid-feedback">
+      <% patient.errors[:cpf].each do |m| %>
+      <%= m %>
+      <br>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group col">
+    <label for="naturalidade">Naturalidade</label>
+    <%= f.text_field :naturalidade, id: 'naturalidade', class: "form-control #{ 'is-invalid' if patient.errors[:naturalidade].any? }", required: true %>
+    <% if patient.errors[:naturalidade].any? %>
+      <div class="invalid-feedback">
+        <% patient.errors[:naturalidade].each do |m| %>
+          <%= m %>
+          <br>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= f.fields_for :address do |addr_form| %>
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="uf">UF</label>
+      <%= addr_form.hidden_field :uf, {name: 'uf_value', id: 'uf_value'} %>
+      <%= addr_form.select :uf, [], { include_blank: false }, { id: 'uf', class: "form-control #{ 'is-invalid' if patient.errors['address.uf'].any? }" } %>
+      <% if patient.errors["address.uf"].any? %>
+      <div class="invalid-feedback">
+        <% patient.errors["address.uf"].each do |m| %>
+        <%= m %>
+        <br>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="city">Cidade</label>
+      <%= addr_form.hidden_field :city, {name: 'city_value', id: 'city_value'} %>
+      <%= addr_form.select :city, [], { include_blank: false }, { id: 'city', class: "form-control #{ 'is-invalid' if patient.errors['address.city'].any? }" } %>
+      <% if patient.errors["address.city"].any? %>
+      <div class="invalid-feedback">
+        <% patient.errors["address.city"].each do |m| %>
+        <%= m %>
+        <br>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="number">Rua</label>
+      <%= addr_form.text_field :street, class: "form-control #{ 'is-invalid' if patient.errors['address.street'].any? }", id: 'street', required: 'true' %>
+      <% if patient.errors["address.street"].any? %>
+      <div class="invalid-feedback">
+        <% patient.errors["address.street"].each do |m| %>
+        <%= m %>
+        <br>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-lg-6 col-12">
+      <label for="neighborhood">Bairro</label>
+      <%= addr_form.text_field :neighborhood, class: "form-control #{ 'is-invalid' if patient.errors['address.neighborhood'].any? }", id: 'neighborhood', required: 'true' %>
+      <% if patient.errors["address.neighborhood"].any? %>
+      <div class="invalid-feedback">
+        <% patient.errors["address.neighborhood"].each do |m| %>
+        <%= m %>
+        <br>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+    <div class="form-group col-12 col-lg-6">
+      <label for="complement">Complemento</label>
+      <%= addr_form.text_field :complement, class: "form-control #{ 'is-invalid' if patient.errors['address.complement'].any? }", id: 'complement' %>
+      <% if patient.errors["address.complement"].any? %>
+      <div class="invalid-feedback">
+        <% patient.errors["address.complement"].each do |m| %>
+        <%= m %>
+        <br>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-lg-8 col-12">
+      <label for="cep">Cep</label>
+      <%= addr_form.text_field :cep, class: "form-control cep #{ 'is-invalid' if patient.errors['address.cep'].any? }", id: 'cep', required: 'true' %>
+      <% if patient.errors["address.cep"].any? %>
+      <div class="invalid-feedback">
+        <% patient.errors["address.cep"].each do |m| %>
+        <%= m %>
+        <br>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+    <div class="form-group col-12 col-lg-4">
+      <label for="number">Número</label>
+      <%= addr_form.number_field :number, min: 0, class: "form-control #{ 'is-invalid' if patient.errors['address.number'].any? }", id: 'number' %>
+      <% if patient.errors["address.number"].any? %>
+      <div class="invalid-feedback">
+        <% patient.errors["address.number"].each do |m| %>
+        <%= m %>
+        <br>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
 
 <div class="form-row">
   <div class="form-group col-12 col-lg-6">
@@ -98,7 +232,6 @@
         <label class="custom-file-label form-control" for="avatar">Selecione uma foto</label>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -123,7 +256,7 @@
 
 <!-- <div class="form-row">
     <div class="form-group col-6">
-    
+
     </div>
   </div> -->
 
@@ -139,3 +272,5 @@
 </div>
 
 <% end %>
+
+<%= javascript_include_tag 'ibge', 'data-turbolinks-track': 'reload' %>

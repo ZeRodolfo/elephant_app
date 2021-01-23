@@ -74,16 +74,20 @@
           <td><%= patient.readable_gender %></td>
           <td>
             <div class="row m-0">
-              <div class="col-4 m-0 p-0 d-flex align-items-center justify-content-center">
-                <a href="<%= edit_patient_path(patient) %>" class="el-anchor"><i class="fas fa-pencil-alt"></i></a>
+              <div class="col-6 col-xl-3 m-0 p-0 d-flex align-items-center justify-content-center">
+                <a title="Editar" href="<%= edit_patient_path(patient) %>" class="el-anchor"><i class="fas fa-pencil-alt"></i></a>
               </div>
 
-              <div class="col-4 m-0 d-flex align-items-center justify-content-center">
-                <a href="<%= validation_patients_path(id: patient) %>" class="el-anchor"><i class="fas fa-calendar-alt"></i></a>
+              <div class="col-6 col-xl-3 m-0 p-0 d-flex align-items-center justify-content-center">
+                <a title="Documentos" href="<%= patient_formularios_path(patient) %>" class="el-anchor"><i class="fas fa-file-alt"></i></a>
               </div>
 
-              <div class="col-4 m-0 p-0 d-flex align-items-center justify-content-center">
-                <%= link_to patient, method: :delete, class: 'text-danger', data: { confirm: 'Tem certeza que deseja excluir este paciente?' } do %>
+              <div class="col-6 col-xl-3 m-0 d-flex align-items-center justify-content-center">
+                <a title="Consultas" href="<%= validation_patients_path(id: patient) %>" class="el-anchor"><i class="fas fa-calendar-alt"></i></a>
+              </div>
+
+              <div class="col-6 col-xl-3 m-0 p-0 d-flex align-items-center justify-content-center">
+                <%= link_to patient, method: :delete, class: 'text-danger', data: { confirm: 'Tem certeza que deseja excluir este paciente?' }, title: 'Excluir' do %>
                   <i class="fas fa-trash"></i>
                 <% end %>
               </div>

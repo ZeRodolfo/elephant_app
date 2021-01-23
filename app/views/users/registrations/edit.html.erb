@@ -199,6 +199,7 @@
         </div>
 
         <%= f.submit 'Atualizar', class: 'mt-2 btn btn-primary btn-block' %>
+        <%= link_to 'Cancelar Assinatura', cancel_subscriptions_path, method: :delete, class: 'btn btn-outline-danger btn-block my-0 my-lg-2', data: { confirm: 'Tem certeza que deseja cancelar a assinatura?' } %>
         <% end %>
 
         <%= javascript_include_tag 'ibge', 'data-turbolinks-track': 'reload' %>

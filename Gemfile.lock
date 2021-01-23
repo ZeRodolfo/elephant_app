@@ -24,6 +24,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    active_storage_validations (0.9.2)
+      rails (>= 5.2.0)
     activeform-rails (0.0.5)
       activemodel (>= 3)
       activesupport (>= 3)
@@ -373,6 +375,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_storage_validations (~> 0.9.2)
   activeform-rails
   annotate
   bootsnap (>= 1.1.0)
@@ -400,6 +403,7 @@ DEPENDENCIES
   pagseguro-oficial (~> 2.6.0)
   pg (>= 0.18, < 2.0)
   prawn-rails
+  prawn-table
   puma (~> 3.11)
   rack-test
   rails (~> 5.2.4, >= 5.2.4.1)

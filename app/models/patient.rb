@@ -6,25 +6,43 @@
 #  avatar         :json
 #  birth_date     :date
 #  code           :string
+#  cpf            :string
 #  gender         :integer
 #  name           :string
+#  naturalidade   :string
 #  phone          :string
 #  profession     :string
 #  relative_phone :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  address_id     :bigint
 #  user_id        :bigint
 #
 # Indexes
 #
-#  index_patients_on_user_id  (user_id)
+#  index_patients_on_address_id  (address_id)
+#  index_patients_on_user_id     (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (address_id => addresses.id)
 #
 class Patient < ApplicationRecord
   belongs_to :user
+  belongs_to :address
 
-  enum genders: { outro: 0, masculino: 1, feminino: 2 }
+  accepts_nested_attributes_for :address
+
+  enum gender: { outro: 0, masculino: 1, feminino: 2 }
 
   has_many :office_visits
+
+  has_many :pareceres, class_name: 'Parecer'
+  has_many :declaracoes, class_name: 'Declaracao'
+  has_many :laudos
+  has_many :relatorios
+  has_many :formularios
+  has_many :atestados
 
   validates_presence_of :birth_date, :code, :gender, :name, :phone, :profession
 
@@ -36,7 +54,7 @@ class Patient < ApplicationRecord
 
   def validity_of_date
     # errors.delete(:birth_date)
-    errors.add(:birth_date, "A data é inválida.") if DateHelper.parse(birth_date).nil? 
+    errors.add(:birth_date, "A data é inválida.") if DateHelper.parse(birth_date).nil?
   end
 
   def age
@@ -45,12 +63,11 @@ class Patient < ApplicationRecord
   end
 
   def self.gender_for_select
-    self.genders.to_a.map{ |x| [x[0].humanize, x[1]] }
+    self.genders.to_a.map{ |x| [x[0].humanize, x[0]] }
   end
 
   def readable_gender
-    g = self.class.genders.key(self.gender)
-    g.nil? ? 'Indefinido' : g.humanize
+    (self.gender || 'Indefinido').humanize
   end
 
   def validate_code(code)

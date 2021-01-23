@@ -1,0 +1,66 @@
+<%= form_with model: declaracao, url: path, local: true, method: method do |f| %>
+  <% if declaracao.id.present? %>
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="created_at">Data de criação</label>
+        <input type="text" id="created_at" disabled value="<%= declaracao.created_at.to_date %>" class="form-control">
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="city">CRP</label>
+      <%= f.text_field :crp, id: 'crp', class: "form-control #{ 'is-invalid' if declaracao.errors[:crp].any? }", required: true %>
+      <% if declaracao.errors[:crp].any? %>
+        <div class="invalid-feedback">
+          <% declaracao.errors[:crp].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="city">Cidade</label>
+      <%= f.text_field :city, id: 'city', class: "form-control #{ 'is-invalid' if declaracao.errors[:city].any? }", required: true %>
+      <% if declaracao.errors[:city].any? %>
+        <div class="invalid-feedback">
+          <% declaracao.errors[:city].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="text">Texto</label>
+      <%= f.text_area :text, id: 'text', class: "form-control #{ 'is-invalid' if declaracao.errors[:text].any? }", required: true, rows: '5' %>
+      <% if declaracao.errors[:text].any? %>
+        <div class="invalid-feedback">
+          <% declaracao.errors[:text].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <% if declaracao.id.present? %>
+      <div class="form-group col-12 col-lg-6">
+          <%= link_to 'Excluir', patient_declaracao_path, method: :delete, class: 'btn btn-outline-danger btn-block my-0 my-lg-2', data: { confirm: 'Tem certeza que deseja excluir esta declaração?' } %>
+      </div>
+    <% end %>
+    <div class="form-group col">
+      <%= f.submit (declaracao.id.present?) ? 'Atualizar' : 'Salvar', class: 'btn btn-primary btn-block my-0 my-lg-2' %>
+    </div>
+</div>
+<% end %>

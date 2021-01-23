@@ -28,4 +28,8 @@ Rails.application.config.assets.precompile += %w(
   parcels.js
   patient.js
   dataTables.bootstrap4.min.css
+  formularios.js
+  grafico.js
+  Chart.min.css
+  Chart.min.js
 )

@@ -1,6 +1,6 @@
 class SubscriptionsController < ApplicationController
   skip_before_action :verify_subscription
-  before_action :redirect_to_home, except: [:index]
+  before_action :redirect_to_home, except: [:index, :cancel]
 
   def index
     @active = current_user.subscription&.active?
@@ -16,8 +16,17 @@ class SubscriptionsController < ApplicationController
       .on_success { |result| redirect_to home_path }
       .on_failure do |result|
         gon.session = PagSeguro::Session.create
-        flash.now[:alert] = result.data
+        flash.now[:alert] = result.data[:message]
         render :new
+      end
+  end
+
+  def cancel
+    PagSeguro::Subscription::Cancel
+      .call(user: current_user)
+      .on_success { |r| redirect_to subscriptions_path, notice: 'Assinatura cancelada' }
+      .on_failure do |r|
+        redirect_to edit_user_registration_path, alert: r.data[:message]
       end
   end
 

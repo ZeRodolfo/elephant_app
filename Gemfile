@@ -24,6 +24,8 @@ gem 'gruff'
 
 # Gem to generate PDF
 gem 'prawn-rails'
+gem 'prawn-table'
+gem 'active_storage_validations', '~> 0.9.2'
 # Gem to generate graphs
 gem 'chart'
 

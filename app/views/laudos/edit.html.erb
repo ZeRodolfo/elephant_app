@@ -1,0 +1,13 @@
+<% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Editar laudo' } %>
+<% content_for(:head) do %>
+  <meta name="turbolinks-visit-control" content="reload">
+<% end %>
+
+<%= render 'shared/navbar' %>
+
+<section class="d-flex m-0 align-items-start justify-content-center el min100">
+  <div class="bounding ojiasasdop">
+    <h1 class="bold">Editar Laudo <% if @laudo.id.present? %> <%= @laudo.readable_kind %> <% end %></h1>
+    <%= render 'form', laudo: @laudo, path: patient_laudo_path, method: :patch  %>
+  </div>
+</section>

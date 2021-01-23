@@ -17,11 +17,17 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  mercado_pago_id        :string
+#  user_preference_id     :bigint
 #
 # Indexes
 #
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_user_preference_id    (user_preference_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_preference_id => user_preferences.id)
 #
 require 'test_helper'
 

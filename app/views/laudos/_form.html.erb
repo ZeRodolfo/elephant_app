@@ -1,0 +1,260 @@
+<%= form_with model: laudo, url: path, local: true, method: method do |f| %>
+  <% if laudo.id.present? %>
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="created_at">Data de criação</label>
+        <input type="text" id="created_at" disabled value="<%= laudo.created_at.to_date %>" class="form-control">
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="kind">Tipo</label>
+      <%= f.select :kind, options_for_select(Laudo.kind_for_select, laudo.kind), {}, { class: "form-control", id: "kind" } %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="text">Solicitante</label>
+      <%= f.text_field :solicitante, id: 'solicitante', class: "form-control #{ 'is-invalid' if laudo.errors[:solicitante].any? }", required: true %>
+      <% if laudo.errors[:solicitante].any? %>
+        <div class="invalid-feedback">
+          <% laudo.errors[:solicitante].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="cidade">CRP</label>
+      <%= f.text_field :crp, id: 'crp', class: "form-control #{ 'is-invalid' if laudo.errors[:crp].any? }", required: true %>
+      <% if laudo.errors[:crp].any? %>
+        <div class="invalid-feedback">
+          <% laudo.errors[:crp].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="description">Descrição da demanda</label>
+      <%= f.text_area :description, id: 'description', class: "form-control #{ 'is-invalid' if laudo.errors[:description].any? }", required: true, rows: '5' %>
+      <% if laudo.errors[:description].any? %>
+        <div class="invalid-feedback">
+          <% laudo.errors[:description].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="procedure">Procedimento</label>
+      <%= f.text_area :procedure, id: 'procedure', class: "form-control #{ 'is-invalid' if laudo.errors[:procedure].any? }", required: true, rows: '5' %>
+      <% if laudo.errors[:procedure].any? %>
+        <div class="invalid-feedback">
+          <% laudo.errors[:procedure].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="analysis">Análise</label>
+      <%= f.text_area :analysis, id: 'analysis', class: "form-control #{ 'is-invalid' if laudo.errors[:analysis].any? }", required: true, rows: '5' %>
+      <% if laudo.errors[:analysis].any? %>
+        <div class="invalid-feedback">
+          <% laudo.errors[:analysis].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="conclusion">Conclusão</label>
+      <%= f.text_area :conclusion, id: 'conclusion', class: "form-control #{ 'is-invalid' if laudo.errors[:conclusion].any? }", required: true, rows: '5' %>
+      <% if laudo.errors[:conclusion].any? %>
+        <div class="invalid-feedback">
+          <% laudo.errors[:conclusion].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="references">Referências</label>
+      <%= f.text_area :references, id: 'references', class: "form-control #{ 'is-invalid' if laudo.errors[:references].any? }", required: true, rows: '5' %>
+      <% if laudo.errors[:references].any? %>
+        <div class="invalid-feedback">
+          <% laudo.errors[:references].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row mx-0 mt-5 mb-2 p-0">
+    <div class="col-8 col-lg-6 d-flex align-items-center justify-content-start m-0 p-0">
+      <h3 class="mt-5 mb-2 bold">Gráfico associado</h3>
+    </div>
+
+    <div class="col-4 col-lg-6 d-flex align-items-end justify-content-end m-0 pr-0">
+      <button id="cclean" type="button" class="btn btn-outline-danger">
+        <i class="d-none d-lg-inline fas fa-plus mr-2"></i>Limpar
+      </button>
+    </div>
+  </div>
+
+  <%= f.fields_for :grafico do |grafico_form| %>
+    <div class="form-row">
+      <div class="form-group col-12 col-lg-6">
+        <label>Tipo</label>
+        <%= grafico_form.select :kind, options_for_select(Grafico.kind_for_select, laudo.grafico.kind), {}, { class: "form-control" } %>
+      </div>
+
+      <div class="form-group col">
+        <label>Título</label>
+        <%= grafico_form.text_field :title, class: "form-control #{ 'is-invalid' if laudo.errors["grafico.title"].any? }" %>
+        <% if laudo.errors["grafico.title"].any? %>
+          <div class="invalid-feedback">
+            <% laudo.errors["grafico.title"].each do |m| %>
+              <%= m %>
+              <br>
+            <% end %>
+          </div>
+        <% end %>
+    </div>
+    </div>
+
+    <%= grafico_form.hidden_field :data, id: 'grafico-data' %>
+    <input type="hidden" id="grafico-kind" value="<%= laudo.grafico.kind %>">
+    <canvas id="grafico" width="100" height="100"></canvas>
+
+    <div id="grafico-fields" class="m-0 p-0">
+      <div id="bar-related">
+        <div class="row mx-0 mt-5 mb-2 p-0">
+          <div class="col-8 col-lg-6 d-flex align-items-center justify-content-start m-0 p-0">
+            <h3 id="grafico-fields-label" class="bold">Colunas</h3>
+          </div>
+
+          <div class="col-4 col-lg-6 d-flex align-items-end justify-content-end m-0 pr-0">
+            <button id="add-bar" type="button" class="btn btn-outline-primary">
+              <i class="d-none d-lg-inline fas fa-plus mr-2"></i>Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div id="bar-fields"></div>
+        
+        <div id="bar-formset" hidden>
+          <div data-index="INDEX" class="bar-formset form-row m-0 p-0">
+            <div class="form-group col-5">
+              <label>Título</label>
+              <input data-index="INDEX" type="text" class="bar-title form-control" value="BAR-TITLE">
+            </div>
+
+            <div class="form-group col-3">
+              <label>Valor</label>
+              <input data-index="INDEX" type="number" min="0" class="bar-value form-control" value="BAR-VALUE">
+            </div>
+
+            <div class="form-group col-2">
+              <label>Cor</label>
+              <input data-index="INDEX" type="color" class="bar-color form-control" value="BAR-COLOR">
+            </div>
+
+            <div class="form-group col-2 d-flex align-items-end">
+              <button data-index="INDEX" type="button" class="bar-remove p-1 btn btn-outline-danger btn-block">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="pizza-related" style="display: none">
+        <div class="row mx-0 mt-5 mb-2 p-0">
+          <div class="col-8 col-lg-6 d-flex align-items-center justify-content-start m-0 p-0">
+            <h3 class="bold">Fatias</h3>
+          </div>
+
+          <div class="col-4 col-lg-6 d-flex align-items-end justify-content-end m-0 pr-0">
+            <button id="add-pizza" type="button" class="btn btn-outline-primary">
+              <i class="d-none d-lg-inline fas fa-plus mr-2"></i>Adicionar
+            </button>
+          </div>
+        </div>
+
+        <small>O envio de fatias com valor 0 (zero) significará sua exclusão.</small>
+        <div id="pizza-fields"></div>
+
+        <div id="pizza-formset" hidden>
+          <div data-index="INDEX" class="pizza-formset form-row m-0 p-0">
+            <div class="form-group col-5">
+              <label>Título</label>
+              <input data-index="INDEX" type="text" class="pizza-title form-control" value="PIZZA-TITLE">
+            </div>
+
+            <div class="form-group col-3">
+              <label>Valor</label>
+              <input data-index="INDEX" type="number" min="0" class="pizza-value form-control" value="PIZZA-VALUE">
+            </div>
+
+            <div class="form-group col-2">
+              <label>Cor</label>
+              <input data-index="INDEX" type="color" class="pizza-color form-control" value="PIZZA-COLOR">
+            </div>
+
+            <div class="form-group col-2 d-flex align-items-end">
+              <button data-index="INDEX" type="button" class="pizza-remove p-1 btn btn-outline-danger btn-block">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-row">
+    <% if laudo.id.present? %>
+      <div class="form-group col-12 col-lg-6">
+          <%= link_to 'Excluir', patient_laudo_path, method: :delete, class: 'btn btn-outline-danger btn-block my-0 my-lg-2', data: { confirm: 'Tem certeza que deseja excluir este laudo?' } %>
+      </div>
+    <% end %>
+    <div class="form-group col">
+      <%= f.submit (laudo.id.present?) ? 'Atualizar' : 'Salvar', class: 'btn btn-primary btn-block my-0 my-lg-2' %>
+    </div>
+</div>
+<% end %>
+
+<%= stylesheet_link_tag 'Chart.min', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'Chart.min', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'grafico', 'data-turbolinks-track': 'reload' %>

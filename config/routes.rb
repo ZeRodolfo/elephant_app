@@ -23,6 +23,26 @@ Rails.application.routes.draw do
       post :create_multiple, on: :collection
     end
 
+    resources :atestados
+    resources :declaracoes
+    resources :laudos
+    resources :pareceres
+    resources :relatorios
+
+    resources :formularios do
+      get 'anamnese-infantil/new', to: 'formularios#new_infantil', on: :collection
+      get 'anamnese-infantil/', to: 'formularios#index_infantil', on: :collection
+      get 'anamnese-infantil/:formulario_id/edit', to: 'formularios#edit_infantil', on: :collection, as: :anamnese_infantil_edit_patient_formularios
+      post 'anamnese-infantil', to: 'formularios#create_infantil', on: :collection
+      post 'anamnese-infantil/:formulario_id/edit', to: 'formularios#update_infantil', on: :collection
+
+      get 'anamnese-adulto/', to: 'formularios#new_adulto', on: :collection
+      get 'anamnese-adulto/new', to: 'formularios#new_adulto', on: :collection
+      get 'anamnese-adulto/:formulario_id/edit', to: 'formularios#edit_adulto', on: :collection, as: :anamnese_adulto_edit_patient_formularios
+      post 'anamnese-adulto', to: 'formularios#create_adulto', on: :collection
+      post 'anamnese-adulto/:formulario_id/edit', to: 'formularios#update_adulto', on: :collection
+    end
+
     collection do
       get 'graph'
       get 'validation'
@@ -43,9 +63,15 @@ Rails.application.routes.draw do
 
   get 'pdf/generate_pdf'
 
-  resources :subscriptions, only: %i[index new create]
+  resources :subscriptions, only: %i[index new create] do
+    delete :cancel, on: :collection
+  end
 
   resources :notifications, only: %i[index create]
+
+  resources :preferences, only: %i[index] do
+    patch :update, on: :collection
+  end
 
   get :home, to: 'home#index'
 

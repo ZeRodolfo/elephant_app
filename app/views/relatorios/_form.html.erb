@@ -1,0 +1,149 @@
+<%= form_with model: relatorio, url: path, local: true, method: method do |f| %>
+  <% if relatorio.id.present? %>
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="created_at">Data de criação</label>
+        <input type="text" id="created_at" disabled value="<%= relatorio.created_at.to_date %>" class="form-control">
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="kind">Tipo</label>
+      <%= f.select :kind, options_for_select(Relatorio.kind_for_select, relatorio.kind), {}, { class: "form-control", id: "kind" } %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="atendido">Nome do atendido</label>
+      <%= f.text_field :atendido, id: 'atendido', class: "form-control #{ 'is-invalid' if relatorio.errors[:atendido].any? }", required: true %>
+      <% if relatorio.errors[:atendido].any? %>
+        <div class="invalid-feedback">
+          <% relatorio.errors[:atendido].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="solicitante">Solicitante</label>
+      <%= f.text_field :solicitante, id: 'solicitante', class: "form-control #{ 'is-invalid' if relatorio.errors[:solicitante].any? }", required: true %>
+      <% if relatorio.errors[:solicitante].any? %>
+        <div class="invalid-feedback">
+          <% relatorio.errors[:solicitante].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="goal">CRP</label>
+      <%= f.text_field :crp, id: 'crp', class: "form-control #{ 'is-invalid' if relatorio.errors[:crp].any? }", required: true %>
+      <% if relatorio.errors[:crp].any? %>
+        <div class="invalid-feedback">
+          <% relatorio.errors[:crp].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="goal">Finalidade</label>
+      <%= f.text_field :goal, id: 'goal', class: "form-control #{ 'is-invalid' if relatorio.errors[:goal].any? }", required: true %>
+      <% if relatorio.errors[:goal].any? %>
+        <div class="invalid-feedback">
+          <% relatorio.errors[:goal].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="description">Descrição da Demanda</label>
+      <%= f.text_area :description, id: 'description', class: "form-control #{ 'is-invalid' if relatorio.errors[:description].any? }", required: true, rows: '5' %>
+      <% if relatorio.errors[:description].any? %>
+        <div class="invalid-feedback">
+          <% relatorio.errors[:description].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="procedure">Procedimento</label>
+      <%= f.text_area :procedure, id: 'procedure', class: "form-control #{ 'is-invalid' if relatorio.errors[:procedure].any? }", required: true, rows: '5' %>
+      <% if relatorio.errors[:procedure].any? %>
+        <div class="invalid-feedback">
+          <% relatorio.errors[:procedure].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="analysis">Análise</label>
+      <%= f.text_area :analysis, id: 'analysis', class: "form-control #{ 'is-invalid' if relatorio.errors[:analysis].any? }", required: true, rows: '5' %>
+      <% if relatorio.errors[:analysis].any? %>
+        <div class="invalid-feedback">
+          <% relatorio.errors[:analysis].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="conclusion">Conclusão</label>
+      <%= f.text_area :conclusion, id: 'conclusion', class: "form-control #{ 'is-invalid' if relatorio.errors[:conclusion].any? }", required: true, rows: '5' %>
+      <% if relatorio.errors[:conclusion].any? %>
+        <div class="invalid-feedback">
+          <% relatorio.errors[:conclusion].each do |m| %>
+            <%= m %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+
+  <div class="form-row">
+    <% if relatorio.id.present? %>
+      <div class="form-group col-12 col-lg-6">
+          <%= link_to 'Excluir', patient_relatorio_path, method: :delete, class: 'btn btn-outline-danger btn-block my-0 my-lg-2', data: { confirm: 'Tem certeza que deseja excluir este relatório?' } %>
+      </div>
+    <% end %>
+    <div class="form-group col">
+      <%= f.submit (relatorio.id.present?) ? 'Atualizar' : 'Salvar', class: 'btn btn-primary btn-block my-0 my-lg-2' %>
+    </div>
+</div>
+<% end %>

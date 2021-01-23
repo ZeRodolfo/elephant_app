@@ -1,0 +1,35 @@
+<% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Editar Perfil' } %>
+
+<%= render 'shared/navbar' %>
+<% content_for(:head) do %>
+<meta name="turbolinks-visit-control" content="reload">
+<% end %>
+
+<section class="d-flex m-0 align-items-start justify-content-center el min100">
+  <div class="bounding generic-form">
+    <h1 class="bold">Ajustes</h1>
+
+    <%= render 'shared/alerts' %>
+
+    <%= form_with(model: @preferences, url: preferences_path, local: true) do |f| %>
+      <label>Papel timbrado</label><br />
+      <% if @preferences.papel_timbrado.attached? && @preferences.papel_timbrado.representable? %>
+        <div class="row justify-content-center">
+          <%= image_tag @preferences.papel_timbrado.variant(resize: '200x400') %>
+        </div>
+      <% end %>
+      <div class="form-row my-2">
+        <div class="form-group col">
+          <div class="input-group">
+            <div class="custom-file">
+              <%= f.file_field :papel_timbrado, class: 'custom-file-input', id: 'avatar' %>
+              <label class="custom-file-label form-control" for="avatar">Selecione a imagem do papel timbrado</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <%= f.submit 'Salvar', class: 'mt-2 btn btn-primary btn-block' %>
+    <% end %>
+  </div>
+</section>

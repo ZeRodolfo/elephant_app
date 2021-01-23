@@ -1,0 +1,408 @@
+<% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Documentos do paciente ' + @patient.name } %>
+
+<%= render 'shared/navbar' %>
+<%= render 'shared/alerts' %>
+<% content_for(:head) do %>
+<meta name="turbolinks-visit-control" content="reload">
+<% end %>
+<style>
+    main {
+        height: 100%;
+    }
+</style>
+
+<%= stylesheet_link_tag 'dataTables.bootstrap4.min', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<section class="el min-100 d-flex flex-column">
+    <div class="my-3">
+        <h6 class="subtitle light m-0">Listagem de documentos</h6>
+        <p class="phrase light m-0">Paciente: <span class="phrase bold"><%= @patient.name %></span></p>
+    </div>
+
+    <div class="bounding align-self-center">
+        <div class="row m-0 py-3">
+            <div class="col-8 col-lg-6 d-flex align-items-center justify-content-start m-0 pl-0">
+                <h1 class="bold m-0">Atestado</h1>
+            </div>
+
+            <div class="col-4 col-lg-6 d-flex align-items-center justify-content-end m-0 pr-0">
+                <%= link_to new_patient_atestado_path, class: 'btn btn-outline-primary' do %>
+                <i class="d-none d-lg-inline fas fa-plus mr-2"></i>Adicionar
+                <% end %>
+            </div>
+        </div>
+
+        <% if @atestados.any? %>
+            <table id="atestado-table" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Criação</th>
+                        <th>Resumo</th>
+                        <th>Atalhos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @atestados.each do |atestado| %>
+                    <tr>
+                        <td><%= atestado.created_at.to_date %></td>
+                        <td><%= (atestado.text.present?) ? truncate(atestado.text, :length => 75, separator: ' ') : '-' %></td>
+                        <td>
+                            <div class="row m-0">
+                                <div class="col-4 m-0 d-flex align-items-center justify-content-center">
+                                    <a title="Editar" href="<%= edit_patient_atestado_path(id: atestado.id) %>" class="el-anchor"><i class="fas fa-pencil-alt"></i></a>
+                                </div>
+
+                                <div class="col-4 m-0 d-flex align-items-center justify-content-center">
+                                    <%= link_to patient_atestado_path(id: atestado.id), class: 'el-anchor', title: 'Ver PDF' do %>
+                                    <i class="fas fa-file-pdf"></i>
+                                    <% end %>
+                                </div>
+
+                                <div class="col-4 m-0 p-0 d-flex align-items-center justify-content-center">
+                                    <%= link_to patient_atestado_path(id: atestado.id), method: :delete, class: 'text-danger', data: { confirm: 'Tem certeza que deseja excluir?' }, title: 'Apagar' do %>
+                                    <i class="fas fa-trash"></i>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        <% else %>
+            <p class="light">Nenhuma entrada.</p>
+        <% end %>
+
+        <hr class="bg-dark my-5">
+
+        <div class="row m-0 py-3">
+            <div class="col-8 col-lg-6 d-flex align-items-center justify-content-start m-0 pl-0">
+                <h1 class="bold m-0">Anamnese adulto</h1>
+            </div>
+
+            <div class="col-4 col-lg-6 d-flex align-items-center justify-content-end m-0 pr-0">
+                <%= link_to anamnese_adulto_new_patient_formularios_path, class: 'btn btn-outline-primary' do %>
+                <i class="d-none d-lg-inline fas fa-plus mr-2"></i>Adicionar
+                <% end %>
+            </div>
+        </div>
+
+        <% if @adultos.any? %>
+            <table id="adulto-table" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Criação</th>
+                        <th>Atalhos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @adultos.each do |adulto| %>
+                    <tr>
+                        <td><%= adulto.created_at.to_date %></td>
+                        <td>
+                            <div class="row m-0">
+                                <div class="col-4 m-0 d-flex align-items-center justify-content-center">
+                                    <a title="Editar" href="<%= anamnese_adulto_edit_patient_formularios_patient_formularios_path(formulario_id: adulto.id) %>" class="el-anchor"><i class="fas fa-pencil-alt"></i></a>
+                                </div>
+
+                                <div class="col-4 m-0 d-flex align-items-center justify-content-center">
+                                    <%= link_to patient_formulario_path(id: adulto.id), class: 'el-anchor', title: 'Ver PDF' do %>
+                                    <i class="fas fa-file-pdf"></i>
+                                    <% end %>
+                                </div>
+
+                                <div class="col-4 m-0 p-0 d-flex align-items-center justify-content-center">
+                                    <%= link_to patient_formulario_path(id: adulto.id), method: :delete, class: 'text-danger', data: { confirm: 'Tem certeza que deseja excluir?' }, title: 'Apagar' do %>
+                                    <i class="fas fa-trash"></i>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        <% else %>
+            <p class="light">Nenhuma entrada.</p>
+        <% end %>
+
+        <hr class="bg-dark my-5">
+
+        <div class="row m-0 py-3">
+            <div class="col-8 col-lg-6 d-flex align-items-center justify-content-start m-0 pl-0">
+                <h1 class="bold m-0">Anamnese infantil</h1>
+            </div>
+
+            <div class="col-4 col-lg-6 d-flex align-items-center justify-content-end m-0 pr-0">
+                <%= link_to anamnese_infantil_new_patient_formularios_path, class: 'btn btn-outline-primary' do %>
+                <i class="d-none d-lg-inline fas fa-plus mr-2"></i>Adicionar
+                <% end %>
+            </div>
+        </div>
+
+        <% if @infantis.any? %>
+            <table id="infantil-table" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Criação</th>
+                        <th>Atalhos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @infantis.each do |infantil| %>
+                    <tr>
+                        <td><%= infantil.created_at.to_date %></td>
+                        <td>
+                            <div class="row m-0">
+                                <div class="col-4 m-0 d-flex align-items-center justify-content-center">
+                                    <a title="Editar" href="<%= anamnese_infantil_edit_patient_formularios_patient_formularios_path(formulario_id: infantil.id) %>" class="el-anchor"><i class="fas fa-pencil-alt"></i></a>
+                                </div>
+
+                                <div class="col-4 m-0 d-flex align-items-center justify-content-center">
+                                    <%= link_to patient_formulario_path(id: infantil.id), class: 'el-anchor', title: 'Ver PDF' do %>
+                                    <i class="fas fa-file-pdf"></i>
+                                    <% end %>
+                                </div>
+
+                                <div class="col-4 m-0 p-0 d-flex align-items-center justify-content-center">
+                                    <%= link_to patient_formulario_path(id: infantil.id), method: :delete, class: 'text-danger', data: { confirm: 'Tem certeza que deseja excluir?' }, title: 'Apagar' do %>
+                                    <i class="fas fa-trash"></i>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        <% else %>
+            <p class="light">Nenhuma entrada.</p>
+        <% end %>
+
+        <hr class="bg-dark my-5">
+
+        <div class="row m-0 py-3">
+            <div class="col-8 col-lg-6 d-flex align-items-center justify-content-start m-0 pl-0">
+                <h1 class="bold m-0">Declaração</h1>
+            </div>
+
+            <div class="col-4 col-lg-6 d-flex align-items-center justify-content-end m-0 pr-0">
+                <%= link_to new_patient_declaracao_path, class: 'btn btn-outline-primary' do %>
+                <i class="d-none d-lg-inline fas fa-plus mr-2"></i>Adicionar
+                <% end %>
+            </div>
+        </div>
+
+        <% if @declaracoes.any? %>
+            <table id="declaracao-table" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Criação</th>
+                        <th>Resumo</th>
+                        <th>Atalhos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @declaracoes.each do |declaracao| %>
+                    <tr>
+                        <td><%= declaracao.created_at.to_date %></td>
+                        <td><%= (declaracao.text.present?) ? truncate(declaracao.text, :length => 75, separator: ' ') : '-' %></td>
+                        <td>
+                            <div class="row m-0">
+                                <div class="col-4 m-0 d-flex align-items-center justify-content-center">
+                                    <a title="Editar" href="<%= edit_patient_declaracao_path(id: declaracao.id) %>" class="el-anchor"><i class="fas fa-pencil-alt"></i></a>
+                                </div>
+
+                                <div class="col-4 m-0 d-flex align-items-center justify-content-center">
+                                    <%= link_to patient_declaracao_path(id: declaracao.id), class: 'el-anchor', title: 'Ver PDF' do %>
+                                    <i class="fas fa-file-pdf"></i>
+                                    <% end %>
+                                </div>
+
+                                <div class="col-4 m-0 p-0 d-flex align-items-center justify-content-center">
+                                    <%= link_to patient_declaracao_path(id: declaracao.id), method: :delete, class: 'text-danger', data: { confirm: 'Tem certeza que deseja excluir?' }, title: 'Apagar' do %>
+                                    <i class="fas fa-trash"></i>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        <% else %>
+            <p class="light">Nenhuma entrada.</p>
+        <% end %>
+
+        <hr class="bg-dark my-5">
+
+        <div class="row m-0 py-3">
+            <div class="col-8 col-lg-6 d-flex align-items-center justify-content-start m-0 pl-0">
+                <h1 class="bold m-0">Laudo</h1>
+            </div>
+
+            <div class="col-4 col-lg-6 d-flex align-items-center justify-content-end m-0 pr-0">
+                <%= link_to new_patient_laudo_path, class: 'btn btn-outline-primary' do %>
+                <i class="d-none d-lg-inline fas fa-plus mr-2"></i>Adicionar
+                <% end %>
+            </div>
+        </div>
+
+        <% if @laudos.any? %>
+            <table id="laudo-table" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Criação</th>
+                        <th>Resumo</th>
+                        <th>Atalhos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @laudos.each do |laudo| %>
+                    <tr>
+                        <td><%= laudo.created_at.to_date %></td>
+                        <td><%= (laudo.description.present?) ? truncate(laudo.description, :length => 75, separator: ' ') : '-' %></td>
+                        <td>
+                            <div class="row m-0">
+                                <div class="col-4 m-0 d-flex align-items-center justify-content-center">
+                                    <a title="Editar" href="<%= edit_patient_laudo_path(id: laudo.id) %>" class="el-anchor"><i class="fas fa-pencil-alt"></i></a>
+                                </div>
+
+                                <div class="col-4 m-0 d-flex align-items-center justify-content-center">
+                                    <%= link_to patient_laudo_path(id: laudo.id), class: 'el-anchor', title: 'Ver PDF' do %>
+                                    <i class="fas fa-file-pdf"></i>
+                                    <% end %>
+                                </div>
+
+                                <div class="col-4 m-0 p-0 d-flex align-items-center justify-content-center">
+                                    <%= link_to patient_laudo_path(id: laudo.id), method: :delete, class: 'text-danger', data: { confirm: 'Tem certeza que deseja excluir?' }, title: 'Apagar' do %>
+                                    <i class="fas fa-trash"></i>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        <% else %>
+            <p class="light">Nenhuma entrada.</p>
+        <% end %>
+
+        <hr class="bg-dark my-5">
+
+        <div class="row m-0 py-3">
+            <div class="col-8 col-lg-6 d-flex align-items-center justify-content-start m-0 pl-0">
+                <h1 class="bold m-0">Parecer</h1>
+            </div>
+
+            <div class="col-4 col-lg-6 d-flex align-items-center justify-content-end m-0 pr-0">
+                <%= link_to new_patient_parecer_path, class: 'btn btn-outline-primary' do %>
+                <i class="d-none d-lg-inline fas fa-plus mr-2"></i>Adicionar
+                <% end %>
+            </div>
+        </div>
+
+        <% if @pareceres.any? %>
+            <table id="parecer-table" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Criação</th>
+                        <th>Resumo</th>
+                        <th>Atalhos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @pareceres.each do |parecer| %>
+                    <tr>
+                        <td><%= parecer.created_at.to_date %></td>
+                        <td><%= (parecer.description.present?) ? truncate(parecer.description, :length => 75, separator: ' ') : '-' %></td>
+                        <td>
+                            <div class="row m-0">
+                                <div class="col-4 m-0 d-flex align-items-center justify-content-center">
+                                    <a title="Editar" href="<%= edit_patient_parecer_path(id: parecer.id) %>" class="el-anchor"><i class="fas fa-pencil-alt"></i></a>
+                                </div>
+
+                                <div class="col-4 m-0 d-flex align-items-center justify-content-center">
+                                    <%= link_to patient_parecer_path(id: parecer.id), class: 'el-anchor', title: 'Ver PDF' do %>
+                                    <i class="fas fa-file-pdf"></i>
+                                    <% end %>
+                                </div>
+
+                                <div class="col-4 m-0 p-0 d-flex align-items-center justify-content-center">
+                                    <%= link_to patient_parecer_path(id: parecer.id), method: :delete, class: 'text-danger', data: { confirm: 'Tem certeza que deseja excluir?' }, title: 'Apagar' do %>
+                                    <i class="fas fa-trash"></i>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        <% else %>
+            <p class="light">Nenhuma entrada.</p>
+        <% end %>
+
+        <hr class="bg-dark my-5">
+
+        <div class="row m-0 py-3">
+            <div class="col-8 col-lg-6 d-flex align-items-center justify-content-start m-0 pl-0">
+                <h1 class="bold m-0">Relatório</h1>
+            </div>
+
+            <div class="col-4 col-lg-6 d-flex align-items-center justify-content-end m-0 pr-0">
+                <%= link_to new_patient_relatorio_path, class: 'btn btn-outline-primary' do %>
+                <i class="d-none d-lg-inline fas fa-plus mr-2"></i>Adicionar
+                <% end %>
+            </div>
+        </div>
+
+        <% if @relatorios.any? %>
+            <table id="relatorio-table" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Criação</th>
+                        <th>Resumo</th>
+                        <th>Atalhos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @relatorios.each do |relatorio| %>
+                    <tr>
+                        <td><%= relatorio.created_at.to_date %></td>
+                        <td><%= (relatorio.description.present?) ? truncate(relatorio.description, :length => 75, separator: ' ') : '-' %></td>
+                        <td>
+                            <div class="row m-0">
+                                <div class="col-4 m-0 d-flex align-items-center justify-content-center">
+                                    <a title="Editar" href="<%= edit_patient_relatorio_path(id: relatorio.id) %>" class="el-anchor"><i class="fas fa-pencil-alt"></i></a>
+                                </div>
+
+                                <div class="col-4 m-0 d-flex align-items-center justify-content-center">
+                                    <%= link_to patient_relatorio_path(id: relatorio.id), class: 'el-anchor', title: 'Ver PDF' do %>
+                                    <i class="fas fa-file-pdf"></i>
+                                    <% end %>
+                                </div>
+
+                                <div class="col-4 m-0 p-0 d-flex align-items-center justify-content-center">
+                                    <%= link_to patient_relatorio_path(id: relatorio.id), method: :delete, class: 'text-danger', data: { confirm: 'Tem certeza que deseja excluir?' }, title: 'Apagar' do %>
+                                    <i class="fas fa-trash"></i>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        <% else %>
+            <p class="light">Nenhuma entrada.</p>
+        <% end %>
+
+        <hr class="bg-dark my-5">
+    </div>
+</section>
+<%= javascript_include_tag 'dataTables.min', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'dataTables.bootstrap4.min', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'dataTables.responsive.min', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'formularios', 'data-turbolinks-track': 'reload' %>
