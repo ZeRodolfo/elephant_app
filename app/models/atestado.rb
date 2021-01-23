@@ -24,6 +24,8 @@ class Atestado < ApplicationRecord
   validates :cidade, :crp, :text, presence: true
 
   def pdf
-    AtestadoPdf.new(self, patient).pdf
+    document = AtestadoPdf.new(self, patient)
+    document.build
+    document.pdf
   end
 end

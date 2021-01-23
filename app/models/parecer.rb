@@ -26,6 +26,8 @@ class Parecer < ApplicationRecord
   validates :analysis, :conclusion, :crp, :description, :references, presence: true
 
   def pdf
-    ParecerPdf.new(self, patient).pdf
+    document = ParecerPdf.new(self, patient)
+    document.build
+    document.pdf
   end
 end

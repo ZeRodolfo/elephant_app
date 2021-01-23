@@ -126,7 +126,6 @@ class PdfDocument
       when 'checkbox'
         add_checkbox(field.label, field.value, prefix: prefix)
       else
-        byebug
         raise 'Tipo de field desconhecido'
       end
 

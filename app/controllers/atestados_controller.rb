@@ -3,7 +3,7 @@ class AtestadosController < ApplicationController
   before_action :set_atestado, only: [:show, :edit, :update, :destroy]
 
   def show
-    render :edit
+    send_data @atestado.pdf.render, filename: 'atestado.pdf', type: 'application/pdf', disposition: 'inline'
   end
 
   def new

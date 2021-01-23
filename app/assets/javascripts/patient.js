@@ -56,34 +56,6 @@ $(document).on('turbolinks:load', () => {
     responsive: true
   })
 
-
-  window.addEventListener('optimizedResize', function (e) {
-    // const atalhos = $(tableId + ' thead th:eq(5)')
-    // const genero = table.column( 4 )
-    // console.log(genero)
-    // genero.visible(false)
-    // const w = window.innerWidth
-    // console.log(window.innerWidth)
-    // if (w <= 608){
-    //   atalhos.width('65%');
-    // }
-    // else if (w <= 686){
-    //   atalhos.width('300px');
-    // }
-    // else if (w <= 785){
-    //   atalhos.width('200px');
-    // }
-    // else if (w <= 950){
-    //   atalhos.width('20%');
-    // }
-    // else if (w <= 1366){
-    //   atalhos.width('15%');
-    // }
-    // else {
-    //   atalhos.width('10%')
-    // }
-  })
-
   const search = $('#patient-search')
 
   search.on('keyup', function () {

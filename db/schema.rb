@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_22_134059) do
+ActiveRecord::Schema.define(version: 2021_01_22_150232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,16 @@ ActiveRecord::Schema.define(version: 2021_01_22_134059) do
     t.bigint "patient_id"
     t.integer "identifier"
     t.index ["patient_id"], name: "index_formularios_on_patient_id"
+  end
+
+  create_table "graficos", force: :cascade do |t|
+    t.json "data"
+    t.string "kind", default: "bar"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "laudo_id"
+    t.index ["laudo_id"], name: "index_graficos_on_laudo_id"
   end
 
   create_table "laudos", force: :cascade do |t|
@@ -247,6 +257,7 @@ ActiveRecord::Schema.define(version: 2021_01_22_134059) do
   add_foreign_key "atestados", "patients"
   add_foreign_key "declaracoes", "patients"
   add_foreign_key "formularios", "patients"
+  add_foreign_key "graficos", "laudos"
   add_foreign_key "laudos", "patients"
   add_foreign_key "office_visits", "patients"
   add_foreign_key "pareceres", "patients"

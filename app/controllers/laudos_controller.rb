@@ -3,11 +3,12 @@ class LaudosController < ApplicationController
   before_action :set_laudo, only: [:show, :edit, :update, :destroy]
 
   def show
-    render :edit
+    send_data @laudo.pdf.render, filename: 'laudo.pdf', type: 'application/pdf', disposition: 'inline'
   end
 
   def new
     @laudo = Laudo.new
+    @laudo.grafico = Grafico.new
   end
 
   def edit
@@ -30,7 +31,6 @@ class LaudosController < ApplicationController
 
 
   def update
-    byebug
     if @laudo.update(laudo_params)
       redirect_to patient_formularios_path, notice: 'Laudo atualizado com sucesso.'
     else
@@ -53,6 +53,18 @@ class LaudosController < ApplicationController
     end
 
     def laudo_params
-      params.require(:laudo).permit(:analysis, :conclusion, :crp, :description, :procedure, :references, :solicitante, :kind)
+      params
+        .require(:laudo)
+        .permit(
+          :analysis,
+          :conclusion,
+          :crp,
+          :description,
+          :procedure,
+          :references,
+          :solicitante,
+          :kind,
+          grafico_attributes: [:id, :data, :title, :kind]
+        )
     end
 end

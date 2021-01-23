@@ -28,6 +28,9 @@ class Laudo < ApplicationRecord
 	enum kind: { psicologico: 'Psicológico', neuropsicologico: 'Neuropsicológico' }
 	validates :analysis, :conclusion, :crp, :description, :procedure, :references, :solicitante, :kind, presence: true
 
+  has_one :grafico
+  accepts_nested_attributes_for :grafico
+
 	def self.kind_for_select
     self.kinds.to_a.map{ |x| [x[1], x[0]] }
 	end
@@ -37,6 +40,8 @@ class Laudo < ApplicationRecord
   end
 
   def pdf
-    LaudoPdf.new(self, patient).pdf
+    document = LaudoPdf.new(self, patient)
+    document.build
+    document.pdf
   end
 end

@@ -24,6 +24,8 @@ class Declaracao < ApplicationRecord
   validates :city, :crp, :text, presence:true
 
   def pdf
-    DeclaracaoPdf.new(self, patient).pdf
+    document = DeclaracaoPdf.new(self, patient)
+    document.build
+    document.pdf
   end
 end

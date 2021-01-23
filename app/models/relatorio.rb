@@ -38,6 +38,8 @@ class Relatorio < ApplicationRecord
   end
 
   def pdf
-    RelatorioPdf.new(self, patient).pdf
+    document = RelatorioPdf.new(self, patient)
+    document.build
+    document.pdf
   end
 end

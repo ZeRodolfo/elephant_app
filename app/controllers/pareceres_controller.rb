@@ -3,7 +3,7 @@ class PareceresController < ApplicationController
   before_action :set_parecer, only: [:show, :edit, :update, :destroy]
 
   def show
-    render :edit
+    send_data @parecer.pdf.render, filename: 'parecer.pdf', type: 'application/pdf', disposition: 'inline'
   end
 
   def new
@@ -30,7 +30,6 @@ class PareceresController < ApplicationController
 
 
   def update
-    byebug
     if @parecer.update(parecer_params)
       redirect_to patient_formularios_path, notice: 'Parecer atualizado com sucesso.'
     else
