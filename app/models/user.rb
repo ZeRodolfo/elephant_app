@@ -36,9 +36,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :patients, dependent: :destroy
-  has_many :addresses
+  has_many :addresses, dependent: :delete_all
   accepts_nested_attributes_for :addresses, allow_destroy: false
-  has_one :subscription
+  has_one :subscription, dependent: :delete_all
   belongs_to :preferences,
     optional: true,
     class_name: 'UserPreference',
