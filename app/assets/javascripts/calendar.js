@@ -53,8 +53,6 @@ $(document).on('turbolinks:load', () => {
       repaint()
     },
     eventDidMount: function (info) {
-      console.log(info.event.title)
-      console.log(info)
       const el = info.el
       $(el).tooltip({
         title: `<span class="text-nowrap">${info.event.title.split('-')[0].trim()} <br> ${info.event.title.split('-')[1].trim()} </span>`,

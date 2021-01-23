@@ -7,7 +7,7 @@ $(() => {
     const randomColor = () => Math.floor(Math.random()*16777215).toString(16)
     const title = get('laudo_grafico_attributes_title')
     const ctx = get('grafico').getContext('2d')
-    const kinds = ['bar', 'pizza', 'radar']
+    const kinds = ['bar', 'pizza']
 
     let grafico = null
     buildGraficoFor(kindSelect.value)
@@ -73,12 +73,14 @@ $(() => {
                 }
             })
         }
-        else if (kind == 'radar'){
-            grafico = null
-        }
+        // else if (kind == 'radar'){
+        //     grafico = null
+        // }
         else {
             throw ('Erro no tipo do gráfico.')
         }
+
+        grafico.update()
     }
 
     function hideAll(){
@@ -113,9 +115,7 @@ $(() => {
     })
 
     kindSelect.addEventListener('change', function(event){
-        grafico.destroy()
-        grafico = buildGraficoFor(kindSelect.value)
-        grafico.update()
+        buildGraficoFor(kindSelect.value)
         show(kindSelect.value)
     })
 

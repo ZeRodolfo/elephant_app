@@ -137,7 +137,6 @@ $(() => {
 
   PagSeguroDirectPayment.onSenderHashReady(function(response) {
     if (response.status == 'error') {
-      console.log(response.message);
       return false;
     }
 
@@ -153,7 +152,6 @@ $(() => {
           $("#security_code").attr('size', response['brand']['cvvSize']);
         },
         error: function(response) {
-          console.log(response);
         }
       })
     };
@@ -174,7 +172,6 @@ $(() => {
         form.submit()
       },
       error: function(response) {
-        console.log(response);
         printError(response);
       }
     }

@@ -12,5 +12,4 @@ $(document).on('turbolinks:load', () => {
     for (const clazz of identifiers){
         $(`.${clazz}`).mask(masks[clazz])
     }
-    console.log('masked')
 })

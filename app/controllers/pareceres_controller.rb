@@ -30,7 +30,6 @@ class PareceresController < ApplicationController
 
 
   def update
-    byebug
     if @parecer.update(parecer_params)
       redirect_to patient_formularios_path, notice: 'Parecer atualizado com sucesso.'
     else
