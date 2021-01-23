@@ -1,7 +1,12 @@
 class PreferencesController < ApplicationController
   before_action :set_preferences
 
-  def index; end
+  def index
+    unless @preferences.present?
+      @preferences = current_user.create_preferences
+      current_user.update(user_preference_id: @preferences.id)
+    end
+  end
 
   def update
     if @preferences.update(preferences_params)
@@ -22,7 +27,6 @@ class PreferencesController < ApplicationController
     end
 
     def set_preferences
-      current_user.create_preferences unless current_user.preferences
       @preferences = current_user.preferences
     end
 end
