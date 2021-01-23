@@ -16,7 +16,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (laudo_id => laudos.id)
+#  fk_rails_...  (laudo_id => laudos.id) ON DELETE => cascade
 #
 require 'rails_helper'
 

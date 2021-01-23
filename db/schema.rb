@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_23_192445) do
+ActiveRecord::Schema.define(version: 2021_01_23_194819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -258,7 +258,7 @@ ActiveRecord::Schema.define(version: 2021_01_23_192445) do
   add_foreign_key "atestados", "patients"
   add_foreign_key "declaracoes", "patients"
   add_foreign_key "formularios", "patients"
-  add_foreign_key "graficos", "laudos"
+  add_foreign_key "graficos", "laudos", on_delete: :cascade
   add_foreign_key "laudos", "patients"
   add_foreign_key "office_visits", "patients"
   add_foreign_key "pareceres", "patients"

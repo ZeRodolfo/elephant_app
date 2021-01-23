@@ -16,7 +16,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (laudo_id => laudos.id)
+#  fk_rails_...  (laudo_id => laudos.id) ON DELETE => cascade
 #
 class Grafico < ApplicationRecord
     belongs_to :laudo
