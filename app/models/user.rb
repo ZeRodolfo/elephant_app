@@ -39,7 +39,10 @@ class User < ApplicationRecord
   has_many :addresses
   accepts_nested_attributes_for :addresses, allow_destroy: false
   has_one :subscription
-  belongs_to :preferences, optional: true, class_name: 'UserPreference', foreign_key: :user_preference_id
+  belongs_to :preferences,
+    optional: true,
+    class_name: 'UserPreference',
+    foreign_key: :user_preference_id
 
   enum document_type: { CPF: 'CPF', CNPJ: 'CNPJ' }
 
