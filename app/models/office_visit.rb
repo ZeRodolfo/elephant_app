@@ -23,7 +23,7 @@
 class OfficeVisit < ApplicationRecord
   include DateHelper
   belongs_to :patient
-  has_many :parcels, dependent: :delete_all
+  has_many :parcels
 
   validates :hour, :date, presence: true
 
@@ -33,7 +33,7 @@ class OfficeVisit < ApplicationRecord
 
   def validity_of_date
     errors.delete(:date)
-    errors.add(:date, "A data é inválida.") if DateHelper.parse(date).nil?
+    errors.add(:date, "A data é inválida.") if DateHelper.parse(date).nil? 
   end
 
   def as_json(options = {})
