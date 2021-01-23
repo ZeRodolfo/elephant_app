@@ -394,6 +394,7 @@ DEPENDENCIES
   font-awesome-rails
   gon (~> 6.0, >= 6.0.1)
   gruff
+  image_processing
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)

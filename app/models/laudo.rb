@@ -28,7 +28,7 @@ class Laudo < ApplicationRecord
 	enum kind: { psicologico: 'Psicológico', neuropsicologico: 'Neuropsicológico' }
 	validates :analysis, :conclusion, :crp, :description, :procedure, :references, :solicitante, :kind, presence: true
 
-  has_one :grafico
+  has_one :grafico, dependent: :delete_all
   accepts_nested_attributes_for :grafico
 
 	def self.kind_for_select

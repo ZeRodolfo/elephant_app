@@ -77,4 +77,7 @@ Rails.application.routes.draw do
 
   get '/landing' => "static#landing"
   get '/termos-politica' => "static#termos"
+
+  get :download_psd, to: 'preferences#download_psd'
+  get :download_png, to: 'preferences#download_png'
 end

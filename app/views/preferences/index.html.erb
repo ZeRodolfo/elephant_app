@@ -26,7 +26,18 @@
               <label class="custom-file-label form-control" for="avatar">Selecione a imagem do papel timbrado</label>
             </div>
           </div>
+          <small>O formatos permitidos são png e jpg</small>
         </div>
+      </div>
+
+      <label>Exemplos de papel timbrado:</label>
+      <div class="row my-2 d-flex justify-content-center">
+        <%= link_to download_psd_path, class: 'btn btn-outline-danger mr-1' do %>
+          PSD <i class="fa fa-download"></i>
+        <% end %>
+        <%= link_to download_png_path, class: 'btn btn-outline-danger mr-1' do %>
+          PNG <i class="fa fa-download"></i>
+        <% end %>
       </div>
 
       <%= f.submit 'Salvar', class: 'mt-2 btn btn-primary btn-block' %>
