@@ -31,10 +31,10 @@ class PdfDocument
     image = patient&.user&.preferences&.papel_timbrado
     return unless image.present?
 
-    resized_image = MiniMagick::Image.read(image.download)
-    suppress(MiniMagick::Error) { resized_image.resample(72, 72) }
+    @resized_image = MiniMagick::Image.read(image.download)
+    suppress(MiniMagick::Error) { @resized_image.resample(72, 72) }
 
-    resized_image.resize('595x842').path
+    @resized_image.resize('595x842').path
   end
 
   def render(*args, **kwargs)
