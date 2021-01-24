@@ -64,7 +64,7 @@ class LaudosController < ApplicationController
           :references,
           :solicitante,
           :kind,
-          grafico_attributes: [:id, :data, :title, :kind]
+          grafico_attributes: [:id, :data, :title, :kind, :image]
         )
     end
 end

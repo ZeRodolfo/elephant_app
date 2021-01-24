@@ -4,6 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  data       :json
+#  image      :string
 #  kind       :string           default(NULL)
 #  title      :string
 #  created_at :datetime         not null

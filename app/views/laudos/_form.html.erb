@@ -59,7 +59,7 @@
       <% end %>
     </div>
   </div>
-  
+
   <div class="form-row">
     <div class="form-group col">
       <label for="procedure">Procedimento</label>
@@ -154,6 +154,7 @@
     </div>
 
     <%= grafico_form.hidden_field :data, id: 'grafico-data' %>
+    <%= grafico_form.hidden_field :image, id: 'grafico-image' %>
     <input type="hidden" id="grafico-kind" value="<%= laudo.grafico.kind %>">
     <canvas id="grafico" width="100" height="100"></canvas>
 
@@ -172,7 +173,7 @@
         </div>
 
         <div id="bar-fields"></div>
-        
+
         <div id="bar-formset" hidden>
           <div data-index="INDEX" class="bar-formset form-row m-0 p-0">
             <div class="form-group col-5">
@@ -271,9 +272,9 @@
           </div>
           <button type="button" class="btn btn-block btn-outline-info" id="ok-vertices">Submeter vertices</button>
         </div>
-        
+
         <div id="radar-fields"></div>
-        
+
 
 
 
@@ -286,7 +287,7 @@
             </div>
           </div>
         </div>
-      
+
     </div>
   <% end %>
 

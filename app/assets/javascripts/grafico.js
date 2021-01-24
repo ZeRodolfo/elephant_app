@@ -53,15 +53,15 @@ $(() => {
                 data: {
                     datasets: [{
                         data: [
-                            
+
                         ],
                         backgroundColor: [
-                            
+
                         ],
                         label: ''
                     }],
                     labels: [
-                        
+
                     ]
                 },
                 options: {
@@ -149,9 +149,10 @@ $(() => {
             .replace('BAR-COLOR', color)
         )
     }
-    
+
     function fill(data, kind){
         if (kind == 'bar'){
+            // debugger
             const arrOfData = objToArray(data)
             // grafico.data.datasets = {...data, ...grafico.data.datasets}
             for (const d of arrOfData){
@@ -186,7 +187,9 @@ $(() => {
             }
         }
         else if (kind == 'radar'){
-
+            // grafico.data.datasets = data.datasets
+            // grafico.data.labels = data.labels
+            // debugger
         }
 
         grafico.update()
@@ -214,7 +217,7 @@ $(() => {
         grafico.data.datasets = grafico.data.datasets.filter(ds => ds.index != index)
         grafico.update()
     }
-    
+
     $('body').on('click', '.bar-remove', function(e){
         const index = this.dataset['index']
         $(`.bar-formset[data-index="${index}"]`).remove()
@@ -263,7 +266,7 @@ $(() => {
     // --------------------------
 
     get('add-radar').addEventListener('click', function(event){
-    
+
         $('#radar-vertices').append(buildRadarVerticeInput())
         grafico.update()
     })
@@ -365,7 +368,7 @@ $(() => {
     function pizzaFormsetCount(){
         return  parseInt($('#pizza-fields .pizza-formset').length)
     }
- 
+
     get('add-pizza').addEventListener('click', function(event){
         const index = pizzaFormsetCount()
         grafico.data.labels[index] = 'Fatia ' + (index + 1)
@@ -375,14 +378,14 @@ $(() => {
         $('#pizza-fields').append(buildPizzaFieldset())
         grafico.update()
     })
- 
+
     function removePizzaDataset(index){
         grafico.data.labels[index] = 'Fatia ' + (index + 1)
         grafico.data.datasets[0].data[index] = 0
         grafico.data.datasets[0].backgroundColor[index] = '#708090'
         grafico.update()
     }
-     
+
     $('body').on('click', '.pizza-remove', function(e){
         const index = parseInt(this.dataset['index'])
         reset($(`.pizza-formset[data-index="${index}"]`))
@@ -395,19 +398,19 @@ $(() => {
         $el.find('input[type="number"]').val(0)
         $el.find('input[type="color"]').val('#708090')
     }
- 
+
     $('body').on('keyup', '.pizza-title', function(){
         const index = parseInt(this.dataset['index'])
         grafico.data.labels[index] = this.value
         grafico.update()
     })
- 
+
     $('body').on('change', '.pizza-color', function(e){
         const index = parseInt(this.dataset['index'])
         grafico.data.datasets[0].backgroundColor[index] = this.value
         grafico.update()
     })
- 
+
     $('body').on('change keyup', '.pizza-value', function(){
         const index = parseInt(this.dataset['index'])
         grafico.data.datasets[0].data[index] = this.value
@@ -415,7 +418,6 @@ $(() => {
     })
 
     $('form').on('submit', function(event){
-        // event.preventDefault()
         let datasets
         if (kindSelect.value == 'bar'){
             datasets = $.extend(true, {}, grafico.data.datasets)
@@ -427,10 +429,12 @@ $(() => {
             datasets = cleanPizza(datasets)
         }
         else if (kindSelect.value == 'radar'){
-
+            datasets = grafico.data
         }
 
+        $('#grafico-image').val(grafico.toBase64Image().split(',')[1])
         $('#grafico-data').val(JSON.stringify(datasets))
+        // event.preventDefault()
     })
 
     window.grafico = grafico
@@ -480,7 +484,7 @@ function clone(obj){
 }
 
 function cleanBar(arr){
-    return arr.map(d => { 
+    return arr.map(d => {
         delete d['_meta']
         return d
     }).filter(d => d.label != "")
