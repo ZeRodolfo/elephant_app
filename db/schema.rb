@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_23_033315) do
+ActiveRecord::Schema.define(version: 2021_01_23_235110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 2021_01_23_033315) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "laudo_id"
+    t.string "image"
     t.index ["laudo_id"], name: "index_graficos_on_laudo_id"
   end
 
@@ -247,6 +248,7 @@ ActiveRecord::Schema.define(version: 2021_01_23_033315) do
     t.string "last_name"
     t.date "birth_date"
     t.bigint "user_preference_id"
+    t.boolean "terms_of_service", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["user_preference_id"], name: "index_users_on_user_preference_id"
@@ -257,7 +259,7 @@ ActiveRecord::Schema.define(version: 2021_01_23_033315) do
   add_foreign_key "atestados", "patients"
   add_foreign_key "declaracoes", "patients"
   add_foreign_key "formularios", "patients"
-  add_foreign_key "graficos", "laudos"
+  add_foreign_key "graficos", "laudos", on_delete: :cascade
   add_foreign_key "laudos", "patients"
   add_foreign_key "office_visits", "patients"
   add_foreign_key "pareceres", "patients"

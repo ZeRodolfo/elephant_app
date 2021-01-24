@@ -4,6 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  data       :json
+#  image      :string
 #  kind       :string           default(NULL)
 #  title      :string
 #  created_at :datetime         not null
@@ -16,7 +17,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (laudo_id => laudos.id)
+#  fk_rails_...  (laudo_id => laudos.id) ON DELETE => cascade
 #
 require 'rails_helper'
 
