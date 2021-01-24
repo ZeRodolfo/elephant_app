@@ -59,7 +59,7 @@
       <% end %>
     </div>
   </div>
-  
+
   <div class="form-row">
     <div class="form-group col">
       <label for="procedure">Procedimento</label>
@@ -154,6 +154,7 @@
     </div>
 
     <%= grafico_form.hidden_field :data, id: 'grafico-data' %>
+    <%= grafico_form.hidden_field :image, id: 'grafico-image' %>
     <input type="hidden" id="grafico-kind" value="<%= laudo.grafico.kind %>">
     <canvas id="grafico" width="100" height="100"></canvas>
 
@@ -172,7 +173,7 @@
         </div>
 
         <div id="bar-fields"></div>
-        
+
         <div id="bar-formset" hidden>
           <div data-index="INDEX" class="bar-formset form-row m-0 p-0">
             <div class="form-group col-5">
@@ -240,6 +241,53 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div id="radar-related" style="display: none">
+        <div class="row mx-0 mt-5 mb-2 p-0">
+          <div class="col-8 col-lg-6 d-flex align-items-center justify-content-start m-0 p-0">
+            <h3 class="bold">Vértices</h3>
+          </div>
+
+          <div class="col-4 col-lg-6 d-flex align-items-end justify-content-end m-0 pr-0">
+            <button id="add-radar" type="button" class="btn btn-outline-primary">
+              <i class="d-none d-lg-inline fas fa-plus mr-2"></i>Adicionar
+            </button>
+          </div>
+        </div>
+
+        <div id="vvvvv" style="border-radius: 1rem" class="border mb-5 p-3">
+          <div id="radar-vertices"></div>
+          <div id="radar-vertices-formset" hidden>
+            <div data-index="RADAR-VERTICE-INDEX" class="form-row radar-vertice-formset">
+              <div class="form-group col">
+                <input data-index="RADAR-VERTICE-INDEX" type="text" class="radar-vertice-label form-control" value="RADAR-VERTICE-VALUE">
+              </div>
+              <div class="form-group col-2 d-flex align-items-end">
+                <button data-index="RADAR-VERTICE-INDEX" type="button" class="radar-vertice-remove p-1 btn btn-outline-danger btn-block">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-block btn-outline-info" id="ok-vertices">Submeter vertices</button>
+        </div>
+
+        <div id="radar-fields"></div>
+
+
+
+
+
+        <div id="radar-formset" hidden>
+          <div data-index="INDEX" class="radar-formset form-row m-0 p-0">
+            <div class="form-group col">
+              <label>RADAR-VALUE-LABEL</label>
+              <input data-index="INDEX" type="number" min="0" class="radar-value form-control" value="RADAR-VALUE">
+            </div>
+          </div>
+        </div>
+
     </div>
   <% end %>
 

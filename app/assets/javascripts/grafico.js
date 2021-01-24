@@ -7,7 +7,7 @@ $(() => {
     const randomColor = () => Math.floor(Math.random()*16777215).toString(16)
     const title = get('laudo_grafico_attributes_title')
     const ctx = get('grafico').getContext('2d')
-    const kinds = ['bar', 'pizza']
+    const kinds = ['bar', 'pizza', 'radar']
 
     let grafico = null
     buildGraficoFor(kindSelect.value)
@@ -53,15 +53,15 @@ $(() => {
                 data: {
                     datasets: [{
                         data: [
-                            
+
                         ],
                         backgroundColor: [
-                            
+
                         ],
                         label: ''
                     }],
                     labels: [
-                        
+
                     ]
                 },
                 options: {
@@ -73,11 +73,27 @@ $(() => {
                 }
             })
         }
-        // else if (kind == 'radar'){
-        //     grafico = null
-        // }
-        else {
-            throw ('Erro no tipo do gráfico.')
+        else if (kind == 'radar'){
+            grafico = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    datasets:
+                    [
+                        {
+                            label: 'Radar',
+                            backgroundColor: 'black',
+                            data: []
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        text: title.value,
+                        display: true
+                    },
+                }
+            })
         }
 
         grafico.update()
@@ -92,6 +108,11 @@ $(() => {
     }
 
     function cclean(kind){
+        $('#radar-vertices').html('')
+        $('#radar-fields').html('')
+        hideRadarValues()
+        showVerticesInputs()
+
         title.value = ''
         buildGraficoFor(kind)
         show(kind)
@@ -128,9 +149,10 @@ $(() => {
             .replace('BAR-COLOR', color)
         )
     }
-    
+
     function fill(data, kind){
         if (kind == 'bar'){
+            // debugger
             const arrOfData = objToArray(data)
             // grafico.data.datasets = {...data, ...grafico.data.datasets}
             for (const d of arrOfData){
@@ -165,7 +187,9 @@ $(() => {
             }
         }
         else if (kind == 'radar'){
-
+            // grafico.data.datasets = data.datasets
+            // grafico.data.labels = data.labels
+            // debugger
         }
 
         grafico.update()
@@ -193,7 +217,7 @@ $(() => {
         grafico.data.datasets = grafico.data.datasets.filter(ds => ds.index != index)
         grafico.update()
     }
-    
+
     $('body').on('click', '.bar-remove', function(e){
         const index = this.dataset['index']
         $(`.bar-formset[data-index="${index}"]`).remove()
@@ -239,6 +263,96 @@ $(() => {
         grafico.update()
     })
 
+    // --------------------------
+
+    get('add-radar').addEventListener('click', function(event){
+
+        $('#radar-vertices').append(buildRadarVerticeInput())
+        grafico.update()
+    })
+
+    function radarVerticeCount(){
+        if (!$('#radar-vertices .radar-vertice-formset').length){ return 0 }
+
+        let max = parseInt($('#radar-vertices .radar-vertice-formset').first().data('index'))
+        $('#radar-vertices .radar-vertice-formset').each(function(i, e){
+            const v = parseInt(this.dataset['index'])
+            if (v > max){
+                max = v
+            }
+        })
+       return max + 1
+    }
+
+    function buildRadarVerticeInput(){
+        const $el = $('#radar-vertices-formset').html().replaceAll('RADAR-VERTICE-INDEX', radarVerticeCount()).replace('RADAR-VERTICE-VALUE', 'Vertice ' + (radarVerticeCount() + 1))
+        return $el
+    }
+
+    function getVertices(){
+        const a = []
+        $('#radar-vertices .radar-vertice-label').each(function(i, e){
+            a.push(e.value)
+        })
+        console.log(a)
+        return a
+    }
+
+    $('#ok-vertices').on('click', function(){
+        const vertices = getVertices()
+        grafico.data.labels = vertices
+        grafico.update()
+        hideVerticesInputs()
+        showRadarValuesForVertices(vertices)
+    })
+
+    function hideVerticesInputs(){
+        $('#vvvvv').hide()
+    }
+
+    function showVerticesInputs(){
+        $('#vvvvv').show()
+    }
+
+    function hideRadarValues(){
+        $('#radar-fields').hide()
+    }
+
+    function showRadarValuesForVertices(vertices){
+        // for (const vertice of vertices){
+        vertices.forEach((v, i) => {
+            buildRadarValueInput(v, i)
+        })
+        $('#radar-fields').show()
+    }
+
+    function buildRadarValueInput(vertice, index){
+        const $el = $($('#radar-formset .radar-formset').html().replaceAll('INDEX', index).replace('RADAR-VALUE-LABEL', vertice))
+        $('#radar-fields').append($el)
+    }
+
+    $('body').on('change keyup', '.radar-value', function(e){
+        const index = parseInt(this.dataset['index'])
+        grafico.data.datasets[0].data[index] = parseFloat(this.value)
+        grafico.update()
+    })
+
+    $('body').on('click', '.radar-vertice-remove', function(e){
+        const index = this.dataset['index']
+        $(`.radar-vertice-formset[data-index="${index}"]`).remove()
+        reIndexVertices()
+    })
+
+    function reIndexVertices(){
+        $('#radar-vertices .radar-vertice-formset').each(function(i, e){
+            console.log(`i ${i} - dataindex ${e.dataset['index']}`)
+            const $e = $(e)
+            $e.attr('data-index', i)
+            $e.find('input.radar-vertice-label').attr('data-index', i)
+            $e.find('button.radar-vertice-remove').attr('data-index', i)
+        })
+    }
+
     // ---------------------
 
     function buildPizzaFieldset(label = 'Fatia ' + (pizzaFormsetCount() + 1), color = '#708090', value = 0){
@@ -254,7 +368,7 @@ $(() => {
     function pizzaFormsetCount(){
         return  parseInt($('#pizza-fields .pizza-formset').length)
     }
- 
+
     get('add-pizza').addEventListener('click', function(event){
         const index = pizzaFormsetCount()
         grafico.data.labels[index] = 'Fatia ' + (index + 1)
@@ -264,14 +378,14 @@ $(() => {
         $('#pizza-fields').append(buildPizzaFieldset())
         grafico.update()
     })
- 
+
     function removePizzaDataset(index){
         grafico.data.labels[index] = 'Fatia ' + (index + 1)
         grafico.data.datasets[0].data[index] = 0
         grafico.data.datasets[0].backgroundColor[index] = '#708090'
         grafico.update()
     }
-     
+
     $('body').on('click', '.pizza-remove', function(e){
         const index = parseInt(this.dataset['index'])
         reset($(`.pizza-formset[data-index="${index}"]`))
@@ -284,19 +398,19 @@ $(() => {
         $el.find('input[type="number"]').val(0)
         $el.find('input[type="color"]').val('#708090')
     }
- 
+
     $('body').on('keyup', '.pizza-title', function(){
         const index = parseInt(this.dataset['index'])
         grafico.data.labels[index] = this.value
         grafico.update()
     })
- 
+
     $('body').on('change', '.pizza-color', function(e){
         const index = parseInt(this.dataset['index'])
         grafico.data.datasets[0].backgroundColor[index] = this.value
         grafico.update()
     })
- 
+
     $('body').on('change keyup', '.pizza-value', function(){
         const index = parseInt(this.dataset['index'])
         grafico.data.datasets[0].data[index] = this.value
@@ -304,7 +418,6 @@ $(() => {
     })
 
     $('form').on('submit', function(event){
-        // event.preventDefault()
         let datasets
         if (kindSelect.value == 'bar'){
             datasets = $.extend(true, {}, grafico.data.datasets)
@@ -316,10 +429,12 @@ $(() => {
             datasets = cleanPizza(datasets)
         }
         else if (kindSelect.value == 'radar'){
-
+            datasets = grafico.data
         }
 
+        $('#grafico-image').val(grafico.toBase64Image().split(',')[1])
         $('#grafico-data').val(JSON.stringify(datasets))
+        // event.preventDefault()
     })
 
     window.grafico = grafico
@@ -369,7 +484,7 @@ function clone(obj){
 }
 
 function cleanBar(arr){
-    return arr.map(d => { 
+    return arr.map(d => {
         delete d['_meta']
         return d
     }).filter(d => d.label != "")

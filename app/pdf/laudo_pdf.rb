@@ -32,5 +32,9 @@ class LaudoPdf < PdfDocument
 
     add_section('Referências:')
     add_paragraph form.references
+
+    if form&.grafico&.image&.present?
+      pdf.image StringIO.new(Base64.decode64(form.grafico.image))
+    end
   end
 end
