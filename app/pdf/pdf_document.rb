@@ -18,13 +18,13 @@ class PdfDocument
     }.merge!(pdf_options)
     @pdf = Prawn::Document.new(@options)
 
-    @pdf.font_families.update('RobotoMono' => {
-      normal: Rails.root.join("app/assets/fonts/RobotoMono-Regular.ttf"),
-      italic: Rails.root.join("app/assets/fonts/RobotoMono-Italic.ttf"),
-      bold: Rails.root.join("app/assets/fonts/RobotoMono-Bold.ttf"),
-      bold_italic: Rails.root.join("app/assets/fonts/RobotoMono-BoldItalic.ttf")
+    @pdf.font_families.update('Times' => {
+      normal: Rails.root.join("app/assets/fonts/times.ttf"),
+      italic: Rails.root.join("app/assets/fonts/timesi.ttf"),
+      bold: Rails.root.join("app/assets/fonts/timesbd.ttf"),
+      bold_italic: Rails.root.join("app/assets/fonts/timesbi.ttf")
     })
-    @pdf.font "RobotoMono"
+    @pdf.font "Times"
   end
 
   def user_background
@@ -54,11 +54,11 @@ class PdfDocument
     end
 
     def add_section(label, **kwargs)
-      pdf.text label, size: 12, style: :bold, indent_paragraphs: 20, **kwargs
+      pdf.text label, size: 14, style: :bold, indent_paragraphs: 20, **kwargs
     end
 
     def add_paragraph(paragraph)
-      pdf.text paragraph, size: 10
+      pdf.text paragraph, size: 12, indent_paragraphs: 20, align: :justify
       move_down 10
     end
 
@@ -69,9 +69,9 @@ class PdfDocument
 
     def add_oneline_answer(question, asnwer, prefix: nil)
       pdf.formatted_text [
-        *(prefix.present? ? [{ text: prefix, size: 10 }] : []),
-        { text: question, size: 10 },
-        { text: asnwer || '', size: 9, styles: [:italic] },
+        *(prefix.present? ? [{ text: prefix, size: 12 }] : []),
+        { text: question, size: 12 },
+        { text: asnwer || '', size: 12, styles: [:italic] },
       ]
     end
 
@@ -79,28 +79,28 @@ class PdfDocument
       render_options = options.map do |option|
         {
           text: ("#{option[1]}" == "#{answer}" ? '(x)': '( )') + " #{option[0]} ",
-          size: 9
+          size: 12
         }
       end
 
       pdf.formatted_text [
-        *(prefix.present? ? [{ text: prefix, size: 10 }] : []),
-        { text: "#{question} ", size: 10 },
+        *(prefix.present? ? [{ text: prefix, size: 12 }] : []),
+        { text: "#{question} ", size: 12 },
         *render_options
       ]
     end
 
     def add_checkbox(label, checked, prefix: nil)
       pdf.formatted_text [
-        *(prefix.present? ? [{ text: prefix, size: 10 }] : []),
-        { text: (checked == 'true' ? '(x)': '( )') + " #{label}", size: 10 },
+        *(prefix.present? ? [{ text: prefix, size: 12 }] : []),
+        { text: (checked == 'true' ? '(x)': '( )') + " #{label}", size: 12 },
       ]
     end
 
     def add_oneline_answer_alternative(question, asnwer, prefix: nil)
       pdf.formatted_text [
-        *(prefix.present? ? [{ text: prefix, size: 10 }] : []),
-        { text: "(#{asnwer}) #{question}", size: 10 },
+        *(prefix.present? ? [{ text: prefix, size: 12 }] : []),
+        { text: "(#{asnwer}) #{question}", size: 12 },
       ]
     end
 
@@ -109,7 +109,7 @@ class PdfDocument
     end
 
     def text(value)
-      pdf.text value, size: 10
+      pdf.text value, size: 12, align: :justify
     end
 
     def normalize_label(label)
