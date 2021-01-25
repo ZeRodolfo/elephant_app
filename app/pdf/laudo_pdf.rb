@@ -25,7 +25,7 @@ class LaudoPdf < PdfDocument
     add_paragraph form.procedure
 
     if form&.grafico&.image&.present?
-      pdf.image StringIO.new(Base64.decode64(form.grafico.image)), position: :center
+      pdf.image StringIO.new(Base64.decode64(form.grafico.image)), position: :center, height: 222, width: 222
     end
 
     add_section('Análise:')
