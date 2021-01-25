@@ -28,7 +28,7 @@ class PdfDocument
   end
 
   def user_background
-    image = patient&.user&.preferences&.papel_timbrado
+    image = patient&.user&.user_preference&.papel_timbrado
     return unless image.present?
 
     @resized_image = MiniMagick::Image.read(image.download)
