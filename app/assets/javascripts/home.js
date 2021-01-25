@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', () => {
-  $('.card-home').on('click', function (event) {
+  $(document).on('click', '.card-home', function (event) {
     window.location.href = this.dataset['link']
   })
 })
