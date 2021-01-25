@@ -34,11 +34,10 @@ class PreferencesController < ApplicationController
     end
 
     def set_preferences
-      unless current_user.preferences.present?
-        @preferences = current_user.create_preferences
-        current_user.update(user_preference_id: @preferences.id)
+      if current_user.user_preference.nil?
+        current_user.create_user_preference
       end
 
-      @preferences = current_user.preferences
+      @preferences = current_user.user_preference
     end
 end
