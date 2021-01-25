@@ -24,6 +24,10 @@ class LaudoPdf < PdfDocument
     add_section('Procedimento:')
     add_paragraph form.procedure
 
+    if form&.grafico&.image&.present?
+      pdf.image StringIO.new(Base64.decode64(form.grafico.image)), position: :center
+    end
+
     add_section('Análise:')
     add_paragraph form.analysis
 
@@ -32,9 +36,5 @@ class LaudoPdf < PdfDocument
 
     add_section('Referências:')
     add_paragraph form.references
-
-    if form&.grafico&.image&.present?
-      pdf.image StringIO.new(Base64.decode64(form.grafico.image)), position: :center
-    end
   end
 end
