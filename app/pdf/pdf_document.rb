@@ -55,6 +55,7 @@ class PdfDocument
 
     def add_section(label, **kwargs)
       pdf.text label, size: 14, style: :bold, indent_paragraphs: 20, **kwargs
+      move_down 5
     end
 
     def add_paragraph(paragraph)
