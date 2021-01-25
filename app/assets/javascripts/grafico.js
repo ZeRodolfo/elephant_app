@@ -81,7 +81,7 @@ $(() => {
                     [
                         {
                             label: 'Radar',
-                            backgroundColor: 'black',
+                            backgroundColor: hexToRgba('#45AA77'),
                             data: []
                         }
                     ]
@@ -152,7 +152,6 @@ $(() => {
 
     function fill(data, kind){
         if (kind == 'bar'){
-            // debugger
             const arrOfData = objToArray(data)
             // grafico.data.datasets = {...data, ...grafico.data.datasets}
             for (const d of arrOfData){
@@ -187,9 +186,14 @@ $(() => {
             }
         }
         else if (kind == 'radar'){
-            // grafico.data.datasets = data.datasets
-            // grafico.data.labels = data.labels
-            // debugger
+            data.labels.forEach((label, i) => {
+                const value = data.data[i] ? data.data[i] : 0
+                buildRadarValueInput(label, i, value)
+                grafico.data.labels.push(label)
+                grafico.data.datasets[0].data.push(value)
+            })
+            hideVerticesInputs()
+            $('#radar-fields').show()
         }
 
         grafico.update()
@@ -294,12 +298,16 @@ $(() => {
         $('#radar-vertices .radar-vertice-label').each(function(i, e){
             a.push(e.value)
         })
-        console.log(a)
         return a
     }
 
     $('#ok-vertices').on('click', function(){
         const vertices = getVertices()
+        if (vertices.length < 3){
+            alert('O radar precisa de pelo menos 3 vértices.')
+            return
+        }
+
         grafico.data.labels = vertices
         grafico.update()
         hideVerticesInputs()
@@ -326,8 +334,8 @@ $(() => {
         $('#radar-fields').show()
     }
 
-    function buildRadarValueInput(vertice, index){
-        const $el = $($('#radar-formset .radar-formset').html().replaceAll('INDEX', index).replace('RADAR-VALUE-LABEL', vertice))
+    function buildRadarValueInput(vertice, index, value=0){
+        const $el = $($('#radar-formset .radar-formset').html().replaceAll('INDEX', index).replace('RADAR-VALUE-LABEL', vertice).replace('RADAR-VALUE', value))
         $('#radar-fields').append($el)
     }
 
@@ -345,7 +353,6 @@ $(() => {
 
     function reIndexVertices(){
         $('#radar-vertices .radar-vertice-formset').each(function(i, e){
-            console.log(`i ${i} - dataindex ${e.dataset['index']}`)
             const $e = $(e)
             $e.attr('data-index', i)
             $e.find('input.radar-vertice-label').attr('data-index', i)
@@ -429,15 +436,17 @@ $(() => {
             datasets = cleanPizza(datasets)
         }
         else if (kindSelect.value == 'radar'){
-            datasets = grafico.data
+            datasets = {
+                data: Array.from(grafico.data.datasets[0].data),
+                labels: Array.from(grafico.data.labels)
+            }
         }
 
         $('#grafico-image').val(grafico.toBase64Image().split(',')[1])
         $('#grafico-data').val(JSON.stringify(datasets))
-        // event.preventDefault()
     })
 
-    window.grafico = grafico
+    console.clear()
 })
 
 function hexToRgba(hex) {
@@ -446,7 +455,7 @@ function hexToRgba(hex) {
     ? `rgba(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(
         result[3],
         16
-      )}, 0.1)`
+      )}, 0.5)`
     : "rgba(0, 0, 0, 0.1)"
 
   return r
