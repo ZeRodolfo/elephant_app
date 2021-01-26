@@ -53,7 +53,8 @@ class PdfDocument
       pdf.move_down 40
     end
 
-    def add_section(label, **kwargs)
+    def add_section(label, margin_top: 20, **kwargs)
+      move_down margin_top
       pdf.text label, size: 14, style: :bold, indent_paragraphs: 20, **kwargs
       move_down 5
     end

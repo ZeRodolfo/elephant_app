@@ -3,7 +3,7 @@ class AnamneseInfantilPdf < PdfDocument
     alphabet = ('a'..'z').map{ |a| "#{a}) " }
 
     add_document_header('ANAMNÉSE INFANTIL')
-    add_section('1 - Identificação')
+    add_section('1 - Identificação', margin_top: 0)
     add_table([
       ['Data Inicial', form.data_inicial&.value&.to_date&.to_s],
       ['Data Término', form.data_termino&.value&.to_date&.to_s],

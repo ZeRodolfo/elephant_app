@@ -1,7 +1,7 @@
 class ParecerPdf < PdfDocument
   def build
     add_document_header('PARECER PSICOLÓGICO')
-    add_section('Identificação:')
+    add_section('Identificação:', margin_top: 0)
 
     add_table([
       ['Paciente', patient.name],

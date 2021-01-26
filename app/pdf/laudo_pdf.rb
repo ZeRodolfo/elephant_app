@@ -6,7 +6,7 @@ class LaudoPdf < PdfDocument
       add_document_header('Laudo Neuropsicológico')
     end
 
-    add_section('Identificação:')
+    add_section('Identificação:', margin_top: 0)
 
     add_table([
       ['Paciente', patient.name],
