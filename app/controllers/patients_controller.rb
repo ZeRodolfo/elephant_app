@@ -33,6 +33,9 @@ class PatientsController < ApplicationController
   end
 
   def edit
+    unless @patient.address.present?
+      @patient.address = Address.new
+    end
   end
 
   def update
@@ -51,7 +54,7 @@ class PatientsController < ApplicationController
     @patient = Patient.find(params[:id_patient])
 
     if @patient.validate_code(params[:patient][:code].to_s)
-      redirect_to patient_office_visits_path(@patient), notice: 'Autenticação realizada!'
+      redirect_to edit_patient_path(@patient), notice: 'Autenticação realizada!'
     else
       redirect_to request.referrer, alert: 'Senha Inválida!'
     end

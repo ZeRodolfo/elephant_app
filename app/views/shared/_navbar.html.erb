@@ -12,19 +12,17 @@
         <li class="nav-item">
           <%= link_to 'Pacientes', patients_path, class: 'nav-link' %>
         </li>
-        <%
-=begin%>
- <li class="nav-item">
-          <%= link_to 'Documentos', '#', class: 'nav-link' %>
-        </li> 
-<%
-=end%>
+      
         <li class="nav-item">
           <%= link_to 'Finanças', graphs_index_path, class: 'nav-link' %>
         </li>
 
         <li class="nav-item">
           <%= link_to 'Consultas', office_visits_path, class: 'nav-link' %>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link"  href="#" data-toggle="modal" data-target="#contatos-modal">Fale Conosco</a>
         </li>
     </ul>
 

@@ -65,7 +65,7 @@ html, body{
   text-transform: uppercase !important;
 }
 
-*:not(i):not(.six):not(.jp-card-container *){
+*:not(i):not(.six):not(.jp-card-container *), .ubuntu{
   font-family: 'Ubuntu', sans-serif !important;
 }
 
@@ -208,8 +208,16 @@ small{
   background-color: var(--lite-green)
 }
 
+.bg-green{
+  background-color: var(--green)
+}
+
 .text-dark{
   color: var(--dark) !important;
+}
+
+.text-white{
+  color: var(--white) !important;
 }
 
 .light{
