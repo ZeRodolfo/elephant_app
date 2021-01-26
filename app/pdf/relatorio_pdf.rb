@@ -6,7 +6,7 @@ class RelatorioPdf < PdfDocument
       add_document_header('Relatório Psicológico ou Multidisciplinar')
     end
 
-    add_section('Identificação:')
+    add_section('Identificação:', margin_top: 0)
 
     add_table([
       ['Nome do atendido', patient.name],

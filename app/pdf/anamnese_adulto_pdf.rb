@@ -3,7 +3,7 @@ class AnamneseAdultoPdf < PdfDocument
     alphabet = ('a'..'z').map{ |a| "#{a}) " }
 
     add_document_header('ANAMNÉSE DE ADULTO')
-    add_section('1 - Identificação')
+    add_section('1 - Identificação', margin_top: 0)
     move_down 20
 
     add_oneline_answer('Nome: ', patient.name)
