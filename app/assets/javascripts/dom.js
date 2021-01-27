@@ -24,6 +24,21 @@ $(document).on('turbolinks:load', () => {
     }, 5000)
 })
 
+$(document).on('click', '.close-elen', function(){
+    $('.elephant').fadeOut('fast', function(){
+        $('.elephant').attr('style', 'display: none !important;')
+
+        $('.reshow-elen').attr('style', 'display: flex;')
+    })
+})
+
+$(document).on('click', '.reshow-elen', function(){
+    $('.reshow-elen').attr('style', 'display: none;')
+    $('.elephant').fadeIn('fast', function(){
+        $('.elephant').attr('style', 'display: block !important;')
+    })
+})
+
 /*
 $(() => {
     function calcRemaining(){

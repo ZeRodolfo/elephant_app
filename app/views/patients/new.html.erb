@@ -7,4 +7,22 @@
     <h1 class="bold">Novo Paciente</h1>
     <%= render 'form', patient: @patient %>
   </div>
+
+  <div class="elen w-25">
+    <div class="elephant">
+      <div class="speech-bubble">
+        <button type="button" class="close close-elen" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <p class="text-center mb-0 phrase">O "código de segurança" será requisitado toda vez que você quiser ter acesso ao paciente.<br>Crie uma senha que seja fácil de lembrar depois.</p>
+      </div>
+      <div class="w-50 mt-3">
+        <%= image_tag "elen-alt.png", class:'img-fluid' %>
+      </div>
+    </div>
+
+    <div class="reshow-elen square-fab ml-4 mb-4" style="display: none">
+      <i class="fas fa-info"></i>
+    </div>
+  </div>
 </section>
