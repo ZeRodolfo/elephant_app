@@ -57,6 +57,24 @@
       Todos os direitos reservados.
     </small>
   </div>
+
+  <div class="elen w-25">
+    <div class="elephant">
+      <div class="speech-bubble">
+        <button type="button" class="close close-elen" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <p class="text-center mb-0 phrase">Oi, eu sou a Elen!<br>Estou aqui para te ajudar <br>com algumas dicas.</p>
+      </div>
+      <div class="w-50 mt-3">
+        <%= image_tag "elen.png", class:'img-fluid' %>
+      </div>
+    </div>
+
+    <div class="reshow-elen square-fab ml-4 mb-4" style="display: none">
+      <i class="fas fa-info"></i>
+    </div>
+  </div>
 </section>
 
 <%= javascript_include_tag 'home', 'data-turbolinks-track': 'reload' %>
