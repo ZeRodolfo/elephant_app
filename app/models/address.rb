@@ -37,4 +37,34 @@ class Address < ApplicationRecord
   def resume
     "#{street}, #{number}, #{neighborhood}, #{city} - #{uf}"
   end
+
+  def self.pre_filled
+    Address.new(
+      cep: "NA", number: 0, street: "NA", city: "", uf: "", complement: "NA", neighborhood: "NA"
+    )
+  end
+
+  def fill_missing
+    [:city, :street, :uf, :neighborhood].each do |attribute|
+      unless self[attribute].present?
+        self[attribute] = "Não definido"
+      end
+    end
+
+    unless cep.present?
+      self.cep = "00000-000"
+    end
+
+    unless number.present?
+      self.number = 0
+    end
+
+    # self.attributes.each do |attr_name, attr_value|
+    #   unless self[attr_name].present?
+    #     self[attr_name] = "Não definido"
+    #    
+    #   end
+    # end
+    return self
+  end
 end
