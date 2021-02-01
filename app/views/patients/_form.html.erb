@@ -244,7 +244,7 @@
         <span class="input-group-text" id="code-prepend"><i class="fas fa-lock"></i></span>
       </div>
 
-      <%= f.password_field :code, class: 'form-control', id:'code', 'aria-describedby': 'code-prepend', autocomplete: 'off' %>
+      <%= f.text_field :code, value: '', class: "no-complete-password form-control #{ 'is-invalid' if patient.errors[:code].any? }", id:'code', 'aria-describedby': 'code-prepend', autocomplete: 'off' %>
     </div>
     <small>Código para acessar as consultas do paciente</small>
     <% if patient.id.present? %>

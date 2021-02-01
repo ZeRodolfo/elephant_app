@@ -1,4 +1,7 @@
 <% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Detalhes do paciente ' + @patient.name } %>
+<% content_for(:head) do %>
+	<meta name="turbolinks-visit-control" content="reload">
+<% end %>
 
 <%= render 'shared/navbar' %>
 <%= render 'shared/alerts' %>
@@ -26,4 +29,7 @@
     </div>
     <%= render 'form', patient: @patient %>
   </div>
+
+  <%= javascript_include_tag 'jquery.disableAutoFill.min', 'data-turbolinks-track': 'reload' %>
+	<%= javascript_include_tag 'disable-autofill', 'data-turbolinks-track': 'reload' %>
 </section>
