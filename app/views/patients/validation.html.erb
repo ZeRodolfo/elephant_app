@@ -1,5 +1,7 @@
 <% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Validação do paciente' } %>
-
+<% content_for(:head) do %>
+	<meta name="turbolinks-visit-control" content="reload">
+<% end %>
 <%= render 'shared/navbar' %>
 
 <section class="d-flex m-0 align-items-start justify-content-center el min100">
@@ -7,7 +9,7 @@
 	<%= render 'shared/alerts' %>
 	<!-- <h1 class="bold">Senha do paciente</h1> -->
 
-	<%= form_for @patient, url: {action: :validate} do |f| %>
+	<%= form_for @patient, url: {action: :validate}, html: { autocomplete: "off" } do |f| %>
 
 		<%= hidden_field_tag :id_patient, @patient.id %>
 
@@ -19,7 +21,7 @@
 					<span class="input-group-text" id="code-prepend"><i class="fas fa-lock"></i></span>
 				</div>
 			
-				<%= f.password_field :code, class: 'form-control', id:'code', 'aria-describedby': 'code-prepend' %>
+				<%= f.text_field :code, value: '', class: 'no-complete-password form-control', id:'code', 'aria-describedby': 'code-prepend', autocomplete: "off" %>
 				</div>
 			</div>
 		</div>
@@ -28,4 +30,7 @@
 		<a class="btn btn-outline-primary btn-block my-2" href="<%= patients_path %>">Voltar</a>
 	<% end %>
 	</div>
+
+	<%= javascript_include_tag 'jquery.disableAutoFill.min', 'data-turbolinks-track': 'reload' %>
+	<%= javascript_include_tag 'disable-autofill', 'data-turbolinks-track': 'reload' %>
 </section>

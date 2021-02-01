@@ -29,21 +29,21 @@
       <div class="form-row">
         <div class="form-group col">
           <label for="card_number">Número</label>
-          <input type="text" id="card_number" value="" class="form-control">
+          <input type="text" id="card_number" value="" placeholder="Número do cartão" class="form-control">
           <div class="invalid-feedback"></div>
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group col-6">
-          <label for="card_expiration_month">Mês</label>
-          <input type="number" min="0" max="12" id="card_expiration_month" value="" class="form-control" maxlength="2">
+          <label for="card_expiration_month">Mês de vencimento (2 dígitos)</label>
+          <input type="number" min="0" max="12" placeholder="ex.: 10" id="card_expiration_month" value="" class="form-control" maxlength="2">
           <div class="invalid-feedback"></div>
         </div>
 
         <div class="form-group col-6">
-          <label for="card_expiration_year">Ano</label>
-          <input type="number" min="0" id="card_expiration_year" value="" class="form-control hidden-arrows" maxlength="4">
+          <label for="card_expiration_year">Ano de vencimento (4 dígitos)</label>
+          <input type="number" min="0" id="card_expiration_year" value="" placeholder="ex.: 2027" class="form-control hidden-arrows" maxlength="4">
           <div class="invalid-feedback"></div>
         </div>
       </div>
@@ -51,7 +51,8 @@
       <div class="form-row">
         <div class="form-group col-12 col-lg-6">
           <label for="security_code">Cód. de segurança</label>
-          <input type="number" min="0" id="security_code" value="" class="form-control hidden-arrows" maxlength="4">
+          <input type="number" min="0" id="security_code" value="" placeholder="ex.: 123" class="form-control hidden-arrows" maxlength="4">
+          <small>3 ou 4 dígitos no verso do cartão.</small>
           <div class="invalid-feedback"></div>
         </div>
       </div>

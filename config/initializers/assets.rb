@@ -32,4 +32,6 @@ Rails.application.config.assets.precompile += %w(
   grafico.js
   Chart.min.css
   Chart.min.js
+  jquery.disableAutoFill.min.js
+  disable-autofill.js
 )
