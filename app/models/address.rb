@@ -31,7 +31,6 @@ class Address < ApplicationRecord
     validates :number
     validates :street
     validates :uf
-    validates :complement
     validates :neighborhood
   end
 
