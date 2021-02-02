@@ -77,7 +77,7 @@ class PatientsController < ApplicationController
   end
 
   def patient_params
-    params
+    p = params
       .require(:patient)
       .permit(
         :avatar,
@@ -92,5 +92,10 @@ class PatientsController < ApplicationController
         :naturalidade,
         address_attributes: [:id, :cep, :city, :number, :street, :uf, :complement, :neighborhood]
       )
+    if p[:address_attributes][:street].empty?
+      p.delete(:address_attributes)
+    end
+
+    p
   end
 end
