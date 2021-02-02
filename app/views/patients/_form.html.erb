@@ -47,7 +47,7 @@
 <div class="form-row">
   <div class="form-group col">
     <label for="naturalidade">Naturalidade</label>
-    <%= f.text_field :naturalidade, id: 'naturalidade', class: "form-control #{ 'is-invalid' if patient.errors[:naturalidade].any? }", required: true %>
+    <%= f.text_field :naturalidade, id: 'naturalidade', class: "form-control #{ 'is-invalid' if patient.errors[:naturalidade].any? }" %>
     <% if patient.errors[:naturalidade].any? %>
       <div class="invalid-feedback">
         <% patient.errors[:naturalidade].each do |m| %>
@@ -95,7 +95,7 @@
   <div class="form-row">
     <div class="form-group col">
       <label for="number">Rua</label>
-      <%= addr_form.text_field :street, class: "form-control #{ 'is-invalid' if patient.errors['address.street'].any? }", id: 'street', required: 'true' %>
+      <%= addr_form.text_field :street, class: "form-control #{ 'is-invalid' if patient.errors['address.street'].any? }", id: 'street' %>
       <% if patient.errors["address.street"].any? %>
       <div class="invalid-feedback">
         <% patient.errors["address.street"].each do |m| %>
@@ -110,7 +110,7 @@
   <div class="form-row">
     <div class="form-group col-lg-6 col-12">
       <label for="neighborhood">Bairro</label>
-      <%= addr_form.text_field :neighborhood, class: "form-control #{ 'is-invalid' if patient.errors['address.neighborhood'].any? }", id: 'neighborhood', required: 'true' %>
+      <%= addr_form.text_field :neighborhood, class: "form-control #{ 'is-invalid' if patient.errors['address.neighborhood'].any? }", id: 'neighborhood' %>
       <% if patient.errors["address.neighborhood"].any? %>
       <div class="invalid-feedback">
         <% patient.errors["address.neighborhood"].each do |m| %>
@@ -137,7 +137,7 @@
   <div class="form-row">
     <div class="form-group col-lg-8 col-12">
       <label for="cep">Cep</label>
-      <%= addr_form.text_field :cep, class: "form-control cep #{ 'is-invalid' if patient.errors['address.cep'].any? }", id: 'cep', required: 'true' %>
+      <%= addr_form.text_field :cep, class: "form-control cep #{ 'is-invalid' if patient.errors['address.cep'].any? }", id: 'cep' %>
       <% if patient.errors["address.cep"].any? %>
       <div class="invalid-feedback">
         <% patient.errors["address.cep"].each do |m| %>
@@ -170,7 +170,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="birth_date-prepend"><i class="far fa-calendar-alt"></i></span>
       </div>
-      <%= f.text_field :birth_date, type: 'text', required: true, class: "form-control nascimento #{ 'is-invalid' if patient.errors[:birth_date].any? }", id: 'birth_date', 'aria-describedby': 'birth_date-prepend', placeholder: 'dd/mm/aaaa' %>
+      <%= f.text_field :birth_date, type: 'text', class: "form-control nascimento #{ 'is-invalid' if patient.errors[:birth_date].any? }", id: 'birth_date', 'aria-describedby': 'birth_date-prepend', placeholder: 'dd/mm/aaaa' %>
       <% if patient.errors[:birth_date].any? %>
         <div class="invalid-feedback">
           <% patient.errors[:birth_date].each do |m| %>
@@ -184,7 +184,7 @@
 
   <div class="form-group col-12 col-lg-6">
     <label for="phone">Contato</label>
-    <%= f.text_field :phone, type: 'text', required: true, class: "form-control telefone #{ 'is-invalid' if patient.errors[:phone].any? }", id: 'phone', autocomplete: 'tel' %>
+    <%= f.text_field :phone, type: 'text', class: "form-control telefone #{ 'is-invalid' if patient.errors[:phone].any? }", id: 'phone', autocomplete: 'tel' %>
     <% if patient.errors[:phone].any? %>
       <div class="invalid-feedback">
         <% patient.errors[:phone].each do |m| %>
@@ -199,7 +199,7 @@
 <div class="form-row">
   <div class="form-group col-12 col-lg-6">
     <label for="profession">Profissão</label>
-    <%= f.text_field :profession, type: 'text', required: true, class: "form-control #{ 'is-invalid' if patient.errors[:profession].any? }", id: 'profession' %>
+    <%= f.text_field :profession, type: 'text', class: "form-control #{ 'is-invalid' if patient.errors[:profession].any? }", id: 'profession' %>
     <% if patient.errors[:profession].any? %>
       <div class="invalid-feedback">
         <% patient.errors[:profession].each do |m| %>
@@ -212,7 +212,7 @@
 
   <div class="form-group col-12 col-lg-6">
     <label for="relative_phone">Contato de parente</label>
-    <%= f.text_field :relative_phone, type: 'text', required: true, class: "form-control telefone #{ 'is-invalid' if patient.errors[:relative_phone].any? }", id: 'relative_phone', autocomplete: 'tel' %>
+    <%= f.text_field :relative_phone, type: 'text', class: "form-control telefone #{ 'is-invalid' if patient.errors[:relative_phone].any? }", id: 'relative_phone', autocomplete: 'tel' %>
     <% if patient.errors[:relative_phone].any? %>
       <div class="invalid-feedback">
         <% patient.errors[:relative_phone].each do |m| %>
@@ -244,7 +244,7 @@
         <span class="input-group-text" id="code-prepend"><i class="fas fa-lock"></i></span>
       </div>
 
-      <%= f.text_field :code, value: '', class: "no-complete-password form-control #{ 'is-invalid' if patient.errors[:code].any? }", id:'code', 'aria-describedby': 'code-prepend', autocomplete: 'off' %>
+      <%= f.text_field :code, required: true, value: '', class: "no-complete-password form-control #{ 'is-invalid' if patient.errors[:code].any? }", id:'code', 'aria-describedby': 'code-prepend', autocomplete: 'off' %>
     </div>
     <small>Código para acessar as consultas do paciente</small>
     <% if patient.id.present? %>

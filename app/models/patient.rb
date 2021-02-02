@@ -29,7 +29,7 @@
 #
 class Patient < ApplicationRecord
   belongs_to :user
-  belongs_to :address
+  belongs_to :address, optional: true
 
   accepts_nested_attributes_for :address
 
@@ -44,13 +44,13 @@ class Patient < ApplicationRecord
   has_many :formularios, dependent: :delete_all
   has_many :atestados, dependent: :delete_all
 
-  validates_presence_of :birth_date, :code, :gender, :name, :phone, :profession
+  validates_presence_of :code, :name
 
   validates :avatar, presence: false
 
   mount_uploader :avatar, AvatarUploader
 
-  validate :validity_of_date
+  # validate :validity_of_date
 
   def validity_of_date
     # errors.delete(:birth_date)
