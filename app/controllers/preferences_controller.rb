@@ -29,7 +29,7 @@ class PreferencesController < ApplicationController
   private
     def preferences_params
       params
-        .require(:user_preference)
+        .fetch(:user_preference, {})
         .permit(:papel_timbrado)
     end
 
