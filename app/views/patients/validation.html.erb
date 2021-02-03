@@ -20,8 +20,10 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text" id="code-prepend"><i class="fas fa-lock"></i></span>
 				</div>
-			
-				<%= f.text_field :code, value: '', class: 'no-complete-password form-control', id:'code', 'aria-describedby': 'code-prepend', autocomplete: "off" %>
+
+				<input type="password" class="password-bait visuallyhidden" autocomplete="new-password">
+
+ 				<%= f.password_field :code, value: '', class: 'form-control', id:'code', 'aria-describedby': 'code-prepend', autocomplete: "off", required: 'true' %> 
 				</div>
 			</div>
 		</div>

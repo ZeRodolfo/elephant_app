@@ -12,20 +12,6 @@
     <div class="my-3">
 
       <a class="text-dark" href="<%= patient_formularios_path(@patient) %>"><i class="fas fa-file-alt mr-2"></i>Ver documentos</a><br><a class="text-dark" href="<%= patient_office_visits_path(patient_id: @patient.id) %>"><i class="fas fa-calendar-alt mr-2"></i>Ver consultas</a> 
-
-      <%
-=begin%>
- <div class="row m-0">
-        <div class="col-6 col-xl-3 m-0 p-0 d-flex align-items-center justify-content-center">
-          <a title="Documentos" href="<%= patient_formularios_path(@patient) %>" class="el-anchor"><i class="fas fa-file-alt"></i></a>
-        </div>
-
-        <div class="col-6 col-xl-3 m-0 d-flex align-items-center justify-content-center">
-          <a title="Consultas" href="<%= patient_office_visits_path(patient_id: @patient.id) %>" class="el-anchor"><i class="fas fa-calendar-alt"></i></a>
-        </div>
-      </div> 
-<%
-=end%>
     </div>
     <%= render 'form', patient: @patient %>
   </div>

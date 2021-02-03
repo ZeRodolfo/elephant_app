@@ -553,3 +553,9 @@ input[type=number].hidden-arrows {
     font-size: 1.15rem !important;
   }
 }
+
+.visuallyhidden { /* https://snook.ca/archives/html_and_css/hiding-content-for-accessibility */
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
