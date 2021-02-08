@@ -1,5 +1,5 @@
 class PreferencesController < ApplicationController
-  before_action :set_preferences, only: [:index, :update]
+  before_action :set_preferences, only: [:index, :update, :destroy_papel_timbrado]
 
   def index; end
 
@@ -12,6 +12,14 @@ class PreferencesController < ApplicationController
       end
       redirect_to preferences_path
     end
+  end
+
+  def destroy_papel_timbrado
+    if @preferences.papel_timbrado.attached?
+      @preferences.papel_timbrado.purge
+    end
+
+    redirect_to preferences_path, notice: 'Papel timbrado removido'
   end
 
   def download_psd
