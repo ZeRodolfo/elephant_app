@@ -21,6 +21,16 @@
           <%= image_tag @preferences.papel_timbrado.variant(resize: '200x400') %>
         </div>
       <% end %>
+
+      <div class="form-row justify-content-center">
+        <% if @preferences.papel_timbrado.attached? %>
+          <%= link_to 'Remover', destroy_papel_timbrado_preferences_path,
+            method: :delete,
+            data: { confirm: 'Tem certeza?' },
+            class: 'btn btn-outline-danger mt-2'
+          %>
+        <% end %>
+      </div>
       <div class="form-row my-2">
         <div class="form-group col">
           <div class="input-group">

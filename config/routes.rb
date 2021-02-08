@@ -71,6 +71,7 @@ Rails.application.routes.draw do
 
   resources :preferences, only: %i[index] do
     patch :update, on: :collection
+    delete :destroy_papel_timbrado, on: :collection
   end
 
   get :home, to: 'home#index'
