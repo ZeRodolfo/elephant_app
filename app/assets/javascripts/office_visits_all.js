@@ -27,12 +27,6 @@ $(document).on('turbolinks:load', () => {
         width: null,
         responsivePriority: 2
       },
-      {
-        searchable: false,
-        title: 'Atalhos',
-        orderable: false,
-        responsivePriority: 1
-      }
     ],
     responsive: true
   })
@@ -59,4 +53,9 @@ $(document).on('turbolinks:load', () => {
 
   window.visits = visits
   window.events = events
+})
+
+$(document).on('click', '#all-office-visits-table tr', function(e){
+  const l = this.dataset['link'] ? this.dataset['link'] : ''
+  window.location.href = l
 })
