@@ -533,6 +533,16 @@ input[type=number].hidden-arrows {
   .ojiasasdop{
     width: 100% !important;
   }
+
+  #calendar div.fc-toolbar-chunk div.btn-group {
+    display: inline;
+  }
+  #calendar div.fc-toolbar-chunk div.btn-group button, #calendar .fc-today-button {
+    margin-bottom: .5rem;
+  }
+  #calendar .fc-today-button{
+    margin-right: .75rem;
+  }
 }
 
 @media screen and (max-width: 768px){
@@ -558,4 +568,8 @@ input[type=number].hidden-arrows {
   position: absolute !important;
   clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
+}
+
+#calendar div.fc-toolbar-chunk div.btn-group button:not(:last-of-type){
+  margin-right: .25rem;
 }

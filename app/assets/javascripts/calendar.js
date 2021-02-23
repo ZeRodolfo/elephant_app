@@ -59,13 +59,8 @@ $(document).on('turbolinks:load', () => {
         container: el,
         html: true,
       })
-      // var tooltip = new Tooltip(info.el, {
-      //   title: info.event.extendedProps.description,
-      //   placement: 'top',
-      //   trigger: 'hover',
-      //   container: 'body'
-      // });
     },
+    bootstrapFontAwesome: false,
   })
 
   calendar.render()
