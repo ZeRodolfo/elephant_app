@@ -16,23 +16,55 @@
           <option selected value="0">Semanal</option>
           <option value="1">Mensal</option>
           <option value="2">Anual</option>
+          <option value="3">Diário</option>
         </select>
       </div>
     </div>
 
-    <div class="graph" data-select="0" style="display: none;">
-      <%= content_tag :div, "", id: "week-graph", data: {graph: week_data} %>
+    <div class="row h-100 m-0 p-0 d-flex align-items-start justify-content-center">
+      <div id="week-container" class="graph visuallyhidden" data-select="0">
+        <%= content_tag :canvas, "", id: "week-graph", data: {graph: week_data} %>
+      </div>
+
+      <div class="graph visuallyhidden" data-select="1">
+        <%= content_tag :canvas, "", id: "month-graph", data: {graph: month_data} %>
+      </div>
+
+      <div class="graph visuallyhidden" data-select="2">
+        <%= content_tag :canvas, "", id: "annual-graph", data: {graph: annual_data} %>
+      </div>
+
+      <div class="visuallyhidden mt-3 row h-100 w-100 pb-5" data-select="3">
+        <%= content_tag :div, id: "daily-data", class: 'mb-5 mb-lg-0 col-12 col-lg-6 pr-lg-5 pr-0 pl-0 border-none border-lg-right', data: {values: daily_data, start: locale(1.month.ago.to_date), end: locale(Date.today + 1.month)} do %>
+          <p>Selecione uma data para exibir os rendimentos.</p>
+        <% end %>
+      
+        <div class="col-12 col-lg-auto mt-5 mt-lg-0 pl-0 pl-lg-5 pr-0">
+          <div class="pb-3 d-inline-block border-bottom">
+            <span>Rendimentos do dia</span>
+            <h6 class="m-0 subtitle light" id="selected-day">##/##/####</h6>
+          </div>
+
+          <div class="pt-3 block">
+            <span>R$</span>
+            <h6 class="m-0 subtitle bold" id="value">0</h6>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="graph" data-select="1" style="display: none;">
-      <%= content_tag :div, "", id: "month-graph", data: {graph: month_data} %>
-    </div>
-
-    <div class="graph" data-select="2" style="display: none;">
-      <%= content_tag :div, "", id: "annual-graph", data: {graph: annual_data} %>
-    </div>
+            
 
   </section>
 </div>
 
+<%= stylesheet_link_tag 'Chart.min', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'Chart.min', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0', 'data-turbolinks-track': 'reload' %>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.pt-BR.min.js" integrity="sha512-mVkLPLQVfOWLRlC2ZJuyX5+0XrTlbW2cyAwyqgPkLGxhoaHNSWesYMlcUjX8X+k45YB8q90s88O7sos86636NQ==" crossorigin="anonymous"></script>
+
 <%= javascript_include_tag 'graphs', 'data-turbolinks-track': 'reload' %>
+
