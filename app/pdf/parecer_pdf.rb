@@ -18,6 +18,8 @@ class ParecerPdf < PdfDocument
     add_section('Análise:')
     add_paragraph form.analysis
 
+    new_page
+
     add_section('Conclusão:')
     add_paragraph form.conclusion
 

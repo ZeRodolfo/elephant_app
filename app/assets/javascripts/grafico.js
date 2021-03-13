@@ -23,6 +23,7 @@ $(() => {
         }
         if (kind == 'bar'){
             grafico =  new Chart(ctx, {
+                plugins: [ChartDataLabels],
                 type: 'bar',
                 data: [],
                 options: {
@@ -34,8 +35,8 @@ $(() => {
                         yAxes: [{
                             ticks: {
                                 suggestedMin: 0,
-                                suggestedMax: 30,
-                                stepSize: 1,
+                                suggestedMax: 100,
+                                stepSize: 5,
                                 beginAtZero: true
                             }
                         }]
@@ -43,12 +44,25 @@ $(() => {
                     responsive: true,
                     legend: {
                         position: 'bottom',
+                    },
+                    plugins: {
+                        datalabels: {
+                            color: 'black',
+                            font: {
+                                size: 14,
+                                weight: 'bold',
+                                family: '"Lucida Console", Monaco, monospace',
+                            },
+                            align: 'end',
+                            anchor: 'end',
+                        }
                     }
                 }
             })
         }
         else if (kind == 'pizza'){
             grafico = new Chart(ctx, {
+                plugins: [ChartDataLabels],
                 type: 'pie',
                 data: {
                     datasets: [{
@@ -70,11 +84,23 @@ $(() => {
                         text: title.value,
                         display: true
                     },
+                    plugins: {
+                        datalabels: {
+                            color: 'white',
+                            font: {
+                                size: 14,
+                                weight: 'bold',
+                                family: '"Lucida Console", Monaco, monospace',
+                            },
+                            align: 'center',
+                        }
+                    }
                 }
             })
         }
         else if (kind == 'radar'){
             grafico = new Chart(ctx, {
+                plugins: [ChartDataLabels],
                 type: 'radar',
                 data: {
                     datasets:
@@ -92,6 +118,30 @@ $(() => {
                         text: title.value,
                         display: true
                     },
+                    scale: {
+                        ticks: {
+                            suggestedMin: 0,
+                            suggestedMax: 50,
+                            stepSize: 10,
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        datalabels: {
+                            backgroundColor: function(context) {
+                              return hexToRgba('#45AA77');
+                            },
+                            padding: 4,
+                            color: 'black',
+                            font: {
+                                size: 12,
+                                weight: 'bold',
+                                family: '"Lucida Console", Monaco, monospace',
+                            },
+                            align: 'end',
+                            anchor: 'end',
+                          }
+                    }
                 }
             })
         }

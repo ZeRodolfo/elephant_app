@@ -9,6 +9,9 @@
     main {
         height: 100%;
     }
+    #all-office-visits-table tr {
+        cursor: pointer;
+    }
 </style>
 
 <%= stylesheet_link_tag 'dataTables.bootstrap4.min', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -33,33 +36,18 @@
     </div>
 
     <div class="h-100 py-3">
-        <table id="all-office-visits-table" data-visits="<%= @office_visits.to_json(:only => [:id, :patient_name, :date, :hour]) %>" class="table table-striped table-bordered" style="width:100%">
+        <table id="all-office-visits-table" data-visits="<%= @office_visits.to_json(:only => [:id, :patient_name, :date, :hour]) %>" class="table table-striped table-bordered table-hover" style="width:100%">
             <thead>
                 <tr>
                     <th>Data</th>
                     <th>Paciente</th>
-                    <th>Atalhos</th>
                 </tr>
             </thead>
             <tbody>
                 <% @office_visits.each do |office_visit| %>
-                <tr>
+                <tr data-link="<%= validation_patients_path(id: office_visit.patient, prev: office_visits_path) %>">
                     <td><%= (office_visit.date.present?) ? office_visit.date : '-' %> <%= (office_visit.hour.present?) ? office_visit.hour : '-' %></td>
                     <td><%= office_visit.patient.name %>
-                    <td class="w-10">
-                        <div class="row m-0">
-                            <div class="col-12 col-lg-6 mb-lg-0 mb-3 d-flex align-items-center justify-content-center">
-                                <%= link_to office_visit, class: 'el-anchor', title: 'Ver Consulta' do %>
-                                <i class="fas fa-search"></i>
-                                <% end %>
-                            </div>
-                            <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center">
-                                <%= link_to [office_visit.patient, office_visit], method: :delete, class: 'text-danger', data: { confirm: 'Tem certeza que deseja excluir esta consulta?' }, title: 'Apagar Consulta' do %>
-                                <i class="fas fa-trash"></i>
-                                <% end %>
-                            </div>
-                        </div>
-                    </td>
                 </tr>
                 <% end %>
             </tbody>

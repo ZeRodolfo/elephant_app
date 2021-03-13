@@ -3,7 +3,6 @@ $(document).on('turbolinks:load', () => {
     start: {},
     end: {}
   }
-
   const startColor = '#45AA77'
   const endColor = '#dc3545'
 
@@ -20,20 +19,39 @@ $(document).on('turbolinks:load', () => {
   const $end = $('#end-date')
   const $hour = $('#hour')
 
-  const hasInputs = $start[0] != undefined
+  const viewOptions = {
+    headerToolbar: {
+      left: 'dayGridMonth semanal quinzena dia',
+      center: 'title'
+    },
+    views: {
+      semanal: {
+        allDaySlot: false,
+        type: 'timeGrid',
+        duration: { days: 7 },
+        buttonText: 'Semana',
+        slotLabelFormat: function (date){
+          return date.date.hour.toString().padStart(2, '0') + 'h'
+        }
+      },
+      quinzena: {
+        allDaySlot: false,
+        type: 'timeGrid',
+        duration: { days: 15 },
+        buttonText: 'Quinzena',
+        slotLabelFormat: function (date){
+          return date.date.hour.toString().padStart(2, '0') + 'h'
+        }
+      },
+      dia: {
+        type: 'dayGrid',
+        duration: { days: 7 },
+        buttonText: 'Dias'
+      }
+    }
+  }
 
-  // Todo: Better way?
-  $start.on('focus', function (endDate) {
-    focused = 'startDate'
-  })
-
-  $end.on('focus', function (endDate) {
-    focused = 'endDate'
-  })
-
-  const calendarDiv = document.getElementById('calendar')
-  const calendar = new FullCalendar.Calendar(calendarDiv, {
-    // const calendar = $('#calendar').fullCalendar({
+  const calendarOptions = {
     themeSystem: 'bootstrap',
     locale: 'pt-br',
     dateClick: function (info) {
@@ -59,14 +77,23 @@ $(document).on('turbolinks:load', () => {
         container: el,
         html: true,
       })
-      // var tooltip = new Tooltip(info.el, {
-      //   title: info.event.extendedProps.description,
-      //   placement: 'top',
-      //   trigger: 'hover',
-      //   container: 'body'
-      // });
     },
+    bootstrapFontAwesome: false,
+  }
+
+  const hasInputs = $start[0] != undefined
+
+  // Todo: Better way?
+  $start.on('focus', function (endDate) {
+    focused = 'startDate'
   })
+
+  $end.on('focus', function (endDate) {
+    focused = 'endDate'
+  })
+
+  const calendarDiv = document.getElementById('calendar')
+  const calendar = new FullCalendar.Calendar(calendarDiv, hasInputs ? calendarOptions : {...calendarOptions, ...viewOptions})
 
   calendar.render()
 

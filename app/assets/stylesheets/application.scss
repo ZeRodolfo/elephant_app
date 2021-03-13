@@ -443,6 +443,38 @@ input[type=number].hidden-arrows {
   -o-animation: bounce 2s infinite;
 }
 
+div.fc-header-toolbar div.fc-toolbar-chunk button:not(:last-of-type){
+  margin-right: .5rem !important;
+  margin-left: 0 !important;
+}
+
+div.fc-header-toolbar div.fc-toolbar-chunk button:last-of-type{
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+// .fc-direction-ltr .fc-toolbar>*>:not(:first-child){
+//   margin: 0 !important;
+// }
+
+.fc-today-button {
+  margin-right: .75rem !important;
+}
+
+@media screen and (max-width: 1024px){
+  div.fc-header-toolbar div.fc-toolbar-chunk button, .fc-today-button, div.fc-header-toolbar div.fc-toolbar-chunk .btn-group button{
+    margin-bottom: .5rem !important
+  }
+  div.fc-header-toolbar div.fc-toolbar-chunk .btn-group {
+    display: block !important;
+    margin: 0 !important;
+  }
+  div.fc-header-toolbar div.fc-toolbar-chunk:not(:first-child):not(:last-child) {
+    margin-right: 1rem !important;
+    margin-left: 1rem !important;
+  }
+}
+
 .dataTables_filter, .dataTables_info { display: none; }
 
 .elen{
@@ -520,6 +552,13 @@ input[type=number].hidden-arrows {
   }
 }
 
+// @media screen and (max-width: 1024px){
+//   div.fc-header-toolbar div.fc-toolbar-chunk .btn-group {
+//     display: block !important;
+//     margin: 0 !important;
+//   }
+// }
+
 @media screen and (max-width: 992px){
   .bounding h1{
     font-size: 2rem !important;
@@ -551,6 +590,12 @@ input[type=number].hidden-arrows {
   }
   .phrase-lg{
     font-size: 1.15rem !important;
+  }
+  div.fc-header-toolbar div.fc-toolbar-chunk button {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.875rem !important;
+    line-height: 1.5  !important;
+    border-radius: 0.2rem !important;
   }
 }
 

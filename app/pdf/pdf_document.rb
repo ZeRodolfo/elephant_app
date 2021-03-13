@@ -42,6 +42,10 @@ class PdfDocument
   end
 
   protected
+    def new_page
+      pdf.start_new_page
+    end
+
     def max_width
       pdf.bounds.width
     end
