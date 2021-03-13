@@ -6,10 +6,10 @@
 	#office-visit-detail{
 		width: 100% !important;
 	}
-	.fc-direction-ltr .fc-toolbar>*>:not(:first-child) {
-		margin-left: auto !important;
-		margin-right: auto !important;
-	}
+	// .fc-direction-ltr .fc-toolbar>*>:not(:first-child) {
+	// 	margin-left: auto !important;
+	// 	margin-right: auto !important;
+	// }
 	.fc-event-title, .fc-direction-ltr .fc-daygrid-event .fc-event-time{
 		display: none;
 	}
