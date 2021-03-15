@@ -56,6 +56,13 @@ $(document).on('turbolinks:load', () => {
   }
 
   const calendarOptions = {
+    timeZone: 'UTC',
+    eventTimeFormat: {
+      hour: '2-digit',
+      minute: '2-digit',
+      meridiem: false,
+      omitZeroMinute: false,
+    },
     themeSystem: 'bootstrap',
     locale: 'pt-br',
     dateClick: function (info) {

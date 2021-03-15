@@ -11,7 +11,7 @@ class OfficeVisitsController < ApplicationController
       set_patient
       @office_visits = @patient.office_visits
     else
-      @office_visits = OfficeVisit.where(patient_id: current_user.patient_ids)
+      @office_visits = OfficeVisit.where(patient_id: current_user.patient_ids).order(date: :ASC, hour: :ASC)
       render :all
     end
 
@@ -109,7 +109,7 @@ class OfficeVisitsController < ApplicationController
   private
 
     def show_calendar
-      @patients_per_day = OfficeVisit.joins(:patient).where("patients.user_id = ?", current_user.id).order(hour: :ASC).group_by(&:date)
+      @patients_per_day = OfficeVisit.joins(:patient).where("patients.user_id = ?", current_user.id).order(date: :ASC, hour: :ASC)
       @date = params[:date] ? Date.parse(params[:date]) : Date.today
     end
 
