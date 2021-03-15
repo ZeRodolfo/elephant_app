@@ -44,9 +44,13 @@ $(document).on('turbolinks:load', () => {
         }
       },
       dia: {
-        type: 'dayGrid',
-        duration: { days: 7 },
-        buttonText: 'Dias'
+        allDaySlot: false,
+        type: 'timeGrid',
+        duration: { days: 1 },
+        buttonText: 'Dia',
+        slotLabelFormat: function (date){
+          return date.date.hour.toString().padStart(2, '0') + 'h'
+        }
       }
     }
   }
