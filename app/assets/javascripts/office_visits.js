@@ -34,7 +34,8 @@ $(document).on('turbolinks:load', () => {
         responsivePriority: 1
       }
     ],
-    responsive: true
+    responsive: true,
+    order: []
   })
 
 
