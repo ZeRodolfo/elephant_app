@@ -28,9 +28,9 @@ $(document).on('turbolinks:load', () => {
         responsivePriority: 2
       },
     ],
-    responsive: true
+    responsive: true,
+    order: []
   })
-
 
   const search = $('#all-office-visits-search')
 
