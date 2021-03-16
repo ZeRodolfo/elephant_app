@@ -44,14 +44,25 @@ $(document).on('turbolinks:load', () => {
         }
       },
       dia: {
-        type: 'dayGrid',
-        duration: { days: 7 },
-        buttonText: 'Dias'
+        allDaySlot: false,
+        type: 'timeGrid',
+        duration: { days: 1 },
+        buttonText: 'Dia',
+        slotLabelFormat: function (date){
+          return date.date.hour.toString().padStart(2, '0') + 'h'
+        }
       }
     }
   }
 
   const calendarOptions = {
+    timeZone: 'UTC',
+    eventTimeFormat: {
+      hour: '2-digit',
+      minute: '2-digit',
+      meridiem: false,
+      omitZeroMinute: false,
+    },
     themeSystem: 'bootstrap',
     locale: 'pt-br',
     dateClick: function (info) {

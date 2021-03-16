@@ -45,9 +45,7 @@ $(document).on('turbolinks:load', () => {
       id: visit.id,
       title: `${visit.patient_name} - Horário: ${visit.hour}`,
       start: visit.date + 'T' + visit.hour + ':00',
-      // end: visit.date,
       allDay: false,
-      // endTime: visit.hour
     }))
   }
 
