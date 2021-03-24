@@ -1,34 +1,4 @@
 $(document).on("turbolinks:load", () => {
-  // const graphs = [
-  //   Morris.Line({
-  //     element: 'week-graph',
-  //     data: $('#week-graph').data('graph'),
-  //     xkey: 'created_at',
-  //     ykeys: ['collected'],
-  //     labels: ['Quantia Recebida (R$)'],
-  //     lineColors: ['#45AA77']
-  //   }),
-
-  //   Morris.Line({
-  //     element: 'month-graph',
-  //     data: $('#month-graph').data('graph'),
-  //     xkey: 'created_at',
-  //     ykeys: ['collected'],
-  //     labels: ['Quantia Recebida (R$)'],
-  //     lineColors: ['#45AA77']
-  //   }),
-
-  //   Morris.Line({
-  //     element: 'annual-graph',
-  //     data: $('#annual-graph').data('graph'),
-  //     xkey: 'created_at',
-  //     ykeys: ['collected'],
-  //     labels: ['Quantia Recebida (R$)'],
-  //     lineColors: ['#45AA77']
-  //   })
-  // ]
-
-
   Chart.defaults.global.plugins = {
     datalabels: {
       color: "black",
@@ -193,7 +163,7 @@ $(document).on("turbolinks:load", () => {
     if (!(day instanceof Date)){ return }
 
     $('#selected-day').text(locale(day))
-    $('#value').text(dailyData[day.getTime() / 1000] || 0)
+    $('#value').text(dailyData[toKey(day)] || 0)
   }
 
   function locale(date){
@@ -229,6 +199,10 @@ $(document).on("turbolinks:load", () => {
 
   function getCurrentVisible() {
     return $("div[data-select]:not(.visuallyhidden)");
+  }
+
+  function toKey(date){ 
+    return `${date.getFullYear()}${(date.getMonth() + 1).toString().padStart(2, '0')}${date.getDate().toString().padStart(2, '0')}` 
   }
 
   window.addEventListener("optimizedResize", function () {
