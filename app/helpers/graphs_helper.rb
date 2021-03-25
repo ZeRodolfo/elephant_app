@@ -17,6 +17,10 @@ module GraphsHelper
 		data
 	end
 
+	def shift(data)
+		data.map { |d| }
+	end
+
 	def month_data
 		start_date = 6.months.ago.to_date
 		end_date = Date.today + 6.months
@@ -46,11 +50,11 @@ module GraphsHelper
 	end
 
 	def daily_data
-		(1.month.ago.to_date..Date.today + 1.month).map{ |date| [date.to_time.to_i, parcels_value(date)] }.to_h
+		(1.month.ago.to_date..Date.today + 1.month).map{ |date| [to_key(to_gmt_minus_3(date)), parcels_value(date)] }.to_h
 	end
 
 	def range(start_date, end_date)
-		OfficeVisit.joins(:patient).joins(:parcels).where("(date(parcels.created_at) >= ? AND date(parcels.created_at) <= ?) AND patients.user_id = ?", start_date, end_date, current_user.id).sum("parcels.value")
+		OfficeVisit.joins(:patient).joins(:parcels).where("(date(parcels.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'America/Sao_Paulo') BETWEEN date(?) AND date(?)) AND patients.user_id = ?", start_date, end_date, current_user.id).sum("parcels.value")
 	end
 
 	def parcels_value(date)
@@ -69,5 +73,14 @@ module GraphsHelper
 
 	def locale_month(index)
 		%w[nil Janeiro Fevereiro Março Abril Maio Junho Julho Agosto Setembro Outubro Novembro Dezembro][index]
+	end
+
+	def to_gmt_minus_3(date)
+		return date.to_datetime.new_offset('-03:00') if (date.instance_of? Date) or (date.instance_of? Time)
+		date.new_offset('-03:00')
+	end
+
+	def to_key(date)
+		date.strftime('%Y%m%d')
 	end
 end

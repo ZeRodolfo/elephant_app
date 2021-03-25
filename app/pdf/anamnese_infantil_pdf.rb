@@ -12,7 +12,7 @@ class AnamneseInfantilPdf < PdfDocument
       ['Idade', patient.age.to_s],
       ['Sexo', patient.gender.to_s],
       ['CPF', patient.cpf.to_s],
-      ['Endereço', patient.address.resume],
+      ['Endereço', patient.address&.resume],
       ['Telefone', patient.phone.to_s],
     ])
 
