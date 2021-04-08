@@ -36,8 +36,8 @@ module GraphsHelper
   	end
 
 	def annual_data
-		start_date = Date.today
-		end_date = Date.today + 4.years
+		start_date = Date.today.beginning_of_year
+		end_date = (Date.today + 4.years).end_of_year
 		data = []
 		time_iterate(start_date, end_date, 1.year) do |date|
 			data.push({
