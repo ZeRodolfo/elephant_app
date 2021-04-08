@@ -1,7 +1,7 @@
 module GraphsHelper
 	def week_data
 		start_date = 1.month.ago.to_date
-		end_date = 1.week.ago.to_date
+		end_date = Date.today + 1.month #1.week.ago.to_date
 		data = []
 
 		time_iterate(start_date, end_date, 1.week) do |date|
@@ -50,15 +50,15 @@ module GraphsHelper
 	end
 
 	def daily_data
-		(1.month.ago.to_date..Date.today + 1.month).map{ |date| [to_key(to_gmt_minus_3(date)), parcels_value(date)] }.to_h
+		(1.month.ago.to_date..Date.today + 1.month).map{ |date| [to_key(date), parcels_value(date)] }.to_h
 	end
 
 	def range(start_date, end_date)
-		OfficeVisit.joins(:patient).joins(:parcels).where("(date(parcels.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'America/Sao_Paulo') BETWEEN date(?) AND date(?)) AND patients.user_id = ?", start_date, end_date, current_user.id).sum("parcels.value")
+		OfficeVisit.joins(:patient).joins(:parcels).where("(date(parcels.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'America/Sao_Paulo') >= date(?) AND date(parcels.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'America/Sao_Paulo') < date(?)) AND patients.user_id = ?", start_date, end_date, current_user.id).sum("parcels.value")
 	end
 
 	def parcels_value(date)
-		OfficeVisit.joins(:patient).joins(:parcels).where("date(parcels.created_at) = ? AND patients.user_id = ?", date, current_user.id).sum("parcels.value")
+		OfficeVisit.joins(:patient).joins(:parcels).where("date(parcels.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'America/Sao_Paulo') = ? AND patients.user_id = ?", date, current_user.id).sum("parcels.value")
 	end
 
 	def time_iterate(start_time, end_time, step, &block)
