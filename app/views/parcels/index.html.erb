@@ -38,7 +38,7 @@
               <% @parcels.each do |parcel| %>
               <tr>
                 <td>R$ <%= parcel.value %></td>
-                <td><%= parcel.created_at %></td>
+                <td data-order="<%= parcel.created_at.to_date.to_time.to_i %>"><%= parcel.created_at %></td>
                 <td <% if parcel.observation.present? %>
                   title="<%= parcel.observation %>" <% end %>>
                   <%= (parcel.observation.present?) ? truncate(parcel.observation, :length => 20, separator: ' ') : '-'%>

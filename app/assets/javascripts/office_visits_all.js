@@ -54,6 +54,7 @@ $(document).on('turbolinks:load', () => {
 })
 
 $(document).on('click', '#all-office-visits-table tr', function(e){
-  const l = this.dataset['link'] ? this.dataset['link'] : ''
+  const l = this.dataset['link']
+  if (!l){ return }
   window.location.href = l
 })

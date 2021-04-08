@@ -46,7 +46,7 @@
             <tbody>
                 <% @office_visits.each do |office_visit| %>
                 <tr data-link="<%= validation_patients_path(id: office_visit.patient, prev: office_visits_path) %>">
-                    <td><%= (office_visit.date.present?) ? office_visit.date : '-' %> <%= (office_visit.hour.present?) ? office_visit.hour : '-' %></td>
+                    <td data-order="<%= office_visit.date %>"><%= (office_visit.date.present?) ? office_visit.date : '-' %> <%= (office_visit.hour.present?) ? office_visit.hour : '-' %></td>
                     <td><%= office_visit.patient.name %>
                 </tr>
                 <% end %>

@@ -44,7 +44,7 @@
                 <tbody>
                     <% @atestados.each do |atestado| %>
                     <tr>
-                        <td><%= atestado.created_at.to_date %></td>
+                        <td data-order="<%= atestado.created_at.to_date.to_time.to_i %>"><%= atestado.created_at.to_date %></td>
                         <td><%= (atestado.text.present?) ? truncate(atestado.text, :length => 75, separator: ' ') : '-' %></td>
                         <td>
                             <div class="row m-0">
@@ -98,7 +98,7 @@
                 <tbody>
                     <% @adultos.each do |adulto| %>
                     <tr>
-                        <td><%= adulto.created_at.to_date %></td>
+                        <td data-order="<%= adulto.created_at.to_date.to_time.to_i %>"><%= adulto.created_at.to_date %></td>
                         <td>
                             <div class="row m-0">
                                 <div class="col-4 m-0 d-flex align-items-center justify-content-center">
@@ -151,7 +151,7 @@
                 <tbody>
                     <% @infantis.each do |infantil| %>
                     <tr>
-                        <td><%= infantil.created_at.to_date %></td>
+                        <td data-order="<%= infantil.created_at.to_date.to_time.to_i %>"><%= infantil.created_at.to_date %></td>
                         <td>
                             <div class="row m-0">
                                 <div class="col-4 m-0 d-flex align-items-center justify-content-center">
@@ -205,7 +205,7 @@
                 <tbody>
                     <% @declaracoes.each do |declaracao| %>
                     <tr>
-                        <td><%= declaracao.created_at.to_date %></td>
+                        <td data-order="<%= declaracao.created_at.to_date.to_time.to_i %>"><%= declaracao.created_at.to_date %></td>
                         <td><%= (declaracao.text.present?) ? truncate(declaracao.text, :length => 75, separator: ' ') : '-' %></td>
                         <td>
                             <div class="row m-0">
@@ -260,7 +260,7 @@
                 <tbody>
                     <% @laudos.each do |laudo| %>
                     <tr>
-                        <td><%= laudo.created_at.to_date %></td>
+                        <td data-order="<%= laudo.created_at.to_date.to_time.to_i %>"><%= laudo.created_at.to_date %></td>
                         <td><%= (laudo.description.present?) ? truncate(laudo.description, :length => 75, separator: ' ') : '-' %></td>
                         <td>
                             <div class="row m-0">
@@ -315,7 +315,7 @@
                 <tbody>
                     <% @pareceres.each do |parecer| %>
                     <tr>
-                        <td><%= parecer.created_at.to_date %></td>
+                        <td data-order="<%= parecer.created_at.to_date.to_time.to_i %>"><%= parecer.created_at.to_date %></td>
                         <td><%= (parecer.description.present?) ? truncate(parecer.description, :length => 75, separator: ' ') : '-' %></td>
                         <td>
                             <div class="row m-0">
@@ -370,7 +370,7 @@
                 <tbody>
                     <% @relatorios.each do |relatorio| %>
                     <tr>
-                        <td><%= relatorio.created_at.to_date %></td>
+                        <td data-order="<%= relatorio.created_at.to_date.to_time.to_i %>"><%= relatorio.created_at.to_date %></td>
                         <td><%= (relatorio.description.present?) ? truncate(relatorio.description, :length => 75, separator: ' ') : '-' %></td>
                         <td>
                             <div class="row m-0">
