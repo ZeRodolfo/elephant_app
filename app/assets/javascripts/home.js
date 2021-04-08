@@ -1,3 +1,5 @@
 $(document).on('click', '.card-home', function (event) {
-  window.location.href = this.dataset['link']
+  const l = this.dataset['link']
+  if (!l){ return }
+  window.location.href = l
 })

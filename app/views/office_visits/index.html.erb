@@ -49,7 +49,7 @@
       <tbody>
         <% @office_visits.each do |office_visit| %>
         <tr>
-          <td><%= (office_visit.date.present?) ? office_visit.date : '-' %> <%= (office_visit.hour.present?) ? office_visit.hour : '-' %></td>
+          <td data-order="<%= office_visit.date.to_time.to_i %>"><%= (office_visit.date.present?) ? office_visit.date : '-' %> <%= (office_visit.hour.present?) ? office_visit.hour : '-' %></td>
           <td><%= (office_visit.description.present?) ? truncate(office_visit.description, :length => 75, separator: ' ') : '-' %></td>
           <td>
             <div class="row m-0">

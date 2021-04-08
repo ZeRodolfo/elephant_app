@@ -57,6 +57,7 @@ $(document).on('turbolinks:load', () => {
 })
 
 $(document).on('click', '#patients-table tr', function(e){
-  const l = this.dataset['link'] ? this.dataset['link'] : ''
+  const l = this.dataset['link']
+  if (!l){ return }
   window.location.href = l
 })
