@@ -1,15 +1,15 @@
 module GraphsHelper
 	def week_data
-		start_date = 1.month.ago.to_date
-		end_date = Date.today + 1.month #1.week.ago.to_date
 		data = []
-
-		time_iterate(start_date, end_date, 1.week) do |date|
-			e = date + 1.week
+		w = Date.today.beginning_of_month
+		weeks = (0..4).map{ |x| w + (x * 1.week) }
+		weeks.each do |week|
+			start_w = week.beginning_of_week
+			end_w = week.end_of_week
 			data.push(
 				{
-					label: [locale(date), ' até ', locale(e)],
-					value: range(date, e)
+					label: ['seg ' + locale2(start_w), ' até ', 'dom ' + locale2(end_w)],
+					value: range(start_w, end_w)
 				}
 			)
 		end
@@ -17,18 +17,18 @@ module GraphsHelper
 		data
 	end
 
-	def shift(data)
-		data.map { |d| }
-	end
-
 	def month_data
-		start_date = 6.months.ago.to_date
-		end_date = Date.today + 6.months
 		data = []
-		time_iterate(start_date, end_date, 1.month) do |date|
+		m = Date.today.beginning_of_year
+		months = (0..11).map{ |x| m + (x * 1.month) }
+
+		months.each do |month|
+			start_m = month.beginning_of_month
+			end_m = month.end_of_month
+
 			data.push({
-				label: [locale_month(date.month), ' de ', date.year.to_s],
-				value: range(date, date + 1.month)
+				label: [locale_month(start_m.month), ' de ', start_m.year.to_s],
+				value: range(start_m, end_m)
 			})
 		end
 
@@ -36,13 +36,16 @@ module GraphsHelper
   	end
 
 	def annual_data
-		start_date = Date.today.beginning_of_year
-		end_date = (Date.today + 4.years).end_of_year
 		data = []
-		time_iterate(start_date, end_date, 1.year) do |date|
+		y = Date.today.beginning_of_year
+		years = (0..4).map{ |x| y + (x * 1.year) }
+
+		years.each do |year|
+			start_y = year.beginning_of_year
+			end_y = year.end_of_year
 			data.push({
-				label: date.year.to_s,
-				value: range(date, date + 1.year)
+				label: start_y.year.to_s,
+				value: range(start_y, end_y)
 			})
 		end
 
@@ -54,7 +57,7 @@ module GraphsHelper
 	end
 
 	def range(start_date, end_date)
-		OfficeVisit.joins(:patient).joins(:parcels).where("(date(parcels.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'America/Sao_Paulo') >= date(?) AND date(parcels.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'America/Sao_Paulo') < date(?)) AND patients.user_id = ?", start_date, end_date, current_user.id).sum("parcels.value")
+		OfficeVisit.joins(:patient).joins(:parcels).where("(date(parcels.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'America/Sao_Paulo') >= date(?) AND date(parcels.created_at AT TIME ZONE 'UTC' AT TIME ZONE 'America/Sao_Paulo') <= date(?)) AND patients.user_id = ?", start_date, end_date, current_user.id).sum("parcels.value")
 	end
 
 	def parcels_value(date)
@@ -69,6 +72,10 @@ module GraphsHelper
 
 	def locale(date)
 		date.strftime('%d/%m/%Y')
+	end
+
+	def locale2(date)
+		date.strftime('%d/%m')
 	end
 
 	def locale_month(index)

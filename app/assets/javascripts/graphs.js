@@ -66,6 +66,15 @@ $(document).on("turbolinks:load", () => {
               },
             },
           ],
+          xAxes: [
+            {
+              ticks: {
+                fontSize: 12,
+                fontColor: '#000',
+                fontStyle: 'bold'
+              }
+            }
+          ]
         },
       },
     }),
