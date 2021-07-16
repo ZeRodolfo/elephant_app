@@ -52,6 +52,6 @@ class AtestadosController < ApplicationController
     end
 
     def atestado_params
-      params.require(:atestado).permit(:cidade, :crp, :text)
+      params.require(:atestado).permit(:cidade, :crp, :certificate_at, :text)
     end
 end

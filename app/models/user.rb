@@ -46,6 +46,7 @@ class User < ApplicationRecord
     validates :last_name
     validates :document_number
     validates :birth_date
+    validates :crp
   end
 
   before_validation :clean_masked_fields
