@@ -206,6 +206,7 @@ GEM
       json (~> 1.8)
       nokogiri (~> 1.6)
     pdf-core (0.9.0)
+    pdfkit (0.8.5)
     pg (1.2.3)
     popper_js (1.16.0)
     prawn (2.4.0)
@@ -270,6 +271,8 @@ GEM
     redis (4.2.5)
     regexp_parser (1.8.2)
     remotipart (1.4.4)
+    render_anywhere (0.0.12)
+      rails (>= 3.0.7)
     request_store (1.5.0)
       rack (>= 1.4)
     responders (3.0.1)
@@ -370,6 +373,7 @@ GEM
     whenever (1.0.0)
       chronic (>= 0.6.3)
     will_paginate (3.1.8)
+    wkhtmltopdf-binary (0.12.6.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
 
@@ -404,6 +408,7 @@ DEPENDENCIES
   mini_magick (~> 4.11)
   morrisjs-rails
   pagseguro-oficial (~> 2.6.0)
+  pdfkit
   pg (>= 0.18, < 2.0)
   prawn-rails
   prawn-table
@@ -412,6 +417,7 @@ DEPENDENCIES
   rails (~> 5.2.4, >= 5.2.4.1)
   rails_admin (~> 2.0)
   raphael-rails
+  render_anywhere
   rspec
   rspec-rails (~> 4.0.1)
   ruby-debug-ide (~> 0.7.2)
@@ -427,6 +433,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   whenever
   will_paginate (~> 3.1.0)
+  wkhtmltopdf-binary
 
 RUBY VERSION
    ruby 2.5.1p57

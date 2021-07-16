@@ -8,7 +8,7 @@ development:
   host: db
   username: postgres
   password: postgres
-  database: ElephantRH_development
+  database: elephantrh_development
 
 test:
   <<: *default

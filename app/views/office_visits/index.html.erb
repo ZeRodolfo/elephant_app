@@ -9,6 +9,15 @@
   main {
     height: 100%;
   }
+
+  .actions {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0px 15px;
+  }
 </style>
 
 <%= stylesheet_link_tag 'dataTables.bootstrap4.min', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -52,33 +61,40 @@
           <td data-order="<%= office_visit.date.to_time.to_i %>"><%= (office_visit.date.present?) ? office_visit.date : '-' %> <%= (office_visit.hour.present?) ? office_visit.hour : '-' %></td>
           <td><%= (office_visit.description.present?) ? truncate(office_visit.description, :length => 75, separator: ' ') : '-' %></td>
           <td>
-            <div class="row m-0">
-
-              <div class="col-2 m-0 d-flex align-items-center justify-content-center">
+            <div class="actions">
+            <%# <div class="row m-0"> %>
+              <%# <div class="col-2 m-0 d-flex align-items-center justify-content-center"> %>
                 <%= link_to office_visit, class: 'el-anchor', title: 'Ver Consulta' do %>
                   <i class="fas fa-search"></i>
                 <% end %>
-              </div>
+              <%# </div> %>
 
-              <div class="col-2 m-0 d-flex align-items-center justify-content-center">
+              <%# <div class="col-2 m-0 d-flex align-items-center justify-content-center"> %>
+                <a href="<%= office_visit_pdf_path(office_visit_id: office_visit.id, format: "pdf") %>" class="el-anchor" target="_blank" title="Imprimir">
+                  <i class="fas fa-print"></i>
+                </a>
+              <%# </div> %>
+
+              <%# <div class="col-2 m-0 d-flex align-items-center justify-content-center"> %>
                 <a title="Editar Consulta" href="<%= edit_patient_office_visit_path(@patient, office_visit) %>" class="el-anchor"><i class="fas fa-pencil-alt"></i></a>
-              </div>
+              <%# </div> %>
 
-              <div class="col-2 m-0 p-0 d-flex align-items-center justify-content-center">
+              <%# <div class="col-2 m-0 p-0 d-flex align-items-center justify-content-center"> %>
                 <%= link_to edit_patient_office_visit_path(@patient, office_visit, remark: true), class: 'el-anchor', title: 'Remarcar Consulta' do %>
                   <i class="far fa-calendar-alt"></i>
                 <% end %>
-              </div>
+              <%# </div> %>
 
-              <div class="col-2 m-0 d-flex align-items-center justify-content-center">
+              <%# <div class="col-2 m-0 d-flex align-items-center justify-content-center"> %>
                 <a title="Adicionar Parcela" href="<%= parcels_path(office: office_visit, id_patient: params[:id_patient]) %>" class="el-anchor"><i class="fas fa-money-bill-wave"></i></a>
-              </div>
+              <%# </div> %>
 
-              <div class="col-4 m-0 p-0 d-flex align-items-center justify-content-center">
+              <%# <div class="col-4 m-0 p-0 d-flex align-items-center justify-content-center"> %>
                 <%= link_to [@patient, office_visit], method: :delete, class: 'text-danger', data: { confirm: 'Tem certeza que deseja excluir esta consulta?' }, title: 'Apagar Consulta' do %>
                   <i class="fas fa-trash"></i>
                 <% end %>
-              </div>
+              <%# </div> %>
+            <%# </div> %>
             </div>
           </td>
         </tr>
