@@ -51,6 +51,10 @@ Here are the technologies used in this project.
 >    $ sudo docker-compose up
 
 
+RAILS_ENV=production rails assets:precompile
+sudo systemctl restart puma
+
+
 ## How to use
 
 Insert your patients and fill the psicologic form.
@@ -89,7 +93,7 @@ The main features of the application are:
 
   ## Authors
 
-  * **Lucas Siqueira Fernandes** 
+  * **José Rodolfo** 
 
   Please follow github and join us!
   Thanks to visiting me and good coding!
