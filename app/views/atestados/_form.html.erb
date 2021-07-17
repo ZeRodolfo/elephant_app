@@ -41,7 +41,7 @@
   <div class="form-row">
     <div class="form-group col">
       <label for="certificate_at">Data do Atestado</label>
-      <input type="date" id="certificate_at" name="atestado[certificate_at]" value="<%= atestado.certificate_at.strftime('%Y-%m-%d') %>" class="form-control">
+      <input type="date" id="certificate_at" name="atestado[certificate_at]" value="<%= atestado.certificate_at? && atestado.certificate_at.strftime('%Y-%m-%d') %>" class="form-control">
     </div>
   </div>
 
