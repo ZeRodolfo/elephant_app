@@ -4,7 +4,15 @@ class PreferencesController < ApplicationController
   def index; end
 
   def update
-    if @preferences.update(preferences_params)
+    params = { data_atual: false }
+   
+    if preferences_params.key?(:data_atual)
+      if preferences_params[:data_atual] == '1'
+        params[:data_atual] = true
+      end
+    end
+
+    if @preferences.update(params)
       redirect_to preferences_path, notice: 'Ajustes salvos'
     else
       if @preferences.errors[:papel_timbrado].any?
@@ -38,7 +46,7 @@ class PreferencesController < ApplicationController
     def preferences_params
       params
         .fetch(:user_preference, {})
-        .permit(:papel_timbrado)
+        .permit(:papel_timbrado, :data_atual, :data_criacao_atendimento)
     end
 
     def set_preferences

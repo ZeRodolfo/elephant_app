@@ -3,6 +3,7 @@
 # Table name: user_preferences
 #
 #  id         :bigint           not null, primary key
+#  data_atual :boolean
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  user_id    :bigint

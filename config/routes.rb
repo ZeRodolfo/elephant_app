@@ -27,6 +27,9 @@ Rails.application.routes.draw do
       post :create_multiple, on: :collection
     end
 
+    post :parcels, to: 'parcels#low_all'
+    post :default_office_visit_value, to: 'patients#default_office_visit_value'
+
     resources :atestados
     resources :declaracoes
     resources :laudos

@@ -31,11 +31,26 @@
 
 <div class="form-row">
   <div class="form-group col">
-    <%= f.label :cpf, for: 'cpf' %>
+    <label for="cpf">CPF</label>
     <%= f.text_field :cpf, class: "form-control cpf #{ 'is-invalid' if patient.errors[:cpf].any? }", id: 'cpf'%>
     <% if patient.errors[:cpf].any? %>
     <div class="invalid-feedback">
       <% patient.errors[:cpf].each do |m| %>
+      <%= m %>
+      <br>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group col">
+    <%= f.label :email, for: 'email' %>
+    <%= f.email_field :email, class: "form-control #{ 'is-invalid' if patient.errors[:email].any? }", id: 'email', autocomplete: "email"%>
+    <% if patient.errors[:email].any? %>
+    <div class="invalid-feedback">
+      <% patient.errors[:email].each do |m| %>
       <%= m %>
       <br>
       <% end %>
@@ -136,7 +151,7 @@
 
   <div class="form-row">
     <div class="form-group col-lg-8 col-12">
-      <label for="cep">Cep</label>
+      <label for="cep">CEP</label>
       <%= addr_form.text_field :cep, class: "form-control cep #{ 'is-invalid' if patient.errors['address.cep'].any? }", id: 'cep' %>
       <% if patient.errors["address.cep"].any? %>
       <div class="invalid-feedback">
@@ -249,10 +264,12 @@
       <%= f.password_field :code, required: true, class: "form-control #{ 'is-invalid' if patient.errors[:code].any? }", id:'code', 'aria-describedby': 'code-prepend', autocomplete: 'off' %>
     </div>
     <small>Código para acessar as consultas do paciente</small>
+    <!--
     <% if patient.id.present? %>
       <br>
       <small>Deixe em branco caso não queira alterar </small>
     <% end %>
+    -->
   </div>
 </div>
 
@@ -270,6 +287,10 @@
   <% end %>
   <div class="form-group col">
     <%= f.submit 'Salvar', class: 'btn btn-primary btn-block my-0 my-lg-2' %>
+  </div>
+
+  <div class="form-group col">
+    <a href="<%= patients_path %>" class='btn btn-primary btn-block my-0 my-lg-2'>Voltar</a>
   </div>
 </div>
 

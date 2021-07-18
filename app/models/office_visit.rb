@@ -41,4 +41,13 @@ class OfficeVisit < ApplicationRecord
       'patient_name' => patient.name
     })
   end
+
+  def get_total_value_of_parcels
+    current_value = 0.0
+    parcels.each do |parcel|
+      current_value += parcel.value
+    end
+
+    return current_value
+  end
 end

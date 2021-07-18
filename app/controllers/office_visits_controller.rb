@@ -33,7 +33,8 @@ class OfficeVisitsController < ApplicationController
   def create
     @office_visit = OfficeVisit.new(office_visit_params)
     @office_visit.patient = @patient
-
+    @office_visit.value = @patient.default_office_visit_value
+  
     if @office_visit.save
       redirect_to request.referrer, notice: 'Consulta criada com sucesso!'
     else
@@ -54,6 +55,7 @@ class OfficeVisitsController < ApplicationController
 
     if repetition == 0 then
       office_visit = OfficeVisit.new(date: @form.start_date, hour: @form.hour, patient_id: @form.id_patient)
+      office_visit.value = @patient.default_office_visit_value
       if office_visit.save
         return redirect_to patient_office_visits_path(@patient), notice: 'Consulta(s) criada(s) com sucesso.'
       else
@@ -70,23 +72,24 @@ class OfficeVisitsController < ApplicationController
       elsif repetition == 3 then
         dates_to_repeat = DateHelper.repeat_monthly(start_date, end_date)
       end
-    end
 
-    visits_to_create = dates_to_repeat.map { |visit|
-      {
-        date: visit.to_s,
-        hour: @form.hour,
-        patient_id: @patient.id
+      visits_to_create = dates_to_repeat.map { |visit|
+        {
+          date: visit.to_s,
+          hour: @form.hour,
+          patient_id: @patient.id,
+          value: @patient.default_office_visit_value
+        }
       }
-    }
-
-    OfficeVisit.transaction do
-      visits_to_create.each do |visit_param|
-        OfficeVisit.create!(visit_param)
+  
+      OfficeVisit.transaction do
+        visits_to_create.each do |visit_param|
+          OfficeVisit.create!(visit_param)
+        end
       end
+  
+      redirect_to patient_office_visits_path(@patient), notice: 'Consulta(s) criada(s) com sucesso.'
     end
-
-    redirect_to patient_office_visits_path(@patient), notice: 'Consulta(s) criada(s) com sucesso.'
   rescue
     flash.now[:alert] = 'Erro ao criar consulta(s). Por favor, confira os campos.'
     return render :new

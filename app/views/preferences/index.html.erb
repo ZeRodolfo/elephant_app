@@ -1,80 +1,132 @@
 <% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Editar Perfil' } %>
 
-
 <% content_for(:head) do %>
-<meta name="turbolinks-visit-control" content="reload">
+  <meta name="turbolinks-visit-control" content="reload">
+
+  <style>
+    .speech-bubble {
+      z-index: 100;
+    }
+
+    h1 {
+      color: var(--green);
+      padding: 100px 0px 30px 15px;
+    }
+
+    .save {
+      width: 400px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 30px;
+      padding: 20px 0px;
+    }
+
+    .save * {
+      width: 100%;
+    }
+
+    .bg-preferences {
+      width: 100%;
+      border-radius: 1rem !important;
+      background-color: var(--lite-green);
+      padding: 2rem;
+      text-align: left !important;
+    }
+  </style>
 <% end %>
 
 <div class="d-flex flex-column m-0 p-0 vh100">
-<%= render 'shared/navbar' %>
+  <%= render 'shared/navbar' %>
 
-<section class="d-flex m-0 align-items-start justify-content-center el fill flex-row">
-  <div class="bounding generic-form">
+  <section>
     <h1 class="bold">Ajustes</h1>
 
-    <%= render 'shared/alerts' %>
-
-    <%= form_with(model: @preferences, url: preferences_path, local: true) do |f| %>
-      <label>Papel timbrado</label><br />
-      <% if @preferences.papel_timbrado.attached? && @preferences.papel_timbrado.representable? %>
-        <div class="row justify-content-center">
-          <%= image_tag @preferences.papel_timbrado.variant(resize: '200x400') %>
+    <%= form_with(model: @preferences, url: preferences_path, local: true, class: 'container') do |f| %>
+      <div class='row'>
+        <div class="col-sm-12 col-md-12">
+          <%= render 'shared/alerts' %>
         </div>
-      <% end %>
 
-      <div class="form-row justify-content-center">
-        <% if @preferences.papel_timbrado.attached? %>
-          <%= link_to 'Remover', destroy_papel_timbrado_preferences_path,
-            method: :delete,
-            data: { confirm: 'Tem certeza?' },
-            class: 'btn btn-outline-danger mt-2'
-          %>
-        <% end %>
-      </div>
-      <div class="form-row my-2">
-        <div class="form-group col">
-          <div class="input-group">
-            <div class="custom-file">
-              <%= f.file_field :papel_timbrado, class: 'custom-file-input', id: 'avatar' %>
-              <label class="custom-file-label form-control" for="avatar">Selecione a imagem do papel timbrado</label>
+        <div class="col-sm-12 col-md-6 mt-4">
+          <div class='w-100 bg-preferences'>
+            <label>Papel timbrado</label><br />
+            <% if @preferences.papel_timbrado.attached? && @preferences.papel_timbrado.representable? %>
+              <div class="row justify-content-center">
+                <%= image_tag @preferences.papel_timbrado.variant(resize: '200x400') %>
+              </div>
+            <% end %>
+
+            <div class="form-row justify-content-center">
+              <% if @preferences.papel_timbrado.attached? %>
+                <%= link_to 'Remover', destroy_papel_timbrado_preferences_path,
+                  method: :delete,
+                  data: { confirm: 'Tem certeza?' },
+                  class: 'btn btn-outline-danger mt-2'
+                %>
+              <% end %>
+            </div>
+            <div class="form-row my-2">
+              <div class="form-group col">
+                <div class="input-group">
+                  <div class="custom-file">
+                    <%= f.file_field :papel_timbrado, class: 'custom-file-input', id: 'avatar' %>
+                    <label class="custom-file-label form-control" for="avatar">Selecione a imagem do papel timbrado</label>
+                  </div>
+                </div>
+                <small>O formatos permitidos são png e jpg</small>
+              </div>
+            </div>
+
+            <label>Exemplos de papel timbrado:</label>
+            <div class="row my-2 d-flex justify-content-center">
+              <%= link_to download_psd_path, class: 'btn btn-outline-danger mr-1' do %>
+                PSD <i class="fa fa-download"></i>
+              <% end %>
+              <%= link_to download_png_path, class: 'btn btn-outline-danger mr-1' do %>
+                PNG <i class="fa fa-download"></i>
+              <% end %>
             </div>
           </div>
-          <small>O formatos permitidos são png e jpg</small>
+        </div>
+
+        <div class="col-sm-12 col-md-6 mt-4">
+          <div class="w-100 bg-preferences ">
+            <label>Definir data de baixa das finanças:</label><br />
+            
+            <div class="form-column justify-content-start">
+              <input type='radio' name='user_preference[data_atual]' value="0" <% if !@preferences.data_atual %>checked<% end %> /> <label><b>Data atual</b></label> <br />
+              <input type='radio' name='user_preference[data_atual]' value="1" <% if @preferences.data_atual %>checked<% end %> /> <label><b>Data da criação do atendimento/documento</b></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="save m-auto">
+            <%= f.submit 'Salvar', class: 'btn btn-primary' %>
+            <a href="#" class='btn btn-primary' onclick="window.history.go(-1)">Voltar</a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="elen w-25">
+      <div class="elephant">
+        <div class="speech-bubble">
+          <button type="button" class="close close-elen" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <p class="text-center mb-0 phrase">O papel timbrado precisa estar em formato PNG ou JPG, com as medidas 297x210mm e 72dpi.</p>
+        </div>
+        <div class="w-50 mt-3">
+          <%= image_tag "elen-alt.png", class:'img-fluid' %>
         </div>
       </div>
 
-      <label>Exemplos de papel timbrado:</label>
-      <div class="row my-2 d-flex justify-content-center">
-        <%= link_to download_psd_path, class: 'btn btn-outline-danger mr-1' do %>
-          PSD <i class="fa fa-download"></i>
-        <% end %>
-        <%= link_to download_png_path, class: 'btn btn-outline-danger mr-1' do %>
-          PNG <i class="fa fa-download"></i>
-        <% end %>
-      </div>
-
-      <%= f.submit 'Salvar', class: 'mt-2 btn btn-primary btn-block' %>
-    <% end %>
-  </div>
-
-  <div class="elen w-25">
-    <div class="elephant">
-      <div class="speech-bubble">
-        <button type="button" class="close close-elen" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <p class="text-center mb-0 phrase">O papel timbrado precisa estar em formato PNG ou JPG, com as medidas 297x210mm e 72dpi.</p>
-      </div>
-      <div class="w-50 mt-3">
-        <%= image_tag "elen-alt.png", class:'img-fluid' %>
+      <div class="reshow-elen square-fab ml-4 mb-4" style="display: none">
+        <i class="fas fa-info"></i>
       </div>
     </div>
-
-    <div class="reshow-elen square-fab ml-4 mb-4" style="display: none">
-      <i class="fas fa-info"></i>
-    </div>
-  </div>
-</section>
+  </section>
 </div>
 
 

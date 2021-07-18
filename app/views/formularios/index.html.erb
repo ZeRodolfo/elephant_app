@@ -14,9 +14,19 @@
 <%= stylesheet_link_tag 'dataTables.bootstrap4.min', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <section class="el min-100 d-flex flex-column">
-    <div class="my-3">
-        <h6 class="subtitle light m-0">Listagem de documentos</h6>
-        <p class="phrase light m-0">Paciente: <span class="phrase bold"><%= @patient.name %></span></p>
+    <div class="row m-0 p-0">
+        <div class="col-6 col-lg-6 col-sm-12 col-md-6">
+            <div class="my-3">
+                <h6 class="subtitle light m-0">Listagem de documentos</h6>
+                <p class="phrase light m-0">Paciente: <span class="phrase bold"><%= @patient.name %></span></p>
+            </div>
+        </div>
+
+        <div class="col-6 col-lg-6 col-sm-12 col-md-6 d-flex align-items-end justify-content-between m-0 pr-0">
+            <div class="ml-auto">
+                <a href="<%= patient_path(@patient) %>" class='btn btn-primary my-0 my-lg-2'>Voltar</a>
+            </div>
+        </div>
     </div>
 
     <div class="bounding align-self-center">

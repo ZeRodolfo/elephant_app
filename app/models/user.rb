@@ -43,10 +43,10 @@ class User < ApplicationRecord
   with_options presence: true do
     validates :phone
     validates :first_name
-    validates :last_name
-    validates :document_number
+    # validates :last_name
+    # validates :document_number
     validates :birth_date
-    validates :crp
+    # validates :crp
   end
 
   before_validation :clean_masked_fields

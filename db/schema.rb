@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_16_211332) do
+ActiveRecord::Schema.define(version: 2021_07_18_184826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,6 +198,8 @@ ActiveRecord::Schema.define(version: 2021_07_16_211332) do
     t.string "cpf"
     t.string "naturalidade"
     t.bigint "address_id"
+    t.decimal "default_office_visit_value"
+    t.string "email"
     t.index ["address_id"], name: "index_patients_on_address_id"
     t.index ["user_id"], name: "index_patients_on_user_id"
   end
@@ -232,6 +234,7 @@ ActiveRecord::Schema.define(version: 2021_07_16_211332) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.boolean "data_atual"
     t.index ["user_id"], name: "index_user_preferences_on_user_id"
   end
 

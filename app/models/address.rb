@@ -25,14 +25,14 @@
 class Address < ApplicationRecord
   belongs_to :user, optional: true
 
-  with_options presence: true do
-    validates :cep
-    validates :city
-    validates :number
-    validates :street
-    validates :uf
-    validates :neighborhood
-  end
+  # with_options presence: true do
+  #   validates :cep
+  #   validates :city
+  #   validates :number
+  #   validates :street
+  #   validates :uf
+  #   validates :neighborhood
+  # end
 
   def resume
     "#{street}, #{number}, #{neighborhood}, #{city} - #{uf}"

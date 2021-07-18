@@ -54,6 +54,7 @@ Here are the technologies used in this project.
 >    $ sudo docker-compose up
 
 docker-compose run --rm app bundle exec rails assets:precompile
+sudo service nginx restart
 
 
 ## How to use
