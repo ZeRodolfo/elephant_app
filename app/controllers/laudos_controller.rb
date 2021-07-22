@@ -22,6 +22,17 @@ class LaudosController < ApplicationController
     @laudo = Laudo.new(laudo_params)
     @laudo.patient_id = @patient.id
 
+
+    uploaded_io = laudo_params[:picture]
+    if !uploaded_io.nil?
+      dir = File.join(Rails.root, 'storage')
+      Dir.mkdir(dir, 0700) unless Dir.exist?(dir)
+      
+      File.open(File.join(dir, uploaded_io.original_filename), 'wb') do |file|
+        file.write(uploaded_io.read)
+      end
+    end
+
     if @laudo.save
       redirect_to patient_formularios_path, notice: 'Laudo criado com sucesso.'
     else
@@ -31,7 +42,32 @@ class LaudosController < ApplicationController
 
 
   def update
+    uploaded_io = laudo_params[:picture]
+    picture = ''
+    if !uploaded_io.nil?
+      dir = File.join(Rails.root, 'public', 'laudos')
+      Dir.mkdir(dir, 0700) unless Dir.exist?(dir)
+
+      md5 = Digest::MD5.new
+      md5.update "#{uploaded_io.original_filename} - #{DateTime.now}"
+
+      type = uploaded_io.content_type.split("/")
+      filename = "#{md5.hexdigest}.#{type[1]}" 
+      pathname = File.join(dir, filename)
+  
+      File.open(pathname, 'wb') do |file|
+        file.write(uploaded_io.read)
+        
+        picture = File.join('laudos', filename)
+      end
+    end
+
     if @laudo.update(laudo_params)
+      if picture
+        @laudo.picture = picture
+        @laudo.save
+      end
+
       redirect_to patient_formularios_path, notice: 'Laudo atualizado com sucesso.'
     else
       render :edit
@@ -63,6 +99,7 @@ class LaudosController < ApplicationController
           :procedure,
           :references,
           :solicitante,
+          :picture,
           :kind,
           grafico_attributes: [:id, :data, :title, :kind, :image]
         )

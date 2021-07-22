@@ -8,6 +8,7 @@
 #  crp         :string
 #  description :string
 #  kind        :string           default(NULL)
+#  picture     :string
 #  procedure   :string
 #  references  :string
 #  solicitante :string

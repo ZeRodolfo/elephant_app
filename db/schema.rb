@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_18_184826) do
+ActiveRecord::Schema.define(version: 2021_07_18_210403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 2021_07_18_184826) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "patient_id"
+    t.string "picture"
     t.index ["patient_id"], name: "index_laudos_on_patient_id"
   end
 
