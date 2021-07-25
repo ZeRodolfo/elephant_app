@@ -29,8 +29,16 @@
       width: 100%;
       border-radius: 1rem !important;
       background-color: var(--lite-green);
-      padding: 2rem;
+      padding: 15px;
       text-align: left !important;
+    }
+
+    @media screen and (max-width: 550px) {
+      .save {
+        width: 100%;
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+      }
     }
   </style>
 <% end %>

@@ -62,5 +62,8 @@
     <div class="form-group col">
       <%= f.submit (declaracao.id.present?) ? 'Atualizar' : 'Salvar', class: 'btn btn-primary btn-block my-0 my-lg-2' %>
     </div>
+    <div class="form-group col">
+      <a href="#" class='btn btn-primary btn-block my-0 my-lg-2' onclick="window.history.go(-1)">Voltar</a>
+    </div>
 </div>
 <% end %>
