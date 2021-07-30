@@ -4,15 +4,17 @@ class PreferencesController < ApplicationController
   def index; end
 
   def update
-    params = { data_atual: false }
-   
     if preferences_params.key?(:data_atual)
       if preferences_params[:data_atual] == '1'
-        params[:data_atual] = true
+        preferences_params[:data_atual] = 1
+      else
+        preferences_params[:data_atual] = 0
       end
+    else
+      preferences_params[:data_atual] = 0
     end
 
-    if @preferences.update(params)
+    if @preferences.update(preferences_params)
       redirect_to preferences_path, notice: 'Ajustes salvos'
     else
       if @preferences.errors[:papel_timbrado].any?

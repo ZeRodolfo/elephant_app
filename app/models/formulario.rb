@@ -6,6 +6,7 @@
 #  content    :json
 #  identifier :integer
 #  kind       :string
+#  version    :string           default("1")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  patient_id :bigint
@@ -28,14 +29,15 @@ class Formulario < ApplicationRecord
 
   def pdf
     if identifier == INFANTIL
-      form = AnamneseInfantilForm.new
+      form = self.version == '1' ? AnamneseInfantilFormV1.new : AnamneseInfantilFormV2.new # v2
       document = AnamneseInfantilPdf.new(form, patient)
     elsif identifier == ADULTO
-      form = AnamneseAdultoForm.new
+      form = self.version == '1' ? AnamneseAdultoFormV1.new : AnamneseAdultoFormV2.new # v2
       document = AnamneseAdultoPdf.new(form, patient)
     end
 
-    form.deserialize content
+    form.deserialize content, self.version
+    document.set_version self.version
     document.build
     document.pdf
   end
