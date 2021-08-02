@@ -1,4 +1,4 @@
-class AnamneseAdultoFormV2 < BaseForm
+class AnamneseAdultoFormV2 < BaseFormV2
   def initialize
     super
     @fields = [

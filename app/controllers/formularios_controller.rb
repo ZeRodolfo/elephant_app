@@ -5,7 +5,6 @@ class FormulariosController < ApplicationController
   before_action :set_formulario, only: [:destroy, :show]
 
   def show
-    # puts @model.content
     send_data @model.pdf.render, filename: 'formulario.pdf', type: 'application/pdf', disposition: 'inline'
   end
 
@@ -21,7 +20,7 @@ class FormulariosController < ApplicationController
 
   def create_infantil
     @form = AnamneseInfantilFormV2.new
-    @form.fill(permitted_params)
+    @form.fill(permitted_params, @form.version)
     @model = Formulario.new
     @model.kind = "Anamnese Infantil"
     @model.identifier = Formulario::INFANTIL
@@ -38,7 +37,7 @@ class FormulariosController < ApplicationController
 
   def create_adulto
     @form = AnamneseAdultoFormV2.new
-    @form.fill(permitted_params)
+    @form.fill(permitted_params, @form.version)
     @model = Formulario.new
     @model.kind = "Anamnese Adulto"
     @model.identifier = Formulario::ADULTO
@@ -55,9 +54,9 @@ class FormulariosController < ApplicationController
 
   def update_infantil
     @form = AnamneseInfantilFormV2.new
-    @form.fill(permitted_params)
+    @form.fill(permitted_params, @form.version)
 
-    if @model.update({ content: @form.serialize })
+    if @model.update({ content: @form.serialize, version: @form.version })
       redirect_to patient_formularios_path(@patient), notice: "Anamnese Infantil atualizada com sucesso."
     else
       render :edit_infantil
@@ -66,7 +65,7 @@ class FormulariosController < ApplicationController
 
   def update_adulto
     @form = AnamneseAdultoFormV2.new
-    @form.fill(permitted_params)
+    @form.fill(permitted_params, @form.version)
 
     if @model.update({ content: @form.serialize, version: @form.version })
       redirect_to patient_formularios_path(@patient), alert: "Anamnese Adulto atualizada com sucesso."

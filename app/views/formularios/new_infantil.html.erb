@@ -2,25 +2,6 @@
 
 <%= render 'shared/navbar' %>
 
-<!--
-<section class="d-flex m-0 align-items-start justify-content-center el min100">
-    <div class="bounding generic-form">
-        <%= form_with url: anamnese_infantil_patient_formularios_path, local: true, method: :post do |form| %>
-            <%= render 'form', formulario: @form, patient: @patient, title: 'Anamnese Infantil', text_area_rows: 3 %>
-            
-            <div class="form-row">
-                <div class="form-group col">
-                    <%= form.submit 'Salvar', class: 'btn btn-primary btn-block my-0 my-lg-2' %>
-                </div>
-                <div class="form-group col">
-                    <a href="#" class='btn btn-primary btn-block my-0 my-lg-2' onclick="window.history.go(-1)">Voltar</a>
-                </div>
-             </div>
-        <% end %>
-    </div>
-</section>
--->
-
 <section class="d-flex m-0 align-items-start justify-content-center el min100">
     <%= form_with url: anamnese_infantil_patient_formularios_path, local: true, method: :post do |form| %>
         <div class="row">

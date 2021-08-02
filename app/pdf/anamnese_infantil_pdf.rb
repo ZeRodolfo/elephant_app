@@ -20,7 +20,7 @@ class AnamneseInfantilPdf < PdfDocument
       ['Telefone', patient.phone.to_s],
     ])
 
-    render_fields_by_version('', 
+    render_fields_by_version('identificacao', 
       :nome_pai, :profissao_pai, :escolaridade_pai,
       :nome_mae, :profissao_mae, :escolaridade_mae,
       :divorciados, :quantidade_irmaos, :nome_escola,
@@ -32,13 +32,13 @@ class AnamneseInfantilPdf < PdfDocument
     add_section('2 - Histórico')
     move_down 20
 
-    render_fields_by_version('', :natural, :natural_obs, :pre_natal, :gravidez_planejada)
+    render_fields_by_version('historico', :natural, :natural_obs, :pre_natal, :gravidez_planejada)
 
     move_down 20
     add_section('3 - Problemas')
     move_down 20
 
-    render_fields_by_version('',
+    render_fields_by_version('problemas',
       :problema_gravidez,
       :problema_pressao,
       :problema_queda,
@@ -57,7 +57,7 @@ class AnamneseInfantilPdf < PdfDocument
     add_section('4 - Parto')
     move_down 20
 
-    render_fields_by_version('',
+    render_fields_by_version('parto',
       :nasceu_em_casa,
       :parto_normal,
       :cesariana,
@@ -73,7 +73,7 @@ class AnamneseInfantilPdf < PdfDocument
 
     move_down 10
 
-    render_fields_by_version('',
+    render_fields_by_version('parto',
       :peso,
       :altura,
       :problemas_depois_nascimento,
@@ -84,7 +84,7 @@ class AnamneseInfantilPdf < PdfDocument
     add_section('5 - Amamentação')
     move_down 20
 
-    render_fields_by_version('',
+    render_fields_by_version('amamentacao',
       :peito_exclusivo,
       :peito_complemento,
       :mamadeira,
@@ -102,7 +102,7 @@ class AnamneseInfantilPdf < PdfDocument
     add_section('6 - Sono')
     move_down 20
 
-    render_fields_by_version('',
+    render_fields_by_version('sono',
       :calmo,
       :agitado,
       :dificuldade_sono,
@@ -116,7 +116,7 @@ class AnamneseInfantilPdf < PdfDocument
     add_section('7 - Desenvolvimento')
     move_down 20
 
-    render_fields_by_version('',
+    render_fields_by_version('desenvolvimento',
       :sentou,
       :engatinhou,
       :andou,
@@ -132,7 +132,7 @@ class AnamneseInfantilPdf < PdfDocument
     add_section('8 - Saúde')
     move_down 20
 
-    render_fields_by_version('',
+    render_fields_by_version('saude',
       :dor_ouvido,
       :infeccao,
       :convulsao,
@@ -147,7 +147,7 @@ class AnamneseInfantilPdf < PdfDocument
 
     move_down 10
 
-    render_fields_by_version('',
+    render_fields_by_version('saude',
       :saude_tratamento,
       :saude_vacinas,
       :saude_aprendizagem,
@@ -159,7 +159,7 @@ class AnamneseInfantilPdf < PdfDocument
     add_section('9 - Escola e Lazer')
     move_down 20
 
-    render_fields_by_version('',
+    render_fields_by_version('escola_e_lazer',
       :pre_escola,
       :repetencia,
       :repetencia_quando,
@@ -179,7 +179,7 @@ class AnamneseInfantilPdf < PdfDocument
     add_section('10 - Relacionamentos')
     move_down 20
 
-    render_fields_by_version('',
+    render_fields_by_version('relacionamentos',
       :grupo_extra_curricular,
       :atividade_extra_curricular,
       :amigos,
@@ -202,7 +202,7 @@ class AnamneseInfantilPdf < PdfDocument
     text '(0) falso/ausente (1) mais ou menos verdadeiro (2) bastante verdadeiro.'
     move_down 20
 
-    render_fields_by_version('',
+    render_fields_by_version('comportamento_crianca_adolescente',
       :comportamento_calmo,
       :comportamento_agitado,
       :comportamento_sem_concentracao,

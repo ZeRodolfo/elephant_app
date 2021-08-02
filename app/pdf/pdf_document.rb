@@ -130,10 +130,6 @@ class PdfDocument
 
     def render_field(field, prefix: nil, use_alternative: nil)
       if !field.nil? and field.type != 'header'
-        if field.name == 'nome_professor'
-          puts field
-        end
-
         case field.type
         when 'text', 'textarea', 'number', 'observation'
           add_oneline_answer(normalize_label(field.label), field.value, prefix: prefix)
