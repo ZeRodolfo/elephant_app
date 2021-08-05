@@ -141,6 +141,10 @@ class PdfDocument
           end
         when 'checkbox'
           add_checkbox(field.label, field.value, prefix: prefix)
+        when 'add_ask'
+          field[:value].each do |item|
+            render_field OpenStruct.new(item), prefix: prefix&.next, use_alternative: use_alternative
+          end
         else
           raise "Tipo de field desconhecido #{field.type}"
         end

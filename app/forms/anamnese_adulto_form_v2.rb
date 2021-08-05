@@ -91,7 +91,7 @@ class AnamneseAdultoFormV2 < BaseFormV2
             type: 'textarea',
             label: 'Aplicação de testes? se sim, qual e resultado'
           },
-          { type: 'add_ask'},
+          { type: 'add_ask', label: 'Adicionar Pergunta', values: [], name: 'identificacao_pergunta_'},
         ],
       },
       { 
@@ -124,6 +124,7 @@ class AnamneseAdultoFormV2 < BaseFormV2
             type: 'textarea',
             label: 'Focos de intervenção psicoterápica'
           },
+          { type: 'add_ask', label: 'Adicionar Pergunta', values: [], name: 'historico_queixa_pergunta_'},
         ],
       },
       { 
@@ -149,6 +150,7 @@ class AnamneseAdultoFormV2 < BaseFormV2
             type: 'textarea',
             label: 'Observações sobre dinâmica familiar atual'
           },
+          { type: 'add_ask', label: 'Adicionar Pergunta', values: [], name: 'relacionamentos_importantes_pergunta_'},
         ]
       },
       { 
@@ -187,6 +189,7 @@ class AnamneseAdultoFormV2 < BaseFormV2
             type: 'textarea',
             label: 'Outros comentários'
           },
+          { type: 'add_ask', label: 'Adicionar Pergunta', values: [], name: 'infancia_pergunta_'},
         ]
       },
       { 
@@ -217,6 +220,7 @@ class AnamneseAdultoFormV2 < BaseFormV2
             type: 'textarea',
             label: 'Círculo de amizades'
           },
+          { type: 'add_ask', label: 'Adicionar Pergunta', values: [], name: 'adolescencia_pergunta_'},
         ]
       },
       { 
@@ -263,6 +267,7 @@ class AnamneseAdultoFormV2 < BaseFormV2
             type: 'textarea',
             label: 'Observação e linguagem não verbal do paciente:'
           },
+          { type: 'add_ask', label: 'Adicionar Pergunta', values: [], name: 'vida_adulta_pergunta_'},
         ]
       },
       { 
@@ -285,7 +290,8 @@ class AnamneseAdultoFormV2 < BaseFormV2
             type: 'textarea',
             label:
               'Terapêutica utilizada (prescrição de exercícios, leituras, relaxamento, etc.'
-          }
+          },
+          { type: 'add_ask', label: 'Adicionar Pergunta', values: [], name: 'atendimentos_prestados_pergunta_'},
         ]
       }
     ]

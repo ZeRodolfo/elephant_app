@@ -37,6 +37,7 @@ class AnamneseAdultoPdf < PdfDocument
       :medicacao_que_esta_tomando,
       :medicacao_alternativa_chas_compostos_etc,
       :'aplicacao_de_testes?_se_sim_qual_e_resultado',
+      :'identificacao_pergunta_',
       :'identificacao_observacao'
     )
 
@@ -51,6 +52,8 @@ class AnamneseAdultoPdf < PdfDocument
       :uso_de_drogas,
       :tentativa_de_suicidio,
       :focos_de_intervencao_psicoterapica,
+      :'historico_queixa_pergunta_',
+      :historico_queixa_observacao
     )
 
     move_down 20
@@ -65,6 +68,8 @@ class AnamneseAdultoPdf < PdfDocument
       :filhos,
       :outros_importantes,
       :observacoes_sobre_dinâmica_familiar_atual,
+      :relacionamentos_importantes_pergunta_,
+      :relacionamentos_importantes_observacao
     )
 
     move_down 20
@@ -78,6 +83,8 @@ class AnamneseAdultoPdf < PdfDocument
       :estressores_na_infância_crises,
       :outros_transtornos_infantis_sono_alimentacao_psicomotor_gagueira_tiques_sonambulismo_aprendizagem,
       :outros_comentarios,
+      :infancia_pergunta_,
+      :infancia_observacao
     )
 
     move_down 20
@@ -89,6 +96,8 @@ class AnamneseAdultoPdf < PdfDocument
       :experiencias_sexuais_marcantes,
       :independencia_primeiros_empregos,
       :circulo_de_amizades,
+      :adolescencia_pergunta_,
+      :adolescencia_observacao
     )
 
     move_down 20
@@ -104,6 +113,8 @@ class AnamneseAdultoPdf < PdfDocument
       :outros_transtornos_atuais_sono_alimentacao_tiquesetc,
       :principais_lazeres_vida_social,
       :observacao_e_linguagem_nao_verbal_do_paciente,
+      :vida_adulta_pergunta_,
+      :vida_adulta_observacao
     )
 
     move_down 20
@@ -114,6 +125,8 @@ class AnamneseAdultoPdf < PdfDocument
       :profissional,
       :encaminhamentos_feitos,
       :terapeutica_utilizada_prescricao_de_exercicios_leituras_relaxamento_etc,
+      :atendimentos_prestados_pergunta_,
+      :atendimentos_prestados_observacao
     )
   end
 end

@@ -58,6 +58,7 @@ class AnamneseInfantilFormV2 < BaseFormV2
           {
             name: 'telefone_escola', type: 'text', classes: 'telefone', label: 'Contato da escola'
           },
+          { type: 'add_ask', label: 'Adicionar Pergunta', values: [], name: 'identificacao_pergunta_'},
         ],
       },
       { 
@@ -84,6 +85,7 @@ class AnamneseInfantilFormV2 < BaseFormV2
             name: 'gravidez_planejada', type: 'select', options: [['Sim', 1],
                                                                   ['Não', 0]], label: 'Gravidez planejada?'
           },
+          { type: 'add_ask', label: 'Adicionar Pergunta', values: [], name: 'historico_pergunta_'},
         ],
       },
       { 
@@ -130,6 +132,7 @@ class AnamneseInfantilFormV2 < BaseFormV2
           {
             name: 'problema_obs', type: 'text', label: 'Observações'
           },
+          { type: 'add_ask', label: 'Adicionar Pergunta', values: [], name: 'problemas_pergunta_'},
         ],
       },
       { 
@@ -187,6 +190,7 @@ class AnamneseInfantilFormV2 < BaseFormV2
           {
             name: 'problemas_depois_nascimento_obs', type: 'text', label: 'Quais?'
           },
+          { type: 'add_ask', label: 'Adicionar Pergunta', values: [], name: 'parto_pergunta_'},
         ],
       },
       { 
@@ -229,6 +233,7 @@ class AnamneseInfantilFormV2 < BaseFormV2
           {
             name: 'dedo_retirada', type: 'number', min: 0, classes: '', label: 'Até'
           },
+          { type: 'add_ask', label: 'Adicionar Pergunta', values: [], name: 'amamentacao_pergunta_'},
         ],
       },
       { 
@@ -261,6 +266,7 @@ class AnamneseInfantilFormV2 < BaseFormV2
             name: 'fala_sono', type: 'select', options: [['Sim', 1],
                                                         ['Não', 0]], label: 'Fala ou anda dormindo'
           },
+          { type: 'add_ask', label: 'Adicionar Pergunta', values: [], name: 'sono_pergunta_'},
         ],
       },
       { 
@@ -298,6 +304,7 @@ class AnamneseInfantilFormV2 < BaseFormV2
             name: 'equilibro', type: 'select', options: [['Sim', 1],
                                                         ['Não', 0]], label: 'Apresenta equilíbrio motor?'
           },
+          { type: 'add_ask', label: 'Adicionar Pergunta', values: [], name: 'desenvolvimento_pergunta_'},
         ],
       },
       { 
@@ -353,6 +360,7 @@ class AnamneseInfantilFormV2 < BaseFormV2
           {
             name: 'saude_psiquiatrico_quais', type: 'textarea', label: 'Quais?'
           },
+          { type: 'add_ask', label: 'Adicionar Pergunta', values: [], name: 'saude_pergunta_'},
         ],
       },
       { 
@@ -407,6 +415,7 @@ class AnamneseInfantilFormV2 < BaseFormV2
           {
             name: 'brincadeiras_preferidos', type: 'textarea', label: 'Atividades e brincadeiras preferidas'
           },
+          { type: 'add_ask', label: 'Adicionar Pergunta', values: [], name: 'escola_e_lazer_pergunta_'},
         ],
       },
       { 
@@ -457,6 +466,7 @@ class AnamneseInfantilFormV2 < BaseFormV2
           {
             name: 'qualidades_obs', type: 'textarea', label: 'Descreva as maiores qualidades ou pontos positivos da criança/adolescente'
           },
+          { type: 'add_ask', label: 'Adicionar Pergunta', values: [], name: 'relacionamentos_pergunta_'},
         ],
       },
       { 
@@ -1408,7 +1418,8 @@ class AnamneseInfantilFormV2 < BaseFormV2
           },
           {
             name: 'outros_problemas_obs', type: 'textarea', label: 'Outros problemas observados'
-          }
+          },
+          { type: 'add_ask', label: 'Adicionar Pergunta', values: [], name: 'comportamento_crianca_adolescente_pergunta_'},
         ],
       }
     ]

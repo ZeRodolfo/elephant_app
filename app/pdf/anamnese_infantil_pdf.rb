@@ -25,14 +25,14 @@ class AnamneseInfantilPdf < PdfDocument
       :nome_mae, :profissao_mae, :escolaridade_mae,
       :divorciados, :quantidade_irmaos, :nome_escola,
       :turma_escola, :serie_escola, :nome_professor,
-      :telefone_escola
+      :telefone_escola, :identificacao_pergunta_, :identificacao_observacao
     )
 
     move_down 20
     add_section('2 - Histórico')
     move_down 20
 
-    render_fields_by_version('historico', :natural, :natural_obs, :pre_natal, :gravidez_planejada)
+    render_fields_by_version('historico', :natural, :natural_obs, :pre_natal, :gravidez_planejada, :historico_pergunta_, :historico_observacao)
 
     move_down 20
     add_section('3 - Problemas')
@@ -50,6 +50,8 @@ class AnamneseInfantilPdf < PdfDocument
       :problema_droga,
       :problema_medicamento,
       :problema_obs,
+      :problemas_pergunta_,
+      :problemas_observacao,
       prefix_enum: alphabet.each
     )
 
@@ -77,7 +79,9 @@ class AnamneseInfantilPdf < PdfDocument
       :peso,
       :altura,
       :problemas_depois_nascimento,
-      :problemas_depois_nascimento_obs
+      :problemas_depois_nascimento_obs,
+      :parto_pergunta_,
+      :parto_observacao,
     )
 
     move_down 20
@@ -95,6 +99,8 @@ class AnamneseInfantilPdf < PdfDocument
       :chupeta_retirada,
       :dedo,
       :dedo_retirada,
+      :amamentacao_pergunta_,
+      :amamentacao_observacao,
       prefix_enum: alphabet.each
     )
 
@@ -109,6 +115,8 @@ class AnamneseInfantilPdf < PdfDocument
       :acorda_a_noite,
       :horario_sono,
       :fala_sono,
+      :sono_pergunta_,
+      :sono_observacao,
       prefix_enum: alphabet.each
     )
 
@@ -125,6 +133,8 @@ class AnamneseInfantilPdf < PdfDocument
       :fralda_dia,
       :fralda_noite,
       :equilibro,
+      :desenvolvimento_pergunta_,
+      :desenvolvimento_observacao,
       prefix_enum: alphabet.each
     )
 
@@ -153,6 +163,8 @@ class AnamneseInfantilPdf < PdfDocument
       :saude_aprendizagem,
       :saude_psiquiatrico,
       :saude_psiquiatrico_quais,
+      :saude_pergunta_,
+      :saude_observacao,
     )
 
     move_down 20
@@ -172,6 +184,8 @@ class AnamneseInfantilPdf < PdfDocument
       :problemas_desempenho_escolar,
       :esportes_preferidos,
       :brincadeiras_preferidos,
+      :escola_e_lazer_pergunta_,
+      :escola_e_lazer_observacao,
       prefix_enum: alphabet.each
     )
 
@@ -191,6 +205,8 @@ class AnamneseInfantilPdf < PdfDocument
       :comparado_grupo,
       :maiores_preocupacoes,
       :qualidades_obs,
+      :relacionamentos_pergunta_,
+      :relacionamentos_observacao,
       prefix_enum: alphabet.each
     )
 
@@ -310,6 +326,8 @@ class AnamneseInfantilPdf < PdfDocument
       :faz_manha,
       :gostaria_de_ser_do_sexo_oposto,
       :outros_problemas_obs,
+      :comportamento_crianca_adolescente_pergunta_,
+      :comportamento_crianca_adolescente_observacao,
       use_alternative: true
     )
   end
