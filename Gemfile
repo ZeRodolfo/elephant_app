@@ -33,7 +33,8 @@ gem 'chart'
 # Generate Pdf with html
 gem 'pdfkit'
 gem 'render_anywhere'
-gem 'wkhtmltopdf-binary'
+#gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary-edge'
 
 # Paginate
 gem 'will_paginate', '~> 3.1.0'
