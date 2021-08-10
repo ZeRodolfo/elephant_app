@@ -8,8 +8,10 @@ class PdfsController < ApplicationController
   private
  
   def office_visit_pdf
+    url = url_for(current_user.user_preference.papel_timbrado)
+
     officeVisit = OfficeVisit.find(params[:office_visit_id])
-    OfficeVisitPdf.new(officeVisit, current_user)
+    OfficeVisitPdf.new(officeVisit, current_user, url)
   end
  
   def send_office_visit_pdf

@@ -57,7 +57,7 @@
 
         <div class="col-sm-12 col-md-6 mt-4">
           <div class='w-100 bg-preferences'>
-            <label>Papel timbrado</label><br />
+            <label>Logotipo</label><br />
             <% if @preferences.papel_timbrado.attached? && @preferences.papel_timbrado.representable? %>
               <div class="row justify-content-center">
                 <%= image_tag @preferences.papel_timbrado.variant(resize: '200x400') %>
@@ -78,14 +78,14 @@
                 <div class="input-group">
                   <div class="custom-file">
                     <%= f.file_field :papel_timbrado, class: 'custom-file-input', id: 'avatar' %>
-                    <label class="custom-file-label form-control" for="avatar">Selecione a imagem do papel timbrado</label>
+                    <label class="custom-file-label form-control" for="avatar">Selecione a imagem do Logotipo</label>
                   </div>
                 </div>
                 <small>O formatos permitidos são png e jpg</small>
               </div>
             </div>
 
-            <label>Exemplos de papel timbrado:</label>
+            <!--<label>Exemplos de papel timbrado:</label>
             <div class="row my-2 d-flex justify-content-center">
               <%= link_to download_psd_path, class: 'btn btn-outline-danger mr-1' do %>
                 PSD <i class="fa fa-download"></i>
@@ -93,7 +93,7 @@
               <%= link_to download_png_path, class: 'btn btn-outline-danger mr-1' do %>
                 PNG <i class="fa fa-download"></i>
               <% end %>
-            </div>
+            </div>-->
           </div>
         </div>
 
@@ -123,7 +123,7 @@
           <button type="button" class="close close-elen" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <p class="text-center mb-0 phrase">O papel timbrado precisa estar em formato PNG ou JPG, com as medidas 297x210mm e 72dpi.</p>
+          <p class="text-center mb-0 phrase">O Logotipo precisa estar em formato PNG ou JPG, com as medidas 120x90mm.</p>
         </div>
         <div class="w-50 mt-3">
           <%= image_tag "elen-alt.png", class:'img-fluid' %>

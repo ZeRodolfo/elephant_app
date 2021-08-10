@@ -28,6 +28,13 @@
   --py: 30px;
 }
 
+@media screen and (min-width: 1300px) {
+  :root {
+    --px: 5rem;
+    --py: 3rem;
+  }
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
 }

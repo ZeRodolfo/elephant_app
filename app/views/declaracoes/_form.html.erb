@@ -1,12 +1,10 @@
 <%= form_with model: declaracao, url: path, local: true, method: method do |f| %>
-  <% if declaracao.id.present? %>
-    <div class="form-row">
-      <div class="form-group col">
-        <label for="created_at">Data de criação</label>
-        <input type="text" id="created_at" disabled value="<%= declaracao.created_at.to_date %>" class="form-control">
-      </div>
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="created_at">Data de criação</label>
+      <input type="date" id="created_at" name="declaracao[created_at]" value="<%= declaracao.created_at.nil? ? "" : declaracao.created_at.strftime("%F") %>" class="form-control">
     </div>
-  <% end %>
+  </div>
 
   <div class="form-row">
     <div class="form-group col">

@@ -37,12 +37,12 @@
             </p>
 
             <p>
-                <strong>Descrição:</strong>
+                <strong>Registro de Atendimento:</strong>
                 <br>
                 <% if @office_visit.description.present? %>
                 <%= @office_visit.description %>
                 <% else %>
-                Sem Descrição.
+                Sem Registro.
                 <% end %>
             </p>
 
@@ -70,11 +70,14 @@
 			<% end %>
 
             <div class="row my-3 mx-0">
-                <div class="col-12 col-lg-6 m-0 p-0 mb-2 mb-lg-0 pr-0 pr-lg-2">
+                <div class="col-12 col-lg-4 m-0 p-0 mb-2 mb-lg-0 pr-0 pr-lg-2">
                     <a href="<%= edit_patient_office_visit_path(@office_visit.patient, @office_visit) %>" class="btn btn-primary btn-block">Editar</a>
                 </div>
-                <div class="col-12 col-lg-6 m-0 p-0 pl-0 pl-lg-2">
+                <div class="col-12 col-lg-4 m-0 p-0 pl-0 pl-lg-2">
                     <a href="<%= edit_patient_office_visit_path(@office_visit.patient, @office_visit, remark: true) %>" class="btn btn-outline-primary btn-block">Remarcar</a>
+                </div>
+                <div class="col-12 col-lg-4 m-0 p-0 pl-0 pl-lg-2">
+                    <a href="#" class='btn btn-primary btn-block my-0' onclick="window.history.go(-1)">Voltar</a>
                 </div>
             </div>
         </div>

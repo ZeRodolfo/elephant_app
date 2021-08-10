@@ -52,6 +52,6 @@ class DeclaracoesController < ApplicationController
     end
 
     def declaracao_params
-      params.require(:declaracao).permit(:city, :crp, :text)
+      params.require(:declaracao).permit(:city, :crp, :text, :created_at)
     end
 end

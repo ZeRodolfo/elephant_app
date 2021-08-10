@@ -3,9 +3,10 @@ require "render_anywhere"
 class OfficeVisitPdf
   include RenderAnywhere
  
-  def initialize(office_visit, current_user)
+  def initialize(office_visit, current_user, logotipo)
     @office_visit = office_visit
     @current_user = current_user
+    @logotipo = logotipo
   end
  
   def to_pdf
@@ -16,12 +17,12 @@ class OfficeVisitPdf
   def filename
     "office_visit #{office_visit.id}.pdf"
   end
- 
+
   private
  
-    attr_reader :office_visit, :current_user
+    attr_reader :office_visit, :current_user, :logotipo
  
     def as_html
-      render template: "office_visits/pdf", layout: "pdf", locals: { office_visit: office_visit, current_user: current_user }
+      render template: "office_visits/pdf", layout: "pdf", locals: { office_visit: office_visit, current_user: current_user, logotipo: logotipo }
     end
 end
