@@ -25,6 +25,7 @@
       z-index: 1000;
       top: 30%;
       left: 30%;
+      right: 30%;
       background: #5f5e5e;
       background-image: url('/assets/elen.png');
       background-repeat: no-repeat;
@@ -82,6 +83,13 @@
       padding: 5px;
     }
 
+    @media screen and (max-width: 1000px) {
+      #baixa_alert {
+        left: 20% !important;
+        right: 20% !important;
+      }
+    }
+
     @media screen and (max-width: 767px) {
       #container_actions {
         justify-content: flex-start !important;
@@ -90,6 +98,18 @@
 
       #container_actions a {
         margin-right: 10px;
+      }
+
+      #baixa_alert {
+        left: 10% !important;
+        right: 10% !important;
+      }
+    }
+
+    @media screen and (max-width: 690px) {
+      #baixa_alert {
+        left: 15px !important;
+        right: 15px !important;
       }
     }
 

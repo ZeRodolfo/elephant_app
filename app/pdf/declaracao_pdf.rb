@@ -1,9 +1,9 @@
 class DeclaracaoPdf < PdfDocument
   def build
     add_document_header_logo()
-    add_document_description("SETOR DE PSICOLOGIA APLICADA – SPA")
-    add_document_description("CLÍNICA DE #{user.clinic_name}")
-    
+    if !user.clinic_name.nil? and !user.clinic_name.empty?
+      add_document_description("#{user.clinic_name}")
+    end
     add_document_header('DECLARAÇÃO', margin_top: 20)
 
     add_paragraph form.text

@@ -27,6 +27,7 @@
       <%= image_tag(logotipo) %>
     </div>
 
-    <h2>SETOR DE PSICOLOGIA APLICADA – SPA</h2>
-    <h2>CLÍNICA DE  <%= current_user.clinic_name %></h2>
+    <% if !current_user.clinic_name.nil? and !current_user.clinic_name.empty? %>
+      <h2><%= current_user.clinic_name %></h2>
+    <% end %>
 </div>
