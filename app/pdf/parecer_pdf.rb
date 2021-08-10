@@ -1,6 +1,10 @@
 class ParecerPdf < PdfDocument
   def build
-    add_document_header('PARECER PSICOLÓGICO')
+    add_document_header_logo()
+    add_document_description("SETOR DE PSICOLOGIA APLICADA – SPA")
+    add_document_description("CLÍNICA DE #{user.clinic_name}")
+    
+    add_document_header('PARECER PSICOLÓGICO', margin_top: 20)
     add_section('Identificação:', margin_top: 0)
 
     add_table([
@@ -17,8 +21,6 @@ class ParecerPdf < PdfDocument
 
     add_section('Análise:')
     add_paragraph form.analysis
-
-    new_page
 
     add_section('Conclusão:')
     add_paragraph form.conclusion

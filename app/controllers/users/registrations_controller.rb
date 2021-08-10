@@ -27,6 +27,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
         :document_number,
         :birth_date,
         :terms_of_service,
+        :crp,
+        :clinic_name,
         addresses_attributes: [:id, :cep, :city, :number, :street, :uf, :complement, :neighborhood]
       )
   end
@@ -39,6 +41,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
         :password,
         :password_confirmation,
         :phone,
+        :crp,
+        :clinic_name,
         addresses_attributes: [:id, :cep, :city, :number, :street, :uf, :complement, :neighborhood]
       )
   end

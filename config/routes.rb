@@ -16,12 +16,19 @@ Rails.application.routes.draw do
 
   root to: "static#landing"
 
-  resources :office_visits, only: [:index, :show]
+  resources :office_visits, only: [:index, :show] do
+    resource :pdf, to: 'pdfs#office_visit', on: :collection 
+  end
+
+  # get 'office_visits/:id/pdf', to: 'office_visits#pdf', as: :office_visits_pdf
 
   resources :patients do
     resources :office_visits do
       post :create_multiple, on: :collection
     end
+
+    post :parcels, to: 'parcels#low_all'
+    post :default_office_visit_value, to: 'patients#default_office_visit_value'
 
     resources :atestados
     resources :declaracoes

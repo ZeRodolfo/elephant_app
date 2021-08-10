@@ -3,6 +3,14 @@ class AtestadosController < ApplicationController
   before_action :set_atestado, only: [:show, :edit, :update, :destroy]
 
   def show
+    # if current_user.user_preference.nil?
+    #   @atestado.certificate_at = @atestado.created_at
+    # else
+    #   if !current_user.user_preference.data_atual
+    #     @atestado.certificate_at = @atestado.created_at
+    #   end
+    # end
+
     send_data @atestado.pdf.render, filename: 'atestado.pdf', type: 'application/pdf', disposition: 'inline'
   end
 
@@ -52,6 +60,6 @@ class AtestadosController < ApplicationController
     end
 
     def atestado_params
-      params.require(:atestado).permit(:cidade, :crp, :text)
+      params.require(:atestado).permit(:cidade, :crp, :certificate_at, :text)
     end
 end

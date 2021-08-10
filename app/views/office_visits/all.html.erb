@@ -12,6 +12,12 @@
     #all-office-visits-table tr {
         cursor: pointer;
     }
+    #all-office-visits-table tr td:last-child {
+        cursor: initial;
+    }
+    td a {
+        color: #000;
+    }
 </style>
 
 <%= stylesheet_link_tag 'dataTables.bootstrap4.min', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -23,14 +29,19 @@
         </div>
     </div>
 
-    <div class="row mx-0 mt-5 p-0">
-        <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center m-0 pl-0">
+    <div class="row mx-0 p-0">
+        <div class="col-lg-6 col-sm-8 col-md-8 d-flex align-items-center justify-content-center p-0 mt-3">
             <label class="sr-only" for="office-visits-search">Pesquisa</label>
             <div class="input-group">
                 <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fas fa-search"></i></div>
                 </div>
                 <input type="text" class="form-control" id="all-office-visits-search" placeholder="busque uma data ou paciente">
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-4 col-md-4 d-flex align-items-end justify-content-end p-0 mt-3">
+            <div id='container_back' class="ml-auto">
+                <a href="#" class='btn btn-primary btn-block my-0 my-lg-2' onclick="window.history.go(-1)">Voltar</a>
             </div>
         </div>
     </div>
@@ -41,13 +52,17 @@
                 <tr>
                     <th>Data</th>
                     <th>Paciente</th>
+                    <th>Atalhos</th>
                 </tr>
             </thead>
             <tbody>
                 <% @office_visits.each do |office_visit| %>
                 <tr data-link="<%= validation_patients_path(id: office_visit.patient, prev: office_visits_path) %>">
                     <td data-order="<%= office_visit.date %>"><%= (office_visit.date.present?) ? office_visit.date : '-' %> <%= (office_visit.hour.present?) ? office_visit.hour : '-' %></td>
-                    <td><%= office_visit.patient.name %>
+                    <td><%= office_visit.patient.name %></td>
+                    <td>
+                        <a href="<%= office_visit_pdf_path(office_visit_id: office_visit.id, format: "pdf") %>" target="_blank" title="Imprimir"><i class="fas fa-print"></i></a>
+                    </td>
                 </tr>
                 <% end %>
             </tbody>

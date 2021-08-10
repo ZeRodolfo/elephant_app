@@ -47,8 +47,14 @@ Here are the technologies used in this project.
 * To install as gens:
 >    $ sudo docker-compose run --rm app bundle install
 
+* To run migrations:
+>    $ sudo docker-compose run --rm app bundle exec rake db:migrate
+
 * To run the project:
 >    $ sudo docker-compose up
+
+docker-compose run --rm app bundle exec rails assets:precompile
+sudo service nginx restart
 
 
 RAILS_ENV=production rails assets:precompile

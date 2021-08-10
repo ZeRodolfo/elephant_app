@@ -3,15 +3,27 @@
 <%= render 'shared/navbar' %>
 
 <section class="d-flex m-0 align-items-start justify-content-center el min100">
-    <div class="bounding generic-form">
-        <%= form_with url: anamnese_infantil_patient_formularios_path, local: true, method: :post do |form| %>
-            <%= render 'form', formulario: @form, patient: @patient, title: 'Anamnese Infantil', text_area_rows: 3 %>
-            
-            <div class="form-row">
-                <div class="form-group col">
-                    <%= form.submit 'Salvar', class: 'btn btn-primary btn-block my-0 my-lg-2' %>
+    <%= form_with url: anamnese_infantil_patient_formularios_path, local: true, method: :post do |form| %>
+        <div class="row">
+            <%= render 'form_v2', formulario: @form, patient: @patient, title: 'Anamnese Infantil', text_area_rows: 3 %>
+        </div>
+
+        <div class="form-row">
+            <div class="m-auto" style="max-width: 300px; width: 100%">
+                <div class="bounding generic-form" style="max-width: 100%">
+                    <% if @model.present? %>
+                        <div class="form-group col">
+                            <%= link_to 'Excluir', [@patient, @model], method: :delete, class: 'btn btn-outline-danger btn-block my-0 my-lg-2', data: { confirm: 'Tem certeza que deseja excluir este formulário?' } %>
+                        </div>
+                    <% end %>
+                    <div class="form-group col">
+                        <%= form.submit 'Salvar', class: 'btn btn-primary btn-block my-0 my-lg-2' %>
+                    </div>
+                    <div class="form-group col">
+                        <a href="#" class='btn btn-primary btn-block my-0 my-lg-2' onclick="window.history.go(-1)">Voltar</a>
+                    </div>
                 </div>
-             </div>
-        <% end %>
-    </div>
+            </div>
+        </div>
+    <% end %>
 </section>

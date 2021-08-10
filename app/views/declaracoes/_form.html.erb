@@ -1,12 +1,10 @@
 <%= form_with model: declaracao, url: path, local: true, method: method do |f| %>
-  <% if declaracao.id.present? %>
-    <div class="form-row">
-      <div class="form-group col">
-        <label for="created_at">Data de criação</label>
-        <input type="text" id="created_at" disabled value="<%= declaracao.created_at.to_date %>" class="form-control">
-      </div>
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="created_at">Data de criação</label>
+      <input type="date" id="created_at" name="declaracao[created_at]" value="<%= declaracao.created_at.nil? ? "" : declaracao.created_at.strftime("%F") %>" class="form-control">
     </div>
-  <% end %>
+  </div>
 
   <div class="form-row">
     <div class="form-group col">
@@ -61,6 +59,9 @@
     <% end %>
     <div class="form-group col">
       <%= f.submit (declaracao.id.present?) ? 'Atualizar' : 'Salvar', class: 'btn btn-primary btn-block my-0 my-lg-2' %>
+    </div>
+    <div class="form-group col">
+      <a href="#" class='btn btn-primary btn-block my-0 my-lg-2' onclick="window.history.go(-1)">Voltar</a>
     </div>
 </div>
 <% end %>

@@ -1,5 +1,5 @@
 class PatientsController < ApplicationController
-  before_action :set_patient, only: [:edit, :show, :update, :destroy, :graph, :validation]
+  before_action :set_patient, only: [:edit, :show, :update, :destroy, :graph, :validation, :default_office_visit_value]
 
   def index
     @patients = current_user.patients.order(name: :ASC)
@@ -70,6 +70,14 @@ class PatientsController < ApplicationController
   end
 
 
+  def default_office_visit_value
+    if @patient.update(default_value_params)
+      redirect_to patient_office_visits_path(@patient), notice: 'Paciente Atualizado com sucesso!' 
+    else
+      redirect_to request.referrer, alert: 'Erro ao Atualizar Paciente!'
+    end
+  end
+
   private
 
   def set_patient
@@ -89,6 +97,7 @@ class PatientsController < ApplicationController
         :profession,
         :relative_phone,
         :cpf,
+        :email,
         :naturalidade,
         address_attributes: [:id, :cep, :city, :number, :street, :uf, :complement, :neighborhood]
       )
@@ -97,5 +106,9 @@ class PatientsController < ApplicationController
     end
 
     p
+  end
+
+  def default_value_params
+    params.require(:patient).permit(:default_office_visit_value)
   end
 end

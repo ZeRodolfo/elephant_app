@@ -2,13 +2,14 @@
 #
 # Table name: atestados
 #
-#  id         :bigint           not null, primary key
-#  cidade     :string
-#  crp        :string
-#  text       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  patient_id :bigint
+#  id             :bigint           not null, primary key
+#  certificate_at :date
+#  cidade         :string
+#  crp            :string
+#  text           :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  patient_id     :bigint
 #
 # Indexes
 #

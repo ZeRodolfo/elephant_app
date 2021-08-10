@@ -1,12 +1,42 @@
 <% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Registro' } %>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+  #steps-indicator {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  #cabecalho {
+    margin-bottom: 30px !important;
+    font-weight: bold !important;
+    text-align: center;
+  }
+
+  #cabecalho h1 {
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 3em;
+    font-weight: bold;
+  }
+
+  #cabecalho h3 {
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 2.5em;
+    font-weight: 500;
+  }
+</style>
+
 <div class="min100">
   <%= render 'shared/public-navbar-login' %>
   <section id="cadastro" class="el fill">
     <div class="row m-0 p-0 h-100">
       <div id="cadastro-left-side" class="d-flex flex-column col m-0 pl-0 left">
         <div id="cabecalho" class="row m-0 p-0 d-flex justify-content-start flex-column">
-          <h1 class="six">O controle completo da sua clínica</h1>
-          <h3 class="six">Acesso rápido e fácil em qualquer lugar.</h3>
+          <h1 class="six">O controle da sua clínica</h1>
+          <h3 class="six">Rápido, fácil e de qualquer lugar!</h3>
         </div>
 
         <div id="cadastro-features-container"
@@ -78,7 +108,7 @@
 
               </div>
             </div>
-            <span class="divider"></span>
+            <!--<span class="divider"></span>
             <div data-step='3' class="item step">
               <div class="indicator">3</div>
               <div class="description">
@@ -86,12 +116,62 @@
                 de<br>logradouro
               </div>
             </div>
+            -->
           </div>
+          <!--
           <% unless resource.addresses.present? %>
             <% resource.addresses.build %>
           <% end %>
+          -->
+
+
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { 'data-step': 'true' }) do |f| %>
           <div data-step-content="1" class="step-content visible">
+            <div class="form-row">
+              <div class="form-group col">
+                <%= f.label "Nome completo", for: 'first_name' %>*
+                <%= f.text_field :first_name, class: "form-control #{ 'is-invalid' if resource.errors[:first_name].any? }", id: 'first_name'%>
+                <% if resource.errors[:first_name].any? %>
+                <div class="invalid-feedback">
+                  <% resource.errors[:first_name].each do |m| %>
+                  <%= m %>
+                  <br>
+                  <% end %>
+                </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col">
+                <%= f.label :phone, for: 'phone' %>*
+                <%= f.text_field :phone, class: "form-control telefone #{ 'is-invalid' if resource.errors[:phone].any? }", id: 'phone'%>
+                <% if resource.errors[:phone].any? %>
+                <div class="invalid-feedback">
+                  <% resource.errors[:phone].each do |m| %>
+                  <%= m %>
+                  <br>
+                  <% end %>
+                </div>
+                <% end %>
+              </div>
+            </div>
+            <%= f.fields_for :addresses do |addr_form| %>
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="city">Cidade</label>
+                <%= addr_form.select :city, [], { include_blank: false }, { id: 'city', class: "form-control #{ 'is-invalid' if resource.errors['addresses.city'].any? }" } %>
+                <% if resource.errors["addresses.city"].any? %>
+                <div class="invalid-feedback">
+                  <% resource.errors["addresses.city"].each do |m| %>
+                  <%= m %>
+                  <br>
+                  <% end %>
+                </div>
+                <% end %>
+              </div>
+            </div>
+            <% end %>
+            <!--
             <div class="form-row">
               <div class="form-group col">
                 <%= f.label :first_name, for: 'first_name' %>*
@@ -151,7 +231,7 @@
                 <% end %>
               </div>
             </div>
-
+            -->
             <div class="form-row">
               <div class="form-group col">
                 <label for="birth_date">Data de Nascimento*</label>
@@ -221,8 +301,28 @@
                 <% end %>
               </div>
             </div>
+
+            <div class="form-row">
+              <div class="form-group col">
+                <div class="form-check">
+                  <%= f.check_box :terms_of_service, id: 'terms_of_service', required: true, class: "form-check-input #{ 'is-invalid' if resource.errors[:terms_of_service].any? }" %>
+                  <label class="form-check-label" for="terms_of_service">
+                    Declaro que li e aceito os <a href="<%= termos_politica_path %>" class="text-dark">Termos de Uso e Política de Privacidade</a>*
+                  </label>
+                  <% if resource.errors[:terms_of_service].any? %>
+                    <div class="invalid-feedback">
+                      <% resource.errors[:terms_of_service].each do |m| %>
+                      <%= m %>
+                      <br>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
           </div>
 
+          <!--
           <div data-step-content="3" class="step-content">
             <%= f.fields_for :addresses do |addr_form| %>
             <div class="form-row">
@@ -344,6 +444,7 @@
             </div>
             <% end %>
           </div>
+          -->
 
           <div class="form-row mb-3 mt-0 mx-0">
             <small class="">

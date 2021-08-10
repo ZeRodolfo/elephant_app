@@ -1,9 +1,13 @@
 class RelatorioPdf < PdfDocument
   def build
+    add_document_header_logo()
+    add_document_description("SETOR DE PSICOLOGIA APLICADA – SPA")
+    add_document_description("CLÍNICA DE #{user.clinic_name}")
+    
     if form.psicologico?
-      add_document_header('Relatório Psicológico')
+      add_document_header('Relatório Psicológico', margin_top: 20)
     else
-      add_document_header('Relatório Psicológico ou Multidisciplinar')
+      add_document_header('Relatório Psicológico ou Multidisciplinar', margin_top: 20)
     end
 
     add_section('Identificação:', margin_top: 0)

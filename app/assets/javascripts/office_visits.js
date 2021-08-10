@@ -44,4 +44,40 @@ $(document).on('turbolinks:load', () => {
   search.on('keyup', function () {
     table.search(this.value).draw()
   })
+
+  $("#baixar_tudo_click").click(function(e) {
+    e.preventDefault();
+
+    $('#baixa_alert').show();
+  })
+
+  $("#baixa_alert_cancel").click(function(e) {
+    e.preventDefault()
+    $('#baixa_alert').hide();
+  })
+
+  // $("#default_office_visit_value").change(function(e) {
+  //   const default_office_visit_value = parseFloat($(this).val())
+  //   const url = $(this).data('url');
+  //   const id = $(this).data('id');
+
+  //   if (!isNaN(default_office_visit_value)) {
+  //     $.ajax({
+  //       url,
+  //       type: 'patch',
+  //       data: {
+  //         id,
+  //         patient: {
+  //           default_office_visit_value
+  //         }
+  //       },
+  //       success: function(response) {
+  //         console.log(response)
+  //       },
+  //       error: function(err) {
+  //         alert("Não foi possível atualizar o valor default da consulta.")
+  //       }
+  //     })
+  //   }
+  // })
 })

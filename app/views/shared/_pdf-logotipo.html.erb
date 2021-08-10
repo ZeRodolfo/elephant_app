@@ -1,0 +1,32 @@
+<style>
+  .logotipo {
+    margin-bottom: 30px;
+  }
+
+  .logotipo img {
+    width: 230px;
+    height: 150px;
+  }
+
+  .logotipo h2 {
+    text-align: center;
+    margin: 0 auto;
+    font-weight: 100;
+    text-transform: uppercase;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .logotipo div {
+    margin-bottom: 15px;
+  }
+</style>
+
+<div class="logotipo">
+    <div class="row justify-content-center">
+      <%= image_tag(logotipo) %>
+    </div>
+
+    <h2>SETOR DE PSICOLOGIA APLICADA – SPA</h2>
+    <h2>CLÍNICA DE  <%= current_user.clinic_name %></h2>
+</div>

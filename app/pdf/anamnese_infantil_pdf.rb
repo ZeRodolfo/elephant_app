@@ -1,8 +1,12 @@
 class AnamneseInfantilPdf < PdfDocument
   def build
+    add_document_header_logo()
+    add_document_description("SETOR DE PSICOLOGIA APLICADA – SPA")
+    add_document_description("CLÍNICA DE #{user.clinic_name}")
+    
     alphabet = ('a'..'z').map{ |a| "#{a}) " }
 
-    add_document_header('ANAMNÉSE INFANTIL')
+    add_document_header('ANAMNÉSE INFANTIL', margin_top: 20)
     add_section('1 - Identificação', margin_top: 0)
     add_table([
       ['Nome', patient.name],
@@ -16,25 +20,25 @@ class AnamneseInfantilPdf < PdfDocument
       ['Telefone', patient.phone.to_s],
     ])
 
-    render_fields(
+    render_fields_by_version('identificacao', 
       :nome_pai, :profissao_pai, :escolaridade_pai,
       :nome_mae, :profissao_mae, :escolaridade_mae,
       :divorciados, :quantidade_irmaos, :nome_escola,
       :turma_escola, :serie_escola, :nome_professor,
-      :telefone_escola
+      :telefone_escola, :identificacao_pergunta_, :identificacao_observacao
     )
 
     move_down 20
     add_section('2 - Histórico')
     move_down 20
 
-    render_fields(:natural, :natural_obs, :pre_natal, :gravidez_planejada)
+    render_fields_by_version('historico', :natural, :natural_obs, :pre_natal, :gravidez_planejada, :historico_pergunta_, :historico_observacao)
 
     move_down 20
     add_section('3 - Problemas')
     move_down 20
 
-    render_fields(
+    render_fields_by_version('problemas',
       :problema_gravidez,
       :problema_pressao,
       :problema_queda,
@@ -46,6 +50,8 @@ class AnamneseInfantilPdf < PdfDocument
       :problema_droga,
       :problema_medicamento,
       :problema_obs,
+      :problemas_pergunta_,
+      :problemas_observacao,
       prefix_enum: alphabet.each
     )
 
@@ -53,7 +59,7 @@ class AnamneseInfantilPdf < PdfDocument
     add_section('4 - Parto')
     move_down 20
 
-    render_fields(
+    render_fields_by_version('parto',
       :nasceu_em_casa,
       :parto_normal,
       :cesariana,
@@ -69,18 +75,20 @@ class AnamneseInfantilPdf < PdfDocument
 
     move_down 10
 
-    render_fields(
+    render_fields_by_version('parto',
       :peso,
       :altura,
       :problemas_depois_nascimento,
-      :problemas_depois_nascimento_obs
+      :problemas_depois_nascimento_obs,
+      :parto_pergunta_,
+      :parto_observacao,
     )
 
     move_down 20
     add_section('5 - Amamentação')
     move_down 20
 
-    render_fields(
+    render_fields_by_version('amamentacao',
       :peito_exclusivo,
       :peito_complemento,
       :mamadeira,
@@ -91,6 +99,8 @@ class AnamneseInfantilPdf < PdfDocument
       :chupeta_retirada,
       :dedo,
       :dedo_retirada,
+      :amamentacao_pergunta_,
+      :amamentacao_observacao,
       prefix_enum: alphabet.each
     )
 
@@ -98,13 +108,15 @@ class AnamneseInfantilPdf < PdfDocument
     add_section('6 - Sono')
     move_down 20
 
-    render_fields(
+    render_fields_by_version('sono',
       :calmo,
       :agitado,
       :dificuldade_sono,
       :acorda_a_noite,
       :horario_sono,
       :fala_sono,
+      :sono_pergunta_,
+      :sono_observacao,
       prefix_enum: alphabet.each
     )
 
@@ -112,7 +124,7 @@ class AnamneseInfantilPdf < PdfDocument
     add_section('7 - Desenvolvimento')
     move_down 20
 
-    render_fields(
+    render_fields_by_version('desenvolvimento',
       :sentou,
       :engatinhou,
       :andou,
@@ -121,6 +133,8 @@ class AnamneseInfantilPdf < PdfDocument
       :fralda_dia,
       :fralda_noite,
       :equilibro,
+      :desenvolvimento_pergunta_,
+      :desenvolvimento_observacao,
       prefix_enum: alphabet.each
     )
 
@@ -128,7 +142,7 @@ class AnamneseInfantilPdf < PdfDocument
     add_section('8 - Saúde')
     move_down 20
 
-    render_fields(
+    render_fields_by_version('saude',
       :dor_ouvido,
       :infeccao,
       :convulsao,
@@ -143,19 +157,21 @@ class AnamneseInfantilPdf < PdfDocument
 
     move_down 10
 
-    render_fields(
+    render_fields_by_version('saude',
       :saude_tratamento,
       :saude_vacinas,
       :saude_aprendizagem,
       :saude_psiquiatrico,
       :saude_psiquiatrico_quais,
+      :saude_pergunta_,
+      :saude_observacao,
     )
 
     move_down 20
     add_section('9 - Escola e Lazer')
     move_down 20
 
-    render_fields(
+    render_fields_by_version('escola_e_lazer',
       :pre_escola,
       :repetencia,
       :repetencia_quando,
@@ -168,6 +184,8 @@ class AnamneseInfantilPdf < PdfDocument
       :problemas_desempenho_escolar,
       :esportes_preferidos,
       :brincadeiras_preferidos,
+      :escola_e_lazer_pergunta_,
+      :escola_e_lazer_observacao,
       prefix_enum: alphabet.each
     )
 
@@ -175,7 +193,7 @@ class AnamneseInfantilPdf < PdfDocument
     add_section('10 - Relacionamentos')
     move_down 20
 
-    render_fields(
+    render_fields_by_version('relacionamentos',
       :grupo_extra_curricular,
       :atividade_extra_curricular,
       :amigos,
@@ -187,6 +205,8 @@ class AnamneseInfantilPdf < PdfDocument
       :comparado_grupo,
       :maiores_preocupacoes,
       :qualidades_obs,
+      :relacionamentos_pergunta_,
+      :relacionamentos_observacao,
       prefix_enum: alphabet.each
     )
 
@@ -198,7 +218,7 @@ class AnamneseInfantilPdf < PdfDocument
     text '(0) falso/ausente (1) mais ou menos verdadeiro (2) bastante verdadeiro.'
     move_down 20
 
-    render_fields(
+    render_fields_by_version('comportamento_crianca_adolescente',
       :comportamento_calmo,
       :comportamento_agitado,
       :comportamento_sem_concentracao,
@@ -306,6 +326,8 @@ class AnamneseInfantilPdf < PdfDocument
       :faz_manha,
       :gostaria_de_ser_do_sexo_oposto,
       :outros_problemas_obs,
+      :comportamento_crianca_adolescente_pergunta_,
+      :comportamento_crianca_adolescente_observacao,
       use_alternative: true
     )
   end

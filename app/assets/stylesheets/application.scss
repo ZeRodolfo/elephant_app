@@ -22,8 +22,17 @@
   --hover-green: #38C87F;
   --dark: #2a2b2e;
   --white: #fff;
-  --px: 5rem;
-  --py: 3rem;
+  // --px: 5rem;
+  // --py: 3rem;
+  --px: 15px;
+  --py: 30px;
+}
+
+@media screen and (min-width: 1300px) {
+  :root {
+    --px: 5rem;
+    --py: 3rem;
+  }
 }
 
 body {
@@ -217,7 +226,8 @@ section.el{
 .bounding{
   border-radius: 1rem !important;
   background-color: var(--lite-green);
-  padding: 2rem;
+  // padding: 2rem;
+  padding: 15px;
   text-align: left !important;
 }
 
@@ -579,7 +589,8 @@ div.fc-header-toolbar div.fc-toolbar-chunk:not(:first-child):not(:last-child) {
 
 @media screen and (max-width: 768px){
   :root{
-    --px: 2rem !important;
+    --px: 15px !important;
+    // --px: 2rem !important;
   }
   .title:not(.section-title){
     font-size: 3rem !important;

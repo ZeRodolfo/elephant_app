@@ -1,0 +1,76 @@
+<%= render 'shared/pdf-logotipo', current_user: current_user, logotipo: logotipo %>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  h1 {
+    font-weight: bold;
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  h2 {
+    font-weight: 500;
+    font-size: 25px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+
+  h5 {
+    font-weight: 300;
+    font-size: 18px;
+    margin-bottom: 7px;
+  }
+
+  #container_paciente h5 {
+    float: left;
+  }
+
+  #paciente_name {
+    width: 400px;
+  }
+
+  #paciente_idade {
+    width: 130px;
+  }
+
+  #clinica {
+    width: 270px;
+  }
+
+  #psicologo_name {
+    padding-right: 15px;
+    width: 400px;
+  }
+
+  .clear {
+    clear: both;
+  }
+</style>
+
+<h1>Relatório de Atendimento</h1>
+
+<h2>Dados do Paciente</h2>
+
+<section id='container_paciente'>
+  <h5 id='paciente_name'><b>Nome:</b> <%= office_visit.patient.name %></h5>
+  <h5 id='paciente_idade'><b>Idade:</b> <%= Date.current.year - office_visit.patient.birth_date.year %></h5>
+  <h5 id='clinica'><b>Clínica:</b> <%= current_user.clinic_name %></h5>
+  
+  <div class="clear"></div>
+  <h5 id='psicologo_name'><b>Psicólogo:</b> <%= current_user.name %></h5>
+  <h5 id='psicologo_crp'><b>CRP:</b> <%= current_user.crp %></h5>
+</section>
+
+<div class="clear"></div>
+
+<h2>Atendimento</h2>
+<section id='container_atendimento'>
+  <h5><b>Data:</b> <%= office_visit.date %></h5>
+
+  <h5 id='informacoes_atendimento'><b>Informações do Atendimento:</b> <%= office_visit.description %></h5>
+</section>

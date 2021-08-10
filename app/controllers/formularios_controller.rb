@@ -9,22 +9,23 @@ class FormulariosController < ApplicationController
   end
 
   def new_infantil
-    @form = AnamneseInfantilForm.new
+    @form = AnamneseInfantilFormV2.new
     @model = Formulario.new
   end
 
   def new_adulto
-    @form = AnamneseAdultoForm.new
+    @form = AnamneseAdultoFormV2.new
     @model = Formulario.new
   end
 
   def create_infantil
-    @form = AnamneseInfantilForm.new
-    @form.fill(permitted_params)
+    @form = AnamneseInfantilFormV2.new
+    @form.fill(permitted_params, @form.version)
     @model = Formulario.new
     @model.kind = "Anamnese Infantil"
     @model.identifier = Formulario::INFANTIL
     @model.content = @form.serialize
+    @model.version = @form.version
     @model.patient_id = @patient.id
 
     if @model.save
@@ -35,12 +36,13 @@ class FormulariosController < ApplicationController
   end
 
   def create_adulto
-    @form = AnamneseAdultoForm.new
-    @form.fill(permitted_params)
+    @form = AnamneseAdultoFormV2.new
+    @form.fill(permitted_params, @form.version)
     @model = Formulario.new
     @model.kind = "Anamnese Adulto"
     @model.identifier = Formulario::ADULTO
     @model.content = @form.serialize
+    @model.version = @form.version
     @model.patient_id = @patient.id
 
     if @model.save
@@ -50,16 +52,11 @@ class FormulariosController < ApplicationController
     end
   end
 
-  def edit_infantil
-    @form = AnamneseInfantilForm.new
-    @form.deserialize(@model.content)
-  end
-
   def update_infantil
-    @form = AnamneseInfantilForm.new
-    @form.fill(permitted_params)
+    @form = AnamneseInfantilFormV2.new
+    @form.fill(permitted_params, @form.version)
 
-    if @model.update({ content: @form.serialize })
+    if @model.update({ content: @form.serialize, version: @form.version })
       redirect_to patient_formularios_path(@patient), notice: "Anamnese Infantil atualizada com sucesso."
     else
       render :edit_infantil
@@ -67,19 +64,38 @@ class FormulariosController < ApplicationController
   end
 
   def update_adulto
-    @form = AnamneseAdultoForm.new
-    @form.fill(permitted_params)
+    @form = AnamneseAdultoFormV2.new
+    @form.fill(permitted_params, @form.version)
 
-    if @model.update({ content: @form.serialize })
-      redirect_to patient_formularios_path(@patient), notice: "Anamnese Adulto atualizada com sucesso."
+    if @model.update({ content: @form.serialize, version: @form.version })
+      redirect_to patient_formularios_path(@patient), alert: "Anamnese Adulto atualizada com sucesso."
     else
       render :edit_adulto
     end
   end
 
+  def edit_infantil
+    if @model.version == '1'
+      @form = AnamneseInfantilFormV1.new
+      @form.deserialize(@model.content, @model.version)
+    elsif @model.version == '2'
+      @form = AnamneseInfantilFormV2.new
+      @form.deserialize(@model.content, @model.version)
+    else
+      redirect_to patient_formularios_path(@patient), alert: "Anamnese Infantil se encontra da versão antiga para edição."
+    end
+  end
+
   def edit_adulto
-    @form = AnamneseAdultoForm.new
-    @form.deserialize(@model.content)
+    if @model.version == '1'
+      @form = AnamneseAdultoFormV1.new
+      @form.deserialize(@model.content, @model.version)
+    elsif @model.version == '2'
+      @form = AnamneseAdultoFormV2.new
+      @form.deserialize(@model.content, @model.version)
+    else
+      redirect_to patient_formularios_path(@patient), notice: "Anamnese Adulto se encontra da versão antiga para edição."
+    end
   end
 
   def index_adulto

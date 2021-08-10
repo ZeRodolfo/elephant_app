@@ -4,6 +4,8 @@
 #
 #  id                     :bigint           not null, primary key
 #  birth_date             :date
+#  clinic_name            :string
+#  crp                    :string
 #  document_number        :string
 #  document_type          :string           default("CPF")
 #  email                  :string           default(""), not null
@@ -41,9 +43,10 @@ class User < ApplicationRecord
   with_options presence: true do
     validates :phone
     validates :first_name
-    validates :last_name
-    validates :document_number
+    # validates :last_name
+    # validates :document_number
     validates :birth_date
+    # validates :crp
   end
 
   before_validation :clean_masked_fields

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_25_141053) do
+ActiveRecord::Schema.define(version: 2021_07_29_230456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2021_01_25_141053) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "patient_id"
+    t.date "certificate_at"
     t.index ["patient_id"], name: "index_atestados_on_patient_id"
   end
 
@@ -113,6 +114,7 @@ ActiveRecord::Schema.define(version: 2021_01_25_141053) do
     t.datetime "updated_at", null: false
     t.bigint "patient_id"
     t.integer "identifier"
+    t.string "version", default: "1"
     t.index ["patient_id"], name: "index_formularios_on_patient_id"
   end
 
@@ -139,6 +141,7 @@ ActiveRecord::Schema.define(version: 2021_01_25_141053) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "patient_id"
+    t.string "picture"
     t.index ["patient_id"], name: "index_laudos_on_patient_id"
   end
 
@@ -197,6 +200,8 @@ ActiveRecord::Schema.define(version: 2021_01_25_141053) do
     t.string "cpf"
     t.string "naturalidade"
     t.bigint "address_id"
+    t.decimal "default_office_visit_value"
+    t.string "email"
     t.index ["address_id"], name: "index_patients_on_address_id"
     t.index ["user_id"], name: "index_patients_on_user_id"
   end
@@ -231,6 +236,7 @@ ActiveRecord::Schema.define(version: 2021_01_25_141053) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.boolean "data_atual"
     t.index ["user_id"], name: "index_user_preferences_on_user_id"
   end
 
@@ -250,6 +256,8 @@ ActiveRecord::Schema.define(version: 2021_01_25_141053) do
     t.string "last_name"
     t.date "birth_date"
     t.boolean "terms_of_service", default: false, null: false
+    t.string "crp"
+    t.string "clinic_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

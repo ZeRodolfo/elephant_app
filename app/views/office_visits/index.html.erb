@@ -1,25 +1,148 @@
 <% content_for(:html_title) { 'Elephant - Gerenciamento Para Psicologia Clínica | Consultas do paciente ' + @patient.name } %>
 
 <%= render 'shared/navbar' %>
-<%= render 'shared/alerts' %>
+
 <% content_for(:head) do %>
   <meta name="turbolinks-visit-control" content="reload">
+
+  <style>
+    main {
+      height: 100%;
+    }
+
+    .actions {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 0px 15px;
+    }
+
+    #baixa_alert {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 30%;
+      left: 30%;
+      background: #5f5e5e;
+      background-image: url('/assets/elen.png');
+      background-repeat: no-repeat;
+      background-size: 180px;
+      background-position: -40px 100px;
+      background-blend-mode: soft-light;
+      padding: 50px;
+      border-radius: 10px;
+      color: #fff;
+    }
+
+    #baixa_alert h5 {
+      text-align: center;
+    }
+
+    #baixa_alert #buttons {
+      margin-top: 50px !important;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .btn-outline-white {
+      color: white;
+      border-color: white;
+      width: 130px;
+    }
+
+    .btn-outline-white:hover {
+      background: white;
+      color: #000;
+    }
+
+    #container_header {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 10px !important;
+    }
+
+    #container_header label {
+      margin: 0;
+    }
+
+    #container_header input {
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+
+    .actions a {
+      padding: 5px;
+    }
+
+    @media screen and (max-width: 767px) {
+      #container_actions {
+        justify-content: flex-start !important;
+        margin-top: 10px;
+      }
+
+      #container_actions a {
+        margin-right: 10px;
+      }
+    }
+
+    @media screen and (max-width: 590px) {
+      #container_back, #container_back input {
+        margin-left: 0px !important;
+        margin-right: 5px;
+      }
+
+      #container_header {
+        margin-bottom: 20px !important;
+      }
+    }
+
+     @media screen and (max-width: 390px) {
+      #container_header input[type='text'] {
+        margin-left: 0px !important;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
 <% end %>
-<style>
-  main {
-    height: 100%;
-  }
-</style>
 
 <%= stylesheet_link_tag 'dataTables.bootstrap4.min', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<section class="el min-100 d-flex flex-column">
-  <div class="my-3">
-    <h6 class="subtitle light m-0">Listagem de consultas</h6>
-    <p class="phrase light m-0">Paciente: <span class="phrase bold"><%= @patient.name %></span></p>
+<div class="row m-0 p-0">
+  <div class="col-sm-12 col-md-12">
+    <%= render 'shared/alerts' %>
   </div>
-  <div class="row m-0 p-0">
-    <div class="col-8 col-lg-6 d-flex align-items-center justify-content-center m-0 pl-0">
+</div>
+
+<section class="el min-100 d-flex flex-column">
+  <div class="row">
+    <div class="col-lg-12 col-sm-12 col-md-12">
+      <h6 class="subtitle light m-0">Listagem de consultas</h6>
+      <p class="phrase light m-0">Paciente: <span class="phrase bold"><%= @patient.name %></span></p>
+      <%= form_with url: patient_default_office_visit_value_path(@patient), method: :post do |form| %>
+        <input type="hidden" value="<%= @patient.id %>" name="id" />
+        <div id='container_header' class="phrase light m-0">
+          <label>Valor padrão das Consultas: </label>
+          <input type="text" id='default_office_visit_value' style='width: 100px' value="<%= @patient.default_office_visit_value %>" name="patient[default_office_visit_value]" />
+          
+          <div id='container_back' class="ml-auto">
+            <%= form.submit 'Atualizar', class: 'btn btn-primary' %>
+            <a href="<%= patient_path(@patient) %>" class='btn btn-primary my-0 my-lg-2'>Voltar</a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+   
+  </div>
+  <div class="row">
+    <div class="col-lg-6 col-sm-12 col-md-6 d-flex align-items-center justify-content-center">
       <label class="sr-only" for="office-visits-search">Pesquisa</label>
       <div class="input-group">
         <div class="input-group-prepend">
@@ -30,7 +153,23 @@
       </div>
     </div>
 
-    <div class="col-4 col-lg-6 d-flex align-items-end justify-content-end m-0 pr-0">
+    <div id='container_actions' class="col-lg-6 col-sm-12 col-md-6 d-flex align-items-end justify-content-between">
+      <div>
+        <!--
+        <%= link_to new_patient_office_visit_path(@patient), class: 'btn btn-outline-primary mr-4' do %>
+          <i class="d-none d-lg-inline fas fa-plus mr-2"></i> Relatórios de atendimentos
+        <% end %>
+        -->
+
+        <%= link_to "#", id: 'baixar_tudo_click', class: 'btn btn-outline-primary' do %>
+          <i class="fas fa-money-bill-wave d-none d-lg-inline mr-2"></i> Baixar valores
+        <% end %>
+
+        <%= link_to patient_parcels_path(@patient), id: 'baixar_tudo', class: 'd-none btn btn-outline-primary', method: 'POST' do %>
+          <i class="fas fa-money-bill-wave d-none d-lg-inline mr-2"></i> Baixar valores
+        <% end %>
+      </div>
+      
       <%= link_to new_patient_office_visit_path(@patient), class: 'btn btn-outline-primary' do %>
         <i class="d-none d-lg-inline fas fa-plus mr-2"></i>Adicionar
       <% end %>
@@ -48,51 +187,56 @@
       </thead>
       <tbody>
         <% @office_visits.each do |office_visit| %>
-        <tr>
-          <td data-order="<%= office_visit.date.to_time.to_i %>"><%= (office_visit.date.present?) ? office_visit.date : '-' %> <%= (office_visit.hour.present?) ? office_visit.hour : '-' %></td>
-          <td><%= (office_visit.description.present?) ? truncate(office_visit.description, :length => 75, separator: ' ') : '-' %></td>
-          <td>
-            <div class="row m-0">
-
-              <div class="col-2 m-0 d-flex align-items-center justify-content-center">
+          <tr>
+            <td data-order="<%= office_visit.date.to_time.to_i %>"><%= (office_visit.date.present?) ? office_visit.date : '-' %> <%= (office_visit.hour.present?) ? office_visit.hour : '-' %></td>
+            <td><%= (office_visit.description.present?) ? truncate(office_visit.description, :length => 75, separator: ' ') : '-' %></td>
+            <td>
+              <div class="actions">
                 <%= link_to office_visit, class: 'el-anchor', title: 'Ver Consulta' do %>
                   <i class="fas fa-search"></i>
                 <% end %>
-              </div>
 
-              <div class="col-2 m-0 d-flex align-items-center justify-content-center">
+                <a href="<%= office_visit_pdf_path(office_visit_id: office_visit.id, format: "pdf") %>" class="el-anchor" target="_blank" title="Imprimir">
+                  <i class="fas fa-print"></i>
+                </a>
+            
                 <a title="Editar Consulta" href="<%= edit_patient_office_visit_path(@patient, office_visit) %>" class="el-anchor"><i class="fas fa-pencil-alt"></i></a>
-              </div>
-
-              <div class="col-2 m-0 p-0 d-flex align-items-center justify-content-center">
-                <%= link_to edit_patient_office_visit_path(@patient, office_visit, remark: true), class: 'el-anchor', title: 'Remarcar Consulta' do %>
+                  <%= link_to edit_patient_office_visit_path(@patient, office_visit, remark: true), class: 'el-anchor', title: 'Remarcar Consulta' do %>
                   <i class="far fa-calendar-alt"></i>
                 <% end %>
-              </div>
 
-              <div class="col-2 m-0 d-flex align-items-center justify-content-center">
-                <a title="Adicionar Parcela" href="<%= parcels_path(office: office_visit, id_patient: params[:id_patient]) %>" class="el-anchor"><i class="fas fa-money-bill-wave"></i></a>
-              </div>
+                <a title="Adicionar Parcela" href="<%= parcels_path(office: office_visit, id_patient: params[:id_patient]) %>" class="el-anchor">
+                  <i class="fas fa-money-bill-wave"></i>
+                </a>
 
-              <div class="col-4 m-0 p-0 d-flex align-items-center justify-content-center">
                 <%= link_to [@patient, office_visit], method: :delete, class: 'text-danger', data: { confirm: 'Tem certeza que deseja excluir esta consulta?' }, title: 'Apagar Consulta' do %>
                   <i class="fas fa-trash"></i>
                 <% end %>
               </div>
-            </div>
-          </td>
-        </tr>
+            </td>
+          </tr>
         <% end %>
       </tbody>
     </table>
-
-    <script>
-
-    </script>
 
     <%= javascript_include_tag 'dataTables.min', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'dataTables.bootstrap4.min', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'dataTables.responsive.min', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'office_visits', 'data-turbolinks-track': 'reload' %>
   </div>
-</section
+
+  <div id='baixa_alert'>
+    <h5>
+      Você tem certeza que deseja confirmar o recebimento de <br />
+      todos os valores cobrados nos atendimentos?
+    </h5>
+
+    <div id='buttons'>
+      <%= link_to patient_parcels_path(@patient), class: 'btn btn-outline-white', method: 'POST' do %>
+        Confirmar
+      <% end %>
+    
+      <button id='baixa_alert_cancel' class='btn btn-outline-white'>Cancelar</button>
+    </div>
+  </div>
+</section>

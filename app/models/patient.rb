@@ -2,21 +2,23 @@
 #
 # Table name: patients
 #
-#  id             :bigint           not null, primary key
-#  avatar         :json
-#  birth_date     :date
-#  code           :string
-#  cpf            :string
-#  gender         :integer
-#  name           :string
-#  naturalidade   :string
-#  phone          :string
-#  profession     :string
-#  relative_phone :string
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  address_id     :bigint
-#  user_id        :bigint
+#  id                         :bigint           not null, primary key
+#  avatar                     :json
+#  birth_date                 :date
+#  code                       :string
+#  cpf                        :string
+#  default_office_visit_value :decimal(, )
+#  email                      :string
+#  gender                     :integer
+#  name                       :string
+#  naturalidade               :string
+#  phone                      :string
+#  profession                 :string
+#  relative_phone             :string
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  address_id                 :bigint
+#  user_id                    :bigint
 #
 # Indexes
 #

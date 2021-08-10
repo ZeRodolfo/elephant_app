@@ -5,7 +5,10 @@ default: &default
 
 development:
   <<: *default
-  database: ElephantRH_development
+  host: db
+  username: postgres
+  password: postgres
+  database: elephantrh_development
 
 test:
   <<: *default

@@ -1,0 +1,173 @@
+<div class="col-md-2"></div>
+<div class="col-md-8 mb-4">
+    <h1 class="bold"><%= title %></h1>
+</div>
+<div class="col-md-2"></div>
+
+<% formulario.fields.each do |f| %>
+    <% if f[:type] == 'topic' %>
+        <% if f[:column_left].any? %>
+            <div class="col-md-2"></div>
+            <div class="col-md-4 mb-5">
+                <div class="bounding generic-form" style="max-width: 100%">
+                    <% f[:column_left].each do |form| %>
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <% if form[:type] == 'header' %>
+                                <h3 class="bold my-2"><%= form[:label] %></h3>
+
+                                <% elsif form[:type] == 'select' %>
+                                <label for="<%= form[:name] %>"><%= form[:label] %></label>
+                                <select name="<%= form[:name] %>" class="form-control <%= form[:classes] %>" id="<%= form[:name] %>">
+                                    <% form[:options].each do |option| %>
+                                    <option value="<%= option[1] %>" <% if form[:value].to_s == option[1].to_s %> selected <% end %>>
+                                        <%= option[0] %>
+                                    </option>
+                                    <% end %>
+                                </select>
+
+                                <% elsif form[:type] == 'checkbox' %>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="<%= true %>" name="<%= form[:name] %>" id="<%= form[:name] %>" <% if form[:value] == 'true' %> checked <% end %>>
+                                    <label class="form-check-label" for="<%= form[:name] %>">
+                                        <%= form[:label] %>
+                                    </label>
+                                </div>
+
+                                <% elsif form[:type] == 'textarea' %>
+                                <label for="<%= form[:name] %>"><%= form[:label] %></label>
+                                <textarea name="<%= form[:name] %>" class="form-control <%= form[:classes] %>" id="<%= form[:name] %>" rows="<%= text_area_rows %>"><%= form[:value] %></textarea>
+
+                                <% elsif form[:type] == 'observation' %>
+                                    <label for="<%= form[:name] %>"><%= form[:label] %></label>
+                                    <textarea name="<%= form[:name] %>" class="form-control <%= form[:classes] %>" id="<%= form[:name] %>" rows="20"><%= form[:value] %></textarea>
+                                
+                                <% elsif form[:type] == 'add_ask' %>
+                                    <div id='container_<%= form[:name] %>' style='margin-left: -20px'>
+                                        <% if !form[:value].nil? %>
+                                            <% form[:value].each do |ask| %>
+                                                <div class="form-row">
+                                                    <div class="form-group col">
+                                                        <div class="form-check">
+                                                            <label for="<%= ask[:name] %>"><%= ask[:label] %></label>
+                                                            <input type="text" name="<%= ask[:name] %>" class="form-control" id="<%= ask[:name] %>" value="<%= ask[:value] %>">
+                                                        </div>   
+                                                    </div>   
+                                                </div>   
+                                            <% end %>
+                                        <% end %>
+                                    </div>
+
+                                    <h4><%= form[:label] %></h4>
+                                    <div class='container_add_task'>                                 
+                                        <input id='input_<%= form[:name] %>' placeholder="Digite aqui a sua Pergunta!" class='form-control <%= form[:classes] %>' type="text" value="" />
+                                        <button type="button" class='add_task' data-name="input_<%= form[:name] %>" data-count="<%= form[:values].length %>">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>   
+                                <% else %>
+                                <label for="<%= form[:name] %>"><%= form[:label] %></label>
+                                <input type="<%= form[:type] %>" name="<%= form[:name] %>" class="form-control <%= form[:classes] %>" id="<%= form[:name] %>" value="<%= form[:value] %>" <% if form[:type] == 'number' %> min="<%= form[:min] %>" <% end %>>
+                                <% end %>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+
+        <% if f[:column_right].any? %>
+            <div class="col-md-4 mb-5">
+                <div class="bounding generic-form" style="max-width: 100%">
+                    <% f[:column_right].each do |form| %>
+                        <% if form[:type] == 'observation' %>
+                            <div class='container_observation'>   
+                                <h4 for="<%= form[:name] %>"><b><%= form[:label] %></b></h4>
+                                <button type="button" class='toggle_observation' data-id='#<%= form[:name] %>'>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            <textarea id='<%= form[:name] %>' name="<%= form[:name] %>" class="form-control <%= form[:classes] %>" id="<%= form[:name] %>" rows="15"><%= form[:value] %></textarea>
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        <% end %>
+    <% end %>
+<% end %>
+
+<style>
+    .container_add_task,
+    .container_observation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .add_task,
+    .toggle_observation {
+        border: none;
+        border-radius: 100%;
+        background: var(--green);
+        color: #fff;
+        margin-left: 15px;
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 20px;
+        outline: none !important;
+    }
+
+    .container_add_task input {
+        width: calc(100% - 40px);
+    }
+
+    .collapse-observation {
+        transform: rotate(90deg);
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $('.add_task').click(function(e) {
+            e.preventDefault();
+        
+            const name = $(this).data('name');
+            const field_label = $(`#${name}`).val();
+ 
+            if (!field_label) {
+                alert("Campo não pode ficar em branco.")
+            } else {
+                const identifier_element = name.replace('input_', '')
+                const identifier = field_label.replace(/ +/g, "_")
+                const html = `
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <div class="form-check">
+                                <label>${field_label}</label>
+                                <input type='text' id='${identifier_element}${identifier}' name='${identifier_element}${identifier}' class='form-control' />
+                            </div>
+                        </div>
+                    </div>
+                `
+
+                $(`#container_${identifier_element}`).append(html);
+                $(`#${name}`).val('');
+            }
+        });
+
+        $('.toggle_observation').click(function(e) {
+            e.preventDefault();
+        
+            const id = $(this).data('id');
+            $(this).toggleClass('collapse-observation')
+
+            if ($(this).hasClass('collapse-observation')) {
+                $(id).slideUp('slow')
+            } else {
+                $(id).slideDown('slow')
+            }
+        });
+    })
+</script>

@@ -1,7 +1,7 @@
 require 'prawn/measurement_extensions'
 
 class PdfDocument
-  attr_reader :background_image, :options, :pdf, :form, :patient
+  attr_reader :background_image, :options, :pdf, :form, :patient, :current_version
 
   def initialize(form, patient, background_image: nil, pdf_options: {})
     @form = form
@@ -13,8 +13,9 @@ class PdfDocument
     @options = {
       page_size: 'A4',
       page_layout: :portrait,
-      margin: [120, 75],
-      background: @background_image,
+      margin: [50, 75],
+      # margin: [120, 75],
+      # background: @background_image,
     }.merge!(pdf_options)
     @pdf = Prawn::Document.new(@options)
 
@@ -41,6 +42,10 @@ class PdfDocument
     pdf.render(*args, **kwargs)
   end
 
+  def set_version(version)
+    @current_version = version
+  end
+
   protected
     def new_page
       pdf.start_new_page
@@ -50,8 +55,9 @@ class PdfDocument
       pdf.bounds.width
     end
 
-    def add_document_header(header)
+    def add_document_header(header, margin_top: 0)
       # pdf.fill_color "666666"
+      pdf.move_down margin_top
       pdf.text header, :size => 16, :style => :bold, :align => :center
       # pdf.text "DATA: #{(Time.now).strftime("%d/%m/%y")}", :align => :right
       pdf.move_down 40
@@ -123,27 +129,59 @@ class PdfDocument
     end
 
     def render_field(field, prefix: nil, use_alternative: nil)
-      case field.type
-      when 'text', 'textarea', 'number'
-        add_oneline_answer(normalize_label(field.label), field.value, prefix: prefix)
-      when 'select'
-        if use_alternative
-          add_oneline_answer_alternative(field.label, field.value, prefix: prefix)
+      if !field.nil? and field.type != 'header'
+        case field.type
+        when 'text', 'textarea', 'number', 'observation'
+          add_oneline_answer(normalize_label(field.label), field.value, prefix: prefix)
+        when 'select'
+          if use_alternative
+            add_oneline_answer_alternative(field.label, field.value, prefix: prefix)
+          else
+            add_select(field.label, field.options, field.value, prefix: prefix)
+          end
+        when 'checkbox'
+          add_checkbox(field.label, field.value, prefix: prefix)
+        when 'add_ask'
+          field[:value].each do |item|
+            render_field OpenStruct.new(item), prefix: prefix&.next, use_alternative: use_alternative
+          end
         else
-          add_select(field.label, field.options, field.value, prefix: prefix)
+          raise "Tipo de field desconhecido #{field.type}"
         end
-      when 'checkbox'
-        add_checkbox(field.label, field.value, prefix: prefix)
-      else
-        raise 'Tipo de field desconhecido'
-      end
 
-      move_down 5
+        move_down 5
+      end
     end
 
     def render_fields(*fields, prefix_enum: nil, use_alternative: nil)
       form.each_field(*fields) do |field|
         render_field field, prefix: prefix_enum&.next, use_alternative: use_alternative
+      end
+    end
+
+    def add_document_description(header)
+      # pdf.fill_color "666666"
+      pdf.text header, :size => 13, :style => :normal, :align => :center
+      # pdf.text "DATA: #{(Time.now).strftime("%d/%m/%y")}", :align => :right
+      pdf.move_down 7
+    end
+
+    def add_document_header_logo()
+      pdf.image @background_image, position: -35, height: 90, width: 120
+      pdf.move_down 10
+    end
+
+    def user
+      patient&.user
+    end
+
+    def render_fields_by_version(identifier, *fields, prefix_enum: nil, use_alternative: nil)
+      if @current_version != '1'
+        form.each_field_by_version(identifier, *fields) do |field|
+          render_field OpenStruct.new(field), prefix: prefix_enum&.next, use_alternative: use_alternative
+        end
+      else
+        render_fields(*fields, prefix_enum, use_alternative)
       end
     end
 end
