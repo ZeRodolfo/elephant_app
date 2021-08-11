@@ -18,4 +18,4 @@ production:
   <<: *default
   database: elephant_prod
   username: elephant
-  password: <%= ENV['ELEPHANTRH_DATABASE_PASSWORD'] %>
+  password: El4Ph4ntSecure#Pa55 #<%= ENV['ELEPHANTRH_DATABASE_PASSWORD'] %>
