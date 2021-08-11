@@ -9,7 +9,12 @@ class AtestadoPdf < PdfDocument
     add_paragraph form.text
     move_down 20
 
-    text "#{form.cidade}, #{form.certificate_at.to_date.to_s}"
+    if form.certificate_at.nil?
+      text "#{form.cidade}, #{form.created_at.to_date.to_s}"
+    else   
+      text "#{form.cidade}, #{form.certificate_at.to_date.to_s}"
+    end
+    
     move_down 20
 
     text patient.user.name
