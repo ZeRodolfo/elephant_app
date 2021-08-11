@@ -82,6 +82,10 @@ class BaseForm
 
   def valid_hash?(string)
     puts 'string', string, 'foi'
+    if !string.nil? && string.include?('Gh') 
+      return false
+    end
+
     !string.nil? ? eval(string).is_a?(Hash) : false
   # rescue SyntaxError
   #   false
