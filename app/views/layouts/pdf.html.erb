@@ -3,7 +3,9 @@
   <head>
     <title><%= content_for?(:html_title) ? yield(:html_title) : "Elephant - Gerenciamento Para Psicologia Clínica" %></title>
     <style>
-      <%= Rails.application.assets.find_asset('application.scss').to_s %>
+      <% unless Rails.application.assets.nil? %>
+        <%= Rails.application.assets.find_asset('application.scss').to_s %>
+      <% end %>
     </style>
 
     <% if content_for?(:head) %>
