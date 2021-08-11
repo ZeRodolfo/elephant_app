@@ -145,8 +145,6 @@ class PdfDocument
           field[:value].each do |item|
             render_field OpenStruct.new(item), prefix: prefix&.next, use_alternative: use_alternative
           end
-        else
-          raise "Tipo de field desconhecido #{field.type}"
         end
 
         move_down 5
@@ -167,8 +165,10 @@ class PdfDocument
     end
 
     def add_document_header_logo()
-      pdf.image @background_image, position: -35, height: 90, width: 120
-      pdf.move_down 10
+      unless @background_image.nil?
+        pdf.image @background_image, position: -35, height: 90, width: 120
+        pdf.move_down 10
+      end
     end
 
     def user
