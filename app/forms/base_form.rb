@@ -81,9 +81,10 @@ class BaseForm
   end
 
   def valid_hash?(string)
+    puts 'string', string, 'foi'
     !string.nil? ? eval(string).is_a?(Hash) : false
-  rescue SyntaxError
-    false
+  # rescue SyntaxError
+  #   false
   end
 
   def convert_value_element_to_hash(element) 
