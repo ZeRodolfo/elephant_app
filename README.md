@@ -60,6 +60,12 @@ sudo service nginx restart
 RAILS_ENV=production rails assets:precompile
 sudo systemctl restart puma
 
+tail -f log/production.log
+tail -f /var/log/nginx/access.log
+tail -f /var/log/nginx/error.log
+tail -f shared/log/puma.stdout.log 
+tail -f shared/log/puma.stderr.log 
+
 
 ## How to use
 

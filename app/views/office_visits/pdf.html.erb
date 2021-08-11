@@ -58,7 +58,12 @@
 
 <section id='container_paciente'>
   <h5 id='paciente_name'><b>Nome:</b> <%= office_visit.patient.name %></h5>
-  <h5 id='paciente_idade'><b>Idade:</b> <%= Date.current.year - office_visit.patient.birth_date.year %></h5>
+  <h5 id='paciente_idade'>
+    <b>Idade:</b> 
+    <% unless office_visit.patient.birth_date.nil? %>
+      <%= Date.current.year - office_visit.patient.birth_date.year %>
+    <% end %>
+  </h5>
   <h5 id='clinica'><b>Clínica:</b> <%= current_user.clinic_name %></h5>
   
   <div class="clear"></div>
