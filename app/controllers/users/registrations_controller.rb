@@ -5,6 +5,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   def update_resource(resource, params)
+    params[:terms_of_service] = true
+    # resource.valid?
+
+    # resource.errors.each do |t|
+    #   puts t
+    # end
+  
     resource.update_without_password(params)
   end
 
