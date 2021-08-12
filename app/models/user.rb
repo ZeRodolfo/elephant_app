@@ -34,7 +34,7 @@ class User < ApplicationRecord
 
   has_many :patients, dependent: :destroy
   has_many :addresses
-  accepts_nested_attributes_for :addresses, allow_destroy: false
+  # accepts_nested_attributes_for :addresses, allow_destroy: false
   has_one :subscription, dependent: :destroy
   has_one :user_preference, dependent: :destroy
 
