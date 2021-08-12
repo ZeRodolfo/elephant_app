@@ -50,7 +50,7 @@ class User < ApplicationRecord
   end
 
   before_validation :clean_masked_fields
-  validates_associated :addresses
+  # validates_associated :addresses
 
   validate :validity_of_date
 
