@@ -37,6 +37,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     params
       .require(:user)
       .permit(
+        :first_name,
+        :birth_date,
         :email,
         :password,
         :password_confirmation,

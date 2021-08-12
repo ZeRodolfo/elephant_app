@@ -11,6 +11,41 @@
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <div class="form-row">
             <div class="form-group col">
+                <%= f.label "Nome completo", for: 'first_name' %>
+                <%= f.text_field :first_name, class: "form-control #{ 'is-invalid' if resource.errors[:first_name].any? }", id: 'first_name'%>
+                <% if resource.errors[:first_name].any? %>
+                <div class="invalid-feedback">
+                  <% resource.errors[:first_name].each do |m| %>
+                  <%= m %>
+                  <br>
+                  <% end %>
+                </div>
+                <% end %>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="birth_date">Data de Nascimento</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="birth_date-prepend"><i class="far fa-calendar-alt"></i></span>
+                  </div>
+                  <%= f.text_field :birth_date, type: 'text', class: "form-control nascimento #{ 'is-invalid' if resource.errors[:birth_date].any? }", id: 'birth_date', 'aria-describedby': 'birth_date-prepend', placeholder: 'dd/mm/aaaa', autocomplete: "off" %>
+                  <% if resource.errors[:birth_date].any? %>
+                    <div class="invalid-feedback">
+                      <% resource.errors[:birth_date].each do |m| %>
+                        <%= m %>
+                        <br>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group col">
                 <%= f.label :email, for: 'email' %>
                 <%= f.email_field :email, id:'email', autofocus: true, placeholder: '', class: "form-control #{ 'is-invalid' if resource.errors[:email].any? }", type: 'email', required: true, autocomplete: "email" %>
                 <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
