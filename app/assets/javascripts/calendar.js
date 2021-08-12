@@ -82,13 +82,16 @@ $(document).on('turbolinks:load', () => {
       repaint()
     },
     eventDidMount: function (info) {
+      const patientName = info.event.title.split('-')[0].trim()
       const el = info.el
       $(el).tooltip({
         // title: `<span class="text-nowrap">${info.event.title.split('-')[0].trim()} <br> ${info.event.title.split('-')[1].trim()} </span>`,
-        title: `<span class="text-wrap">${info.event.title.split('-')[0].trim()}</span>`,
+        title: `<span class="text-wrap">${patientName}</span>`,
         container: el,
         html: true,
       })
+
+      $('.fc-event-title').text(patientName)
     },
     bootstrapFontAwesome: false,
   }
