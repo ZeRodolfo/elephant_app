@@ -62,6 +62,14 @@
       color: #000;
     }
 
+    #container_head {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 10px !important;
+    }
+
     #container_header {
       width: 100%;
       display: flex;
@@ -113,10 +121,21 @@
       }
     }
 
-    @media screen and (max-width: 590px) {
+    @media screen and (max-width: 620px) {
       #container_back, #container_back input {
         margin-left: 0px !important;
         margin-right: 5px;
+      }
+    }
+
+    @media screen and (max-width: 590px) {
+      #container_back, #container_back input, #container_header input[type='submit'] {
+        margin-left: 0px !important;
+        margin-right: 5px;
+      }
+
+      #container_back, #container_header input[type='submit'] {
+        margin-top: 10px;
       }
 
       #container_header {
@@ -124,10 +143,44 @@
       }
     }
 
-     @media screen and (max-width: 390px) {
+    @media screen and (max-width: 470px) {
+      #container_head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      #container_head a {
+        margin-left: 0px !important;
+        margin-top: 10px;
+      }
+    }
+
+    @media screen and (max-width: 390px) {
+      #container_header input[type='text'] {
+        margin-left: 15px !important;
+      }
+    }
+
+    @media screen and (max-width: 356px) {
+      #container_header input[type='text'] {
+        margin-left: 10px !important;
+      }
+    }
+
+    @media screen and (max-width: 351px) {
+      #container_header input[type='text'] {
+        margin-left: 5px !important;
+      }
+    }
+
+    @media screen and (max-width: 346px) {
       #container_header input[type='text'] {
         margin-left: 0px !important;
         margin-bottom: 10px;
+      }
+
+      #container_header input[type='submit'] {
+        margin-top: 0px;
       }
     }
   </style>
@@ -144,17 +197,25 @@
 <section class="el min-100 d-flex flex-column">
   <div class="row">
     <div class="col-lg-12 col-sm-12 col-md-12">
-      <h6 class="subtitle light m-0">Listagem de consultas</h6>
-      <p class="phrase light m-0">Paciente: <span class="phrase bold"><%= @patient.name %></span></p>
+      <div id='container_head' class="phrase light m-0">
+        <div>
+          <h6 class="subtitle light m-0">Listagem de consultas</h6>
+          <p class="phrase light m-0">Paciente: <span class="phrase bold"><%= @patient.name %></span></p>
+        </div>
+        <a href="<%= patient_path(@patient) %>" class='btn btn-primary my-0 my-lg-2 ml-auto'>Voltar</a>
+      </div>
+
       <%= form_with url: patient_default_office_visit_value_path(@patient), method: :post do |form| %>
         <input type="hidden" value="<%= @patient.id %>" name="id" />
         <div id='container_header' class="phrase light m-0">
           <label>Valor padrão das Consultas: </label>
           <input type="text" id='default_office_visit_value' style='width: 100px' value="<%= @patient.default_office_visit_value %>" name="patient[default_office_visit_value]" />
-          
+          <%= form.submit 'Atualizar', class: 'btn btn-primary' %>
+
           <div id='container_back' class="ml-auto">
-            <%= form.submit 'Atualizar', class: 'btn btn-primary' %>
-            <a href="<%= patient_path(@patient) %>" class='btn btn-primary my-0 my-lg-2'>Voltar</a>
+            <%= link_to "#", id: 'baixar_tudo_click', class: 'btn btn-outline-primary' do %>
+              <i class="fas fa-money-bill-wave d-none d-lg-inline mr-2"></i> Baixar valores
+            <% end %>
           </div>
         </div>
       <% end %>
@@ -179,11 +240,11 @@
         <%= link_to new_patient_office_visit_path(@patient), class: 'btn btn-outline-primary mr-4' do %>
           <i class="d-none d-lg-inline fas fa-plus mr-2"></i> Relatórios de atendimentos
         <% end %>
-        -->
 
         <%= link_to "#", id: 'baixar_tudo_click', class: 'btn btn-outline-primary' do %>
           <i class="fas fa-money-bill-wave d-none d-lg-inline mr-2"></i> Baixar valores
         <% end %>
+        -->
 
         <%= link_to patient_parcels_path(@patient), id: 'baixar_tudo', class: 'd-none btn btn-outline-primary', method: 'POST' do %>
           <i class="fas fa-money-bill-wave d-none d-lg-inline mr-2"></i> Baixar valores

@@ -27,6 +27,16 @@
     font-size: 2.5em;
     font-weight: 500;
   }
+
+  @media screen and (max-width: 1640px) {
+    #cabecalho h1 {
+      font-size: 2em;
+    }
+
+    #cabecalho h3 {
+      font-size: 1.5em;
+    }
+  }
 </style>
 
 <div class="min100">
@@ -36,7 +46,7 @@
       <div id="cadastro-left-side" class="d-flex flex-column col m-0 pl-0 left">
         <div id="cabecalho" class="row m-0 p-0 d-flex justify-content-start flex-column">
           <h1 class="six">O controle da sua clínica</h1>
-          <h3 class="six">Rápido, fácil e de qualquer lugar!</h3>
+          <h3 class="six">Rápido, fácil e de<br> qualquer lugar!</h3>
         </div>
 
         <div id="cadastro-features-container"
@@ -159,7 +169,9 @@
             <div class="form-row">
               <div class="form-group col">
                 <label for="city">Cidade</label>
-                <%= addr_form.select :city, [], { include_blank: false }, { id: 'city', class: "form-control #{ 'is-invalid' if resource.errors['addresses.city'].any? }" } %>
+                <!-- <%= addr_form.select :city, [], { include_blank: false }, { id: 'city', class: "form-control #{ 'is-invalid' if resource.errors['addresses.city'].any? }" } %> -->
+                <%= addr_form.text_field :city, id: 'city', class: "form-control #{ 'is-invalid' if resource.errors['addresses.city'].any? }" %>
+
                 <% if resource.errors["addresses.city"].any? %>
                 <div class="invalid-feedback">
                   <% resource.errors["addresses.city"].each do |m| %>
