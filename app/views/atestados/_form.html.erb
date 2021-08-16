@@ -3,16 +3,13 @@
     <div class="form-row">
       <div class="form-group col">
         <label for="created_at">Data de criação</label>
-        <input type="text" id="created_at" disabled value="<%= atestado.created_at.to_date %>" class="form-control">
+        <input type="text" id="created_at" disabled value="<%= atestado.certificate_at? ? atestado.certificate_at.to_date : atestado.created_at.to_date %>" class="form-control">
       </div>
     </div>
-  <% end %>
-
-  <% if atestado.id.present? %>
     <div class="form-row">
       <div class="form-group col">
         <label for="certificate_at">Atualizar Data de criação</label>
-        <input type="date" id="certificate_at" name="atestado[certificate_at]" value="<%= atestado.certificate_at? && atestado.certificate_at.strftime('%Y-%m-%d') %>" class="form-control">
+        <input type="date" id="certificate_at" name="atestado[certificate_at]" value="<%= atestado.certificate_at? && atestado.certificate_at.to_date.strftime('%Y-%m-%d') %>" class="form-control">
       </div>
     </div>
   <% end %>

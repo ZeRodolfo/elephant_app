@@ -64,7 +64,9 @@
                 <tbody>
                     <% @atestados.each do |atestado| %>
                     <tr>
-                        <td data-order="<%= atestado.created_at.to_date.to_time.to_i %>"><%= atestado.created_at.to_date %></td>
+                        <td data-order="<%= atestado.created_at.to_date.to_time.to_i %>">
+                            <%= atestado.certificate_at? ? atestado.certificate_at.to_date : atestado.created_at.to_date %>
+                        </td>
                         <td><%= (atestado.text.present?) ? truncate(atestado.text, :length => 75, separator: ' ') : '-' %></td>
                         <td>
                             <div class="row m-0">

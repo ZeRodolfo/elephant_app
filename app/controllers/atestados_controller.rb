@@ -27,6 +27,7 @@ class AtestadosController < ApplicationController
 
   def create
     @atestado = Atestado.new(atestado_params)
+    @atestado.certificate_at = Time.now
     @atestado.patient_id = @patient.id
 
     if @atestado.save
