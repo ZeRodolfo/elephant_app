@@ -81,7 +81,7 @@ class BaseForm
   end
 
   def valid_hash?(string)
-    if !string.nil? && string.include?('Gh') 
+    if !string.nil? && (string.include?('Gh') || string.include?('Silva'))
       return false
     end
 
