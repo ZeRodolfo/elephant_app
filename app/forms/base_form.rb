@@ -90,6 +90,8 @@ class BaseForm
     rescue
       return false
     end
+  rescue SyntaxError
+    false
   end
 
   def convert_value_element_to_hash(element) 
