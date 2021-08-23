@@ -81,13 +81,15 @@ class BaseForm
   end
 
   def valid_hash?(string)
-    if !string.nil? && (string.include?('Gh') || string.include?('Silva'))
+    begin
+      if !string.nil? && (string.include?('Gh') || string.include?('Silva'))
+        return false
+      end
+
+      !string.nil? ? eval(string).is_a?(Hash) : false
+    rescue
       return false
     end
-
-    !string.nil? ? eval(string).is_a?(Hash) : false
-  rescue SyntaxError
-    false
   end
 
   def convert_value_element_to_hash(element) 
