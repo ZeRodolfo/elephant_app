@@ -91,7 +91,7 @@ $(document).on('turbolinks:load', () => {
         html: true,
       })
 
-      $('.fc-event-title').text(patientName)
+      $(info.el).children('.fc-event-title').text(patientName)
     },
     bootstrapFontAwesome: false,
   }
