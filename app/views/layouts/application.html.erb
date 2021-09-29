@@ -26,7 +26,7 @@
     if (window.location.pathname == '/users/sign_up') {
       const img = '<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=265086948302437&ev=PageView&noscript=1" />'
       const tagmanager = document.getElementById('tagmanager');
-      tagmanager.append(img);
+      tagmanager.html(img);
 
       !function(f,b,e,v,n,t,s)
           {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
