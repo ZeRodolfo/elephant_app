@@ -10,9 +10,9 @@ development:
   password: postgres
   database: elephantrh_development
 
-test:
-  <<: *default
-  database: ElephantRH_test
+# test:
+#   <<: *default
+#   database: ElephantRH_test
 
 production:
   <<: *default
