@@ -11,7 +11,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # resource.errors.each do |t|
     #   puts t
     # end
-  
+    if !params[:password].blank?
+      resource.password = params[:password]
+      resource.password_confirmation = params[:password_confirmation]
+    end
+    
     resource.update_without_password(params)
   end
 
